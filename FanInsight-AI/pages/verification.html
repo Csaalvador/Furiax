@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificação de Identidade - FanInsight AI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+</head>
+<body class="bg-gray-900 text-white min-h-screen">
+    <header class="bg-black py-4 shadow-lg">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center">
+                <img src="/api/placeholder/48/48" alt="FURIA Logo" class="h-12">
+                <h1 class="ml-3 text-2xl font-bold">FanInsight AI</h1>
+            </div>
+            <div class="text-sm">
+                <div class="flex items-center">
+                    <div class="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+                    <span>Etapa 2 de 4: Verificação</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-10">
+        <section class="max-w-4xl mx-auto mb-16">
+            <h2 class="text-3xl font-bold mb-6 text-center">Verificação de Identidade</h2>
+            <p class="text-center mb-8">Para garantir a segurança do seu perfil, precisamos verificar sua identidade.</p>
+            
+            <div class="bg-gray-800 rounded-lg p-8">
+                <div class="space-y-8">
+                    <div class="border-b border-gray-700 pb-8">
+                        <h3 class="text-xl font-semibold mb-4">1. Upload de Documento</h3>
+                        <p class="mb-4">Faça upload de um documento oficial com foto (RG, CNH ou Passaporte).</p>
+                        <div class="mt-4">
+                            <label for="document-upload" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-600 border-dashed rounded-lg cursor-pointer bg-gray-700 hover:bg-gray-600 transition">
+                                <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                    <svg class="w-10 h-10 mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                                    </svg>
+                                    <p class="mb-2 text-sm text-gray-400"><span class="font-semibold">Clique para fazer upload</span> ou arraste e solte</p>
+                                    <p class="text-xs text-gray-400">PNG, JPG ou PDF (MAX. 5MB)</p>
+                                </div>
+                                <input id="document-upload" type="file" class="hidden" accept="image/png, image/jpeg, application/pdf" />
+                            </label>
+                            <div id="document-preview" class="mt-4 hidden">
+                                <div class="flex items-center p-2 bg-gray-700 rounded">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-400 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                    </svg>
+                                    <span id="document-name" class="text-sm">documento.jpg</span>
+                                    <button type="button" id="remove-document" class="ml-auto text-gray-400 hover:text-red-400">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="border-b border-gray-700 pb-8">
+                        <h3 class="text-xl font-semibold mb-4">2. Selfie</h3>
+                        <p class="mb-4">Tire uma selfie para confirmarmos sua identidade. Certifique-se de estar em um ambiente bem iluminado.</p>
+                        <div class="mt-4">
+                            <label for="selfie-upload" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-600 border-dashed rounded-lg cursor-pointer bg-gray-700 hover:bg-gray-600 transition">
+                                <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 mb-3 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    </svg>
+                                    <p class="mb-2 text-sm text-gray-400"><span class="font-semibold">Clique para fazer upload</span> ou abrir câmera</p>
+                                    <p class="text-xs text-gray-400">PNG ou JPG (MAX. 5MB)</p>
+                                </div>
+                                <input id="selfie-upload" type="file" class="hidden" accept="image/png, image/jpeg" capture="user" />
+                            </label>
+                            <div id="selfie-preview" class="mt-4 hidden">
+                                <div class="flex items-center p-2 bg-gray-700 rounded">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-400 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                    </svg>
+                                    <span id="selfie-name" class="text-sm">selfie.jpg</span>
+                                    <button type="button" id="remove-selfie" class="ml-auto text-gray-400 hover:text-red-400">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center">
+                        <button id="verify-button" type="button" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full text-lg transition opacity-50 cursor-not-allowed" disabled>
+                            Verificar Identidade
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Área de Status de Verificação -->
+                <div id="verification-status" class="mt-8 hidden">
+                    <div class="bg-gray-700 rounded-lg p-6">
+                        <h4 class="text-lg font-semibold mb-4">Status da Verificação</h4>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <div id="document-status-icon" class="w-8 h-8 rounded-full flex items-center justify-center bg-gray-600 mr-4">
+                                    <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="font-medium">Verificação de Documento</p>
+                                    <p id="document-status-text" class="text-sm text-gray-400">Processando...</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center">
+                                <div id="face-status-icon" class="w-8 h-8 rounded-full flex items-center justify-center bg-gray-600 mr-4">
+                                    <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="font-medium">Verificação Facial</p>
+                                    <p id="face-status-text" class="text-sm text-gray-400">Aguardando processamento do documento...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Mensagem de Sucesso -->
+                <div id="verification-success" class="mt-8 hidden">
+                    <div class="bg-green-800 bg-opacity-20 border border-green-600 rounded-lg p-6 text-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto text-green-500 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <h4 class="text-xl font-bold mb-2">Verificação Concluída com Sucesso!</h4>
+                        <p class="mb-6">Sua identidade foi verificada. Agora você pode continuar para conectar suas redes sociais.</p>
+                        <a href="social-connect.html" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full text-lg inline-block transition">
+                            Continuar para Redes Sociais
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Mensagem de Erro -->
+                <div id="verification-error" class="mt-8 hidden">
+                    <div class="bg-red-800 bg-opacity-20 border border-red-600 rounded-lg p-6 text-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto text-red-500 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <h4 class="text-xl font-bold mb-2">Erro na Verificação</h4>
+                        <p id="error-message" class="mb-6">Ocorreu um erro durante o processo de verificação. Por favor, tente novamente.</p>
+                        <button id="retry-button" type="button" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full text-lg inline-block transition">
+                            Tentar Novamente
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-black py-6">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2025 FanInsight AI - FURIA. Todos os direitos reservados.</p>
+            <div class="mt-4 flex justify-center space-x-4">
+                <a href="#" class="text-gray-400 hover:text-white transition">Termos de Uso</a>
+                <a href="#" class="text-gray-400 hover:text-white transition">Política de Privacidade</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/upload.js"></script>
+</body>
+</html>
