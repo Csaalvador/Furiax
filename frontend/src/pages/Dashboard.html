@@ -1,0 +1,1081 @@
+</div>
+`;
+}
+
+return `
+<div class="bg-gray-700 rounded-lg overflow-hidden">
+  <div class="flex items-center ${bgColor} text-white p-4">
+    <div class="mr-3">
+      ${icon}
+    </div>
+    <div>
+      <h3 class="font-bold">${conn.platform.charAt(0).toUpperCase() + conn.platform.slice(1)}</h3>
+      <p class="text-sm">@${conn.username}</p>
+    </div>
+  </div>
+  <div class="p-4">
+    <div class="flex items-center text-sm">
+      <svg class="h-4 w-4 text-green-500 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+      </svg>
+      <span class="text-green-500">Conectado</span>
+      <span class="text-gray-400 text-xs ml-auto">
+        ${new Date(conn.connectedAt).toLocaleDateString('pt-BR')}
+      </span>
+    </div>
+    ${statsHtml}
+  </div>
+</div>
+`;
+}).join('');
+}
+
+// Função para renderizar perfis de jogos
+function renderGameProfiles(profiles) {
+if (!profiles || profiles.length === 0) {
+noProfiles.classList.remove('hidden');
+return;
+}
+
+noProfiles.classList.add('hidden');
+
+// Criar cards para cada perfil
+gameProfiles.innerHTML = profiles.map(profile => {
+// Determinar ícone baseado na plataforma
+let icon;
+switch (profile.platform.toLowerCase()) {
+case 'steam':
+  icon = '<svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.006l2.861-4.142V8.91c0-2.495 2.028-4.524 4.524-4.524 2.494 0 4.524 2.031 4.524 4.527s-2.03 4.525-4.524 4.525h-.105l-4.076 2.911c0 .052.004.105.004.159 0 1.875-1.515 3.396-3.39 3.396-1.635 0-3.016-1.173-3.331-2.727L.436 15.27C1.862 20.307 6.486 24 11.979 24c6.627 0 11.999-5.373 11.999-12S18.605 0 11.979 0zM7.54 18.21l-1.473-.61c.262.543.714.999 1.314 1.25 1.297.539 2.793-.076 3.332-1.375.263-.63.264-1.319.005-1.949s-.75-1.121-1.377-1.383c-.624-.26-1.29-.249-1.878-.03l1.523.63c.956.4 1.409 1.5 1.009 2.455-.397.957-1.497 1.41-2.454 1.012H7.54zm11.415-9.303c0-1.662-1.353-3.015-3.015-3.015-1.665 0-3.015 1.353-3.015 3.015 0 1.665 1.35 3.015 3.015 3.015 1.663 0 3.015-1.35 3.015-3.015zm-5.273-.005c0-1.252 1.013-2.266 2.265-2.266 1.249 0 2.266 1.014 2.266 2.266 0 1.251-1.017 2.265-2.266 2.265-1.253 0-2.265-1.014-2.265-2.265z"/></svg>';
+  break;
+case 'faceit':
+  icon = '<svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M23.97 13.43v-2.08c-3.45-.52-6.9-1.06-10.34-1.58v10.2c-2.44-.48-4.87-.96-7.31-1.44-2.86-4.38 1.1-10.39 6.19-9.2v-2.27C4.03 5.5-1.38 14.8 3.31 21.23c6.9 1.16 13.77 2.35 20.66 3.52v-11.3"/></svg>';
+  break;
+case 'riot':
+  icon = '<svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M12.534 21.77l-2.833-2.834v-4.7c0-.367.03-.717.09-1.05a8.932 8.932 0 0 1 3.05-5.933 9.126 9.126 0 0 1 6.4-2.5c.35 0 .683.016 1 .05L23.07 7.63a9.11 9.11 0 0 0-1.05-.074 5.9 5.9 0 0 0-4.184 1.817 5.7 5.7 0 0 0-1.683 4.183v5.1zm4.467-1.1c0 .383-.092.742-.275 1.075a2.917 2.917 0 0 1-1.892 1.4v.025a5.89 5.89 0 0 1-4.176-1.817 5.703 5.703 0 0 1-1.683-4.184v-5.1l-2.834-2.833 2.834-2.833v4.7c0 .366-.03.716-.09 1.05a8.93 8.93 0 0 1-3.05 5.933 9.126 9.126 0 0 1-6.4 2.5c-.383 0-.733-.025-1.05-.075L.936 18.27a9.11 9.11 0 0 0 1.05.075 5.9 5.9 0 0 0 4.183-1.817 5.702 5.702 0 0 0 1.684-4.183v-5.1L10.7 10.08l1.05-1.05 5.25 5.25-1.05 1.05-3.15-3.15v2.833c0 1.05.342 1.925 1.025 2.625a3.27 3.27 0 0 0 2.475 1.075h.05c.967 0 1.8-.342 2.5-1.025a3.28 3.28 0 0 0 1.05-2.475v-8.4l2.833 2.833-2.833 2.834z"/></svg>';
+  break;
+case 'twitch':
+  icon = '<svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/></svg>';
+  break;
+default:
+  icon = '<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>';
+}
+
+return `
+<div class="bg-gray-700 rounded-lg p-4">
+  <div class="flex justify-between">
+    <div class="flex items-center">
+      <div class="text-gray-300 mr-3">
+        ${icon}
+      </div>
+      <div>
+        <h3 class="font-bold">${profile.customPlatform || profile.platform}</h3>
+        <p class="text-sm text-gray-400">${profile.username}</p>
+      </div>
+    </div>
+    
+    <a href="${profile.url}" target="_blank" rel="noopener noreferrer" 
+      class="text-furia-blue hover:text-blue-400 transition-colors">
+      <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+      </svg>
+    </a>
+  </div>
+  
+  ${profile.relevanceScore ? `
+    <div class="mt-3 pt-3 border-t border-gray-600">
+      <div class="flex items-center mb-1">
+        <span class="text-xs text-gray-400 mr-2">Relevância FURIA:</span>
+        <div class="flex-1 bg-gray-800 h-1.5 rounded-full overflow-hidden">
+          <div class="bg-furia-blue h-full" style="width: ${profile.relevanceScore}%"></div>
+        </div>
+        <span class="text-xs text-furia-blue ml-2">${profile.relevanceScore}%</span>
+      </div>
+      ${profile.insights ? `
+        <p class="text-xs text-gray-400 mt-1">${profile.insights}</p>
+      ` : ''}
+    </div>
+  ` : ''}
+</div>
+`;
+}).join('');
+
+// Renderizar jogos mais jogados
+if (profiles.some(p => p.gameStats)) {
+// Extrair dados de jogos de todos os perfis
+const games = profiles
+.filter(p => p.gameStats)
+.flatMap(p => p.gameStats)
+.reduce((acc, game) => {
+  const existing = acc.find(g => g.name === game.name);
+  if (existing) {
+    existing.hours += game.hours;
+  } else {
+    acc.push({ ...game });
+  }
+  return acc;
+}, [])
+.sort((a, b) => b.hours - a.hours)
+.slice(0, 5);
+
+// Renderizar lista de jogos
+topGames.innerHTML = games.map(game => `
+<div class="flex items-center justify-between">
+  <span>${game.name}</span>
+  <div class="flex items-center">
+    <span class="text-xs text-gray-400 mr-2">${game.hours}h</span>
+    <div class="w-24 bg-gray-800 h-1.5 rounded-full overflow-hidden">
+      <div class="bg-furia-blue h-full" style="width: ${Math.min(game.hours / 10, 100)}%"></div>
+    </div>
+  </div>
+</div>
+`).join('');
+} else {
+topGames.innerHTML = '<p class="text-gray-400">Nenhum dado de jogo disponível</p>';
+}
+
+// Definir nível competitivo
+const avgScore = profiles.reduce((sum, p) => sum + (p.relevanceScore || 0), 0) / profiles.length;
+let level, bgColor, insights;
+
+if (avgScore >= 80) {
+level = 'Pro-Player';
+bgColor = 'bg-red-600';
+insights = 'Seu perfil mostra um nível profissional de jogo com forte engajamento em competições da FURIA.';
+} else if (avgScore >= 60) {
+level = 'Semi-Pro';
+bgColor = 'bg-orange-600';
+insights = 'Você demonstra habilidades de alto nível e participação ativa em torneios relacionados à FURIA.';
+} else if (avgScore >= 40) {
+level = 'Competitivo';
+bgColor = 'bg-yellow-600';
+insights = 'Seu perfil mostra participação regular em competições e jogos relacionados à FURIA.';
+} else if (avgScore >= 20) {
+level = 'Amador';
+bgColor = 'bg-teal-600';
+insights = 'Você joga regularmente e tem interesse nos jogos que a FURIA compete.';
+} else {
+level = 'Casual';
+bgColor = 'bg-blue-600';
+insights = 'Você demonstra interesse casual nos jogos que a FURIA compete.';
+}
+
+competitiveLevelText.textContent = level;
+competitiveLevelIcon.className = `w-10 h-10 rounded-full ${bgColor} flex items-center justify-center text-white mr-3`;
+competitiveInsights.textContent = insights;
+}
+
+// Função para renderizar histórico de interações
+function renderInteractionHistory(interactions) {
+if (!interactions || interactions.length === 0) {
+interactionsTimeline.innerHTML = '<p class="text-gray-400 text-center py-4">Nenhuma interação registrada recentemente.</p>';
+return;
+}
+
+interactionsTimeline.innerHTML = interactions.map(interaction => {
+// Determinar ícone e cor baseado no tipo de interação
+let icon, bgColor;
+
+switch (interaction.type) {
+case 'social_post':
+  icon = '<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" /></svg>';
+  bgColor = 'bg-blue-600';
+  break;
+case 'purchase':
+  icon = '<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>';
+  bgColor = 'bg-green-600';
+  break;
+case 'event':
+  icon = '<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>';
+  bgColor = 'bg-purple-600';
+  break;
+case 'game':
+  icon = '<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" /></svg>';
+  bgColor = 'bg-red-600';
+  break;
+default:
+  icon = '<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>';
+  bgColor = 'bg-gray-600';
+}
+
+// Formatar data
+const date = new Date(interaction.date);
+const formattedDate = new Intl.DateTimeFormat('pt-BR', { 
+day: 'numeric', 
+month: 'short', 
+hour: '2-digit', 
+minute: '2-digit' 
+}).format(date);
+
+return `
+<div class="flex">
+  <div class="mr-4 flex flex-col items-center">
+    <div class="${bgColor} rounded-full p-2 text-white">
+      ${icon}
+    </div>
+    <div class="h-full w-0.5 bg-gray-700 mt-2"></div>
+  </div>
+  
+  <div class="bg-gray-700 rounded-lg p-4 mb-4 flex-1">
+    <div class="flex justify-between items-start">
+      <h3 class="font-bold">${interaction.title}</h3>
+      <span class="text-xs text-gray-400">${formattedDate}</span>
+    </div>
+    <p class="text-sm text-gray-300 mt-1">${interaction.description}</p>
+    ${interaction.platform ? `
+      <div class="mt-2 text-xs inline-block px-2 py-1 bg-gray-800 rounded-full text-furia-blue">
+        ${interaction.platform}
+      </div>
+    ` : ''}
+  </div>
+</div>
+`;
+}).join('');
+}
+
+// Eventos dos botões
+if (shareProfileBtn) {
+shareProfileBtn.addEventListener('click', () => {
+// Gerar URL de compartilhamento do perfil
+const shareUrl = window.location.origin + '/fan-profile/' + (state.user?.username || 'you');
+
+// Mostrar modal de compartilhamento
+showModal(`
+<div class="text-center">
+  <h3 class="text-xl font-bold mb-4">Compartilhar Perfil</h3>
+  <p class="mb-6">Compartilhe seu perfil de fã da FURIA com a comunidade!</p>
+  
+  <div class="bg-gray-700 p-3 rounded-lg mb-4">
+    <input id="share-url" type="text" value="${shareUrl}" readonly
+      class="w-full bg-transparent border-none text-white text-center focus:outline-none">
+  </div>
+  
+  <div class="flex justify-center space-x-4 mb-6">
+    <button id="copy-btn" class="bg-furia-blue hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-colors flex items-center">
+      <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+      </svg>
+      Copiar Link
+    </button>
+    
+    <a href="https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=Confira%20meu%20perfil%20de%20f%C3%A3%20da%20FURIA%20no%20FanInsight%20AI!" target="_blank" rel="noopener noreferrer"
+      class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition-colors flex items-center">
+      <svg class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M23.643 4.937c-.835.37-1.732.62-2.675.733.962-.576 1.7-1.49 2.048-2.578-.9.534-1.897.922-2.958 1.13-.85-.904-2.06-1.47-3.4-1.47-2.572 0-4.658 2.086-4.658 4.66 0 .364.042.718.12 1.06-3.873-.195-7.304-2.05-9.602-4.868-.4.69-.63 1.49-.63 2.342 0 1.616.823 3.043 2.072 3.878-.764-.025-1.482-.234-2.11-.583v.06c0 2.257 1.605 4.14 3.737 4.568-.392.106-.803.162-1.227.162-.3 0-.593-.028-.877-.082.593 1.85 2.313 3.198 4.352 3.234-1.595 1.25-3.604 1.995-5.786 1.995-.376 0-.747-.022-1.112-.065 2.062 1.323 4.51 2.093 7.14 2.093 8.57 0 13.255-7.098 13.255-13.254 0-.2-.005-.402-.014-.602.91-.658 1.7-1.477 2.323-2.41z" />
+      </svg>
+      Twitter
+    </a>
+  </div>
+  
+  <button data-close-modal class="text-gray-400 hover:text-white transition-colors">
+    Fechar
+  </button>
+</div>
+`);
+
+// Adicionar funcionalidade de cópia ao botão
+document.getElementById('copy-btn').addEventListener('click', () => {
+const shareUrlInput = document.getElementById('share-url');
+shareUrlInput.select();
+document.execCommand('copy');
+
+// Mostrar confirmação
+showNotification('Link copiado para a área de transferência!', 'success');
+});
+});
+}
+
+if (editProfileBtn) {
+editProfileBtn.addEventListener('click', () => {
+showModal(`
+<div>
+  <h3 class="text-xl font-bold mb-4">Editar Perfil</h3>
+  <p class="mb-6">Escolha o que você deseja atualizar:</p>
+  
+  <div class="space-y-3 mb-6">
+    <button class="w-full bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg transition-colors text-left flex items-center" data-close-modal onclick="navigateTo('/register')">
+      <svg class="h-5 w-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+      </svg>
+      Informações Pessoais
+    </button>
+    
+    <button class="w-full bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg transition-colors text-left flex items-center" data-close-modal onclick="navigateTo('/social')">
+      <svg class="h-5 w-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+      </svg>
+      Redes Sociais
+    </button>
+    
+    <button class="w-full bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg transition-colors text-left flex items-center" data-close-modal onclick="navigateTo('/profiles')">
+      <svg class="h-5 w-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" />
+      </svg>
+      Perfis de Jogos
+    </button>
+  </div>
+  
+  <div class="text-center">
+    <button data-close-modal class="text-gray-400 hover:text-white transition-colors">
+      Cancelar
+    </button>
+  </div>
+</div>
+`);
+});
+}
+
+if (addSocialBtn) {
+addSocialBtn.addEventListener('click', () => {
+navigateTo('/social');
+});
+}
+
+if (connectSocialBtn) {
+connectSocialBtn.addEventListener('click', () => {
+navigateTo('/social');
+});
+}
+
+if (addProfileBtn) {
+addProfileBtn.addEventListener('click', () => {
+navigateTo('/profiles');
+});
+}
+
+if (connectProfilesBtn) {
+connectProfilesBtn.addEventListener('click', () => {
+navigateTo('/profiles');
+});
+}
+
+if (interactionHistoryBtn) {
+interactionHistoryBtn.addEventListener('click', () => {
+showModal(`
+<div>
+  <h3 class="text-xl font-bold mb-4">Histórico Completo de Interações</h3>
+  
+  <div class="max-h-96 overflow-y-auto pr-2">
+    <div id="full-interactions-timeline" class="space-y-4">
+      <!-- Será preenchido dinamicamente -->
+    </div>
+  </div>
+  
+  <div class="text-center mt-6">
+    <button data-close-modal class="bg-furia-blue hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg transition-colors">
+      Fechar
+    </button>
+  </div>
+</div>
+`);
+
+// Buscar histórico completo (simulado)
+getFanInsights().then(insights => {
+const fullTimeline = document.getElementById('full-interactions-timeline');
+if (fullTimeline) {
+  // Gerar mais interações para o histórico completo
+  const allInteractions = [
+    ...insights.recentInteractions,
+    // Adicionar mais interações fictícias
+    {
+      type: 'social_post',
+      title: 'Tweet sobre a FURIA',
+      description: 'Você compartilhou a vitória da FURIA contra a Navi na IEM Rio',
+      platform: 'Twitter',
+      date: '2023-10-15T14:23:00Z'
+    },
+    {
+      type: 'event',
+      title: 'Major Rio 2022',
+      description: 'Você participou do evento Major Rio 2022',
+      date: '2022-11-12T09:30:00Z'
+    },
+    {
+      type: 'purchase',
+      title: 'Compra de Camiseta',
+      description: 'Você adquiriu a camiseta oficial da FURIA',
+      date: '2022-10-01T16:45:00Z'
+    },
+    {
+      type: 'game',
+      title: 'Partida com FURIA Guerreiros',
+      description: 'Você jogou uma partida com os jogadores da FURIA',
+      platform: 'CS:GO',
+      date: '2022-09-05T20:15:00Z'
+    }
+  ].sort((a, b) => new Date(b.date) - new Date(a.date));
+  
+  // Renderizar histórico completo (usando a mesma função)
+  renderInteractionHistory(allInteractions);
+  fullTimeline.innerHTML = interactionsTimeline.innerHTML;
+}
+});
+});
+}              <div id="products-list" class="text-gray-300">
+        <!-- Será preenchido dinamicamente -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Seção de redes sociais -->
+<div class="bg-gray-800 rounded-lg p-6 mb-8">
+  <div class="flex items-center justify-between mb-4">
+    <h2 class="text-xl font-bold">Análise de Redes Sociais</h2>
+    <button id="add-social-btn" class="flex items-center bg-furia-blue hover:bg-blue-700 text-white text-sm font-bold py-1 px-3 rounded transition-colors">
+      <svg class="h-4 w-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+      </svg>
+      Adicionar rede
+    </button>
+  </div>
+  
+  <div id="no-social" class="hidden text-gray-400 text-center py-8">
+    <p>Nenhuma rede social conectada ainda.</p>
+    <button id="connect-social-btn" class="mt-4 bg-furia-blue hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg transition-colors">
+      Conectar Redes Sociais
+    </button>
+  </div>
+  
+  <div id="social-networks" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <!-- Será preenchido dinamicamente -->
+  </div>
+  
+  <div class="mt-6 bg-gray-700 rounded-lg p-4">
+    <h3 class="font-bold mb-2">Análise de Engajamento</h3>
+    <div class="space-y-3">
+      <div>
+        <div class="flex justify-between mb-1">
+          <span class="text-sm text-gray-300">Menções à FURIA</span>
+          <span id="mentions-count" class="text-sm text-furia-blue font-bold">0</span>
+        </div>
+        <div class="w-full bg-gray-800 rounded-full h-2">
+          <div id="mentions-bar" class="bg-furia-blue h-2 rounded-full" style="width: 0%"></div>
+        </div>
+      </div>
+      
+      <div>
+        <div class="flex justify-between mb-1">
+          <span class="text-sm text-gray-300">Interações com conteúdo</span>
+          <span id="interactions-count" class="text-sm text-furia-blue font-bold">0</span>
+        </div>
+        <div class="w-full bg-gray-800 rounded-full h-2">
+          <div id="interactions-bar" class="bg-furia-blue h-2 rounded-full" style="width: 0%"></div>
+        </div>
+      </div>
+      
+      <div>
+        <div class="flex justify-between mb-1">
+          <span class="text-sm text-gray-300">Frequência de interação</span>
+          <span id="frequency-value" class="text-sm text-furia-blue font-bold">Baixa</span>
+        </div>
+        <div class="w-full bg-gray-800 rounded-full h-2">
+          <div id="frequency-bar" class="bg-furia-blue h-2 rounded-full" style="width: 0%"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Seção de perfis de jogos -->
+<div class="bg-gray-800 rounded-lg p-6 mb-8">
+  <div class="flex items-center justify-between mb-4">
+    <h2 class="text-xl font-bold">Perfis de Jogos Conectados</h2>
+    <button id="add-profile-btn" class="flex items-center bg-furia-blue hover:bg-blue-700 text-white text-sm font-bold py-1 px-3 rounded transition-colors">
+      <svg class="h-4 w-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+      </svg>
+      Adicionar perfil
+    </button>
+  </div>
+  
+  <div id="no-profiles" class="hidden text-gray-400 text-center py-8">
+    <p>Nenhum perfil de jogo conectado ainda.</p>
+    <button id="connect-profiles-btn" class="mt-4 bg-furia-blue hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg transition-colors">
+      Conectar Perfis de Jogos
+    </button>
+  </div>
+  
+  <div id="game-profiles" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <!-- Será preenchido dinamicamente -->
+  </div>
+  
+  <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="bg-gray-700 rounded-lg p-4">
+      <h3 class="font-bold mb-3">Jogos Mais Jogados</h3>
+      <div id="top-games" class="space-y-2">
+        <!-- Será preenchido dinamicamente -->
+      </div>
+    </div>
+    
+    <div class="bg-gray-700 rounded-lg p-4">
+      <h3 class="font-bold mb-3">Nível Competitivo</h3>
+      <div class="flex items-center mb-3">
+        <div id="competitive-level-icon" class="w-10 h-10 rounded-full bg-red-600 flex items-center justify-center text-white mr-3">
+          <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+          </svg>
+        </div>
+        <div>
+          <h4 id="competitive-level-text" class="font-bold"></h4>
+          <p class="text-xs text-gray-400">Baseado em seus perfis de jogos</p>
+        </div>
+      </div>
+      <div id="competitive-insights" class="text-sm text-gray-300">
+        <!-- Será preenchido dinamicamente -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Seção de recompensas e experiências exclusivas -->
+<div class="bg-gray-800 rounded-lg p-6 mb-8">
+  <h2 class="text-xl font-bold mb-4">Experiências Exclusivas</h2>
+  
+  <div id="no-rewards" class="hidden text-gray-400 text-center py-8">
+    <p>Continue aumentando seu nível de fã para desbloquear experiências exclusivas!</p>
+  </div>
+  
+  <div id="rewards-list" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div class="bg-gradient-to-br from-gray-700 to-gray-900 rounded-lg p-4 border border-furia-blue">
+      <div class="flex justify-between items-start">
+        <h3 class="font-bold">Early Access</h3>
+        <span class="text-xs bg-green-600 text-white px-2 py-1 rounded">Desbloqueado</span>
+      </div>
+      <p class="text-sm text-gray-300 mt-2">Acesso antecipado a novos produtos da FURIA antes do lançamento oficial.</p>
+      <button class="mt-4 w-full bg-furia-blue hover:bg-blue-700 text-white text-sm font-bold py-2 px-4 rounded transition-colors">
+        Acessar
+      </button>
+    </div>
+    
+    <div class="bg-gradient-to-br from-gray-700 to-gray-900 rounded-lg p-4 border border-gray-600">
+      <div class="flex justify-between items-start">
+        <h3 class="font-bold">Meet & Greet</h3>
+        <span class="text-xs bg-gray-600 text-white px-2 py-1 rounded">Nível 3 Necessário</span>
+      </div>
+      <p class="text-sm text-gray-300 mt-2">Encontros virtuais exclusivos com jogadores e equipes da FURIA.</p>
+      <button disabled class="mt-4 w-full bg-gray-600 cursor-not-allowed text-gray-400 text-sm font-bold py-2 px-4 rounded transition-colors">
+        Bloqueado
+      </button>
+    </div>
+    
+    <div class="bg-gradient-to-br from-gray-700 to-gray-900 rounded-lg p-4 border border-gray-600">
+      <div class="flex justify-between items-start">
+        <h3 class="font-bold">Backstage Pass</h3>
+        <span class="text-xs bg-gray-600 text-white px-2 py-1 rounded">Nível 5 Necessário</span>
+      </div>
+      <p class="text-sm text-gray-300 mt-2">Acesso aos bastidores em eventos onde a FURIA estiver competindo.</p>
+      <button disabled class="mt-4 w-full bg-gray-600 cursor-not-allowed text-gray-400 text-sm font-bold py-2 px-4 rounded transition-colors">
+        Bloqueado
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Histórico de interações -->
+<div class="bg-gray-800 rounded-lg p-6">
+  <div class="flex items-center justify-between mb-4">
+    <h2 class="text-xl font-bold">Histórico de Interações</h2>
+    <div>
+      <button id="interaction-history-btn" class="flex items-center text-furia-blue hover:text-blue-400 font-bold text-sm">
+        Ver todos
+        <svg class="h-4 w-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+    </div>
+  </div>
+  
+  <div id="interactions-timeline" class="space-y-4">
+    <!-- Será preenchido dinamicamente -->
+  </div>
+</div>
+</div>
+</div>
+`;
+
+// Elementos do DOM
+const loadingDashboard = document.getElementById('loading-dashboard');
+const dashboardContent = document.getElementById('dashboard-content');
+
+// Elementos de perfil
+const profileImage = document.getElementById('profile-image');
+const fanName = document.getElementById('fan-name');
+const fanUsername = document.getElementById('fan-username');
+const fanLevelBadge = document.getElementById('fan-level-badge');
+const fanSince = document.getElementById('fan-since');
+
+// Métricas principais
+const fanScore = document.getElementById('fan-score');
+const fanScoreBar = document.getElementById('fan-score-bar');
+const engagementScore = document.getElementById('engagement-score');
+const competitiveScore = document.getElementById('competitive-score');
+const loyaltyScore = document.getElementById('loyalty-score');
+const socialConnectionsCount = document.getElementById('social-connections-count');
+const gameProfilesCount = document.getElementById('game-profiles-count');
+const eventsAttended = document.getElementById('events-attended');
+
+// Informações pessoais
+const personalName = document.getElementById('personal-name');
+const personalEmail = document.getElementById('personal-email');
+const personalPhone = document.getElementById('personal-phone');
+const personalBirth = document.getElementById('personal-birth');
+const personalAddress = document.getElementById('personal-address');
+const personalCity = document.getElementById('personal-city');
+const verificationDate = document.getElementById('verification-date');
+
+// Interesses
+const gamesList = document.getElementById('games-list');
+const teamsList = document.getElementById('teams-list');
+const eventsList = document.getElementById('events-list');
+const productsList = document.getElementById('products-list');
+
+// Redes sociais
+const noSocial = document.getElementById('no-social');
+const socialNetworks = document.getElementById('social-networks');
+const mentionsCount = document.getElementById('mentions-count');
+const mentionsBar = document.getElementById('mentions-bar');
+const interactionsCount = document.getElementById('interactions-count');
+const interactionsBar = document.getElementById('interactions-bar');
+const frequencyValue = document.getElementById('frequency-value');
+const frequencyBar = document.getElementById('frequency-bar');
+
+// Perfis de jogos
+const noProfiles = document.getElementById('no-profiles');
+const gameProfiles = document.getElementById('game-profiles');
+const topGames = document.getElementById('top-games');
+const competitiveLevelIcon = document.getElementById('competitive-level-icon');
+const competitiveLevelText = document.getElementById('competitive-level-text');
+const competitiveInsights = document.getElementById('competitive-insights');
+
+// Recompensas
+const noRewards = document.getElementById('no-rewards');
+const rewardsList = document.getElementById('rewards-list');
+
+// Histórico
+const interactionsTimeline = document.getElementById('interactions-timeline');
+
+// Botões
+const shareProfileBtn = document.getElementById('share-profile-btn');
+const editProfileBtn = document.getElementById('edit-profile-btn');
+const addSocialBtn = document.getElementById('add-social-btn');
+const connectSocialBtn = document.getElementById('connect-social-btn');
+const addProfileBtn = document.getElementById('add-profile-btn');
+const connectProfilesBtn = document.getElementById('connect-profiles-btn');
+const interactionHistoryBtn = document.getElementById('interaction-history-btn');
+
+// Função para carregar o perfil completo do usuário
+async function loadUserProfile() {
+showLoading();
+try {
+// Buscar os dados do perfil da API
+const profileData = await getUserProfile();
+const insights = await getFanInsights();
+const socialConnections = await getSocialConnections();
+const externalProfiles = await getExternalProfiles();
+
+// Renderizar os dados no dashboard
+renderUserProfile(profileData);
+renderFanInsights(insights);
+renderSocialNetworks(socialConnections);
+renderGameProfiles(externalProfiles);
+renderInteractionHistory(insights.recentInteractions);
+
+// Esconder loading e mostrar conteúdo
+loadingDashboard.classList.add('hidden');
+dashboardContent.classList.remove('hidden');
+} catch (error) {
+showNotification('Erro ao carregar perfil. Tente novamente.', 'error');
+console.error('Erro ao carregar perfil:', error);
+} finally {
+hideLoading();
+}
+}
+
+// Função para renderizar o perfil básico do usuário
+function renderUserProfile(profile) {
+// Foto e nome
+profileImage.src = profile.profileImage || 'assets/default-avatar.png';
+fanName.textContent = profile.personalInfo.fullName;
+fanUsername.textContent = profile.username || '';
+
+// Nível e tempo
+fanLevelBadge.textContent = profile.fanLevel;
+
+const registerDate = new Date(profile.registeredAt);
+const formattedDate = new Intl.DateTimeFormat('pt-BR', { month: 'long', year: 'numeric' }).format(registerDate);
+fanSince.textContent = `Fã desde ${formattedDate}`;
+
+// Métricas principais
+fanScore.textContent = profile.fanScore;
+fanScoreBar.style.width = `${profile.fanScore}%`;
+
+engagementScore.textContent = profile.engagementScore;
+competitiveScore.textContent = profile.competitiveScore;
+loyaltyScore.textContent = profile.loyaltyScore;
+
+socialConnectionsCount.textContent = profile.socialConnections.length;
+gameProfilesCount.textContent = profile.gameProfiles.length;
+eventsAttended.textContent = profile.eventsAttended;
+
+// Informações pessoais
+personalName.textContent = `Nome completo: ${profile.personalInfo.fullName}`;
+personalEmail.textContent = `E-mail: ${profile.personalInfo.email}`;
+personalPhone.textContent = `Telefone: ${profile.personalInfo.phone}`;
+
+const birthDate = new Date(profile.personalInfo.birthDate);
+const formattedBirthDate = new Intl.DateTimeFormat('pt-BR').format(birthDate);
+personalBirth.textContent = `Data de nasc.: ${formattedBirthDate}`;
+
+// Endereço
+personalAddress.textContent = `Endereço: ${profile.address.street}, ${profile.address.number}${profile.address.complement ? `, ${profile.address.complement}` : ''} - ${profile.address.neighborhood}`;
+personalCity.textContent = `Cidade/Estado: ${profile.address.city}/${profile.address.state}`;
+
+// Verificação
+const verifiedDate = new Date(profile.verifiedAt);
+const formattedVerifiedDate = new Intl.DateTimeFormat('pt-BR').format(verifiedDate);
+verificationDate.textContent = `Verificado em: ${formattedVerifiedDate}`;
+
+// Interesses
+renderInterests(profile.interests);
+}
+
+// Função para renderizar os interesses
+function renderInterests(interests) {
+// Jogos acompanhados
+gamesList.innerHTML = interests.games.map(game => 
+`<span class="bg-gray-700 text-white text-sm px-3 py-1 rounded">${game}</span>`
+).join('');
+
+// Times da FURIA
+teamsList.innerHTML = interests.teams.map(team => 
+`<span class="bg-gray-700 text-white text-sm px-3 py-1 rounded">${team}</span>`
+).join('');
+
+// Eventos
+if (interests.events && interests.events.trim()) {
+const events = interests.events.split(',').map(event => event.trim());
+eventsList.innerHTML = events.map(event => 
+`<div class="flex items-center mb-2">
+  <svg class="h-4 w-4 text-furia-blue mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+  </svg>
+  <span>${event}</span>
+</div>`
+).join('');
+} else {
+eventsList.innerHTML = '<p class="text-gray-400">Nenhum evento registrado</p>';
+}
+
+// Produtos
+if (interests.products && interests.products.trim()) {
+const products = interests.products.split(',').map(product => product.trim());
+productsList.innerHTML = products.map(product => 
+`<div class="flex items-center mb-2">
+  <svg class="h-4 w-4 text-furia-blue mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+  </svg>
+  <span>${product}</span>
+</div>`
+).join('');
+} else {
+productsList.innerHTML = '<p class="text-gray-400">Nenhum produto registrado</p>';
+}
+}
+
+// Função para renderizar insights do fã
+function renderFanInsights(insights) {
+// Análise de redes sociais
+mentionsCount.textContent = insights.socialMentions;
+mentionsBar.style.width = `${Math.min(insights.socialMentions / 2, 100)}%`;
+
+interactionsCount.textContent = insights.socialInteractions;
+interactionsBar.style.width = `${Math.min(insights.socialInteractions / 5, 100)}%`;
+
+frequencyValue.textContent = insights.interactionFrequency;
+
+// Frequência de interação
+let frequencyPercentage = 0;
+switch (insights.interactionFrequency) {
+case 'Muito Alta':
+frequencyPercentage = 100;
+break;
+case 'Alta':
+frequencyPercentage = 75;
+break;
+case 'Média':
+frequencyPercentage = 50;
+break;
+case 'Baixa':
+frequencyPercentage = 25;
+break;
+default:
+frequencyPercentage = 10;
+}
+frequencyBar.style.width = `${frequencyPercentage}%`;
+}
+
+// Função para renderizar redes sociais
+function renderSocialNetworks(connections) {
+if (!connections || connections.length === 0) {
+noSocial.classList.remove('hidden');
+return;
+}
+
+noSocial.classList.add('hidden');
+
+// Criar cards para cada rede social
+socialNetworks.innerHTML = connections.map(conn => {
+let bgColor, icon;
+
+switch (conn.platform) {
+case 'twitter':
+  bgColor = 'bg-blue-500';
+  icon = '<svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M23.643 4.937c-.835.37-1.732.62-2.675.733.962-.576 1.7-1.49 2.048-2.578-.9.534-1.897.922-2.958 1.13-.85-.904-2.06-1.47-3.4-1.47-2.572 0-4.658 2.086-4.658 4.66 0 .364.042.718.12 1.06-3.873-.195-7.304-2.05-9.602-4.868-.4.69-.63 1.49-.63 2.342 0 1.616.823 3.043 2.072 3.878-.764-.025-1.482-.234-2.11-.583v.06c0 2.257 1.605 4.14 3.737 4.568-.392.106-.803.162-1.227.162-.3 0-.593-.028-.877-.082.593 1.85 2.313 3.198 4.352 3.234-1.595 1.25-3.604 1.995-5.786 1.995-.376 0-.747-.022-1.112-.065 2.062 1.323 4.51 2.093 7.14 2.093 8.57 0 13.255-7.098 13.255-13.254 0-.2-.005-.402-.014-.602.91-.658 1.7-1.477 2.323-2.41z" /></svg>';
+  break;
+case 'instagram':
+  bgColor = 'bg-gradient-to-tr from-purple-600 to-pink-500';
+  icon = '<svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" /></svg>';
+  break;
+case 'youtube':
+  bgColor = 'bg-red-600';
+  icon = '<svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z" /></svg>';
+  break;
+default:
+  bgColor = 'bg-gray-600';
+  icon = '<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>';
+}
+
+// Gerar estatísticas baseadas na plataforma
+let statsHtml = '';
+
+if (conn.platform === 'twitter') {
+statsHtml = `
+  <div class="flex justify-between text-xs text-gray-400 mt-3">
+    <span>${conn.insights?.tweetCount || 0} tweets</span>
+    <span>${conn.insights?.likeCount || 0} curtidas</span>
+  </div>
+`;
+} else if (conn.platform === 'instagram') {
+statsHtml = `
+  <div class="flex justify-between text-xs text-gray-400 mt-3">
+    <span>${conn.insights?.postCount || 0} posts</span>
+    <span>${conn.insights?.storyCount || 0} stories</span>
+  </div>
+`;
+} else if (conn.platform === 'youtube') {
+statsHtml = `
+  <div class="flex justify-between text-xs text-gray-400 mt-3">
+    <span>${conn.insights?.videoCount || 0} vídeos</span>
+    <span>${conn.insights?.commentCount || 0} comentários</span>
+  // FanInsight AI - Página de Dashboard
+// Exibe o perfil unificado do fã da FURIA com insights e análises completas
+
+import { navigateTo } from '../js/routes.js';
+import { getUserProfile, getFanInsights, getSocialConnections, getExternalProfiles } from '../js/api.js';
+import { showLoading, hideLoading, showNotification, showModal, state } from '../js/app.js';
+
+export function renderDashboardPage(container) {
+container.innerHTML = `
+<div class="max-w-5xl mx-auto py-8 px-4">
+<div id="loading-dashboard" class="flex justify-center items-center h-64">
+<div class="animate-spin h-12 w-12 border-4 border-furia-blue border-t-transparent rounded-full"></div>
+</div>
+
+<div id="dashboard-content" class="hidden">
+<!-- Cabeçalho do perfil -->
+<div class="flex flex-col lg:flex-row items-center lg:items-start justify-between mb-8">
+  <div class="flex flex-col lg:flex-row items-center mb-6 lg:mb-0">
+    <div class="w-24 h-24 bg-gray-800 rounded-full flex items-center justify-center mb-4 lg:mb-0 lg:mr-6 overflow-hidden border-2 border-furia-blue">
+      <img id="profile-image" src="" alt="Foto de perfil" class="w-full h-full object-cover">
+    </div>
+    
+    <div class="text-center lg:text-left">
+      <h1 id="fan-name" class="text-3xl font-bold"></h1>
+      <p id="fan-username" class="text-gray-400 text-lg"></p>
+      <div class="mt-2 flex flex-wrap justify-center lg:justify-start">
+        <span id="fan-level-badge" class="inline-block bg-furia-blue text-white text-xs font-bold uppercase tracking-wide px-3 py-1 rounded-full mr-2 mb-2">
+        </span>
+        <span id="fan-since" class="inline-block bg-gray-700 text-white text-xs font-bold uppercase tracking-wide px-3 py-1 rounded-full mr-2 mb-2">
+        </span>
+      </div>
+    </div>
+  </div>
+  
+  <div class="flex items-center space-x-4">
+    <button id="share-profile-btn" class="flex items-center bg-furia-blue hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-colors">
+      <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+      </svg>
+      Compartilhar
+    </button>
+    <button id="edit-profile-btn" class="flex items-center bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg transition-colors">
+      <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+      </svg>
+      Editar
+    </button>
+  </div>
+</div>
+
+<!-- Cartões de métricas principais -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+  <div class="bg-gray-800 p-4 rounded-lg">
+    <div class="flex justify-between items-start mb-4">
+      <h3 class="text-lg font-bold">Score Geral</h3>
+      <span class="text-xs bg-furia-blue text-white px-2 py-1 rounded">Calculado</span>
+    </div>
+    <div class="flex items-end">
+      <div id="fan-score" class="text-4xl font-bold text-furia-blue">0</div>
+      <div class="text-lg text-gray-400 ml-1">/100</div>
+    </div>
+    <div class="mt-2 flex items-center">
+      <div class="w-full bg-gray-700 rounded-full h-2.5 mt-2">
+        <div id="fan-score-bar" class="bg-furia-blue h-2.5 rounded-full" style="width: 0%"></div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="bg-gray-800 p-4 rounded-lg">
+    <div class="flex justify-between items-start mb-4">
+      <h3 class="text-lg font-bold">Engajamento</h3>
+      <span class="text-xs bg-indigo-600 text-white px-2 py-1 rounded">Social</span>
+    </div>
+    <div class="flex items-end">
+      <div id="engagement-score" class="text-4xl font-bold text-indigo-400">0</div>
+      <div class="text-lg text-gray-400 ml-1">/100</div>
+    </div>
+    <div class="mt-2 text-gray-400 text-sm">
+      <span id="social-connections-count">0</span> redes conectadas
+    </div>
+  </div>
+  
+  <div class="bg-gray-800 p-4 rounded-lg">
+    <div class="flex justify-between items-start mb-4">
+      <h3 class="text-lg font-bold">Competitivo</h3>
+      <span class="text-xs bg-red-600 text-white px-2 py-1 rounded">Gaming</span>
+    </div>
+    <div class="flex items-end">
+      <div id="competitive-score" class="text-4xl font-bold text-red-400">0</div>
+      <div class="text-lg text-gray-400 ml-1">/100</div>
+    </div>
+    <div class="mt-2 text-gray-400 text-sm">
+      <span id="game-profiles-count">0</span> perfis conectados
+    </div>
+  </div>
+  
+  <div class="bg-gray-800 p-4 rounded-lg">
+    <div class="flex justify-between items-start mb-4">
+      <h3 class="text-lg font-bold">Fidelidade</h3>
+      <span class="text-xs bg-amber-600 text-white px-2 py-1 rounded">Histórico</span>
+    </div>
+    <div class="flex items-end">
+      <div id="loyalty-score" class="text-4xl font-bold text-amber-400">0</div>
+      <div class="text-lg text-gray-400 ml-1">/100</div>
+    </div>
+    <div class="mt-2 text-gray-400 text-sm">
+      <span id="events-attended">0</span> eventos participados
+    </div>
+  </div>
+</div>
+
+<!-- Seção de identidade verificada -->
+<div class="bg-gray-800 rounded-lg p-6 mb-8">
+  <div class="flex items-center justify-between mb-4">
+    <h2 class="text-xl font-bold">Identidade Verificada</h2>
+    <div id="verification-badge" class="flex items-center bg-green-900 bg-opacity-30 border border-green-700 text-green-500 px-3 py-1 rounded-lg">
+      <svg class="h-5 w-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+      </svg>
+      <span>Verificado</span>
+    </div>
+  </div>
+  
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div>
+      <h3 class="text-lg font-bold mb-3">Informações Pessoais</h3>
+      <div class="space-y-2 text-gray-300">
+        <div class="flex items-center">
+          <svg class="h-5 w-5 text-gray-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+          </svg>
+          <span id="personal-name">Nome completo: </span>
+        </div>
+        <div class="flex items-center">
+          <svg class="h-5 w-5 text-gray-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          </svg>
+          <span id="personal-email">E-mail: </span>
+        </div>
+        <div class="flex items-center">
+          <svg class="h-5 w-5 text-gray-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+          </svg>
+          <span id="personal-phone">Telefone: </span>
+        </div>
+        <div class="flex items-center">
+          <svg class="h-5 w-5 text-gray-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+          <span id="personal-birth">Data de nasc.: </span>
+        </div>
+      </div>
+    </div>
+    
+    <div>
+      <h3 class="text-lg font-bold mb-3">Localização</h3>
+      <div class="space-y-2 text-gray-300">
+        <div class="flex items-start">
+          <svg class="h-5 w-5 text-gray-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+          <span id="personal-address">Endereço: </span>
+        </div>
+        <div class="flex items-center">
+          <svg class="h-5 w-5 text-gray-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9" />
+          </svg>
+          <span id="personal-city">Cidade/Estado: </span>
+        </div>
+      </div>
+      
+      <div class="mt-4">
+        <h3 class="text-lg font-bold mb-3">Verificação</h3>
+        <div class="text-gray-300 flex items-center">
+          <svg class="h-5 w-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+          </svg>
+          <span id="verification-date">Verificado em: </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Seção de interesses -->
+<div class="bg-gray-800 rounded-lg p-6 mb-8">
+  <h2 class="text-xl font-bold mb-4">Interesses em E-Sports</h2>
+  
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div>
+      <h3 class="text-lg font-bold mb-3">Jogos Acompanhados</h3>
+      <div id="games-list" class="flex flex-wrap gap-2">
+        <!-- Será preenchido dinamicamente -->
+      </div>
+      
+      <h3 class="text-lg font-bold mt-6 mb-3">Times da FURIA</h3>
+      <div id="teams-list" class="flex flex-wrap gap-2">
+        <!-- Será preenchido dinamicamente -->
+      </div>
+    </div>
+    
+    <div>
+      <h3 class="text-lg font-bold mb-3">Eventos Participados</h3>
+      <div id="events-list" class="text-gray-300">
+        <!-- Será preenchido dinamicamente -->
+      </div>
+      
+      <h3 class="text-lg font-bold mt-6 mb-3">Produtos Adquiridos</h3>
+      <div id="products-list" class="text-gray-300">
+        <!-- Será preenchido dinamicamente -->
+      </div>
