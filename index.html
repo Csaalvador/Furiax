@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FURIAX - Sua Jornada FURIOSA</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <style>
+   * { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Orbitron', sans-serif;
+  background-color: #0a0a0a;
+  color: #f0f0f0;
+  display: flex;
+}
+
+/* Removida luz azul pulsante */
+
+/* Sidebar */
+.sidebar {
+  width: 240px;
+  height: 100vh;
+  background: linear-gradient(to bottom, #111, #181818);
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border-right: 2px solid #333;
+  box-shadow: 4px 0 10px rgba(0, 0, 0, 0.5);
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+
+.sidebar img {
+  width: 140px;
+  margin-bottom: 2rem;
+  align-self: center;
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.1));
+}
+
+.sidebar button {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid transparent;
+  color: #ccc;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  text-align: left;
+  padding: 1.4rem 1rem;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sidebar button:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: #666;
+  transform: translateX(5px);
+}
+
+/* Conteúdo principal */
+.main-content {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+  position: relative;
+  z-index: 2;
+}
+
+.video-container {
+  width: 100%;
+  height: 360px;
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+/* Painéis */
+.info-panels {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  margin-top: -50px;
+}
+
+.panel {
+  display: flex;
+  background: #111;
+  border-left: 6px solid #444;
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(255,255,255,0.05);
+  transition: all 0.3s ease-in-out;
+}
+
+.panel:hover {
+  border-left: 6px solid #888;
+  box-shadow: 0 0 20px rgba(255,255,255,0.1);
+}
+
+.panel-content {
+  margin-left: 15px;
+}
+
+.panel h2 {
+  color: #ddd;
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+}
+
+.panel p {
+  color: #aaa;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Popup */
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #1a1a1a;
+  color: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(255,255,255,0.1);
+  z-index: 999;
+  display: none;
+  text-align: center;
+}
+
+.popup button {
+  margin-top: 1rem;
+  background: #fff;
+  color: #000;
+  padding: 0.6rem 1.2rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Futuristic Box */
+.futuristic-box {
+  background: #0d0d0d;
+  position: relative;
+  padding: 25px;
+  margin: 30px 0;
+  border-radius: 12px;
+  overflow: hidden;
+  color: #ddd;
+  box-shadow: 0 0 10px rgba(255,255,255,0.03);
+}
+
+.futuristic-box::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #444, #666);
+  z-index: -1;
+  filter: blur(12px);
+  animation: rotateBorder 10s linear infinite;
+}
+
+@keyframes rotateBorder {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.futuristic-box h2 {
+  color: #bbb;
+  margin-bottom: 10px;
+}
+
+.futuristic-box p {
+  color: #999;
+}
+
+.tooltip-popup {
+  position: fixed;
+  background: #1a1a1a;
+  color: #fff;
+  padding: 0.7rem 1rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(255,255,255,0.1);
+  z-index: 1000;
+  font-size: 0.9rem;
+  display: none;
+  max-width: 250px;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  font-family: 'arial';
+}
+
+  /* Seção de níveis - MODIFICADO PARA FICAR MENOR E ABAIXO DO VÍDEO */
+  .levels-section {
+    margin-top: 1.5rem;
+  }
+  
+  .levels-title {
+    font-size: 1.2rem;
+    color: #1e90ff;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .levels-title i {
+    font-size: 1rem;
+  }
+  
+  .level-cards {
+    display: flex;
+    padding: 0.5rem 0;
+    scroll-snap-type: x mandatory;
+    gap: 1rem;
+  }
+  
+  .level-card {
+    height: 138px;
+    min-width: 200px;
+    background: linear-gradient(145deg, #111, #181818);
+    border-radius: 10px;
+    padding: 1rem;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    border: 1px solid #333;
+    transition: all 0.3s ease;
+  }
+  
+  .level-card:hover {
+    transform: scale(1.03);
+    border-color: #1e90ff;
+  }
+  
+  .level-header {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 0.8rem;
+  }
+  
+  .level-icon {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(30, 144, 255, 0.1);
+    border-radius: 50%;
+    font-size: 1rem;
+    color: #1e90ff;
+  }
+  
+  .level-title {
+    font-size: 1rem;
+    color: #ddd;
+  }
+  
+  .level-description {
+    color: #999;
+    font-size: 0.8rem;
+    margin-bottom: 1rem;
+  }
+  
+  .level-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #1e90ff;
+    color: white;
+    font-size: 0.7rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 50px;
+    box-shadow: 0 0 8px rgba(30, 144, 255, 0.5);
+  }
+  
+  .achievement-list {
+    list-style-type: none;
+    margin-top: auto;
+  }
+  
+  .achievement-item {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-bottom: 0.4rem;
+    color: #888;
+    font-size: 0.8rem;
+  }
+  
+  .achievement-item i {
+    color: #1e90ff;
+  }
+
+  .go button {
+    background: #1e90ff;
+    color: #fff;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    width: 100%;
+  }
+
+  .go button:hover {
+    background: #1a7bbf;
+  }
+
+  </style>
+</head>
+<body>
+  <div id="particles-js" style="position: fixed; z-index: 0; width: 100vw; height: 100vh; top: 0; left: 0;"></div>
+  <div class="sidebar">
+    <img src="./img/logo/logoFuriax.png" alt="FURIAX Logo">
+    <div style="color: #1e90ff; font-size: 1.1rem; margin-bottom: 1.5rem; text-align: center;">
+      Bem-vindo ao <strong>FURIAX</strong><br><small style="color:#888;">Sua Jornada Furiosa</small>
+    </div>
+    <button><i class="fas fa-bolt"></i> O que é o FURIAX?</button>
+    <button><i class="fas fa-lightbulb"></i> Principais Recursos</button>
+    <button><i class="fas fa-map-signs"></i> Como Funciona</button>
+    <button><i class="fas fa-star"></i> Destaques</button>
+    <a href="./pages/login.html" class="go"><button><i class="fas fa-play-circle"></i> Começar Agora</button></a>
+  </div>
+  
+  <div class="main-content">
+    <h2 style="margin-bottom: 1rem;">🎥 Conheça o FURIAX</h2>
+    <div style="height: 4px; width: 100%; background: #222;">
+      <div id="videoProgress" style="height: 100%; width: 0%; background: #1e90ff;"></div>
+    </div>    
+    <div class="video-container">
+      <iframe id="yt-video" width="100%" height="315" src="https://www.youtube.com/embed/OpbiJMgFnRY?enablejsapi=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    
+    <!-- SEÇÃO DE NÍVEIS MOVIDA PARA ABAIXO DO VÍDEO -->
+    <div class="levels-section">
+      <h3 class="levels-title"><i class="fas fa-layer-group"></i> NÍVEIS DE EXPERIÊNCIA</h3>
+      <div class="level-cards">
+        <div class="level-card">
+          <div class="level-badge">INICIANTE</div>
+          <div class="level-header">
+            <div class="level-icon">
+              <i class="fas fa-seedling"></i>
+            </div>
+            <div class="level-title">Nível Novato</div>
+          </div>
+          <div class="level-description">Primeiros passos no universo FURIAX, descubra as mecânicas básicas.</div>
+        </div>
+        
+        <div class="level-card">
+          <div class="level-badge">INTERMEDIÁRIO</div>
+          <div class="level-header">
+            <div class="level-icon">
+              <i class="fas fa-fire"></i>
+            </div>
+            <div class="level-title">Nível Furioso</div>
+          </div>
+          <div class="level-description">Domine os sistemas do FURIAX e participe da comunidade.</div>
+       
+        </div>
+        
+        <div class="level-card">
+          <div class="level-badge">AVANÇADO</div>
+          <div class="level-header">
+            <div class="level-icon">
+              <i class="fas fa-crown"></i>
+            </div>
+            <div class="level-title">Nível Elite</div>
+          </div>
+          <div class="level-description">Torne-se referência na comunidade FURIAX, desbloqueie áreas exclusivas.</div>
+      
+        </div>
+        
+        <div class="level-card">
+          <div class="level-badge">LENDÁRIO</div>
+          <div class="level-header">
+            <div class="level-icon">
+              <i class="fas fa-dragon"></i>
+            </div>
+            <div class="level-title">Nível Lenda</div>
+          </div>
+          <div class="level-description">O auge da experiência FURIAX, com benefícios exclusivos.</div>
+      
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="popup" id="popup">
+    <h3>🎉 Parabéns!</h3>
+    <p>Você ganhou <strong>+100 XP</strong> por assistir ao vídeo!</p>
+    <button onclick="document.getElementById('popup').style.display='none'">Fechar</button>
+  </div>
+  <div class="tooltip-popup" id="tooltipPopup"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script src="./js/integration/recommends.js"></script>
+  <script>
+    particlesJS("particles-js", {
+      "particles": {
+        "number": { "value": 60 },
+        "color": { "value": "#1e90ff" },
+        "shape": { "type": "circle" },
+        "opacity": { "value": 0.5 },
+        "size": { "value": 3 },
+        "move": { "enable": true, "speed": 2 }
+      },
+      "interactivity": {
+        "events": {
+          "onhover": { "enable": true, "mode": "repulse" }
+        }
+      }
+    });
+  </script>
+  <script>
+    let tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    document.body.appendChild(tag);
+
+    let player;
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player('yt-video', {
+        events: {
+          'onStateChange': onPlayerStateChange
+        }
+      });
+    }
+
+    let awarded = false;
+    function onPlayerStateChange(event) {
+      if (event.data == YT.PlayerState.ENDED && !awarded) {
+        showXPReward();
+        awarded = true;
+      }
+    }
+
+    function showXPReward() {
+      const popup = document.getElementById('popup');
+      popup.style.display = 'block';
+      popup.animate([
+        { transform: 'scale(0.8)', opacity: 0 },
+        { transform: 'scale(1.05)', opacity: 1 },
+        { transform: 'scale(1)', opacity: 1 }
+      ], {
+        duration: 500,
+        easing: 'ease-out'
+      });
+    }
+
+    function onPlayerStateChange(event) {
+  if (event.data == YT.PlayerState.PLAYING) {
+    setInterval(() => {
+      const duration = player.getDuration();
+      const currentTime = player.getCurrentTime();
+      const percent = (currentTime / duration) * 100;
+      document.getElementById("videoProgress").style.width = percent + "%";
+    }, 1000);
+  }
+}
+  const tooltipPopup = document.getElementById('tooltipPopup');
+
+  const tooltips = {
+  "O que é o FURIAX?": "FURIAX é a plataforma definitiva que conecta fãs e transforma emoções em conquistas épicas.",
+  "Principais Recursos": "Chatbot com IA, feed personalizado, ranking de fãs e experiências gamificadas.",
+  "Como Funciona": "Interaja com o bot, participe dos desafios, acumule XP e desbloqueie conquistas lendárias.",
+  "Destaques": "Veja os fãs mais engajados, os momentos mais emocionantes e as recompensas da semana.",
+  "Começar Agora": "Crie seu perfil, mergulhe no universo da FURIAX e torne-se uma lenda furiosa!"
+};
+
+
+  document.querySelectorAll('.sidebar button').forEach(btn => {
+    btn.addEventListener('mouseenter', (e) => {
+      const text = btn.innerText.trim();
+      if (tooltips[text]) {
+        tooltipPopup.innerText = tooltips[text];
+        tooltipPopup.style.display = 'block';
+      }
+    });
+
+    btn.addEventListener('mousemove', (e) => {
+      tooltipPopup.style.left = e.pageX + 15 + 'px';
+      tooltipPopup.style.top = e.pageY + 'px';
+    });
+
+    btn.addEventListener('mouseleave', () => {
+      tooltipPopup.style.display = 'none';
+    });
+  });
+
+  
+  </script>
+</body>
+</html>

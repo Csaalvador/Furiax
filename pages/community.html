@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FURIAX - Comunidade Inteligente</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/comunidadeaa.css">
+    <link rel="stylesheet" href="../css/furiax-sentiment.css">
+    <style>
+    .gauge-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #ff3b5c, #1e90ff, #00cc66);
+    border-radius: 10px;
+    min-width: 100%;
+    }
+
+    .user-profile {
+            margin-top: auto;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            transition: var(--transition);
+        }
+        
+        .user-profile:hover {
+            background: rgba(0, 0, 0, 0.3);
+            transform: translateY(-3px);
+        }
+        
+        .profile-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 10px;
+            overflow: hidden;
+            border: 2px solid rgba(30, 144, 255, 0.3);
+        }
+        
+        .avatar-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .user-info {
+            flex: 1;
+        }
+        
+        .user-name {
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        
+        .user-role {
+            font-size: 0.8rem;
+            color: var(--primary);
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <img src="../img/logo/logoFuriax.png" alt="FURIAX Logo">
+        <div class="sidebar-header">
+            Comunidade <strong>FURIAX</strong><br>
+            <small style="color:#888;">Conectando a Fúria</small>
+        </div>
+        
+        <a href="../index.html"><button><i class="fas fa-home"></i> <span>Início</span></button></a>
+        <a href="./profile.html"><button><i class="fas fa-user-edit"></i> <span>Perfil</span></button></a>
+        <a href="./missions.html"><button><i class="fas fa-tasks"></i> <span>Missões</span></button></a>
+        <a href="./community.html"><button class="active"><i class="fas fa-users"></i> <span>Comunidade</span></button></a>
+        <a href="./ia.html"><button><i class="fas fa-calendar"></i> <span>FuriosoAI</span></button></a>
+        
+        <div class="user-profile">
+            <div class="profile-avatar">
+                <img src="../img/logo/logoFuriax.png" alt="Avatar do usuário" class="avatar-image">
+            </div>
+            
+            <div class="user-info">
+                <div class="user-name" id="sidebarUsername">FuriaX_Pro</div>
+                <div class="user-role" id="sidebarTitle">Furioso Elite</div>
+            </div>
+            </div>
+            
+    </div>
+    
+    <div class="main-content">
+        <div class="main-header">
+            <h1 class="main-title">
+                <i class="fas fa-users title-icon"></i>
+                Comunidade FURIAX
+            </h1>
+        </div>
+        
+        <div class="community-feed">
+            <div class="feed-column">
+                <!-- Create Post -->
+                <div class="create-post">
+                    <textarea class="post-input" placeholder="O que você está pensando sobre a FURIA hoje?" rows="3"></textarea>
+                    <div class="post-actions">
+                        <div class="post-attachments">
+                            <button class="attachment-button"><i class="fas fa-image"></i></button>
+                            <button class="attachment-button"><i class="fas fa-video"></i></button>
+                            <button class="attachment-button"><i class="fas fa-poll"></i></button>
+                            <button class="attachment-button"><i class="fas fa-link"></i></button>
+                        </div>
+                        <button class="post-button" id="analyzePostBtn">
+                            <i class="fas fa-paper-plane"></i> Publicar
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Posts Feed -->
+                <div class="post-card">
+                    <div class="post-header">
+                        <div class="post-avatar">
+                            <img src="./api/placeholder/50/50" alt="Avatar">
+                        </div>
+                        <div class="post-user-info">
+                            <div class="post-user-name">Luiza_FURIA</div>
+                            <div class="post-time">Há 2 horas</div>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        Que vitória INCRÍVEL da FURIA ontem! 🔥🔥 O time está jogando um CS como nunca antes. Art está absurdo com o AWP! Estou com muita expectativa pro próximo major. #FURIAnoMajor #SomosFURIA
+                    </div>
+                    <img src="/api/placeholder/600/350" alt="Post Image" class="post-image">
+                    <div class="post-footer">
+                        <div class="post-stats">
+                            <div class="post-stat"><i class="fas fa-heart"></i> 128</div>
+                            <div class="post-stat"><i class="fas fa-comment"></i> 32</div>
+                            <div class="post-stat"><i class="fas fa-share"></i> 8</div>
+                        </div>
+                        <div class="post-actions-btns">
+                            <button class="post-action-btn"><i class="far fa-heart"></i> Curtir</button>
+                            <button class="post-action-btn comment-btn"><i class="far fa-comment"></i> Comentar</button>
+                            <button class="post-action-btn"><i class="fas fa-share"></i> Compartilhar</button>
+                        </div>
+                    </div>
+                    <!-- Comentários -->
+                    <div class="comments-section" id="comments-1">
+                        <div class="comment-form">
+                            <input type="text" class="comment-input" placeholder="Escreva um comentário...">
+                            <button class="comment-submit">Enviar</button>
+                        </div>
+                        <div class="comment-list">
+                            <div class="comment-item">
+                                <div class="comment-avatar">RN</div>
+                                <div class="comment-content">
+                                    <div class="comment-user">RoninDaFuria</div>
+                                    <div class="comment-text">A jogada do Art na Mirage foi insana! 3k com AWP em menos de 5 segundos!</div>
+                                    <div class="comment-time">Há 1 hora</div>
+                                </div>
+                            </div>
+                            <div class="comment-item">
+                                <div class="comment-avatar">TB</div>
+                                <div class="comment-content">
+                                    <div class="comment-user">Tora_Brutal</div>
+                                    <div class="comment-text">KSCERATO tá jogando muito também. Aquele clutch 1v3 na Dust2 foi de outro mundo.</div>
+                                    <div class="comment-time">Há 45 minutos</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="post-card">
+                    <div class="post-header">
+                        <div class="post-avatar">MA</div>
+                        <div class="post-user-info">
+                            <div class="post-user-name">Marcos_Avante</div>
+                            <div class="post-time">Há 5 horas</div>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        Alguém vai estar no encontro de fãs em São Paulo no próximo fim de semana? Estou organizando uma caravana saindo do Rio de Janeiro na sexta-feira! Se alguém tiver interesse, comente aqui. Vamos juntos apoiar nosso time! #FURIAMeetup #EncontroFURIA
+                    </div>
+                    <div class="post-footer">
+                        <div class="post-stats">
+                            <div class="post-stat"><i class="fas fa-heart"></i> 64</div>
+                            <div class="post-stat"><i class="fas fa-comment"></i> 48</div>
+                            <div class="post-stat"><i class="fas fa-share"></i> 12</div>
+                        </div>
+                        <div class="post-actions-btns">
+                            <button class="post-action-btn"><i class="far fa-heart"></i> Curtir</button>
+                            <button class="post-action-btn comment-btn"><i class="far fa-comment"></i> Comentar</button>
+                            <button class="post-action-btn"><i class="fas fa-share"></i> Compartilhar</button>
+                        </div>
+                    </div>
+                    <!-- Comentários -->
+                    <div class="comments-section" id="comments-2">
+                        <div class="comment-form">
+                            <input type="text" class="comment-input" placeholder="Escreva um comentário...">
+                            <button class="comment-submit">Enviar</button>
+                        </div>
+                        <div class="comment-list">
+                            <div class="comment-item">
+                                <div class="comment-avatar">LP</div>
+                                <div class="comment-content">
+                                    <div class="comment-user">Lobinha_FURIA</div>
+                                    <div class="comment-text">Eu vou estar lá! Podemos nos encontrar no terminal Tietê?</div>
+                                    <div class="comment-time">Há 3 horas</div>
+                                </div>
+                            </div>
+                            <div class="comment-item">
+                                <div class="comment-avatar">FS</div>
+                                <div class="comment-content">
+                                    <div class="comment-user">Furioso_SP</div>
+                                    <div class="comment-text">Vou estar te esperando, Marcos! Vai ser um encontro épico.</div>
+                                    <div class="comment-time">Há 2 horas</div>
+                                </div>
+                            </div>
+                            <div class="comment-item">
+                                <div class="comment-avatar">MA</div>
+                                <div class="comment-content">
+                                    <div class="comment-user">Marcos_Avante</div>
+                                    <div class="comment-text">Lobinha, sim! Vamos nos encontrar lá às 10h da manhã. Vou criar um grupo no WhatsApp para coordenar.</div>
+                                    <div class="comment-time">Há 1 hora</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="post-card">
+                    <div class="post-header">
+                        <div class="post-avatar">RG</div>
+                        <div class="post-user-info">
+                            <div class="post-user-name">RafaGamer</div>
+                            <div class="post-time">Há 8 horas</div>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        Alguém mais acha que o KSCERATO merece ser considerado um dos TOP 5 jogadores do mundo? As estatísticas dele nesta temporada são simplesmente absurdas! Especialmente aquele clutch 1v3 contra o Navi. O que vocês acham? #KSCERATO #FURIAEsports #TopPlayer
+                    </div>
+                    <div class="post-footer">
+                        <div class="post-stats">
+                            <div class="post-stat"><i class="fas fa-heart"></i> 215</div>
+                            <div class="post-stat"><i class="fas fa-comment"></i> 87</div>
+                            <div class="post-stat"><i class="fas fa-share"></i> 24</div>
+                        </div>
+                        <div class="post-actions-btns">
+                            <button class="post-action-btn liked"><i class="fas fa-heart"></i> Curtido</button>
+                            <button class="post-action-btn comment-btn"><i class="far fa-comment"></i> Comentar</button>
+                            <button class="post-action-btn"><i class="fas fa-share"></i> Compartilhar</button>
+                        </div>
+                    </div>
+                    <!-- Comentários -->
+                    <div class="comments-section" id="comments-3">
+                        <div class="comment-form">
+                            <input type="text" class="comment-input" placeholder="Escreva um comentário...">
+                            <button class="comment-submit">Enviar</button>
+                        </div>
+                        <div class="comment-list">
+                            <div class="comment-item">
+                                <div class="comment-avatar">CS</div>
+                                <div class="comment-content">
+                                    <div class="comment-user">CSniper_PRO</div>
+                                    <div class="comment-text">Sem dúvida! O rating 2.0 dele está em 1.34 nos últimos três meses. Isso é TOP 3 material!</div>
+                                    <div class="comment-time">Há 7 horas</div>
+                                </div>
+                            </div>
+                            <div class="comment-item">
+                                <div class="comment-avatar">FF</div>
+                                <div class="comment-content">
+                                    <div class="comment-user">FuriaFanatic</div>
+                                    <div class="comment-text">Concordo! E a consciência tática dele é inigualável. Não é só aim, é o QI de jogo que impressiona.</div>
+                                    <div class="comment-time">Há 6 horas</div>
+                                </div>
+                            </div>
+                            <div class="comment-item">
+                                <div class="comment-avatar">VF</div>
+                                <div class="comment-content">
+                                    <div class="comment-user">Valkiria_FURIA</div>
+                                    <div class="comment-text">Ele e Art formam a melhor dupla do CS mundial atual. Mas ele com certeza está no TOP 5!</div>
+                                    <div class="comment-time">Há 5 horas</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Polls -->
+                <div class="post-card">
+                    <div class="post-header">
+                        <div class="post-avatar">
+                            <img src="/api/placeholder/50/50" alt="FURIA Official">
+                        </div>
+                        <div class="post-user-info">
+                            <div class="post-user-name">FURIA Official</div>
+                            <div class="post-time">Há 12 horas</div>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        Qual mapa vocês querem ver a FURIA dominar no próximo major? Vote e nos ajude a entender as preferências da nossa comunidade! #FURIAlistens
+                    </div>
+                    <div class="community-polls">
+                        <div class="poll-item">
+                            <div class="poll-options">
+                                <div class="poll-option voted">
+                                    <div class="poll-fill" style="width: 42%"></div>
+                                    <div class="poll-option-text">
+                                        <span>Mirage</span>
+                                        <span class="poll-percentage">42%</span>
+                                    </div>
+                                </div>
+                                <div class="poll-option">
+                                    <div class="poll-fill" style="width: 28%"></div>
+                                    <div class="poll-option-text">
+                                        <span>Inferno</span>
+                                        <span class="poll-percentage">28%</span>
+                                    </div>
+                                </div>
+                                <div class="poll-option">
+                                    <div class="poll-fill" style="width: 15%"></div>
+                                    <div class="poll-option-text">
+                                        <span>Nuke</span>
+                                        <span class="poll-percentage">15%</span>
+                                    </div>
+                                </div>
+                                <div class="poll-option">
+                                    <div class="poll-fill" style="width: 15%"></div>
+                                    <div class="poll-option-text">
+                                        <span>Ancient</span>
+                                        <span class="poll-percentage">15%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="poll-meta">
+                                <div class="poll-votes">
+                                    <i class="fas fa-user"></i> 758 votos
+                                </div>
+                                <div class="poll-time">
+                                    <i class="fas fa-clock"></i> Fechamento em 2 dias
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post-footer">
+                        <div class="post-stats">
+                            <div class="post-stat"><i class="fas fa-heart"></i> 287</div>
+                            <div class="post-stat"><i class="fas fa-comment"></i> 36</div>
+                            <div class="post-stat"><i class="fas fa-share"></i> 42</div>
+                        </div>
+                        <div class="post-actions-btns">
+                            <button class="post-action-btn"><i class="far fa-heart"></i> Curtir</button>
+                            <button class="post-action-btn comment-btn"><i class="far fa-comment"></i> Comentar</button>
+                            <button class="post-action-btn"><i class="fas fa-share"></i> Compartilhar</button>
+                        </div>
+                    </div>
+                    <!-- Comentários -->
+                    <div class="comments-section" id="comments-4">
+                        <div class="comment-form">
+                            <input type="text" class="comment-input" placeholder="Escreva um comentário...">
+                            <button class="comment-submit">Enviar</button>
+                        </div>
+                        <div class="comment-list">
+                            <div class="comment-item">
+                                <div class="comment-avatar">CS</div>
+                                <div class="comment-content">
+                                    <div class="comment-user">CSniper_PRO</div>
+                                    <div class="comment-text">Mirage é a cara da FURIA! Aquele 16-4 contra a Liquid foi absurdo.</div>
+                                    <div class="comment-time">Há 10 horas</div>
+                                </div>
+                            </div>
+                            <div class="comment-item">
+                                <div class="comment-avatar">VF</div>
+                                <div class="comment-content">
+                                    <div class="comment-user">Valkiria_FURIA</div>
+                                    <div class="comment-text">Votei em Inferno porque acho que ainda podemos melhorar lá, mas nosso Mirage é realmente o melhor!</div>
+                                    <div class="comment-time">Há 8 horas</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="analysis-column">
+                <!-- Tabs -->
+                <div class="analysis-tabs">
+                    <div class="analysis-tab" data-tab="profile">Perfil</div>
+                    <div class="analysis-tab" data-tab="fandata">Fã Data</div>
+                    <div class="analysis-tab" data-tab="trending">Trending</div>
+                </div>
+                
+              
+                     
+                
+                      
+                
+                        
+                
+                    <!-- JavaScript para gráficos e funcionalidades -->
+                   
+                <!-- Fan Profile -->
+                <div class="analysis-content" id="profile-content">
+                    <div class="fan-profile">
+                        <div class="fan-profile-header">
+                            <i class="fas fa-user-chart"></i> Perfil de Fã
+                        </div>
+                        
+                        <div class="fan-stats">
+                            <div class="fan-stat-item">
+                                <div class="fan-stat-title">
+                                    <i class="fas fa-calendar-alt"></i> Tempo de Fã
+                                </div>
+                                <div class="fan-stat-value">2 anos e 4 meses</div>
+                            </div>
+                            
+                            <div class="fan-stat-item">
+                                <div class="fan-stat-title">
+                                    <i class="fas fa-chart-pie"></i> Interesses
+                                </div>
+                                <div class="fan-stat-value">
+                                    <div class="interest-chart">
+                                        <div class="chart-bar">
+                                            <div class="chart-label">CS:GO</div>
+                                        </div>
+                                        <div class="chart-bar">
+                                            <div class="chart-label">Valorant</div>
+                                        </div>
+                                        <div class="chart-bar">
+                                            <div class="chart-label">LoL</div>
+                                        </div>
+                                        <div class="chart-bar">
+                                            <div class="chart-label">R6</div>
+                                        </div>
+                                        <div class="chart-bar">
+                                            <div class="chart-label">Conteúdo</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="fan-stat-item">
+                                <div class="fan-stat-title">
+                                    <i class="fas fa-trophy"></i> Conquistas
+                                </div>
+                                <div class="fan-stat-value">
+                                    12 missões completas<br>
+                                    3 eventos presenciais<br>
+                                    5 produtos adquiridos
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="social-integration">
+                            <div class="social-title">
+                                <i class="fas fa-link"></i> Contas Conectadas
+                            </div>
+                            <div class="social-accounts">
+                                <div class="social-account">
+                                    <div class="social-icon twitter-icon">
+                                        <i class="fab fa-twitter"></i>
+                                    </div>
+                                    <div class="social-name">Twitter</div>
+                                    <div class="social-status">Conectado</div>
+                                </div>
+                                
+                                <div class="social-account">
+                                    <div class="social-icon instagram-icon">
+                                        <i class="fab fa-instagram"></i>
+                                    </div>
+                                    <div class="social-name">Instagram</div>
+                                    <div class="social-status">Conectado</div>
+                                </div>
+                                
+                                <div class="social-account">
+                                    <div class="social-icon twitch-icon">
+                                        <i class="fab fa-twitch"></i>
+                                    </div>
+                                    <div class="social-name">Twitch</div>
+                                    <div class="social-status not-connected">Não conectado</div>
+                                </div>
+                                
+                                <div class="social-account">
+                                    <div class="social-icon youtube-icon">
+                                        <i class="fab fa-youtube"></i>
+                                    </div>
+                                    <div class="social-name">YouTube</div>
+                                    <div class="social-status not-connected">Não conectado</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Fan Engagement Score -->
+                    <div class="fan-engagement">
+                        <div class="fan-profile-header">
+                            <i class="fas fa-chart-bar"></i> Pontuação de Engajamento
+                        </div>
+                        
+                        <div class="engagement-score">
+                            <div class="score-circle">
+                                <div class="score-value">85</div>
+                            </div>
+                            <div class="score-label">Nível de Engajamento: ELITE</div>
+                        </div>
+                        
+                        <div class="engagement-breakdown">
+                            <div class="engagement-item">
+                                <div class="engagement-label">Atividade na Comunidade</div>
+                                <div class="engagement-value">92/100</div>
+                            </div>
+                            <div class="engagement-item">
+                                <div class="engagement-label">Presença em Eventos</div>
+                                <div class="engagement-value">76/100</div>
+                            </div>
+                            <div class="engagement-item">
+                                <div class="engagement-label">Suporte ao Time</div>
+                                <div class="engagement-value">88/100</div>
+                            </div>
+                            <div class="engagement-item">
+                                <div class="engagement-label">Reputação entre Fãs</div>
+                                <div class="engagement-value">81/100</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Fan Data Analysis -->
+                <div class="analysis-content" id="fandata-content">
+                    <div class="fan-insights">
+                        <div class="fan-profile-header">
+                            <i class="fas fa-brain"></i> Insights Personalizados
+                        </div>
+                        
+                        <div class="insight-item">
+                            <div class="insight-header">
+                                <i class="fas fa-lightbulb"></i> Padrão de Comportamento
+                            </div>
+                            <div class="insight-content">
+                                Você demonstra maior atividade após vitórias da FURIA em competições importantes, com picos de engajamento nas 24h seguintes aos jogos.
+                            </div>
+                            <div class="insight-prediction">
+                                <div class="prediction-icon"><i class="fas fa-chart-line"></i></div>
+                                <div class="prediction-text">Sugestão: Ative notificações para eventos ao vivo para aumentar seu engajamento.</div>
+                            </div>
+                        </div>
+                        
+                        <div class="insight-item">
+                            <div class="insight-header">
+                                <i class="fas fa-users"></i> Comunidade
+                            </div>
+                            <div class="insight-content">
+                                Seus interesses se alinham com 78% dos fãs mais ativos da FURIA. Sua interação com conteúdo sobre CS:GO está entre os 15% mais altos da plataforma.
+                            </div>
+                            <div class="insight-prediction">
+                                <div class="prediction-icon"><i class="fas fa-user-friends"></i></div>
+                                <div class="prediction-text">Sugestão: Conecte-se com @RoninDaFuria e @CSniper_PRO que compartilham seus interesses.</div>
+                            </div>
+                        </div>
+                        
+                        <div class="insight-item">
+                            <div class="insight-header">
+                                <i class="fas fa-shopping-cart"></i> Consumo
+                            </div>
+                            <div class="insight-content">
+                                Seu histórico de compras mostra preferência por camisetas e itens de edição limitada. Você costuma adquirir produtos nas primeiras 48h após lançamentos.
+                            </div>
+                            <div class="insight-prediction">
+                                <div class="prediction-icon"><i class="fas fa-tag"></i></div>
+                                <div class="prediction-text">Recomendação: A nova coleção "FURIA Major Edition" será lançada na próxima semana.</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Social Feed Integration -->
+                    <div class="social-feed">
+                        <div class="social-feed-title">
+                            <i class="fas fa-stream"></i> Suas Interações Sociais
+                        </div>
+                        
+                        <div class="external-post">
+                            <div class="external-post-header">
+                                <div class="external-source twitter-source">
+                                    <i class="fab fa-twitter"></i>
+                                </div>
+                                <div class="external-user">Você retweetou @FURIA</div>
+                            </div>
+                            <div class="external-content">
+                                "VAMOS! Classificados para a próxima fase do Major! GGWP @TeamLiquid #DIADEFURIA"
+                            </div>
+                            <div class="external-stats">
+                                <div><i class="fas fa-heart"></i> 1.2K</div>
+                                <div><i class="fas fa-retweet"></i> 342</div>
+                                <div><i class="fas fa-reply"></i> 76</div>
+                            </div>
+                        </div>
+                        
+                        <div class="external-post">
+                            <div class="external-post-header">
+                                <div class="external-source instagram-source">
+                                    <i class="fab fa-instagram"></i>
+                                </div>
+                                <div class="external-user">Você curtiu post de @artcs</div>
+                            </div>
+                            <div class="external-content">
+                                "Preparando para o Major. Foco total! 🔥 #FURIA #CSMAJOR"
+                            </div>
+                            <div class="external-stats">
+                                <div><i class="fas fa-heart"></i> 45.7K</div>
+                                <div><i class="fas fa-comment"></i> 892</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Fan Analytics -->
+                    <div class="user-analytics">
+                        <div class="analytics-title">
+                            <i class="fas fa-chart-pie"></i> Análise de Preferências
+                        </div>
+                        
+                        <div class="analytics-charts">
+                            <div class="analytics-chart">
+                                <div class="chart-title">
+                                    <i class="fas fa-gamepad"></i> Distribuição de Interesses em Jogos
+                                </div>
+                                <div class="donut-chart"></div>
+                                <div class="chart-legend">
+                                    <div class="legend-item">
+                                        <div class="legend-color blue"></div>
+                                        <div class="legend-text">CS:GO</div>
+                                    </div>
+                                    <div class="legend-item">
+                                        <div class="legend-color purple"></div>
+                                        <div class="legend-text">Valorant</div>
+                                    </div>
+                                    <div class="legend-item">
+                                        <div class="legend-color orange"></div>
+                                        <div class="legend-text">LoL</div>
+                                    </div>
+                                    <div class="legend-item">
+                                        <div class="legend-color red"></div>
+                                        <div class="legend-text">Outros</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Trending Topics -->
+                <div class="analysis-content" id="trending-content">
+                    <div class="trending-topics">
+                        <div class="fan-profile-header">
+                            <i class="fas fa-fire"></i> Trending Topics
+                        </div>
+                        
+                        <div class="topic-list">
+                            <div class="topic-item">
+                                <div class="topic-rank">1</div>
+                                <div class="topic-content">
+                                    <div class="topic-title">FURIA no Major</div>
+                                    <div class="topic-meta">
+                                        <div>482 menções</div>
+                                        <div class="topic-trend trend-up">
+                                            <i class="fas fa-arrow-up"></i> 22%
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="topic-item">
+                                <div class="topic-rank">2</div>
+                                <div class="topic-content">
+                                    <div class="topic-title">Art AWPer</div>
+                                    <div class="topic-meta">
+                                        <div>376 menções</div>
+                                        <div class="topic-trend trend-up">
+                                            <i class="fas fa-arrow-up"></i> 45%
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="topic-item">
+                                <div class="topic-rank">3</div>
+                                <div class="topic-content">
+                                    <div class="topic-title">Encontro de fãs SP</div>
+                                    <div class="topic-meta">
+                                        <div>289 menções</div>
+                                        <div class="topic-trend trend-up">
+                                            <i class="fas fa-arrow-up"></i> 12%
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="topic-item">
+                                <div class="topic-rank">4</div>
+                                <div class="topic-content">
+                                    <div class="topic-title">KSCERATO Top 5</div>
+                                    <div class="topic-meta">
+                                        <div>215 menções</div>
+                                        <div class="topic-trend trend-up">
+                                            <i class="fas fa-arrow-up"></i> 32%
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="topic-item">
+                                <div class="topic-rank">5</div>
+                                <div class="topic-content">
+                                    <div class="topic-title">Nova camisa FURIA</div>
+                                    <div class="topic-meta">
+                                        <div>187 menções</div>
+                                        <div class="topic-trend trend-down">
+                                            <i class="fas fa-arrow-down"></i> 8%
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Loyalty Program -->
+                    <div class="loyalty-program">
+                        <div class="fan-profile-header">
+                            <i class="fas fa-award"></i> Programa de Lealdade
+                        </div>
+                        
+                        <div class="loyalty-rewards">
+                            <div class="reward-item">
+                                <div class="reward-icon">
+                                    <i class="fas fa-ticket-alt"></i>
+                                </div>
+                                <div class="reward-info">
+                                    <div class="reward-title">Acesso Prioritário - Meetup SP</div>
+                                    <div class="reward-desc">Entrada 1h antes para encontro com jogadores</div>
+                                </div>
+                                <div class="reward-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 85%"></div>
+                                    </div>
+                                    <div class="progress-text">85%</div>
+                                </div>
+                            </div>
+                            
+                            <div class="reward-item">
+                                <div class="reward-icon">
+                                    <i class="fas fa-tshirt"></i>
+                                </div>
+                                <div class="reward-info">
+                                    <div class="reward-title">Camisa Exclusiva FURIA Elite</div>
+                                    <div class="reward-desc">Edição limitada para fãs de alta pontuação</div>
+                                </div>
+                                <div class="reward-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 60%"></div>
+                                    </div>
+                                    <div class="progress-text">60%</div>
+                                </div>
+                            </div>
+                            
+                            <div class="reward-item">
+                                <div class="reward-icon">
+                                    <i class="fas fa-headset"></i>
+                                </div>
+                                <div class="reward-info">
+                                    <div class="reward-title">Sessão de Gameplay com Jogador</div>
+                                    <div class="reward-desc">30 minutos jogando com um pro player</div>
+                                </div>
+                                <div class="reward-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 35%"></div>
+                                    </div>
+                                    <div class="progress-text">35%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/integration/recommends.js"></script>
+    <script src="../js/furiax-login-auth.js"></script>
+<script src="../js/furiax-sentiment-analysis.js"></script>
+<!-- <script src="../js/furiax-feed-manager.js"></script> -->
+<!-- <script src="../js/furiax-ai-assistant.js"></script> -->
+<script src="../js/furiax-gamification.js"></script>
+<script src="../js/furiax-profile-system.js"></script>
+<script src="../js/furiax-main-integration.js"></script>
+<script src="../js/furiax-community.js"></script>
+<script src="../js/integration/furiax-profile.js"></script>
+<script src="../js/integration/furiax-sync.js"></script>
+<script src="../js/integration/furiax-user_session.js"></script>
+<script src="../js/furiax-post-fix.js"></script>
+<script src="../js/integration/furiax-core.js"></script>
+
+<script>
+    
+
+document.addEventListener("DOMContentLoaded", function() {
+    const tabs = document.querySelectorAll('.analysis-tab');
+    const contents = document.querySelectorAll('.analysis-content');
+
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            const target = tab.getAttribute('data-tab');
+3
+            tabs.forEach(t => t.classList.remove('active'));
+            contents.forEach(c => c.classList.remove('active'));
+
+            tab.classList.add('active');
+            document.getElementById(target + '-content').classList.add('active');
+        });
+    });
+
+    // Ativar a aba "profile" por padrão
+    tabs[0].click();
+});
+    
+</script>
+
+
+</body>
+</html>

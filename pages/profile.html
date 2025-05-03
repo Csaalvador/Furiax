@@ -1,0 +1,1433 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FURIAX - Configuração de Perfil</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+
+        body {
+            font-family: 'Exo 2', sans-serif;
+            background-color: #0a0a0a;
+            color: #f0f0f0;
+            display: flex;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 240px;
+            height: 100vh;
+            background: linear-gradient(to bottom, #111, #181818);
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            border-right: 2px solid #333;
+            box-shadow: 4px 0 10px rgba(0, 0, 0, 0.5);
+            z-index: 10;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar img {
+            width: 140px;
+            align-self: center;
+            filter: drop-shadow(0 0 6px rgba(30, 144, 255, 0.3));
+        }
+
+        .sidebar-header {
+            color: #1e90ff;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .sidebar button {
+            width: 200px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid #333;
+            color: #ccc;
+            font-size: 0.9rem;
+            margin-bottom: 0.8rem;
+            text-align: left;
+            padding: 0.6rem 1rem;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .sidebar button:hover {
+            background: rgba(30, 144, 255, 0.1);
+            border-color: #1e90ff;
+            transform: translateX(5px);
+            color: #fff;
+        }
+
+        .sidebar button.active {
+            background: rgba(30, 144, 255, 0.15);
+            border-color: #1e90ff;
+            color: #1e90ff;
+            box-shadow: 0 0 10px rgba(30, 144, 255, 0.2);
+        }
+
+        .sidebar button i {
+            color: #1e90ff;
+        }
+
+        .user-profile {
+            margin-top: auto;
+            background: rgba(30, 144, 255, 0.05);
+            border-radius: 10px;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid #333;
+        }
+
+        .avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #1e90ff, #00bfff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            box-shadow: 0 0 15px rgba(30, 144, 255, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .user-name {
+            font-size: 1rem;
+            color: #ddd;
+            margin-bottom: 5px;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .user-role {
+            font-size: 0.7rem;
+            color: #1e90ff;
+            background: rgba(30, 144, 255, 0.1);
+            padding: 3px 8px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        /* Conteúdo principal */
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .main-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #333;
+        }
+
+        .main-title {
+            font-size: 1.8rem;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(30, 144, 255, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .title-icon {
+            color: #1e90ff;
+        }
+
+        /* Estilo para as configurações do perfil */
+        .profile-config {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 20px;
+        }
+
+        .preview-section {
+            background: linear-gradient(145deg, #111, #181818);
+            border-radius: 15px;
+            padding: 20px;
+            height: fit-content;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            border: 1px solid #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: sticky;
+            top: 20px;
+            height: 84vh;
+        }
+
+        .avatar-preview {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #1e90ff, #00bfff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            box-shadow: 0 0 15px rgba(30, 144, 255, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .avatar-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .avatar-preview .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .avatar-preview:hover .overlay {
+            opacity: 1;
+        }
+
+        .avatar-preview .overlay i {
+            color: white;
+            font-size: 2rem;
+        }
+
+        .preview-name {
+            font-size: 1.5rem;
+            color: #fff;
+            margin-bottom: 5px;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .preview-title {
+            font-size: 0.8rem;
+            color: #1e90ff;
+            background: rgba(30, 144, 255, 0.1);
+            padding: 5px 10px;
+            border-radius: 20px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .preview-level {
+            font-size: 1.1rem;
+            color: gold;
+            margin-bottom: 10px;
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .preview-progress {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .preview-progress .bar {
+            height: 100%;
+            background: linear-gradient(90deg, #1e90ff, #00bfff);
+            width: 70%;
+            border-radius: 20px;
+        }
+
+        .preview-stats {
+            display: flex;
+            width: 100%;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.2rem;
+            color: #1e90ff;
+            font-weight: bold;
+        }
+
+        .stat-label {
+            font-size: 0.7rem;
+            color: #aaa;
+            text-transform: uppercase;
+        }
+
+        .badge-showcase {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .badge {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(30, 144, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1e90ff;
+            font-size: 1rem;
+            border: 1px solid #333;
+        }
+
+        .gold-badge {
+            background: rgba(255, 215, 0, 0.1);
+            color: gold;
+            border-color: #665500;
+        }
+
+        .purple-badge {
+            background: rgba(138, 43, 226, 0.1);
+            color: blueviolet;
+            border-color: #4b0082;
+        }
+
+        .red-badge {
+            background: rgba(255, 0, 0, 0.1);
+            color: #ff4040;
+            border-color: #800000;
+        }
+
+        .green-badge {
+            background: rgba(0, 255, 0, 0.1);
+            color: #40ff40;
+            border-color: #008000;
+        }
+
+        /* Seção de formulários */
+        .config-section {
+            background: linear-gradient(145deg, #111, #181818);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            border: 1px solid #333;
+        }
+
+        .config-tab-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+
+        .config-tab-button {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid #333;
+            color: #aaa;
+            font-size: 0.9rem;
+            padding: 0.6rem 1rem;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.3s;
+            font-family: 'Orbitron', sans-serif;
+            white-space: nowrap;
+        }
+
+        .config-tab-button:hover {
+            background: rgba(30, 144, 255, 0.1);
+            border-color: #1e90ff;
+            color: #fff;
+        }
+
+        .config-tab-button.active {
+            background: rgba(30, 144, 255, 0.2);
+            border-color: #1e90ff;
+            color: #1e90ff;
+        }
+
+        .config-tab {
+            display: none;
+        }
+
+        .config-tab.active {
+            display: block;
+        }
+
+        .section-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #1e90ff;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        .form-input, .form-select {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid #444;
+            color: #ddd;
+            padding: 10px;
+            border-radius: 8px;
+            font-family: 'Exo 2', sans-serif;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+        }
+
+        .form-input:focus, .form-select:focus {
+            border-color: #1e90ff;
+            box-shadow: 0 0 10px rgba(30, 144, 255, 0.3);
+            outline: none;
+        }
+
+        .form-select option {
+            background: #111;
+            color: #ddd;
+        }
+
+        .bio-textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .btn-cancel {
+            background: rgba(255, 255, 255, 0.05);
+            color: #aaa;
+            border: 1px solid #444;
+        }
+
+        .btn-cancel:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ddd;
+        }
+
+        .btn-save {
+            background: #1e90ff;
+            color: white;
+            border: none;
+            box-shadow: 0 0 10px rgba(30, 144, 255, 0.3);
+        }
+
+        .btn-save:hover {
+            background: #0078e7;
+            transform: translateY(-3px);
+            box-shadow: 0 3px 15px rgba(30, 144, 255, 0.5);
+        }
+
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(30, 144, 255, 0.9);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(30, 144, 255, 0.5);
+            transform: translateY(150%);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .notification.show {
+            transform: translateY(0);
+        }
+
+        .avatar-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .avatar-option {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .avatar-option.selected {
+            border-color: #1e90ff;
+            box-shadow: 0 0 15px rgba(30, 144, 255, 0.5);
+            transform: scale(1.1);
+        }
+        
+        .avatar-selector {
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .avatar-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .avatar-choice {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid #333;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .avatar-choice img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .avatar-choice:hover {
+            transform: scale(1.1);
+            border-color: #1e90ff;
+        }
+        
+        .avatar-choice.selected {
+            border: 3px solid #1e90ff;
+            box-shadow: 0 0 15px rgba(30, 144, 255, 0.5);
+        }
+    </style>
+</head>
+<body>
+   <!-- Corrigir os links na sidebar do arquivo profile.html -->
+<div class="sidebar">
+    <img src="../img/logo/logoFuriax.png" alt="FURIAX Logo">
+    <div class="sidebar-header">
+        Configure seu perfil <strong>FURIAX</strong><br>
+        <small style="color:#888;">Mostre seu estilo</small>
+    </div>
+    
+    <!-- CORRIGIDO: Use getCorrectPath para gerar links corretos -->
+    <a href="javascript:void(0)" onclick="window.location.href = getCorrectPath('index')"><button><i class="fas fa-home"></i> Início</button></a>
+    <button class="active"><i class="fas fa-user-edit"></i> Perfil</button>
+    <a href="./missions.html"><button><i class="fas fa-tasks"></i> Missões</button></a>
+    <a href="javascript:void(0)" onclick="window.location.href = getCorrectPath('community')"><button><i class="fas fa-users"></i> Comunidade</button></a>
+    <button><i class="fas fa-calendar"></i> Eventos</button>
+    
+    <div class="user-profile">
+        <div class="user-name" id="sidebarUsername">FuriaX_Pro</div>
+        <div class="user-role" id="sidebarTitle">Furioso Elite</div>
+    </div>
+</div>
+    
+    <div class="main-content">
+        <div class="main-header">
+            <h1 class="main-title">
+                <i class="fas fa-user-cog title-icon"></i>
+                Configuração de Perfil
+            </h1>
+        </div>
+        
+        <div class="profile-config">
+            <!-- Preview do Perfil -->
+            <div class="preview-section">
+                <div class="avatar-preview" id="avatarPreview">
+                    <img src="/api/placeholder/150/150" alt="Avatar Preview" id="previewImage">
+                    <div class="overlay">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                </div>
+                <div class="preview-name" id="previewName">FuriaX_Pro</div>
+                <div class="preview-title" id="previewTitle">Furioso Elite</div>
+                <div class="preview-level" id="previewLevel">Nível 12</div>
+                <div class="preview-progress">
+                    <div class="bar" id="progressBar"></div>
+                </div>
+                <div class="preview-xp" id="previewXP">75/100 XP</div>
+                
+                <div class="preview-stats">
+                    <div class="stat-item">
+                        <div class="stat-value" id="statsWins">42</div>
+                        <div class="stat-label">Vitórias</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="statsTrophies">5</div>
+                        <div class="stat-label">Troféus</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="statsGames">98</div>
+                        <div class="stat-label">Jogos</div>
+                    </div>
+                </div>
+                
+                <div class="badge-showcase" id="badgeShowcase">
+                    <div class="badge"><i class="fas fa-trophy"></i></div>
+                    <div class="badge gold-badge"><i class="fas fa-medal"></i></div>
+                    <div class="badge purple-badge"><i class="fas fa-crown"></i></div>
+                    <div class="badge red-badge"><i class="fas fa-fire"></i></div>
+                    <div class="badge green-badge"><i class="fas fa-star"></i></div>
+                </div>
+            </div>
+            
+            <!-- Seção de Configuração -->
+            <div class="config-section">
+                <div class="config-tab-buttons">
+                    <button class="config-tab-button active" data-tab="personal">Informações Pessoais</button>
+                    <button class="config-tab-button" data-tab="appearance">Aparência</button>
+                    <button class="config-tab-button" data-tab="stats">Estatísticas</button>
+                </div>
+
+                <!-- Aba de Informações Pessoais -->
+                <div id="personal" class="config-tab active">
+                    <h3 class="section-title">Informações Básicas</h3>
+                    
+                    <form id="profileForm">
+                        <div class="form-group">
+                            <label class="form-label">Nome de Usuário</label>
+                            <input type="text" class="form-input" id="usernameInput" name="username" value="FuriaX_Pro" maxlength="20" readonly style="background: rgba(255, 255, 255, 0.02); cursor: not-allowed; opacity: 0.7; border-color: #333;">
+                            <small style="color: #888; font-size: 0.8rem; margin-top: 5px; display: block;">O nome de usuário é único e não pode ser alterado.</small>
+                        </div>
+                    
+                 <!-- Campo de email modificado para mostrar como "privado" -->
+<div class="form-group">
+    <label class="form-label">Email</label>
+    <input type="text" class="form-input" id="emailInput" name="email" value="Privado" readonly style="background: rgba(255, 255, 255, 0.02); cursor: not-allowed; opacity: 0.7; border-color: #333;">
+    <small style="color: #888; font-size: 0.8rem; margin-top: 5px; display: block;">Seu email é mantido privado por razões de segurança.</small>
+</div>
+                    
+                        <div class="form-group">
+                            <label class="form-label">Título de Jogador</label>
+                            <select class="form-select" id="titleSelect" name="title">
+                                <option value="novato">Novato</option>
+                                <option value="iniciante">Iniciante</option>
+                                <option value="casual">Jogador Casual</option>
+                                <option value="competitivo">Competidor</option>
+                                <option value="furioso">Furioso</option>
+                                <option value="furioso_elite" selected>Furioso Elite</option>
+                                <option value="lendario">Furioso Lendário</option>
+                            </select>
+                        </div>
+                    
+                        <div class="form-group">
+                            <label class="form-label">Sobre Mim</label>
+                            <textarea class="form-input bio-textarea" id="bioTextarea" name="bio">Jogador competitivo de CS2 e VALORANT. Fan da FURIA desde 2019. Meta: alcançar o ranking global até o final do ano.</textarea>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- Aba de Aparência -->
+                <div id="appearance" class="config-tab">
+                    <h3 class="section-title">Escolha seu Avatar</h3>
+                    
+                    <div class="avatar-grid" id="avatarGrid">
+                        <div class="avatar-choice selected" data-avatar="1">
+                            <img src="../img/avatars/avatar01.jpg" alt="Avatar 0">
+                        </div>
+                        <div class="avatar-choice" data-avatar="2">
+                            <img src="../img/avatars/avatar02.jpg" alt="Avatar 1">
+                        </div>
+                        <div class="avatar-choice" data-avatar="3">
+                            <img src="../img/avatars/avatar03.jpg" alt="Avatar 2">
+                        </div>
+                        <div class="avatar-choice" data-avatar="4">
+                            <img src="../img/avatars/avatar04.png" alt="Avatar 3">
+                        </div>
+                        <div class="avatar-choice" data-avatar="5">
+                            <img src="../img/avatars/avatar05.png" alt="Avatar 4">
+                        </div>
+                        <div class="avatar-choice" data-avatar="6">
+                            <img src="../img/avatars/avatar06.jpg" alt="Avatar 5">
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <!-- Aba de Estatísticas -->
+                <div id="stats" class="config-tab">
+                    <h3 class="section-title">Suas Estatísticas</h3>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Número de Vitórias</label>
+                        <input type="number" class="form-input" id="winsInput" value="42" min="0">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Número de Troféus</label>
+                        <input type="number" class="form-input" id="trophiesInput" value="5" min="0">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Jogos Completados</label>
+                        <input type="number" class="form-input" id="gamesInput" value="98" min="0">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Nível</label>
+                        <input type="number" class="form-input" id="levelInput" value="12" min="1">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Progresso de XP (atual/total)</label>
+                        <div style="display: flex; gap: 10px;">
+                            <input type="number" class="form-input" id="xpCurrentInput" value="75" min="0" style="width: 45%;">
+                            <span style="line-height: 40px;">/</span>
+                            <input type="number" class="form-input" id="xpTotalInput" value="100" min="1" style="width: 45%;">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-buttons">
+                    <button type="button" class="btn btn-cancel" id="cancelBtn">Cancelar</button>
+                    <button type="button" class="btn btn-save" id="saveProfileBtn">Salvar Alterações</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../js/furiax-avatars.js"></script>
+    <!-- ADICIONE ESTE CÓDIGO APÓS A TAG <body> EM CADA ARQUIVO HTML -->
+<script>
+    // Detectar ambiente atual
+    const isInPagesDir = window.location.pathname.includes('/pages/');
+    
+    // Função para obter caminho correto com base no ambiente
+    function getCorrectPath(page) {
+      // Remover .html se presente
+      const pageName = page.endsWith('.html') ? page.substring(0, page.length - 5) : page;
+      
+      // Casos especiais
+      if (pageName === 'login') {
+        return isInPagesDir ? 'login.html' : 'pages/login.html';
+      } else if (pageName === 'index' || pageName === 'home') {
+        return isInPagesDir ? '../index.html' : 'index.html';
+      } else {
+        // Para outras páginas
+        return isInPagesDir ? pageName + '.html' : 'pages/' + pageName + '.html';
+      }
+    }
+  </script>
+    <div class="notification" id="notification"></div>
+    <script src="../js/integration/furiax-profile.js"></script>
+<script src="../js/integration/furiax-sync.js"></script>
+<script src="../js/integration/furiax-user_session.js"></script>
+
+<script>
+// Elementos DOM
+const usernameInput = document.getElementById('usernameInput');
+const emailInput = document.getElementById('emailInput');
+const titleSelect = document.getElementById('titleSelect');
+const bioTextarea = document.getElementById('bioTextarea');
+const previewName = document.getElementById('previewName');
+const previewTitle = document.getElementById('previewTitle');
+const previewImage = document.getElementById('previewImage');
+const previewLevel = document.getElementById('previewLevel');
+const previewXP = document.getElementById('previewXP');
+const progressBar = document.getElementById('progressBar');
+const statsWins = document.getElementById('statsWins');
+const statsTrophies = document.getElementById('statsTrophies');
+const statsGames = document.getElementById('statsGames');
+const sidebarUsername = document.getElementById('sidebarUsername');
+const sidebarTitle = document.getElementById('sidebarTitle');
+const saveProfileBtn = document.getElementById('saveProfileBtn');
+const cancelBtn = document.getElementById('cancelBtn');
+const winsInput = document.getElementById('winsInput');
+const trophiesInput = document.getElementById('trophiesInput');
+const gamesInput = document.getElementById('gamesInput');
+const levelInput = document.getElementById('levelInput');
+const xpCurrentInput = document.getElementById('xpCurrentInput');
+const xpTotalInput = document.getElementById('xpTotalInput');
+const notification = document.getElementById('notification');
+const avatarGrid = document.getElementById('avatarGrid');
+const tabButtons = document.querySelectorAll('.config-tab-button');
+const configTabs = document.querySelectorAll('.config-tab');
+
+// Dados iniciais do perfil (se não houver dados salvos)
+const defaultProfile = {
+    username: "FuriaX_Pro",
+    email: "furioso@furiax.com",
+    title: "furioso_elite",
+    bio: "Jogador competitivo de CS2 e VALORANT. Fan da FURIA desde 2019. Meta: alcançar o ranking global até o final do ano.",
+    avatar: 1,
+    level: 12,
+    xpCurrent: 75,
+    xpTotal: 100,
+    wins: 42,
+    trophies: 5,
+    games: 98
+};
+
+// Adicione esta função e chame-a na inicialização
+function checkTitleSelectOptions() {
+    console.log("Verificando options do titleSelect:");
+    const options = titleSelect.options;
+    for (let i = 0; i < options.length; i++) {
+        console.log(`Opção ${i}: value="${options[i].value}", text="${options[i].text}"`);
+    }
+    
+    console.log("Valor atual do titleSelect:", titleSelect.value);
+    console.log("Valor atual no userProfile:", userProfile.title);
+}
+
+// Chame esta função no carregamento da página
+document.addEventListener('DOMContentLoaded', () => {
+    loadProfileData();
+    checkTitleSelectOptions();
+    
+    // Configurar animações...
+});
+
+// 1. Modifique o event listener do titleSelect
+titleSelect.addEventListener('change', () => {
+    const titleValue = titleSelect.value;
+    const titleText = getTitleText(titleValue);
+    
+    // Atualizar a exibição
+    previewTitle.textContent = titleText;
+    sidebarTitle.textContent = titleText;
+    
+    // Importante: atualize o objeto userProfile imediatamente
+    userProfile.title = titleValue;
+    
+    console.log("Título alterado para:", titleValue);
+});
+
+// 2. Modifique a função saveProfile para garantir que o título seja salvo
+function saveProfile() {
+    // Certifique-se de obter o valor atual do select
+    const currentTitle = titleSelect.value;
+    
+    // Atualize o objeto userProfile
+    userProfile.username = usernameInput.value;
+    userProfile.email = emailInput.value;
+    userProfile.title = currentTitle; // Garantir que pegamos o valor atual
+    userProfile.bio = bioTextarea.value;
+    userProfile.level = parseInt(levelInput.value) || 1;
+    userProfile.xpCurrent = parseInt(xpCurrentInput.value) || 0;
+    userProfile.xpTotal = parseInt(xpTotalInput.value) || 100;
+    userProfile.wins = parseInt(winsInput.value) || 0;
+    userProfile.trophies = parseInt(trophiesInput.value) || 0;
+    userProfile.games = parseInt(gamesInput.value) || 0;
+    userProfile.avatar = parseInt(avatarGrid.querySelector('.selected').dataset.avatar) || 1;
+    
+    // Salve no localStorage
+    localStorage.setItem('furiaxProfile', JSON.stringify(userProfile));
+    
+    // Atualize a exibição
+    updatePreview();
+    
+    // Log para depuração
+    console.log("Perfil salvo com título:", userProfile.title);
+    
+    showNotification('Perfil salvo com sucesso!');
+}
+
+// 3. Adicione uma função específica para salvar apenas o título (para teste)
+function saveTitleOnly() {
+    const currentTitle = titleSelect.value;
+    userProfile.title = currentTitle;
+    localStorage.setItem('furiaxProfile', JSON.stringify(userProfile));
+    
+    const titleText = getTitleText(currentTitle);
+    previewTitle.textContent = titleText;
+    sidebarTitle.textContent = titleText;
+    
+    showNotification('Título salvo: ' + titleText);
+    console.log("Apenas título salvo:", currentTitle);
+}
+
+// 4. Adicione um botão de teste (apenas para depuração)
+// Função para adicionar botão de logout ao sidebar
+// Função corrigida para adicionar botão de logout ao sidebar
+function addLogoutButtonToSidebar() {
+    // Encontrar o sidebar
+    const sidebar = document.querySelector('.sidebar');
+    
+    if (!sidebar) {
+      console.log("Sidebar não encontrado");
+      return;
+    }
+    
+    // Verificar se o botão já existe para evitar duplicação
+    if (document.querySelector('.logout-button')) {
+      return;
+    }
+    
+    // Criar o botão de logout
+    const logoutButton = document.createElement('button');
+    logoutButton.className = 'logout-button';
+    logoutButton.innerHTML = '<i class="fas fa-sign-out-alt"></i> <span>Sair</span>';
+    
+    // Adicionar estilo similar aos outros botões
+    logoutButton.style.marginTop = '20px'; // Dar um espaço adicional no topo
+    
+    // Adicionar evento de logout
+    logoutButton.addEventListener('click', function() {
+        // deseja realmemnte sair sim ou não?;");
+        if (!confirm("Você realmente deseja sair?")) {
+            return; // Se o usuário cancelar, não faça nada
+        }
+      // Limpar dados da sessão
+      localStorage.removeItem('furiax_current_user');
+      localStorage.removeItem('furiax_session_token');
+      localStorage.removeItem('furiaxProfile');
+      
+      // CORRIGIDO: Usar getCorrectPath para redirecionar corretamente
+      window.location.href = getCorrectPath('login');
+    });
+    
+    // Adicionar ao sidebar (logo antes do user-profile)
+    const profileSection = sidebar.querySelector('.user-profile');
+    
+    if (profileSection) {
+      // Inserir antes da seção de perfil
+      sidebar.insertBefore(logoutButton, profileSection);
+    } else {
+      // Se não encontrar a seção de perfil, adicionar ao final
+      sidebar.appendChild(logoutButton);
+    }
+}
+  
+  // Executar quando a página carregar
+  document.addEventListener('DOMContentLoaded', addLogoutButtonToSidebar);// <button id="saveTitleBtn">Salvar Apenas Título</button>
+
+// E este código:
+const saveTitleBtn = document.getElementById('saveTitleBtn');
+if (saveTitleBtn) {
+    saveTitleBtn.addEventListener('click', saveTitleOnly);
+}
+// Carregar perfil do localStorage ou usar o padrão
+let userProfile = JSON.parse(localStorage.getItem('furiaxProfile')) || defaultProfile;
+
+// Função para obter o texto do título com base no valor
+function getTitleText(titleValue) {
+    const titles = {
+        "novato": "Novato",
+        "iniciante": "Iniciante",
+        "casual": "Jogador Casual",
+        "competitivo": "Competidor",
+        "furioso": "Furioso",
+        "furioso_elite": "Furioso Elite",
+        "lendario": "Furioso Lendário"
+    };
+    return titles[titleValue] || titleValue;
+}
+
+// Função para atualizar o preview
+function updatePreview() {
+    previewName.textContent = userProfile.username;
+    previewTitle.textContent = getTitleText(userProfile.title);
+    previewLevel.textContent = `Nível ${userProfile.level}`;
+    previewXP.textContent = `${userProfile.xpCurrent}/${userProfile.xpTotal} XP`;
+    
+    const progressPercentage = (userProfile.xpCurrent / userProfile.xpTotal) * 100;
+    progressBar.style.width = `${progressPercentage}%`;
+    
+    statsWins.textContent = userProfile.wins;
+    statsTrophies.textContent = userProfile.trophies;
+    statsGames.textContent = userProfile.games;
+    
+    previewImage.src = `/api/placeholder/150/150?avatar=${userProfile.avatar}`;
+    
+    sidebarUsername.textContent = userProfile.username;
+    sidebarTitle.textContent = getTitleText(userProfile.title);
+}
+
+// Função para carregar dados do perfil na interface
+function loadProfileData() {
+    // Formulário principal
+    usernameInput.value = userProfile.username;
+    emailInput.value = userProfile.email;
+    titleSelect.value = userProfile.title;
+    bioTextarea.value = userProfile.bio;
+    
+    // Estatísticas
+    winsInput.value = userProfile.wins;
+    trophiesInput.value = userProfile.trophies;
+    gamesInput.value = userProfile.games;
+    levelInput.value = userProfile.level;
+    xpCurrentInput.value = userProfile.xpCurrent;
+    xpTotalInput.value = userProfile.xpTotal;
+    
+    // Selecionar avatar na grade
+    document.querySelectorAll('.avatar-choice').forEach(choice => {
+        choice.classList.toggle('selected', parseInt(choice.dataset.avatar) === userProfile.avatar);
+    });
+    
+    // Atualizar preview
+    updatePreview();
+}
+
+// Função para salvar perfil
+function saveProfile() {
+    // Atualiza o objeto userProfile com dados dos inputs
+    userProfile.username = usernameInput.value; // ADICIONANDO ESTA LINHA CRUCIAL
+    userProfile.email = emailInput.value;
+    userProfile.title = titleSelect.value;
+    userProfile.bio = bioTextarea.value;
+    userProfile.level = parseInt(levelInput.value) || 1;
+    userProfile.xpCurrent = parseInt(xpCurrentInput.value) || 0;
+    userProfile.xpTotal = parseInt(xpTotalInput.value) || 100;
+    userProfile.wins = parseInt(winsInput.value) || 0;
+    userProfile.trophies = parseInt(trophiesInput.value) || 0;
+    userProfile.games = parseInt(gamesInput.value) || 0;
+    // avatar já é atualizado em tempo real no evento de click
+    
+    // Salva atualizado
+    localStorage.setItem('furiaxProfile', JSON.stringify(userProfile));
+
+    // Atualiza tela
+    updatePreview();
+    showNotification('Perfil salvo com sucesso!');
+}
+    // Modifique a função loadProfileData() para exibir o email como privado
+function loadProfileData() {
+    // Verificar se o perfil tem email
+    ensureEmailIsPresent();
+    
+    // Formulário principal
+    usernameInput.value = userProfile.username;
+    
+    // Mostrar placeholder "Privado" em vez do email real
+    emailInput.value = "Privado";
+    
+    titleSelect.value = userProfile.title;
+    bioTextarea.value = userProfile.bio;
+    
+    // Estatísticas
+    winsInput.value = userProfile.wins;
+    trophiesInput.value = userProfile.trophies;
+    gamesInput.value = userProfile.games;
+    levelInput.value = userProfile.level;
+    xpCurrentInput.value = userProfile.xpCurrent;
+    xpTotalInput.value = userProfile.xpTotal;
+    
+    // Selecionar avatar na grade
+    document.querySelectorAll('.avatar-choice').forEach(choice => {
+        choice.classList.toggle('selected', parseInt(choice.dataset.avatar) === userProfile.avatar);
+    });
+    
+    // Atualizar preview
+    updatePreview();
+    
+    console.log("Perfil carregado com sucesso:", userProfile);
+}
+
+// Função para garantir que o email esteja presente no perfil
+function ensureEmailIsPresent() {
+    // Se o perfil não tiver email, tente obter do localStorage
+    if (!userProfile.email) {
+        // Tentar buscar email do usuário atual
+        const currentUser = JSON.parse(localStorage.getItem('furiax_current_user') || '{}');
+        if (currentUser && currentUser.email) {
+            userProfile.email = currentUser.email;
+            localStorage.setItem('furiaxProfile', JSON.stringify(userProfile));
+        } else {
+            // Se não conseguir encontrar, use um valor padrão
+            userProfile.email = "user@furiax.com";
+            localStorage.setItem('furiaxProfile', JSON.stringify(userProfile));
+        }
+    }
+}
+
+// Modificar a função saveProfile para NÃO sobrescrever o email
+function saveProfile() {
+    // Atualiza o objeto userProfile com dados dos inputs
+    userProfile.username = usernameInput.value;
+    // O email é mantido no localStorage, mas nunca é exibido na interface
+    userProfile.title = titleSelect.value;
+    userProfile.bio = bioTextarea.value;
+    userProfile.level = parseInt(levelInput.value) || 1;
+    userProfile.xpCurrent = parseInt(xpCurrentInput.value) || 0;
+    userProfile.xpTotal = parseInt(xpTotalInput.value) || 100;
+    userProfile.wins = parseInt(winsInput.value) || 0;
+    userProfile.trophies = parseInt(trophiesInput.value) || 0;
+    userProfile.games = parseInt(gamesInput.value) || 0;
+    // avatar já é atualizado em tempo real no evento de click
+    
+    // Salva atualizado
+    localStorage.setItem('furiaxProfile', JSON.stringify(userProfile));
+
+    // Atualiza tela
+    updatePreview();
+    showNotification('Perfil salvo com sucesso!');
+}
+// Função para mostrar notificação
+function showNotification(message) {
+    notification.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
+    notification.classList.add('show');
+    
+    setTimeout(() => {
+        notification.classList.remove('show');
+    }, 3000);
+}
+
+// Função para alternar entre abas
+function switchTab(tabId) {
+    // Desativar todas as abas e botões
+    configTabs.forEach(tab => tab.classList.remove('active'));
+    tabButtons.forEach(btn => btn.classList.remove('active'));
+    
+    // Ativar aba selecionada e botão correspondente
+    document.getElementById(tabId).classList.add('active');
+    document.querySelector(`[data-tab="${tabId}"]`).classList.add('active');
+}
+
+// Event Listeners
+// Botões de aba
+tabButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const tabId = button.getAttribute('data-tab');
+        switchTab(tabId);
+    });
+});
+
+// Seleção de avatar
+avatarGrid.addEventListener('click', (e) => {
+    const avatarChoice = e.target.closest('.avatar-choice');
+    if (avatarChoice) {
+        // Remover seleção anterior
+        document.querySelectorAll('.avatar-choice').forEach(choice => {
+            choice.classList.remove('selected');
+        });
+        
+        // Selecionar novo avatar
+        avatarChoice.classList.add('selected');
+        userProfile.avatar = parseInt(avatarChoice.dataset.avatar);
+        
+        // Atualizar preview
+        previewImage.src = `/api/placeholder/150/150?avatar=${userProfile.avatar}`;
+    }
+});
+
+// Adicionar eventos para atualização em tempo real
+usernameInput.addEventListener('input', () => {
+    previewName.textContent = usernameInput.value;
+    sidebarUsername.textContent = usernameInput.value;
+});
+
+// Campos com atualização ao vivo
+titleSelect.addEventListener('change', () => {
+    const titleText = getTitleText(titleSelect.value);
+    previewTitle.textContent = titleText;
+    sidebarTitle.textContent = titleText;
+});
+
+// Atualizações de estatísticas ao vivo
+levelInput.addEventListener('input', () => {
+    previewLevel.textContent = `Nível ${levelInput.value}`;
+});
+
+xpCurrentInput.addEventListener('input', updateXPProgress);
+xpTotalInput.addEventListener('input', updateXPProgress);
+
+function updateXPProgress() {
+    const current = parseInt(xpCurrentInput.value) || 0;
+    const total = parseInt(xpTotalInput.value) || 1;
+    previewXP.textContent = `${current}/${total} XP`;
+    
+    const progressPercentage = (current / total) * 100;
+    progressBar.style.width = `${progressPercentage}%`;
+}
+
+winsInput.addEventListener('input', () => {
+    statsWins.textContent = winsInput.value;
+});
+
+trophiesInput.addEventListener('input', () => {
+    statsTrophies.textContent = trophiesInput.value;
+});
+
+gamesInput.addEventListener('input', () => {
+    statsGames.textContent = gamesInput.value;
+});
+
+// Botões de ação
+saveProfileBtn.addEventListener('click', () => {
+    saveProfile();
+    location.reload(); 
+
+    showNotification('Alterações salvas!');
+});
+
+cancelBtn.addEventListener('click', () => {
+    loadProfileData();
+    showNotification('Alterações descartadas!');
+});
+
+// Inicialização
+document.addEventListener('DOMContentLoaded', () => {
+    
+    loadProfileData();
+    
+    // Configurar animações de hover para os elementos da interface
+    const buttons = document.querySelectorAll('button:not(.avatar-choice)');
+    buttons.forEach(button => {
+        button.addEventListener('mouseenter', () => {
+            button.style.transition = 'all 0.3s';
+        });
+    });
+});
+
+// Avatar preview click para abrir aba de aparência
+document.getElementById('avatarPreview').addEventListener('click', () => {
+    switchTab('appearance');
+});
+
+// Validação para campos numéricos
+const numericInputs = [winsInput, trophiesInput, gamesInput, levelInput, xpCurrentInput, xpTotalInput];
+numericInputs.forEach(input => {
+    input.addEventListener('input', () => {
+        // Garantir valor mínimo
+        const min = parseInt(input.getAttribute('min') || 0);
+        if (input.value < min) input.value = min;
+    });
+});
+
+// Função para limitar o texto de bio
+bioTextarea.addEventListener('input', () => {
+    const maxLength = 200;
+    if (bioTextarea.value.length > maxLength) {
+        bioTextarea.value = bioTextarea.value.substring(0, maxLength);
+    }
+});
+
+// Sistema completo de avatares - Para implementar no arquivo furiax-profile.js
+
+// Mapeamento de IDs de avatar para URLs de imagens
+const avatarMappings = {
+    1: "../img/avatars/avatar01.jpg", 
+    2: "../img/avatars/avatar02.jpg",
+    3: "../img/avatars/avatar03.jpg",
+    4: "../img/avatars/avatar04.png",
+    5: "../img/avatars/avatar05.png",
+    6: "../img/avatars/avatar06.jpg"
+};
+
+// Função para obter a URL do avatar a partir do ID
+function getAvatarUrl(avatarId) {
+    // Ajusta o cafminho com base no ambiente (páginas ou raiz)
+    const isInPagesDir = window.location.pathname.includes('/pages/');
+    const prefix = isInPagesDir ? '../' : '';
+    
+    // Verifica se existe um mapeamento para este ID
+    if (avatarMappings[avatarId]) {
+        return avatarMappings[avatarId].replace('../', prefix);
+    }
+    
+    // Se não encontrar, usa o placeholder como fallback
+    return `/api/placeholder/150/150?avatar=${avatarId}`;
+}
+
+// Inicializa o sistema de avatares
+function initAvatarSystem() {
+    console.log("Inicializando sistema de avatares...");
+    
+    // Elementos DOM para avatares
+    const avatarGrid = document.getElementById('avatarGrid');
+    const previewImage = document.getElementById('previewImage');
+    const avatarElements = document.querySelectorAll('.user-avatar, .profile-avatar');
+    
+    // Carrega o perfil do usuário do localStorage ou cria um novo
+    const userProfile = JSON.parse(localStorage.getItem('furiaxProfile')) || createDefaultProfile();
+    
+    // Garante que o avatar existe no perfil
+    if (!userProfile.avatar) {
+        userProfile.avatar = 1;
+        localStorage.setItem('furiaxProfile', JSON.stringify(userProfile));
+    }
+    
+    // Atualiza todas as imagens de avatar no sistema
+    updateAllAvatars(userProfile.avatar);
+    
+    // Adiciona evento de clique no grid de avatares (se existir)
+    if (avatarGrid) {
+        avatarGrid.addEventListener('click', (e) => {
+            const avatarChoice = e.target.closest('.avatar-choice');
+            if (!avatarChoice) return;
+            
+            // Remove seleção anterior
+            document.querySelectorAll('.avatar-choice').forEach(choice => {
+                choice.classList.remove('selected');
+            });
+            
+            // Adiciona seleção ao avatar clicado
+            avatarChoice.classList.add('selected');
+            
+            // Extrai o ID do avatar dos dados do elemento
+            const newAvatarId = parseInt(avatarChoice.dataset.avatar);
+            
+            // Atualiza o avatar no perfil
+            userProfile.avatar = newAvatarId;
+            localStorage.setItem('furiaxProfile', JSON.stringify(userProfile));
+            
+            // Atualiza a exibição do avatar em todo o sistema
+            updateAllAvatars(newAvatarId);
+            
+            console.log("Avatar alterado para:", newAvatarId);
+        });
+    }
+    
+    // Função para atualizar todos os avatares no sistema
+    function updateAllAvatars(avatarId) {
+        // Obter a URL do avatar
+        const avatarUrl = getAvatarUrl(avatarId);
+        console.log("URL do avatar:", avatarUrl);
+        
+        // Atualizar a imagem de pré-visualização (se existir)
+        if (previewImage) {
+            previewImage.src = avatarUrl;
+            console.log("Preview atualizado");
+        }
+        
+        // Atualizar todos os elementos com classe .user-avatar ou .profile-avatar
+        avatarElements.forEach(el => {
+            if (el.tagName === 'IMG') {
+                el.src = avatarUrl;
+                console.log("Avatar atualizado:", el);
+            }
+        });
+        
+        // Marcar o avatar correto como selecionado na grade (se existir)
+        if (avatarGrid) {
+            document.querySelectorAll('.avatar-choice').forEach(choice => {
+                const isSelected = parseInt(choice.dataset.avatar) === avatarId;
+                choice.classList.toggle('selected', isSelected);
+            });
+        }
+    }
+    
+    // Criar um perfil padrão caso não exista
+    function createDefaultProfile() {
+        const defaultProfile = {
+            username: "Usuário FURIAX",
+            email: "",
+            title: "novato",
+            bio: "Olá, sou um fã da FURIA!",
+            avatar: 1,
+            level: 1,
+            xpCurrent: 0,
+            xpTotal: 100,
+            wins: 0,
+            trophies: 0,
+            games: 0
+        };
+        
+        localStorage.setItem('furiaxProfile', JSON.stringify(defaultProfile));
+        return defaultProfile;
+    }
+}
+
+// Integrar com o sistema de perfil existente
+document.addEventListener('DOMContentLoaded', function() {
+    // Inicializa o sistema de avatares
+    initAvatarSystem();
+    
+    // Sobrescreve a função updateProfileElements para incluir a atualização de avatares
+    if (typeof window.updateProfileElements === 'function') {
+        const originalUpdateProfileElements = window.updateProfileElements;
+        
+        window.updateProfileElements = function(profile) {
+            // Chama a função original
+            originalUpdateProfileElements(profile);
+            
+            // Atualiza os avatares com base no perfil
+            if (profile && profile.avatar) {
+                const avatarUrl = getAvatarUrl(profile.avatar);
+                
+                // Atualiza todas as imagens de avatar
+                const avatarElements = document.querySelectorAll('.user-avatar, .profile-avatar');
+                avatarElements.forEach(el => {
+                    if (el && el.tagName === 'IMG') {
+                        el.src = avatarUrl;
+                    }
+                });
+            }
+        };
+    }
+});
+
+// Para usar em outras páginas fora da página de perfil
+// Adicione esta função para carregar o avatar em qualquer página
+function loadUserAvatar() {
+    const userProfile = JSON.parse(localStorage.getItem('furiaxProfile'));
+    
+    if (userProfile && userProfile.avatar) {
+        const avatarUrl = getAvatarUrl(userProfile.avatar);
+        
+        // Atualiza todos os elementos de avatar na página
+        const avatarElements = document.querySelectorAll('.user-avatar, .profile-avatar');
+        avatarElements.forEach(el => {
+            if (el && el.tagName === 'IMG') {
+                el.src = avatarUrl;
+            }
+        });
+    }
+}
+
+// Chama a função de carregamento de avatar em todas as páginas
+document.addEventListener('DOMContentLoaded', loadUserAvatar);
+</script>
+</body>
+</html>

@@ -1,0 +1,2001 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FURIAX - Experiências Personalizadas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e90ff;
+            --primary-dark: #0066cc;
+            --secondary: #ff3b5c;
+            --tertiary: #00cc66;
+            --warning: #ffc107;
+            --dark: #111;
+            --darker: #0a0a0a;
+            --light: #f0f0f0;
+            --gray: #aaa;
+            --transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Exo 2', sans-serif;
+            background-color: var(--darker);
+            color: var(--light);
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 10%, rgba(30, 144, 255, 0.05) 0%, transparent 30%),
+                radial-gradient(circle at 90% 30%, rgba(255, 59, 92, 0.05) 0%, transparent 30%),
+                radial-gradient(circle at 50% 80%, rgba(0, 204, 102, 0.05) 0%, transparent 40%);
+            position: relative;
+        }
+
+        /* Overlay para popups e modais */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(5px);
+            z-index: 998;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        
+        .overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        /* Base para popups */
+        .furiax-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            z-index: 999;
+            background: linear-gradient(145deg, #111, #181818);
+            border-radius: 20px;
+            border: 1px solid #333;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+            width: 90%;
+            max-width: 550px;
+            opacity: 0;
+            pointer-events: none;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .furiax-popup.active {
+            opacity: 1;
+            pointer-events: all;
+            transform: translate(-50%, -50%) scale(1);
+        }
+        
+        /* Cabeçalho do popup */
+        .popup-header {
+            position: relative;
+            padding: 20px 25px;
+            background: rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .popup-title {
+            color: var(--primary);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.25rem;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .popup-title i {
+            font-size: 1.4rem;
+        }
+        
+        .popup-close {
+            background: none;
+            border: none;
+            color: var(--gray);
+            font-size: 1.4rem;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+        
+        .popup-close:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            transform: rotate(90deg);
+        }
+        
+        /* Corpo do popup */
+        .popup-body {
+            padding: 25px;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+        
+        /* Rodapé do popup */
+        .popup-footer {
+            padding: 15px 25px;
+            border-top: 1px solid #333;
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            background: rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Estilos para popups específicos */
+        
+        /* Popup para fã de eventos presenciais */
+        .popup-events {
+            background: linear-gradient(135deg, #111, #181818);
+        }
+        
+        .popup-events::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('/api/placeholder/550/300') center top/cover no-repeat;
+            opacity: 0.15;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .popup-events .popup-header {
+            background: rgba(30, 144, 255, 0.1);
+        }
+        
+        /* Popup para gamers */
+        .popup-gaming {
+            background: linear-gradient(135deg, #111, #131320);
+        }
+        
+        .popup-gaming .popup-header {
+            background: rgba(255, 59, 92, 0.1);
+        }
+        
+        .popup-gaming .popup-title {
+            color: var(--secondary);
+        }
+        
+        /* Popup para colecionadores */
+        .popup-collector {
+            background: linear-gradient(135deg, #111, #112011);
+        }
+        
+        .popup-collector .popup-header {
+            background: rgba(0, 204, 102, 0.1);
+        }
+        
+        .popup-collector .popup-title {
+            color: var(--tertiary);
+        }
+        
+        /* Popup para fã de conteúdo */
+        .popup-content {
+            background: linear-gradient(135deg, #111, #181410);
+        }
+        
+        .popup-content .popup-header {
+            background: rgba(255, 193, 7, 0.1);
+        }
+        
+        .popup-content .popup-title {
+            color: var(--warning);
+        }
+        
+        /* Botões */
+        .btn {
+            font-family: 'Exo 2', sans-serif;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: none;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(90deg, var(--primary), #36a6ff);
+            color: white;
+            box-shadow: 0 4px 15px rgba(30, 144, 255, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(30, 144, 255, 0.4);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(90deg, var(--secondary), #ff5277);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 59, 92, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(255, 59, 92, 0.4);
+        }
+        
+        .btn-tertiary {
+            background: linear-gradient(90deg, var(--tertiary), #00e676);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 204, 102, 0.3);
+        }
+        
+        .btn-tertiary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(0, 204, 102, 0.4);
+        }
+        
+        .btn-warning {
+            background: linear-gradient(90deg, var(--warning), #ffcd38);
+            color: #111;
+            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
+            font-weight: 600;
+        }
+        
+        .btn-warning:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(255, 193, 7, 0.4);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--gray);
+            color: var(--gray);
+        }
+        
+        .btn-outline:hover {
+            border-color: white;
+            color: white;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Seção de vantagens */
+        .benefits-section {
+            margin-bottom: 20px;
+        }
+        
+        .benefits-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .benefits-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .benefit-item {
+            display: flex;
+            gap: 15px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 12px 15px;
+            border-radius: 10px;
+            transition: var(--transition);
+        }
+        
+        .benefit-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateX(5px);
+        }
+        
+        .benefit-icon {
+            width: 40px;
+            height: 40px;
+            min-width: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: white;
+        }
+        
+        .benefit-content {
+            flex: 1;
+        }
+        
+        .benefit-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .benefit-description {
+            font-size: 0.9rem;
+            color: var(--gray);
+            line-height: 1.4;
+        }
+        
+        /* Cores de ícones por tipo */
+        .icon-blue {
+            background: rgba(30, 144, 255, 0.15);
+            color: var(--primary) !important;
+        }
+        
+        .icon-red {
+            background: rgba(255, 59, 92, 0.15);
+            color: var(--secondary) !important;
+        }
+        
+        .icon-green {
+            background: rgba(0, 204, 102, 0.15);
+            color: var(--tertiary) !important;
+        }
+        
+        .icon-yellow {
+            background: rgba(255, 193, 7, 0.15);
+            color: var(--warning) !important;
+        }
+        
+        /* Card de informações */
+        .info-card {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), transparent);
+        }
+        
+        .card-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.05rem;
+            margin-bottom: 10px;
+        }
+        
+        .card-subtitle {
+            font-size: 0.9rem;
+            color: var(--gray);
+            margin-bottom: 15px;
+        }
+        
+        .card-content {
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        /* Destacar texto */
+        .highlight {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .highlight-red {
+            color: var(--secondary);
+            font-weight: 600;
+        }
+        
+        .highlight-green {
+            color: var(--tertiary);
+            font-weight: 600;
+        }
+        
+        .highlight-yellow {
+            color: var(--warning);
+            font-weight: 600;
+        }
+        
+        /* Cards de itens exclusivos */
+        .exclusive-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .exclusive-item {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .exclusive-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .exclusive-image {
+            width: 100%;
+            height: 100px;
+            overflow: hidden;
+        }
+        
+        .exclusive-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .exclusive-item:hover .exclusive-image img {
+            transform: scale(1.05);
+        }
+        
+        .exclusive-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255, 59, 92, 0.9);
+            color: white;
+            font-size: 0.7rem;
+            padding: 3px 8px;
+            border-radius: 20px;
+            font-weight: 600;
+            z-index: 1;
+        }
+        
+        .exclusive-content {
+            padding: 12px;
+        }
+        
+        .exclusive-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            line-height: 1.3;
+            height: 2.6rem;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+        
+        .exclusive-price {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        
+        .sale-price {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .original-price {
+            color: var(--gray);
+            text-decoration: line-through;
+            font-size: 0.8rem;
+        }
+        
+        .discount-badge {
+            background: rgba(255, 59, 92, 0.9);
+            color: white;
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        
+        /* Conteúdo por abas */
+        .tab-navigation {
+            display: flex;
+            border-bottom: 1px solid #333;
+            margin-bottom: 20px;
+            gap: 5px;
+        }
+        
+        .tab-button {
+            padding: 10px 15px;
+            background: transparent;
+            border: none;
+            color: var(--gray);
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Exo 2', sans-serif;
+            font-size: 0.95rem;
+            position: relative;
+        }
+        
+        .tab-button:hover {
+            color: white;
+        }
+        
+        .tab-button.active {
+            color: var(--primary);
+        }
+        
+        .tab-button.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 3px 3px 0 0;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease forwards;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Itens em grade */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .content-item {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+        
+        .content-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .content-image {
+            width: 100%;
+            height: 110px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .content-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .content-item:hover .content-image img {
+            transform: scale(1.05);
+        }
+        
+        .content-type {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            font-size: 0.7rem;
+            padding: 3px 8px;
+            border-radius: 20px;
+            font-weight: 600;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .content-info {
+            padding: 12px;
+        }
+        
+        .content-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            line-height: 1.3;
+            height: 2.4rem;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+        
+        .content-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+        
+        /* Badge Novo */
+        .new-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 204, 102, 0.9);
+            color: white;
+            font-size: 0.7rem;
+            padding: 3px 8px;
+            border-radius: 20px;
+            font-weight: 600;
+            z-index: 1;
+        }
+        
+        /* Botão flutuante de convite */
+        .invite-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), #36a6ff);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(30, 144, 255, 0.4);
+            transition: var(--transition);
+            z-index: 99;
+        }
+        
+        .invite-button:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 6px 20px rgba(30, 144, 255, 0.5);
+        }
+        
+        .invite-button::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), #36a6ff);
+            opacity: 0.5;
+            z-index: -1;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+            70% {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        /* Formulário de pontuação */
+        .popup-score-form {
+            background: linear-gradient(135deg, #111, #181830);
+        }
+        
+        .score-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 10px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid #333;
+            border-radius: 8px;
+            color: white;
+            padding: 12px 15px;
+            font-family: 'Exo 2', sans-serif;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+        
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(30, 144, 255, 0.2);
+        }
+        
+        .form-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .form-checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-top: 5px;
+        }
+        
+        .form-checkbox {
+            margin-top: 3px;
+        }
+        
+        .form-checkbox-label {
+            flex: 1;
+            font-size: 0.9rem;
+            color: var(--gray);
+            line-height: 1.4;
+        }
+        
+        /* Ranking de experiências */
+        .ranking-list {
+            list-style: none;
+            margin: 15px 0;
+        }
+        
+        .ranking-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            margin-bottom: 10px;
+            transition: var(--transition);
+        }
+        
+        .ranking-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateX(5px);
+        }
+        
+        .ranking-position {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            min-width: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .ranking-position.top {
+            color: var(--warning);
+        }
+        
+        .ranking-info {
+            flex: 1;
+        }
+        
+        .ranking-title {
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+        
+        .ranking-meta {
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+        
+        .ranking-score {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+        
+        /* Media Queries */
+        @media screen and (max-width: 767px) {
+            .furiax-popup {
+                width: 95%;
+                max-height: 85vh;
+            }
+            
+            .exclusive-items, .content-grid {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            }
+            
+            .benefit-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .benefit-icon {
+                margin-bottom: 10px;
+            }
+            
+            .popup-header {
+                padding: 15px 20px;
+            }
+            
+            .popup-body {
+                padding: 20px;
+            }
+            
+            .popup-footer {
+                padding: 12px 20px;
+                flex-direction: column;
+            }
+            
+            .popup-footer .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Overlay para fundo dos popups -->
+    <div class="overlay" id="overlay"></div>
+    
+    <!-- Botão flutuante de convite -->
+    <div class="invite-button" id="inviteButton">
+        <i class="fas fa-star"></i>
+    </div>
+
+    <!-- Popup para fã de eventos -->
+    <div class="furiax-popup popup-events" id="popupEvents">
+        <div class="popup-header">
+            <h3 class="popup-title"><i class="fas fa-calendar-alt"></i> Eventos Exclusivos FURIA</h3>
+            <button class="popup-close"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="popup-body">
+            <div class="info-card">
+                <div class="card-title">Olá, <span class="highlight" id="userNameEvents">Carlos</span>!</div>
+                <div class="card-subtitle">Notamos que você é um grande fã de eventos presenciais da FURIA.</div>
+                <div class="card-content">
+                    Com base no seu perfil, preparamos algumas experiências exclusivas para aproximar você ainda mais do seu time!
+                </div>
+            </div>
+
+            <div class="benefits-section">
+                <h4 class="benefits-title"><i class="fas fa-ticket-alt"></i> Para Fãs de Eventos como você</h4>
+                <div class="benefits-list">
+                    <div class="benefit-item">
+                        <div class="benefit-icon icon-blue">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <div class="benefit-content">
+                            <div class="benefit-title">Acesso VIP</div>
+                            <div class="benefit-description">Entrada antecipada nos eventos presenciais da FURIA com área exclusiva.</div>
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon icon-blue">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="benefit-content">
+                            <div class="benefit-title">Meet & Greet</div>
+                            <div class="benefit-description">Prioridade em sessões exclusivas com os jogadores da FURIA.</div>
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon icon-blue">
+                            <i class="fas fa-percent"></i>
+                        </div>
+                        <div class="benefit-content">
+                            <div class="benefit-title">Descontos Exclusivos</div>
+                            <div class="benefit-description">20% de desconto em todos os ingressos para eventos oficiais FURIA.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h4 class="benefits-title"><i class="fas fa-calendar-check"></i> Próximos Eventos Recomendados</h4>
+            <div class="exclusive-items">
+                <div class="exclusive-item">
+                    <div class="exclusive-badge">-15%</div>
+                    <div class="exclusive-image">
+                        <img src="/api/placeholder/160/100" alt="Fan Fest FURIA">
+                    </div>
+                    <div class="exclusive-content">
+                        <div class="exclusive-title">FURIA Fan Fest SP 2025</div>
+                        <div class="exclusive-price">
+                            <div class="sale-price">
+                                R$ 119,00 <span class="original-price">R$ 140,00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="exclusive-item">
+                    <div class="exclusive-badge">VIP</div>
+                    <div class="exclusive-image">
+                        <img src="/api/placeholder/160/100" alt="Viewing Party">
+                    </div>
+                    <div class="exclusive-content">
+                        <div class="exclusive-title">CS Major Viewing Party</div>
+                        <div class="exclusive-price">R$ 89,00</div>
+                    </div>
+                </div>
+                <div class="exclusive-item">
+                    <div class="exclusive-badge">Novo</div>
+                    <div class="exclusive-image">
+                        <img src="/api/placeholder/160/100" alt="Workshop CS">
+                    </div>
+                    <div class="exclusive-content">
+                        <div class="exclusive-title">Workshop Tático com arT</div>
+                        <div class="exclusive-price">R$ 149,00</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="popup-footer">
+            <button class="btn btn-outline popup-close-btn">Talvez Depois</button>
+            <button class="btn btn-primary">Ver Todos os Eventos</button>
+        </div>
+    </div>
+
+    <!-- Popup para fã de gaming/gamers -->
+    <div class="furiax-popup popup-gaming" id="popupGaming">
+        <div class="popup-header">
+            <h3 class="popup-title"><i class="fas fa-gamepad"></i> Experiências Gaming FURIA</h3>
+            <button class="popup-close"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="popup-body">
+            <div class="info-card">
+                <div class="card-title">E aí, <span class="highlight-red" id="userNameGaming">Carlos</span>!</div>
+                <div class="card-subtitle">Identificamos que você é um gamer hardcore e fã das equipes FURIA.</div>
+                <div class="card-content">
+                    Para jogadores como você, criamos experiências exclusivas que vão além do comum. Confira o que preparamos:
+                </div>
+            </div>
+
+            <div class="benefits-section">
+                <h4 class="benefits-title" style="color: var(--secondary);"><i class="fas fa-trophy"></i> Privilégios para Gamers</h4>
+                <div class="benefits-list">
+                    <div class="benefit-item">
+                        <div class="benefit-icon icon-red">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <div class="benefit-content">
+                            <div class="benefit-title">Play with Pros</div>
+                            <div class="benefit-description">Jogue partidas exclusivas com jogadores profissionais da FURIA!</div>
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon icon-red">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="benefit-content">
+                            <div class="benefit-title">Masterclass Tática</div>
+                            <div class="benefit-description">Sessões de coaching com a equipe técnica para elevar seu gameplay.</div>
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon icon-red">
+                            <i class="fas fa-keyboard"></i>
+                        </div>
+                        <div class="benefit-content">
+                            <div class="benefit-title">Setup dos Pros</div>
+                            <div class="benefit-description">Descubra e adquira os mesmos equipamentos utilizados pelos jogadores da FURIA.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-navigation">
+                <button class="tab-button active" data-tab="setupsTab">Setups Pro</button>
+                <button class="tab-button" data-tab="workshopsTab">Workshops</button>
+                <button class="tab-button" data-tab="matchmakingTab">Matchmaking</button>
+            </div>
+
+            <div class="tab-content active" id="setupsTab">
+                <div class="content-grid">
+                    <div class="content-item">
+                        <div class="content-image">
+                            <img src="/api/placeholder/180/110" alt="Mouse Pro">
+                            <div class="content-type"><i class="fas fa-mouse"></i> Mouse</div>
+                        </div>
+                        <div class="content-info">
+                            <div class="content-title">Mouse FURIA Pro Edition - Edição arT</div>
+                            <div class="content-meta">
+                                <div>R$ 349,90</div>
+                                <div>-15%</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-item">
+                        <div class="content-image">
+                            <img src="/api/placeholder/180/110" alt="Teclado Pro">
+                            <div class="content-type"><i class="fas fa-keyboard"></i> Teclado</div>
+                        </div>
+                        <div class="content-info">
+                            <div class="content-title">Teclado Mecânico FURIA Elite</div>
+                            <div class="content-meta">
+                                <div>R$ 499,90</div>
+                                <div>-10%</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-item">
+                        <div class="content-image">
+                            <img src="/api/placeholder/180/110" alt="Headset Pro">
+                            <div class="content-type"><i class="fas fa-headset"></i> Headset</div>
+                            <div class="new-badge">Novo</div>
+                        </div>
+                        <div class="content-info">
+                            <div class="content-title">Headset FURIA Signature CS Edition</div>
+                            <div class="content-meta">
+                                <div>R$ 399,90</div>
+                                <div>Em estoque</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="workshopsTab">
+                <div class="content-grid">
+                    <div class="content-item">
+                        <div class="content-image">
+                            <img src="/api/placeholder/180/110" alt="Workshop Aim">
+                            <div class="content-type"><i class="fas fa-crosshairs"></i> Aim</div>
+                        </div>
+                        <div class="content-info">
+                            <div class="content-title">Workshop Treino de Aim com KSCERATO</div>
+                            <div class="content-meta">
+                                <div>15 Jun</div>
+                                <div>Online</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-item">
+                        <div class="content-image">
+                            <img src="/api/placeholder/180/110" alt="Workshop Smoke">
+                            <div class="content-type"><i class="fas fa-cloud"></i> Utility</div>
+                            <div class="new-badge">Novo</div>
+                        </div>
+                        <div class="content-info">
+                            <div class="content-title">Workshop Smokes e Molotovs Avançadas</div>
+                            <div class="content-meta">
+                                <div>22 Jun</div>
+                                <div>Online</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-item">
+                        <div class="content-image">
+                            <img src="/api/placeholder/180/110" alt="Workshop IGL">
+                            <div class="content-type"><i class="fas fa-chess"></i> Tático</div>
+                        </div>
+                        <div class="content-info">
+                            <div class="content-title">Liderança In-Game: Workshop com arT</div>
+                            <div class="content-meta">
+                                <div>30 Jun</div>
+                                <div>Presencial</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="matchmakingTab">
+                <div class="info-card">
+                    <div class="card-title">Jogue com Pros da FURIA!</div>
+                    <div class="card-content">
+                        Reserve sua vaga para jogar partidas do CS2 ou VALORANT com os pros da FURIA. Vagas limitadas!
+                    </div>
+                </div>
+                <div class="content-grid">
+                    <div class="content-item">
+                        <div class="content-image">
+                            <img src="/api/placeholder/180/110" alt="CS2 Match">
+                            <div class="content-type"><i class="fas fa-crosshairs"></i> CS2</div>
+                        </div>
+                        <div class="content-info">
+                            <div class="content-title">Matchmaking com KSCERATO - 2 partidas</div>
+                            <div class="content-meta">
+                                <div>CS2</div>
+                                <div>18 Jun</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-item">
+                        <div class="content-image">
+                            <img src="/api/placeholder/180/110" alt="VALORANT Match">
+                            <div class="content-type"><i class="fas fa-shield-alt"></i> VAL</div>
+                        </div>
+                        <div class="content-info">
+                            <div class="content-title">Matchmaking com Quick - 2 partidas</div>
+                            <div class="content-meta">
+                                <div>VALORANT</div>
+                                <div>20 Jun</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="popup-footer">
+            <button class="btn btn-outline popup-close-btn">Agora Não</button>
+            <button class="btn btn-secondary">Ver Experiências Gaming</button>
+        </div>
+    </div>
+
+    <!-- Popup para colecionadores -->
+    <div class="furiax-popup popup-collector" id="popupCollector">
+        <div class="popup-header">
+            <h3 class="popup-title"><i class="fas fa-box-open"></i> Colecionáveis FURIA</h3>
+            <button class="popup-close"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="popup-body">
+            <div class="info-card">
+                <div class="card-title">Olá, <span class="highlight-green" id="userNameCollector">Carlos</span>!</div>
+                <div class="card-subtitle">Identificamos você como um grande colecionador de itens FURIA.</div>
+                <div class="card-content">
+                    Preparamos uma seleção especial de itens exclusivos disponíveis apenas para colecionadores como você!
+                </div>
+            </div>
+
+            <div class="benefits-section">
+                <h4 class="benefits-title" style="color: var(--tertiary);"><i class="fas fa-medal"></i> Vantagens do Colecionador</h4>
+                <div class="benefits-list">
+                    <div class="benefit-item">
+                        <div class="benefit-icon icon-green">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                        <div class="benefit-content">
+                            <div class="benefit-title">Itens Exclusivos</div>
+                            <div class="benefit-description">Acesso prioritário a itens em edição limitada e numerada.</div>
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon icon-green">
+                            <i class="fas fa-signature"></i>
+                        </div>
+                        <div class="benefit-content">
+                            <div class="benefit-title">Autógrafos Garantidos</div>
+                            <div class="benefit-description">Todos os itens colecionáveis virão com certificado de autenticidade e assinatura dos jogadores.</div>
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon icon-green">
+                            <i class="fas fa-truck-loading"></i>
+                        </div>
+                        <div class="benefit-content">
+                            <div class="benefit-title">Frete Premium</div>
+                            <div class="benefit-description">Entrega expressa e gratuita para todas as suas compras de colecionáveis.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h4 class="benefits-title" style="color: var(--tertiary);"><i class="fas fa-gem"></i> Colecionáveis Exclusivos</h4>
+            <div class="exclusive-items">
+                <div class="exclusive-item">
+                    <div class="exclusive-badge">Limitado</div>
+                    <div class="exclusive-image">
+                        <img src="/api/placeholder/160/100" alt="Jersey Autografada">
+                    </div>
+                    <div class="exclusive-content">
+                        <div class="exclusive-title">Jersey Pro Player Autografada - Edição Major</div>
+                        <div class="exclusive-price">R$ 499,90</div>
+                    </div>
+                </div>
+                <div class="exclusive-item">
+                    <div class="exclusive-badge">Numerado</div>
+                    <div class="exclusive-image">
+                        <img src="/api/placeholder/160/100" alt="Placa Comemorativa">
+                    </div>
+                    <div class="exclusive-content">
+                        <div class="exclusive-title">Placa Comemorativa Major - 100 unidades</div>
+                        <div class="exclusive-price">R$ 299,90</div>
+                    </div>
+                </div>
+                <div class="exclusive-item">
+                    <div class="exclusive-badge">Ultra Raro</div>
+                    <div class="exclusive-image">
+                        <img src="/api/placeholder/160/100" alt="Mouse Pad Autografado">
+                    </div>
+                    <div class="exclusive-content">
+                        <div class="exclusive-title">Mouse Pad XXL Autografado Equipe Completa</div>
+                        <div class="exclusive-price">R$ 249,90</div>
+                    </div>
+                </div>
+                <div class="exclusive-item">
+                    <div class="exclusive-badge">Único</div>
+                    <div class="exclusive-image">
+                        <img src="/api/placeholder/160/100" alt="Troféu Réplica">
+                    </div>
+                    <div class="exclusive-content">
+                        <div class="exclusive-title">Réplica em Miniatura do Troféu do Major</div>
+                        <div class="exclusive-price">R$ 599,90</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-card" style="margin-top: 20px;">
+                <div class="card-title">Clube do Colecionador</div>
+                <div class="card-content">
+                    Entre para o Clube do Colecionador FURIA e tenha acesso a drops exclusivos mensais, encontros com os jogadores e muito mais.
+                </div>
+            </div>
+        </div>
+        <div class="popup-footer">
+            <button class="btn btn-outline popup-close-btn">Depois</button>
+            <button class="btn btn-tertiary">Explorar Coleção</button>
+        </div>
+    </div>
+
+    <!-- Popup para fã de conteúdo -->
+    <div class="furiax-popup popup-content" id="popupContent">
+        <div class="popup-header">
+            <h3 class="popup-title"><i class="fas fa-film"></i> Conteúdo Premium FURIA</h3>
+            <button class="popup-close"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="popup-body">
+            <div class="info-card">
+                <div class="card-title">Olá, <span class="highlight-yellow" id="userNameContent">Carlos</span>!</div>
+                <div class="card-subtitle">Vimos que você adora conteúdo exclusivo sobre a FURIA!</div>
+                <div class="card-content">
+                    Selecionamos conteúdos premium que vão te dar acesso aos bastidores e detalhes que poucos fãs têm.
+                </div>
+            </div>
+
+            <div class="benefits-section">
+                <h4 class="benefits-title" style="color: var(--warning);"><i class="fas fa-play-circle"></i> Benefícios de Conteúdo</h4>
+                <div class="benefits-list">
+                    <div class="benefit-item">
+                        <div class="benefit-icon icon-yellow">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <div class="benefit-content">
+                            <div class="benefit-title">Conteúdo Exclusivo</div>
+                            <div class="benefit-description">Documentários, VODs com comms completos e vídeos de bastidores.</div>
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon icon-yellow">
+                            <i class="fas fa-microphone-alt"></i>
+                        </div>
+                        <div class="benefit-content">
+                            <div class="benefit-title">Podcasts Internos</div>
+                            <div class="benefit-description">Episódios exclusivos com conversas profundas com jogadores e staff.</div>
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon icon-yellow">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <div class="benefit-content">
+                            <div class="benefit-title">Guides Avançados</div>
+                            <div class="benefit-description">Material técnico aprofundado criado pela equipe de treinadores.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-navigation">
+                <button class="tab-button active" data-tab="videoTab">Vídeos</button>
+                <button class="tab-button" data-tab="podcastTab">Podcasts</button>
+                <button class="tab-button" data-tab="guidesTab">Guides</button>
+            </div>
+
+            <div class="tab-content active" id="videoTab">
+                <div class="content-grid">
+                    <div class="content-item">
+                        <div class="content-image">
+                            <img src="/api/placeholder/180/110" alt="Road to Major">
+                            <div class="content-type"><i class="fas fa-film"></i> Série</div>
+                            <div class="new-badge">Novo</div>
+                        </div>
+                        <div class="content-info">
+                            <div class="content-title">Road to Major: Jornada Completa</div>
+                            <div class="content-meta">
+                                <div>8 episódios</div>
+                                <div>5h total</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-item">
+                        <div class="content-image">
+                            <img src="/api/placeholder/180/110" alt="VOD Comms">
+                            <div class="content-type"><i class="fas fa-headset"></i> VOD</div>
+                        </div>
+                        <div class="content-info">
+                            <div class="content-title">Comms Completo: Final vs Navi</div>
+                            <div class="content-meta">
+                                <div>Bo3</div>
+                                <div>2h45min</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-item">
+                        <div class="content-image">
+                            <img src="/api/placeholder/180/110" alt="Bootcamp Tour">
+                            <div class="content-type"><i class="fas fa-building"></i> Tour</div>
+                        </div>
+                        <div class="content-info">
+                            <div class="content-title">Tour Completo: Novo Bootcamp FURIA</div>
+                            <div class="content-meta">
+                                <div>Exclusivo</div>
+                                <div>48min</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="podcastTab">
+                <div class="content-grid">
+                    <div class="content-item">
+                        <div class="content-image">
+                            <img src="/api/placeholder/180/110" alt="Papo FURIA">
+                            <div class="content-type"><i class="fas fa-microphone"></i> Podcast</div>
+                        </div>
+                        <div class="content-info">
+                            <div class="content-title">Papo FURIA #42: Preparação Mental</div>
+                            <div class="content-meta">
+                                <div>arT, KSCERATO</div>
+                                <div>1h12min</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-item">
+                        <div class="content-image">
+                            <img src="/api/placeholder/180/110" alt="Coach Talk">
+                            <div class="content-type"><i class="fas fa-microphone"></i> Podcast</div>
+                            <div class="new-badge">Novo</div>
+                        </div>
+                        <div class="content-info">
+                            <div class="content-title">Inside Coach Talk: Estratégias para o próximo Major</div>
+                            <div class="content-meta">
+                                <div>tacitus</div>
+                                <div>58min</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="guidesTab">
+                <div class="content-grid">
+                    <div class="content-item">
+                        <div class="content-image">
+                            <img src="/api/placeholder/180/110" alt="Guide Mirage">
+                            <div class="content-type"><i class="fas fa-map"></i> Mapa</div>
+                        </div>
+                        <div class="content-info">
+                            <div class="content-title">Dominando Mirage: Guia Completo</div>
+                            <div class="content-meta">
+                                <div>CS2</div>
+                                <div>65 páginas</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-item">
+                        <div class="content-image">
+                            <img src="/api/placeholder/180/110" alt="Guide Utility">
+                            <div class="content-type"><i class="fas fa-bomb"></i> Utility</div>
+                            <div class="new-badge">Novo</div>
+                        </div>
+                        <div class="content-info">
+                            <div class="content-title">Guia de Utility: Execuções Perfeitas</div>
+                            <div class="content-meta">
+                                <div>CS2</div>
+                                <div>Vídeo + PDF</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-card" style="margin-top: 20px;">
+                <div class="card-title">FURIA Insider</div>
+                <div class="card-content">
+                    Assine o plano FURIA Insider e tenha acesso ilimitado a todo conteúdo premium, além de streams exclusivas com a equipe.
+                </div>
+            </div>
+        </div>
+        <div class="popup-footer">
+            <button class="btn btn-outline popup-close-btn">Mais Tarde</button>
+            <button class="btn btn-warning">Explorar Conteúdo</button>
+        </div>
+    </div>
+    
+    <!-- Popup de formulário para captação de score -->
+    <div class="furiax-popup popup-score-form" id="popupScoreForm">
+        <div class="popup-header">
+            <h3 class="popup-title"><i class="fas fa-star"></i> Experiências Personalizadas FURIA</h3>
+            <button class="popup-close"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="popup-body">
+            <div class="info-card">
+                <div class="card-title">Olá, <span class="highlight" id="userNameScore">Fã da FURIA</span>!</div>
+                <div class="card-subtitle">Queremos oferecer experiências feitas especialmente para você.</div>
+                <div class="card-content">
+                    Conte-nos um pouco mais sobre suas preferências para personalizarmos sua jornada como fã da FURIA.
+                </div>
+            </div>
+            
+            <form class="score-form">
+                <div class="form-group">
+                    <label class="form-label">O que você mais gosta de acompanhar da FURIA?</label>
+                    <select class="form-select" id="mainInterest">
+                        <option value="">Selecione uma opção...</option>
+                        <option value="events">Eventos presenciais</option>
+                        <option value="games">Jogar os mesmos jogos</option>
+                        <option value="content">Conteúdos e vídeos</option>
+                        <option value="items">Produtos e colecionáveis</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Qual jogo você mais acompanha?</label>
+                    <select class="form-select" id="mainGame">
+                        <option value="">Selecione uma opção...</option>
+                        <option value="cs2">Counter-Strike 2</option>
+                        <option value="valorant">VALORANT</option>
+                        <option value="lol">League of Legends</option>
+                        <option value="apex">Apex Legends</option>
+                        <option value="r6">Rainbow Six Siege</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Como você prefere interagir com a FURIA?</label>
+                    <select class="form-select" id="interactionStyle">
+                        <option value="">Selecione uma opção...</option>
+                        <option value="presential">Participando de eventos presenciais</option>
+                        <option value="gaming">Jogando e praticando como os pros</option>
+                        <option value="content">Assistindo conteúdos e transmissões</option>
+                        <option value="collection">Colecionando itens e produtos oficiais</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Região onde você mora:</label>
+                    <select class="form-select" id="userRegion">
+                        <option value="">Selecione uma opção...</option>
+                        <option value="south">Sul</option>
+                        <option value="southeast">Sudeste</option>
+                        <option value="midwest">Centro-Oeste</option>
+                        <option value="northeast">Nordeste</option>
+                        <option value="north">Norte</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">O que você mais gostaria de experimentar com a FURIA?</label>
+                    <textarea class="form-textarea" id="userExperience" placeholder="Conte-nos como seria sua experiência ideal..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <div class="form-checkbox-group">
+                        <input type="checkbox" class="form-checkbox" id="allowOffers" checked>
+                        <label for="allowOffers" class="form-checkbox-label">
+                            Quero receber ofertas e experiências personalizadas baseadas nas minhas preferências.
+                        </label>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="popup-footer">
+            <button class="btn btn-outline popup-close-btn">Agora Não</button>
+            <button class="btn btn-primary" id="submitScoreForm">Personalizar Minha Experiência</button>
+        </div>
+    </div>
+    
+    <!-- Popup de Top Recomendações -->
+    <div class="furiax-popup" id="popupRecommendations">
+        <div class="popup-header">
+            <h3 class="popup-title"><i class="fas fa-fire"></i> Top Experiências FURIA</h3>
+            <button class="popup-close"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="popup-body">
+            <div class="info-card">
+                <div class="card-title">Olá, <span class="highlight" id="userNameRecommendations">Furioso</span>!</div>
+                <div class="card-subtitle">Baseado no seu perfil, estas são as experiências mais populares da FURIA.</div>
+                <div class="card-content">
+                    Confira o ranking das experiências mais populares entre os fãs e descubra o que está em alta na comunidade FURIA.
+                </div>
+            </div>
+
+            <div class="ranking-list">
+                <div class="ranking-item">
+                    <div class="ranking-position top">1</div>
+                    <div class="ranking-info">
+                        <div class="ranking-title">Play with Pro: CS2 com KSCERATO</div>
+                        <div class="ranking-meta">2 partidas competitivas + feedback personalizado</div>
+                    </div>
+                    <div class="ranking-score">9.8</div>
+                </div>
+                <div class="ranking-item">
+                    <div class="ranking-position top">2</div>
+                    <div class="ranking-info">
+                        <div class="ranking-title">Fan Fest SP 2025 - Meet & Greet VIP</div>
+                        <div class="ranking-meta">Sessão exclusiva de fotos e autógrafos</div>
+                    </div>
+                    <div class="ranking-score">9.6</div>
+                </div>
+                <div class="ranking-item">
+                    <div class="ranking-position top">3</div>
+                    <div class="ranking-info">
+                        <div class="ranking-title">Workshop Tático CS2 - Mirage Masterclass</div>
+                        <div class="ranking-meta">Estratégias avançadas com a equipe técnica</div>
+                    </div>
+                    <div class="ranking-score">9.4</div>
+                </div>
+                <div class="ranking-item">
+                    <div class="ranking-position">4</div>
+                    <div class="ranking-info">
+                        <div class="ranking-title">Jersey Pro Edition - Major Champions</div>
+                        <div class="ranking-meta">Edição limitada numerada com medalha</div>
+                    </div>
+                    <div class="ranking-score">9.2</div>
+                </div>
+                <div class="ranking-item">
+                    <div class="ranking-position">5</div>
+                    <div class="ranking-info">
+                        <div class="ranking-title">FURIA Insider - 1 Ano de Conteúdo Premium</div>
+                        <div class="ranking-meta">Acesso ilimitado a todo conteúdo exclusivo</div>
+                    </div>
+                    <div class="ranking-score">9.0</div>
+                </div>
+            </div>
+
+            <div class="info-card" style="margin-top: 20px;">
+                <div class="card-title">Perfis Semelhantes Também Curtem:</div>
+                <div class="content-grid" style="margin-top: 15px; grid-template-columns: repeat(2, 1fr);">
+                    <div class="content-item">
+                        <div class="content-image">
+                            <img src="/api/placeholder/180/110" alt="Camarote VIP">
+                            <div class="content-type"><i class="fas fa-ticket-alt"></i> Evento</div>
+                        </div>
+                        <div class="content-info">
+                            <div class="content-title">Camarote VIP - Próximos Campeonatos</div>
+                        </div>
+                    </div>
+                    <div class="content-item">
+                        <div class="content-image">
+                            <img src="/api/placeholder/180/110" alt="Bootcamp Tour">
+                            <div class="content-type"><i class="fas fa-building"></i> Tour</div>
+                        </div>
+                        <div class="content-info">
+                            <div class="content-title">Tour Exclusivo no Bootcamp da FURIA</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="popup-footer">
+            <button class="btn btn-outline popup-close-btn">Fechar</button>
+            <button class="btn btn-primary">Ver Todas Experiências</button>
+        </div>
+    </div>
+
+    <!-- Popup de agradecimento -->
+    <div class="furiax-popup" id="popupThanks">
+        <div class="popup-header">
+            <h3 class="popup-title"><i class="fas fa-check-circle"></i> Perfil Atualizado</h3>
+            <button class="popup-close"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="popup-body" style="text-align: center;">
+            <div style="font-size: 4rem; color: var(--primary); margin-bottom: 20px;">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <div style="font-size: 1.5rem; font-family: 'Orbitron', sans-serif; margin-bottom: 15px;">
+                Obrigado por compartilhar suas preferências!
+            </div>
+            <div style="color: var(--gray); margin-bottom: 20px; max-width: 80%; margin-left: auto; margin-right: auto;">
+                Agora podemos personalizar ainda mais sua experiência na plataforma FURIAX. Fique atento a nossas recomendações personalizadas!
+            </div>
+            <div style="background: rgba(255, 255, 255, 0.05); padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+                <div style="font-family: 'Orbitron', sans-serif; color: var(--primary); margin-bottom: 10px; font-size: 1.1rem;">
+                    Pontuação de Perfil
+                </div>
+                <div style="font-size: 2.5rem; font-weight: 700; margin-bottom: 10px;">
+                    <span id="userProfileScore">85</span><span style="font-size: 1.2rem; color: var(--gray);">/100</span>
+                </div>
+                <div style="font-size: 0.9rem; color: var(--gray);">
+                    Seu perfil de fã está <span class="highlight">85%</span> completo
+                </div>
+            </div>
+            <div style="font-family: 'Orbitron', sans-serif; font-size: 1.1rem; margin-bottom: 15px;">
+                <span id="userProfileCategory">Fã de Eventos</span>
+            </div>
+            <div style="color: var(--gray); font-size: 0.9rem;">
+                Esta é a principal categoria que identificamos para o seu perfil.
+            </div>
+        </div>
+        <div class="popup-footer">
+            <button class="btn btn-outline popup-close-btn">Fechar</button>
+            <button class="btn btn-primary">Ver Minhas Recomendações</button>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Elementos DOM
+        const overlay = document.getElementById('overlay');
+        const popups = document.querySelectorAll('.furiax-popup');
+        const closeButtons = document.querySelectorAll('.popup-close, .popup-close-btn');
+        const inviteButton = document.getElementById('inviteButton');
+        const submitScoreButton = document.getElementById('submitScoreForm');
+        
+        // Arrays para categorias e seus respectivos popups
+        const categories = ['events', 'gaming', 'collector', 'content'];
+        const popupIds = {
+            'events': 'popupEvents',
+            'gaming': 'popupGaming',
+            'collector': 'popupCollector',
+            'content': 'popupContent'
+        };
+        
+        // Função para abrir popup
+        function openPopup(popupId) {
+            // Ativar overlay
+            overlay.classList.add('active');
+            
+            // Ativar popup específico
+            const popup = document.getElementById(popupId);
+            if (popup) {
+                popup.classList.add('active');
+                
+                // Atualizar nome do usuário nos spans relevantes
+                updateUserNames();
+            }
+        }
+        
+        // Função para fechar todos os popups
+        function closeAllPopups() {
+            overlay.classList.remove('active');
+            popups.forEach(popup => {
+                popup.classList.remove('active');
+            });
+        }
+        
+        // Obter dados do usuário do localStorage - Integração com o formulário "Know Your Fan"
+        function getUserData() {
+            // Verificar se há dados do formulário Know Your Fan
+            const fanData = localStorage.getItem('furiax_fan_data');
+            
+            if (fanData) {
+                try {
+                    const data = JSON.parse(fanData);
+                    return data;
+                } catch (e) {
+                    console.error('Erro ao analisar dados do usuário:', e);
+                }
+            }
+            
+            // Se não houver dados do formulário, verificar o perfil geral
+            const profileData = localStorage.getItem('furiaxProfile');
+            
+            if (profileData) {
+                try {
+                    const data = JSON.parse(profileData);
+                    return {
+                        personalData: {
+                            name: data.username || 'Fã da FURIA'
+                        }
+                    };
+                } catch (e) {
+                    console.error('Erro ao analisar dados de perfil:', e);
+                }
+            }
+            
+            // Dados padrão caso nada seja encontrado
+            return {
+                personalData: {
+                    name: 'Fã da FURIA'
+                }
+            };
+        }
+        
+        // Determinar categoria do usuário com base nos dados do formulário
+        function getUserCategory() {
+            const fanData = localStorage.getItem('furiax_fan_data');
+            
+            if (fanData) {
+                try {
+                    const data = JSON.parse(fanData);
+                    
+                    // Analisa os interesses para determinar a categoria
+                    if (data.gameInterests && Object.keys(data.gameInterests).length > 0) {
+                        // Se tiver altos valores de interesse em jogos, provavelmente é gamer
+                        const gameScores = Object.values(data.gameInterests);
+                        const avgGameScore = gameScores.reduce((a, b) => a + b, 0) / gameScores.length;
+                        
+                        if (avgGameScore > 4) {
+                            return 'gaming';
+                        }
+                    }
+                    
+                    // Verificar interesses específicos
+                    if (data.topicInterests) {
+                        // Interesse em eventos presenciais
+                        if (data.topicInterests.includes('Eventos Presenciais')) {
+                            return 'events';
+                        }
+                        
+                        // Interesse em produtos e colecionáveis
+                        if (data.topicInterests.includes('Produtos Oficiais')) {
+                            return 'collector';
+                        }
+                        
+                        // Interesse em conteúdo e streaming
+                        if (data.topicInterests.includes('Streamings') || 
+                            data.topicInterests.includes('Bastidores')) {
+                            return 'content';
+                        }
+                    }
+                    
+                    // Verificar compras
+                    if (data.purchasedProducts && data.purchasedProducts.length > 3) {
+                        return 'collector';
+                    }
+                    
+                    // Verificar eventos
+                    if (data.attendedEvents && data.attendedEvents.length > 2) {
+                        return 'events';
+                    }
+                } catch (e) {
+                    console.error('Erro ao analisar categoria do usuário:', e);
+                }
+            }
+            
+            // Se não conseguir determinar, escolher uma categoria aleatória
+            // Em um sistema real, usaria um algoritmo mais sofisticado
+            return categories[Math.floor(Math.random() * categories.length)];
+        }
+        
+        // Atualizar nomes do usuário nos popups
+        function updateUserNames() {
+            const userData = getUserData();
+            const userName = userData.personalData?.name || 'Fã da FURIA';
+            
+            // Atualizar todos os elementos que exibem o nome do usuário
+            document.querySelectorAll('#userNameEvents, #userNameGaming, #userNameCollector, #userNameContent, #userNameScore, #userNameRecommendations').forEach(el => {
+                if (el) el.textContent = userName;
+            });
+        }
+        
+        // Abrir popup apropriado com base na categoria do usuário
+        function openCategoryPopup() {
+            const category = getUserCategory();
+            const popupId = popupIds[category] || 'popupScoreForm';
+            
+            openPopup(popupId);
+        }
+        
+        // EventListeners
+        
+        // Botão flutuante
+        inviteButton.addEventListener('click', function() {
+            // Se tiver dados do formulário, abrir popup personalizado
+            // Caso contrário, abrir formulário de captação
+            const hasFormData = localStorage.getItem('furiax_fan_data') !== null;
+            
+            if (hasFormData) {
+                openCategoryPopup();
+            } else {
+                openPopup('popupScoreForm');
+            }
+        });
+        
+        // Botões de fechar
+        closeButtons.forEach(button => {
+            button.addEventListener('click', closeAllPopups);
+        });
+        
+        // Botão de envio do formulário
+        if (submitScoreButton) {
+            submitScoreButton.addEventListener('click', function() {
+                // Capturar dados do formulário
+                const formData = {
+                    mainInterest: document.getElementById('mainInterest').value,
+                    mainGame: document.getElementById('mainGame').value,
+                    interactionStyle: document.getElementById('interactionStyle').value,
+                    userRegion: document.getElementById('userRegion').value,
+                    userExperience: document.getElementById('userExperience').value,
+                    allowOffers: document.getElementById('allowOffers').checked
+                };
+                
+                // Em um sistema real, enviaria estes dados para o servidor
+                console.log('Dados do formulário:', formData);
+                
+                // Determinar categoria com base nas respostas
+                let category = 'events'; // padrão
+                
+                if (formData.mainInterest === 'games' || formData.interactionStyle === 'gaming') {
+                    category = 'gaming';
+                } else if (formData.mainInterest === 'content' || formData.interactionStyle === 'content') {
+                    category = 'content';
+                } else if (formData.mainInterest === 'items' || formData.interactionStyle === 'collection') {
+                    category = 'collector';
+                }
+                
+                // Armazenar dados simplificados no localStorage para simular o "Know Your Fan"
+                const simplifiedData = {
+                    personalData: {
+                        name: getUserData().personalData?.name || 'Fã da FURIA'
+                    },
+                    topicInterests: [
+                        formData.mainInterest === 'events' ? 'Eventos Presenciais' : '',
+                        formData.mainInterest === 'games' ? 'Jogos' : '',
+                        formData.mainInterest === 'content' ? 'Streamings' : '',
+                        formData.mainInterest === 'items' ? 'Produtos Oficiais' : ''
+                    ].filter(Boolean),
+                    gameInterests: {
+                        [formData.mainGame]: 5
+                    }
+                };
+                
+                localStorage.setItem('furiax_fan_data', JSON.stringify(simplifiedData));
+                
+                // Também armazenar a categoria específica
+                localStorage.setItem('furiax_fan_category', category);
+                
+                // Mostrar popup de agradecimento
+                closeAllPopups();
+                openPopup('popupThanks');
+                
+                // Atualizar categoria exibida
+                const categoryElement = document.getElementById('userProfileCategory');
+                if (categoryElement) {
+                    const categoryNames = {
+                        'events': 'Fã de Eventos',
+                        'gaming': 'Gamer Hardcore',
+                        'collector': 'Colecionador',
+                        'content': 'Entusiasta de Conteúdo'
+                    };
+                    
+                    categoryElement.textContent = categoryNames[category] || 'Fã da FURIA';
+                }
+            });
+        }
+        
+        // Navegação por abas
+        document.querySelectorAll('.tab-button').forEach(button => {
+            button.addEventListener('click', function() {
+                // Obter o id da aba
+                const tabId = this.getAttribute('data-tab');
+                if (!tabId) return;
+                
+                // Desativar todas as abas do mesmo grupo
+                const tabNav = this.closest('.tab-navigation');
+                if (tabNav) {
+                    tabNav.querySelectorAll('.tab-button').forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    
+                    // Esconder todos os conteúdos das abas
+                    const tabContents = document.querySelectorAll('.tab-content');
+                    tabContents.forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    
+                    // Ativar aba atual
+                    this.classList.add('active');
+                    
+                    // Mostrar conteúdo da aba
+                    const tabContent = document.getElementById(tabId);
+                    if (tabContent) {
+                        tabContent.classList.add('active');
+                    }
+                }
+            });
+        });
+        
+        // Função para verificar se deve mostrar popup automaticamente
+        function checkAutoPopup() {
+            // Verificar se o usuário tem dados do formulário Know Your Fan
+            // e não viu o popup personalizado recentemente
+            const hasFormData = localStorage.getItem('furiax_fan_data') !== null;
+            const lastPopupTime = localStorage.getItem('furiax_last_popup_time');
+            const now = Date.now();
+            
+            // Só mostrar automaticamente se já se passaram 24 horas desde o último popup
+            // ou se nunca viu o popup
+            if (hasFormData && (!lastPopupTime || (now - parseInt(lastPopupTime)) > 24 * 60 * 60 * 1000)) {
+                // Esperar 3 segundos para mostrar o popup
+                setTimeout(() => {
+                    openCategoryPopup();
+                    
+                    // Atualizar timestamp do último popup
+                    localStorage.setItem('furiax_last_popup_time', now.toString());
+                }, 3000);
+            } else if (!hasFormData) {
+                // Se não tiver dados, mostrar formulário após 5 segundos
+                setTimeout(() => {
+                    openPopup('popupScoreForm');
+                }, 5000);
+            }
+        }
+        
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', function() {
+            // Verificar se deve mostrar popup automaticamente
+            checkAutoPopup();
+            
+            // Para desenvolvimento: botões para testar cada popup
+            // Em produção, removeria esta parte
+            if (window.location.search.includes('dev=true')) {
+                const devButtons = document.createElement('div');
+                devButtons.style.position = 'fixed';
+                devButtons.style.top = '10px';
+                devButtons.style.left = '10px';
+                devButtons.style.zIndex = '999';
+                devButtons.style.display = 'flex';
+                devButtons.style.flexDirection = 'column';
+                devButtons.style.gap = '5px';
+                
+                const buttons = [
+                    { id: 'popupEvents', label: 'Pop: Eventos' },
+                    { id: 'popupGaming', label: 'Pop: Gaming' },
+                    { id: 'popupCollector', label: 'Pop: Colecionador' },
+                    { id: 'popupContent', label: 'Pop: Conteúdo' },
+                    { id: 'popupScoreForm', label: 'Pop: Formulário' },
+                    { id: 'popupRecommendations', label: 'Pop: Recomendações' },
+                    { id: 'popupThanks', label: 'Pop: Agradecimento' }
+                ];
+                
+                buttons.forEach(button => {
+                    const btn = document.createElement('button');
+                    btn.textContent = button.label;
+                    btn.style.padding = '5px 10px';
+                    btn.style.fontSize = '12px';
+                    btn.addEventListener('click', () => openPopup(button.id));
+                    devButtons.appendChild(btn);
+                });
+                
+                document.body.appendChild(devButtons);
+            }
+        });
+    </script>
+</body>
+</html>

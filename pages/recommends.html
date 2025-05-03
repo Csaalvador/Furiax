@@ -1,0 +1,2934 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FURIAX - Experiências Personalizadas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e90ff;
+            --primary-dark: #0066cc;
+            --secondary: #ff3b5c;
+            --success: #00cc66;
+            --warning: #ffc107;
+            --dark: #111;
+            --darker: #0a0a0a;
+            --light: #f0f0f0;
+            --gray: #aaa;
+            --transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Exo 2', sans-serif;
+            background-color: var(--darker);
+            color: var(--light);
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 10%, rgba(30, 144, 255, 0.05) 0%, transparent 30%),
+                radial-gradient(circle at 90% 30%, rgba(255, 59, 92, 0.05) 0%, transparent 30%),
+                radial-gradient(circle at 50% 80%, rgba(0, 204, 102, 0.05) 0%, transparent 40%);
+        }
+        
+        /* Animação de partículas */
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), transparent);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.5;
+            }
+            90% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-1000px) rotate(720deg);
+                opacity: 0;
+            }
+        }
+        
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            background: linear-gradient(145deg, #111, #181818);
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: 100vh;
+            box-shadow: 5px 0 15px rgba(0, 0, 0, 0.3);
+            z-index: 900;
+            transition: var(--transition);
+        }
+        
+        .sidebar-logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .sidebar-logo img {
+            width: 100px;
+            filter: drop-shadow(0 0 10px rgba(30, 144, 255, 0.5));
+            transition: var(--transition);
+        }
+        
+        .sidebar-logo:hover img {
+            transform: scale(1.05);
+            filter: drop-shadow(0 0 15px rgba(30, 144, 255, 0.7));
+        }
+        
+        .sidebar-header {
+            text-align: center;
+            margin-bottom: 20px;
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary);
+            text-shadow: 0 0 10px rgba(30, 144, 255, 0.3);
+        }
+        
+        .nav-item {
+            margin-bottom: 10px;
+        }
+        
+        .nav-link {
+            background: rgba(255, 255, 255, 0.05);
+            border: none;
+            border-radius: 8px;
+            padding: 12px 15px;
+            color: var(--gray);
+            font-family: 'Exo 2', sans-serif;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            width: 100%;
+        }
+        
+        .nav-link i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .nav-link:hover {
+            background: rgba(30, 144, 255, 0.1);
+            color: var(--primary);
+            transform: translateX(5px);
+        }
+        
+        .nav-link.active {
+            background: rgba(30, 144, 255, 0.1);
+            border-left: 3px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .user-profile {
+            margin-top: auto;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            transition: var(--transition);
+        }
+        
+        .user-profile:hover {
+            background: rgba(0, 0, 0, 0.3);
+            transform: translateY(-3px);
+        }
+        
+        .profile-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 10px;
+            overflow: hidden;
+            border: 2px solid rgba(30, 144, 255, 0.3);
+        }
+        
+        .avatar-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .user-info {
+            flex: 1;
+        }
+        
+        .user-name {
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        
+        .user-role {
+            font-size: 0.8rem;
+            color: var(--primary);
+        }
+        
+        /* Main Content */
+        .main-content {
+            margin-left: 250px;
+            padding: 30px;
+            width: calc(100% - 250px);
+            min-height: 100vh;
+        }
+        
+        .main-header {
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .main-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            color: var(--primary);
+            display: inline-block;
+            position: relative;
+        }
+
+        .main-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 3px;
+        }
+        
+        .experiences-container {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        /* Card com as experiências */
+        .profile-summary-card {
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 40px;
+        }
+        
+        .profile-summary-card::before {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(45deg, var(--primary), transparent);
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.1;
+            top: -50px;
+            left: -50px;
+            z-index: -1;
+        }
+        
+        .profile-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .profile-info {
+            flex: 1;
+        }
+        
+        .profile-avatar-large {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            overflow: hidden;
+            border: 3px solid rgba(30, 144, 255, 0.3);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .profile-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .profile-title {
+            font-size: 1rem;
+            color: var(--primary);
+        }
+        
+        .profile-meta {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        
+        .profile-meta-item {
+            display: flex;
+            align-items: center;
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+        
+        .profile-meta-item i {
+            margin-right: 5px;
+            font-size: 0.9rem;
+        }
+        
+        .fan-type {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            background: rgba(30, 144, 255, 0.1);
+            padding: 8px 15px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            color: var(--primary);
+            font-weight: bold;
+            border: 1px solid rgba(30, 144, 255, 0.3);
+        }
+        
+        .fan-type i {
+            margin-right: 5px;
+        }
+        
+        .recommendations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary);
+            margin: 30px 0 20px;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        
+        .section-title i {
+            margin-right: 10px;
+            font-size: 1.3rem;
+        }
+        
+        .recommendation-card {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: var(--transition);
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .recommendation-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .recommendation-image {
+            height: 160px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .recommendation-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .recommendation-card:hover .recommendation-image img {
+            transform: scale(1.05);
+        }
+        
+        .recommendation-content {
+            padding: 20px;
+        }
+        
+        .recommendation-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .recommendation-description {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+        
+        .recommendation-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+        
+        .recommendation-date {
+            display: flex;
+            align-items: center;
+        }
+        
+        .recommendation-date i {
+            margin-right: 5px;
+        }
+        
+        .recommendation-category {
+            background: rgba(30, 144, 255, 0.1);
+            padding: 5px 10px;
+            border-radius: 20px;
+            color: var(--primary);
+            font-size: 0.75rem;
+        }
+        
+        .recommendation-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .btn {
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-family: 'Exo 2', sans-serif;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(90deg, var(--primary), #36a6ff);
+            color: white;
+            box-shadow: 0 3px 10px rgba(30, 144, 255, 0.2);
+            flex: 1;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(30, 144, 255, 0.3);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--gray);
+            color: var(--gray);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--light);
+            color: var(--light);
+        }
+        
+        .btn-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn-icon:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--light);
+            transform: translateY(-2px);
+        }
+        
+        .exclusive-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: linear-gradient(90deg, var(--warning), #ffad33);
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            color: #222;
+            z-index: 10;
+            box-shadow: 0 2px 8px rgba(255, 193, 7, 0.3);
+        }
+        
+        .event-info {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+            color: var(--gray);
+            font-size: 0.85rem;
+        }
+        
+        .event-info i {
+            margin-right: 5px;
+        }
+        
+        .event-info-divider {
+            margin: 0 8px;
+            color: #444;
+        }
+        
+        .progress-bar-container {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            margin-top: 15px;
+            overflow: hidden;
+        }
+        
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), #36a6ff);
+            border-radius: 3px;
+        }
+        
+        .filters-bar {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-button {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid #333;
+            border-radius: 20px;
+            padding: 8px 15px;
+            color: var(--gray);
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .filter-button:hover, .filter-button.active {
+            background: rgba(30, 144, 255, 0.1);
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        
+        .filter-button i {
+            margin-right: 5px;
+        }
+        
+        .tabs-container {
+            margin-bottom: 30px;
+        }
+        
+        .tabs-nav {
+            display: flex;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 20px;
+        }
+        
+        .tab-item {
+            padding: 12px 20px;
+            color: var(--gray);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .tab-item:hover {
+            color: var(--light);
+        }
+        
+        .tab-item.active {
+            color: var(--primary);
+        }
+        
+        .tab-item.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 3px 3px 0 0;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--gray);
+        }
+        
+        .empty-state-icon {
+            font-size: 3rem;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        .empty-state-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .empty-state-text {
+            font-size: 0.9rem;
+            max-width: 400px;
+            margin: 0 auto 20px;
+            line-height: 1.5;
+        }
+        
+        .customize-box {
+            background: rgba(30, 144, 255, 0.05);
+            border: 1px solid rgba(30, 144, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        
+        .customize-title {
+            display: flex;
+            align-items: center;
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .customize-title i {
+            margin-right: 10px;
+        }
+        
+        .interest-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .interest-tag {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid #333;
+            border-radius: 20px;
+            padding: 5px 12px;
+            font-size: 0.8rem;
+            color: var(--gray);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        
+        .interest-tag:hover, .interest-tag.active {
+            background: rgba(30, 144, 255, 0.1);
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        
+        /* Efeito de brilho nos cards */
+        .glow-effect {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: linear-gradient(45deg, 
+                transparent, 
+                rgba(30, 144, 255, 0.03),
+                transparent,
+                rgba(255, 59, 92, 0.03),
+                transparent);
+            background-size: 200% 200%;
+            animation: glow 15s infinite linear;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        @keyframes glow {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+        
+        /* Responsividade */
+        @media screen and (max-width: 992px) {
+            .sidebar {
+                width: 80px;
+                padding: 20px 10px;
+            }
+            
+            .sidebar-header, .sidebar-logo img, .nav-link span, .user-name, .user-role {
+                display: none;
+            }
+            
+            .sidebar-logo {
+                margin-bottom: 40px;
+            }
+            
+            .nav-link {
+                justify-content: center;
+                padding: 15px;
+            }
+            
+            .nav-link i {
+                margin-right: 0;
+                font-size: 1.2rem;
+            }
+            
+            .user-profile {
+                justify-content: center;
+                padding: 10px;
+            }
+            
+            .profile-avatar {
+                margin-right: 0;
+            }
+            
+            .main-content {
+                margin-left: 80px;
+                width: calc(100% - 80px);
+            }
+            
+            .recommendations-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+        
+        @media screen and (max-width: 768px) {
+            .main-content {
+                padding: 20px;
+            }
+            
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .profile-avatar-large {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            
+            .profile-meta {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .fan-type {
+                position: relative;
+                top: auto;
+                right: auto;
+                margin: 15px auto 0;
+                display: inline-block;
+            }
+            
+            .recommendations-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tabs-nav {
+                overflow-x: auto;
+                white-space: nowrap;
+                padding-bottom: 5px;
+            }
+            
+            .tab-item {
+                padding: 12px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Contêiner de partículas para fundo animado -->
+    <div class="particles-container" id="particles"></div>
+    
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-logo">
+                <img src="../img/logo/logoFuriax.png" alt="FURIAX Logo">
+            </div>
+            <div class="sidebar-header">
+                FURIAX<br>
+                <small style="color:#888;">Conectando a Fúria</small>
+            </div>
+            
+            <div class="nav-item">
+                <a href="../index.html" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    <span>Início</span>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="./profile.html" class="nav-link">
+                    <i class="fas fa-user-edit"></i>
+                    <span>Perfil</span>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="./missions.html" class="nav-link">
+                    <i class="fas fa-tasks"></i>
+                    <span>Missões</span>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="./community.html" class="nav-link">
+                    <i class="fas fa-users"></i>
+                    <span>Comunidade</span>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="./know-your-fan.html" class="nav-link">
+                    <i class="fas fa-id-card"></i>
+                    <span>Know Your Fan</span>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="./experiences.html" class="nav-link active">
+                    <i class="fas fa-star"></i>
+                    <span>Experiências</span>
+                </a>
+            </div>
+            
+            <div class="user-profile">
+                <div class="profile-avatar">
+                    <img src="../img/logo/logoFuriax.png" alt="Avatar do usuário" class="avatar-image">
+                </div>
+                
+                <div class="user-info">
+                    <div class="user-name" id="sidebarUsername">FuriaX_Pro</div>
+                    <div class="user-role" id="sidebarTitle">Furioso Elite</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Conteúdo Principal -->
+        <div class="main-content">
+            <div class="main-header">
+                <h1 class="main-title">Experiências Personalizadas</h1>
+            </div>
+            
+            <div class="experiences-container">
+                <!-- Resumo do Perfil -->
+                <div class="profile-summary-card">
+                    <!-- Efeito de brilho -->
+                    <div class="glow-effect"></div>
+                    
+                    <div class="profile-header">
+                        <div class="profile-avatar-large">
+                            <img src="../img/logo/logoFuriax.png" alt="Avatar do usuário" class="avatar-image">
+                        </div>
+                        <div class="profile-info">
+                            <div class="profile-name" id="profileName">Carlos Silva</div>
+                            <div class="profile-title" id="profileTitle">Furioso Elite</div>
+                            <div class="profile-meta">
+                                <div class="profile-meta-item">
+                                    <i class="fas fa-calendar-alt"></i> Fã desde 2023
+                                </div>
+                                <div class="profile-meta-item">
+                                    <i class="fas fa-map-marker-alt"></i> São Paulo, SP
+                                </div>
+                                <div class="profile-meta-item">
+                                    <i class="fas fa-trophy"></i> 15 eventos
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fan-type" id="fanCategory">
+                            <i class="fas fa-gamepad"></i> Gamer Hardcore
+                        </div>
+                    </div>
+                    
+                    <div class="customize-box">
+                        <div class="customize-title">
+                            <i class="fas fa-thumbs-up"></i> Seus Interesses
+                        </div>
+                        <p style="color: var(--gray); font-size: 0.9rem;">
+                            Com base no seu perfil, identificamos estes interesses principais:
+                        </p>
+                        
+                        <div class="interest-tags" id="interestTags">
+                            <div class="interest-tag active">CS:GO</div>
+                            <div class="interest-tag active">Campeonatos</div>
+                            <div class="interest-tag active">Eventos Presenciais</div>
+                            <div class="interest-tag">Produtos Oficiais</div>
+                            <div class="interest-tag">Bastidores</div>
+                            <div class="interest-tag">Streamings</div>
+                            <div class="interest-tag">VALORANT</div>
+                        </div>
+                        
+                        <button class="btn btn-secondary" style="font-size: 0.8rem;">
+                            <i class="fas fa-sliders-h"></i> Ajustar Interesses
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Abas de Experiências -->
+                <div class="tabs-container">
+                    <div class="tabs-nav">
+                        <div class="tab-item active" data-tab="events">Eventos</div>
+                        <div class="tab-item" data-tab="products">Produtos</div>
+                        <div class="tab-item" data-tab="content">Conteúdo Exclusivo</div>
+                        <div class="tab-item" data-tab="experiences">Experiências VIP</div>
+                    </div>
+                    
+                    <!-- Conteúdo da aba Eventos -->
+                    <div class="tab-content active" id="events-content">
+                        <div class="filters-bar">
+                            <button class="filter-button active">
+                                <i class="fas fa-filter"></i> Todos
+                            </button>
+                            <button class="filter-button">
+                                <i class="fas fa-fire"></i> Recomendados
+                            </button>
+                            <button class="filter-button">
+                                <i class="fas fa-map-marker-alt"></i> São Paulo
+                            </button>
+                            <button class="filter-button">
+                                <i class="fas fa-calendar-alt"></i> Próximos 30 dias
+                            </button>
+                            <button class="filter-button">
+                                <i class="fas fa-trophy"></i> Competitivos
+                            </button>
+                        </div>
+                        
+                        <div class="recommendations-grid">
+                            <!-- Evento 1 -->
+                            <div class="recommendation-card">
+                                <div class="exclusive-badge">Exclusivo</div>
+                                <div class="recommendation-image">
+                                    <img src="/api/placeholder/400/240" alt="FURIA Fan Fest">
+                                </div>
+                                <div class="recommendation-content">
+                                    <div class="recommendation-title">FURIA Fan Fest SP 2025</div>
+                                    <div class="recommendation-description">
+                                        O maior evento de fãs da FURIA, com meet & greet, torneios amadores e experiências exclusivas.
+                                    </div>
+                                    <div class="event-info">
+                                        <i class="fas fa-calendar-alt"></i> 25-26 Julho, 2025
+                                        <span class="event-info-divider">|</span>
+                                        <i class="fas fa-map-marker-alt"></i> Expo Center Norte
+                                    </div>
+                                    <div class="recommendation-actions">
+                                        <button class="btn btn-primary">
+                                            <i class="fas fa-ticket-alt"></i> Pré-registro
+                                        </button>
+                                        <button class="btn-icon">
+                                            <i class="fas fa-bell"></i>
+                                        </button>
+                                        <button class="btn-icon">
+                                            <i class="fas fa-share-alt"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Evento 2 -->
+                            <div class="recommendation-card">
+                                <div class="recommendation-image">
+                                    <img src="/api/placeholder/400/240" alt="CS Major Viewing Party">
+                                </div>
+                                <div class="recommendation-content">
+                                    <div class="recommendation-title">CS Major Viewing Party</div>
+                                    <div class="recommendation-description">
+                                        Assista ao Major com outros fãs da FURIA, ambiente climatizado e open food.
+                                    </div>
+                                    <div class="event-info">
+                                        <i class="fas fa-calendar-alt"></i> 10 Junho, 2025
+                                        <span class="event-info-divider">|</span>
+                                        <i class="fas fa-map-marker-alt"></i> FURIA Arena
+                                    </div>
+                                    <div class="recommendation-actions">
+                                        <button class="btn btn-primary">
+                                            <i class="fas fa-shopping-cart"></i> Ingressos
+                                        </button>
+                                        <button class="btn-icon">
+                                            <i class="fas fa-bell"></i>
+                                        </button>
+                                        <button class="btn-icon">
+                                            <i class="fas fa-share-alt"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Evento 3 -->
+                            <div class="recommendation-card">
+                                <div class="recommendation-image">
+                                    <img src="/api/placeholder/400/240" alt="Workshop Tático CS">
+                                </div>
+                                <div class="recommendation-content">
+                                    <div class="recommendation-title">Workshop Tático CS</div>
+                                    <div class="recommendation-description">
+                                        Aprenda táticas e estratégias com analistas e ex-jogadores profissionais.
+                                    </div>
+                                    <div class="event-info">
+                                        <i class="fas fa-calendar-alt"></i> 15 Agosto, 2025
+                                        <span class="event-info-divider">|</span>
+                                        <i class="fas fa-map-marker-alt"></i> Online
+                                    </div>
+                                    <div class="recommendation-actions">
+                                        <button class="btn btn-primary">
+                                            <i class="fas fa-shopping-cart"></i> Garantir Vaga
+                                        </button>
+                                        <button class="btn-icon">
+                                            <i class="fas fa-bell"></i>
+                                        </button>
+                                        <button class="btn-icon">
+                                            <i class="fas fa-share-alt"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Conteúdo da aba Produtos -->
+                    <div class="tab-content" id="products-content">
+                        <div class="filters-bar">
+                            <button class="filter-button active">
+                                <i class="fas fa-filter"></i> Todos
+                            </button>
+                            <button class="filter-button">
+                                <i class="fas fa-tshirt"></i> Vestuário
+                            </button>
+                            <button class="filter-button">
+                                <i class="fas fa-keyboard"></i> Hardware
+                            </button>
+                            <button class="filter-button">
+                                <i class="fas fa-percentage"></i> Promoções
+                            </button>
+                            <button class="filter-button">
+                                <i class="fas fa-star"></i> Colecionáveis
+                            </button>
+                        </div>
+                        
+                        <div class="recommendations-grid">
+                            <!-- Produto 1 -->
+                            <div class="recommendation-card">
+                                <div class="exclusive-badge">Exclusivo</div>
+                                <div class="recommendation-image">
+                                    <img src="/api/placeholder/400/240" alt="Jersey Pro Player Edition">
+                                </div>
+                                <div class="recommendation-content">
+                                    <div class="recommendation-title">Jersey Pro Player Edition</div>
+                                    <div class="recommendation-description">
+                                        Edição limitada com mesmo tecido e corte utilizados pelos jogadores profissionais.
+                                    </div>
+                                    <div class="recommendation-meta">
+                                        <div class="recommendation-category">Vestuário</div>
+                                        <div class="recommendation-date">
+                                            <i class="fas fa-tag"></i> R$ 349,90
+                                        </div>
+                                    </div>
+                                    <div class="recommendation-actions">
+                                        <button class="btn btn-primary">
+                                            <i class="fas fa-shopping-cart"></i> Comprar
+                                        </button>
+                                        <button class="btn-icon">
+                                            <i class="fas fa-heart"></i>
+                                        </button>
+                                        <button class="btn-icon">
+                                            <i class="fas fa-share-alt"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Produto 2 -->
+                            <div class="recommendation-card">
+                                <div class="recommendation-image">
+                                    <img src="/api/placeholder/400/240" alt="Mousepad Pro">
+                                </div>
+                                <div class="recommendation-content">
+                                    <div class="recommendation-title">Mousepad XL Pro Series</div>
+                                    <div class="recommendation-description">
+                                        Mousepad profissional com bordas costuradas e superfície de alta precisão.
+                                    </div>
+                                    <div class="recommendation-meta">
+                                        <div class="recommendation-category">Hardware</div>
+                                        <div class="recommendation-date">
+                                            <i class="fas fa-tag"></i> R$ 149,90
+                                        </div>
+                                    </div>
+                                    <div class="recommendation-actions">
+                                        <button class="btn btn-primary">
+                                            <i class="fas fa-shopping-cart"></i> Comprar
+                                        </button>
+                                        <button class="btn-icon">
+                                            <i class="fas fa-heart"></i>
+                                        </button>
+                                        <button class="btn-icon">
+                                            <i class="fas fa-share-alt"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Produto 3 -->
+                            <div class="recommendation-card">
+                                <div class="recommendation-image">
+                                    <img src="/api/placeholder/400/240" alt="Boné FURIA">
+                                </div>
+                                <div class="recommendation-content">
+                                    <div class="recommendation-title">Boné FURIA Championship</div>
+                                    <div class="recommendation-description">
+                                        Boné comemorativo da campanha no último major, com bordado especial.
+                                    </div>
+                                    <div class="recommendation-meta">
+                                        <div class="recommendation-category">Vestuário</div>
+                                        <div class="recommendation-date">
+                                            <i class="fas fa-tag"></i> R$ 129,90
+                                        </div>
+                                    </div>
+                                    <div class="recommendation-actions">
+                                        <button class="btn btn-primary">
+                                            <i class="fas fa-shopping-cart"></i> Comprar
+                                        </button>
+                                        <button class="btn-icon">
+                                            <i class="fas fa-heart"></i>
+                                        </button>
+                                        <button class="btn-icon">
+                                            <i class="fas fa-share-alt"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Conteúdo da aba Conteúdo Exclusivo -->
+                    <div class="tab-content" id="content-content">
+                        <div class="filters-bar">
+                            <button class="filter-button active">
+                                <i class="fas fa-filter"></i> Todos
+                            </button>
+                            <button class="filter-button">
+                                <i class="fas fa-video"></i> Vídeos
+                            </button>
+                            <button class="filter-button">
+                                <i class="fas fa-microphone-alt"></i> Podcasts
+                            </button>
+                            <button class="filter-button">
+                                <i class="fas fa-file-alt"></i> Artigos
+                            </button>
+                            <button class="filter-button">
+                                <i class="fas fa-chalkboard-teacher"></i> Tutoriais
+                            </button>
+                        </div>
+                        
+                        <div class="recommendations-grid">
+                            <!-- Conteúdo 1 -->
+                            <div class="recommendation-card">
+                                <div class="exclusive-badge">Premium</div>
+                                <div class="recommendation-image">
+                                    <img src="/api/placeholder/400/240" alt="Vídeo de Treino">
+                                </div>
+                                <div class="recommendation-content">
+                                    <div class="recommendation-title">Treino Tático do Major</div>
+                                    <div class="recommendation-description">
+                                        Acesso exclusivo a sessão de treino tático da FURIA antes da final do último major.
+                                    </div>
+                                    <div class="recommendation-meta">
+                                        <div class="recommendation-category">Vídeo</div>
+                                        <div class="recommendation-date">
+                                            <i class="fas fa-clock"></i> 45 min
+                                        </div>
+                                    </div>
+                                    <div class="recommendation-actions">
+                                        <button class="btn btn-primary">
+                                            <i class="fas fa-play"></i> Assistir
+                                        </button>
+                                        <button class="btn-icon">
+                                            <i class="fas fa-download"></i>
+                                        </button>
+                                        <button class="btn-icon">
+                                            <i class="fas fa-share-alt"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Conteúdo 2 -->
+                            <div class="recommendation-card">
+                                <div class="recommendation-image">
+                                    <img src="/api/placeholder/400/240" alt="Podcast com jogadores">
+                                </div>
+                                <div class="recommendation-content">
+                                    <div class="recommendation-title">Podcast: Nos Bastidores</div>
+                                    <div class="recommendation-description">
+                                        Um papo sincero com os jogadores sobre a rotina, treinos e vida pessoal.
+                                    </div>
+                                    <div class="recommendation-meta">
+                                        <div class="recommendation-category">Podcast</div>
+                                        <div class="recommendation-date">
+                                            <i class="fas fa-clock"></i> 1h 23min
+                                        </div>
+                                    </div>
+                                    <div class="recommendation-actions">
+                                        <button class="btn btn-primary">
+                                            <i class="fas fa-headphones"></i> Ouvir
+                                        </button>
+                                        <button class="btn-icon">
+                                            <i class="fas fa-download"></i>
+                                        </button>
+                                        <button class="btn-icon">
+                                            <i class="fas fa-share-alt"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Conteúdo 3 -->
+                            <div class="recommendation-card">
+                                <div class="recommendation-image">
+                                    <img src="/api/placeholder/400/240" alt="Tutorial de smokes">
+                                </div>
+                                <div class="recommendation-content">
+                                    <div class="recommendation-title">Masterclass: Smokes Avançadas</div>
+                                    <div class="recommendation-description">
+                                        Aprenda configurações avançadas de smokes com os jogadores profissionais da FURIA.
+                                    </div>
+                                    <div class="recommendation-meta">
+                                        <div class="recommendation-category">Tutorial</div>
+                                        <div class="recommendation-date">
+                                            <i class="fas fa-clock"></i> 35 min
+                                        </div>
+                                    </div>
+                                    <div class="recommendation-actions">
+                                        <button class="btn btn-primary">
+                                            <i class="fas fa-play"></i> Assistir
+                                        </button>
+                                        <button class="btn-icon">
+                                            <i class="fas fa-download"></i>
+                                        </button>
+                                        <button class="btn-icon">
+                                            <i class="fas fa-share-alt"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Conteúdo da aba Experiências VIP -->
+                    <div class="tab-content" id="experiences-content">
+                        <div class="filters-bar">
+                            <button class="filter-button active">
+                                <i class="fas fa-filter"></i> Todos
+                            </button>
+                            <button class="filter-button">
+                                <i class="fas fa-users"></i> Meet & Greet
+                            </button>
+                            <button class="filter-button">
+                                <i class="fas fa-headset"></i> Play with Pro
+                            </button>
+                            <button class="filter-button">
+                                <i class="fas fa-plane"></i> Viagens
+                            </button>
+                            <button class="filter-button">
+                                <i class="fas fa-chair"></i> Camarotes
+                            </button>
+                        </div>
+                        
+                        <div class="recommendations-grid">
+                            <!-- Experiência 1 -->
+                            <div class="recommendation-card">
+                                <div class="exclusive-badge">Ultra Premium</div>
+                                <div class="recommendation-image">
+                                    <img src="/api/placeholder/400/240" alt="Bootcamp Experience">
+                                </div>
+                                <div class="recommendation-content">
+                                    <div class="recommendation-title">Bootcamp Experience</div>
+                                    <div class="recommendation-description">
+                                        Passe um dia inteiro no bootcamp da FURIA, acompanhando treinos e conhecendo a rotina dos pros.
+                                    </div>
+                                    <div class="event-info">
+                                        <i class="fas fa-calendar-alt"></i> 10 de Agosto, 2025
+                                        <span class="event-info-divider">|</span>
+                                        <i class="fas fa-users"></i> Apenas 5 vagas
+                                    </div>
+                                    <div class="progress-bar-container">
+                                        <div class="progress-bar-fill" style="width: 60%"></div>
+                                    </div>
+                                    <div class="recommendation-actions">
+                                        <button class="btn btn-primary">
+                                            <i class="fas fa-star"></i> Participar
+                                        </button>
+                                        <button class="btn-icon">
+                                            <i class="fas fa-share-alt"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Experiência 2 -->
+                            <div class="recommendation-card">
+                                <div class="recommendation-image">
+                                    <img src="/api/placeholder/400/240" alt="Camarote Major">
+                                </div>
+                                <div class="recommendation-content">
+                                    <div class="recommendation-title">Camarote VIP no Major</div>
+                                    <div class="recommendation-description">
+                                        Assista ao Major de um camarote exclusivo com open bar e meet & greet com jogadores.
+                                    </div>
+                                    <div class="event-info">
+                                        <i class="fas fa-calendar-alt"></i> 15-20 de Outubro, 2025
+                                        <span class="event-info-divider">|</span>
+                                        <i class="fas fa-users"></i> 20 vagas
+                                    </div>
+                                    <div class="progress-bar-container">
+                                        <div class="progress-bar-fill" style="width: 35%"></div>
+                                    </div>
+                                    <div class="recommendation-actions">
+                                        <button class="btn btn-primary">
+                                            <i class="fas fa-ticket-alt"></i> Reservar
+                                        </button>
+                                        <button class="btn-icon">
+                                            <i class="fas fa-share-alt"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Experiência 3 -->
+                            <div class="recommendation-card">
+                                <div class="recommendation-image">
+                                    <img src="/api/placeholder/400/240" alt="Play with Pro">
+                                </div>
+                                <div class="recommendation-content">
+                                    <div class="recommendation-title">Play with Pro: Matchmaking</div>
+                                    <div class="recommendation-description">
+                                        Jogue 3 partidas de matchmaking com um jogador profissional da FURIA.
+                                    </div>
+                                    <div class="event-info">
+                                        <i class="fas fa-calendar-alt"></i> Agende sua data
+                                        <span class="event-info-divider">|</span>
+                                        <i class="fas fa-users"></i> 1:1
+                                    </div>
+                                    <div class="recommendation-actions">
+                                        <button class="btn btn-primary">
+                                            <i class="fas fa-gamepad"></i> Reservar
+                                        </button>
+                                        <button class="btn-icon">
+                                            <i class="fas fa-share-alt"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Seção de Sugestão de Experiência Personalizada -->
+                <div class="customize-box" style="margin-top: 40px;">
+                    <div class="customize-title">
+                        <i class="fas fa-magic"></i> Sugerir Nova Experiência Personalizada
+                    </div>
+                    <p style="color: var(--gray); font-size: 0.9rem; margin-bottom: 20px;">
+                        Não encontrou o que procurava? Conte-nos qual tipo de experiência exclusiva você gostaria de ter com a FURIA:
+                    </p>
+                    
+                    <textarea placeholder="Descreva sua experiência ideal com a FURIA..." style="width: 100%; background: rgba(255, 255, 255, 0.03); border: 1px solid #333; color: var(--light); padding: 15px; border-radius: 10px; font-family: 'Exo 2', sans-serif; min-height: 100px; margin-bottom: 15px;"></textarea>
+                    
+                    <button class="btn btn-primary" style="padding: 12px 20px;">
+                        <i class="fas fa-paper-plane"></i> Enviar Sugestão
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- JavaScript -->
+    <script>
+        // Criar partículas para o fundo
+        function createParticles() {
+            const container = document.getElementById('particles');
+            const numParticles = 30;
+            
+            for (let i = 0; i < numParticles; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // Posicionar aleatoriamente
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                
+                // Tamanhos variados
+                const size = Math.random() * 8 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Opacidade variada
+                particle.style.opacity = Math.random() * 0.5 + 0.1;
+                
+                // Animação com delay variável
+                const duration = Math.random() * 25 + 15; // 15-40s
+                const delay = Math.random() * 10;
+                particle.style.animationDuration = `${duration}s`;
+                particle.style.animationDelay = `${delay}s`;
+                
+                container.appendChild(particle);
+            }
+        }
+        
+        // Configurar navegação por abas
+        function setupTabs() {
+            const tabItems = document.querySelectorAll('.tab-item');
+            
+            tabItems.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Remover classe ativa de todas as abas
+                    tabItems.forEach(t => t.classList.remove('active'));
+                    
+                    // Adicionar classe ativa à aba clicada
+                    tab.classList.add('active');
+                    
+                    // Esconder todos os conteúdos de abas
+                    document.querySelectorAll('.tab-content').forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    
+                    // Mostrar conteúdo da aba selecionada
+                    const tabId = tab.getAttribute('data-tab');
+                    document.getElementById(`${tabId}-content`).classList.add('active');
+                });
+            });
+        }
+        
+        // Carregar dados do usuário
+        function loadUserData() {
+            // Em uma implementação real, carregaria do banco de dados
+            // Simulação para demonstração
+            
+            try {
+                // Tentar carregar do localStorage (se existir)
+                const userData = localStorage.getItem('furiax_fan_data');
+                
+                if (userData) {
+                    const parsedData = JSON.parse(userData);
+                    
+                    // Preencher dados no perfil
+                    if (parsedData.personalData) {
+                        document.getElementById('profileName').textContent = parsedData.personalData.name || "FuriaX Pro";
+                    }
+                    
+                    // Categorizar o usuário com base em seus interesses
+                    categorizeUser();
+                } else {
+                    // Usar dados de demonstração
+                    console.log("Usando dados de demonstração - perfil 'Know Your Fan' não encontrado");
+                }
+            } catch (error) {
+                console.error("Erro ao carregar dados do usuário:", error);
+            }
+        }
+        
+        // Categorizar o usuário
+        function categorizeUser() {
+            // Em uma implementação real, usaria algoritmo de machine learning
+            // para classificar o usuário com base em seus interesses e comportamentos
+            
+            // Simulação para demonstração - categorias pré-definidas
+            const categories = [
+                { id: 'gamer', name: 'Gamer Hardcore', icon: 'gamepad' },
+                { id: 'collector', name: 'Colecionador', icon: 'trophy' },
+                { id: 'evento', name: 'Fã de Eventos', icon: 'calendar-alt' },
+                { id: 'social', name: 'Social Media', icon: 'share-alt' }
+            ];
+            
+            // Escolher uma categoria aleatória para demonstração
+            const randomCategory = categories[Math.floor(Math.random() * categories.length)];
+            
+            // Atualizar no DOM
+            const fanCategoryEl = document.getElementById('fanCategory');
+            if (fanCategoryEl) {
+                fanCategoryEl.innerHTML = `<i class="fas fa-${randomCategory.icon}"></i> ${randomCategory.name}`;
+            }
+            
+            // Personalizar recomendações com base na categoria
+            customizeRecommendations(randomCategory.id);
+        }
+        
+        // Personalizar recomendações
+        function customizeRecommendations(category) {
+            // Em uma implementação real, filtraria as recomendações
+            // com base na categoria do usuário, seu histórico e interesses
+            
+            console.log(`Personalizando para categoria: ${category}`);
+            
+            // Simulação - destaque algumas recomendações com base na categoria
+            const allCards = document.querySelectorAll('.recommendation-card');
+            
+            // Reset
+            allCards.forEach(card => {
+                card.style.order = '0';
+                card.style.transform = 'none';
+                card.style.boxShadow = 'none';
+            });
+            
+            // Destaque aleatório (simulação)
+            const randomCards = Array.from(allCards).sort(() => 0.5 - Math.random()).slice(0, 3);
+            
+            randomCards.forEach((card, index) => {
+                card.style.order = '-1';
+                card.style.transform = 'scale(1.02)';
+                card.style.boxShadow = '0 10px 20px rgba(30, 144, 255, 0.2)';
+                
+                // Adicionar badge se não existir
+                if (!card.querySelector('.exclusive-badge')) {
+                    const badge = document.createElement('div');
+                    badge.className = 'exclusive-badge';
+                    badge.textContent = 'Recomendado';
+                    card.prepend(badge);
+                }
+            });
+        }
+        
+        // Configurar filtros
+        function setupFilters() {
+            const filterButtons = document.querySelectorAll('.filter-button');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remover classe ativa de todos os filtros no mesmo grupo
+                    button.parentNode.querySelectorAll('.filter-button').forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    
+                    // Adicionar classe ativa ao filtro clicado
+                    button.classList.add('active');
+                    
+                    // Simular filtragem (para demonstração)
+                    // Em uma implementação real, filtraria os resultados
+                    simulateFiltering();
+                });
+            });
+        }
+        
+        // Simular filtragem
+        function simulateFiltering() {
+            // Animação simples para simulação de filtragem
+            const cards = document.querySelectorAll('.recommendation-card');
+            
+            cards.forEach(card => {
+                card.style.opacity = '0.5';
+                card.style.transform = 'translateY(10px)';
+            });
+            
+            setTimeout(() => {
+    cards.forEach((card, index) => {
+        setTimeout(() => {
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+        }, index * 50);
+    });
+}, 300);
+    }
+
+    
+    // Configurar tags de interesse
+    function setupInterestTags() {
+        const tags = document.querySelectorAll('.interest-tag');
+        
+        tags.forEach(tag => {
+            tag.addEventListener('click', () => {
+                tag.classList.toggle('active');
+                
+                // Em uma implementação real, salvaria a preferência
+                // e recalcularia as recomendações
+                recalculateRecommendations();
+            });
+        });
+    }
+    
+    // Recalcular recomendações com base nos interesses
+    function recalculateRecommendations() {
+        // Obter interesses ativos
+        const activeInterests = Array.from(
+            document.querySelectorAll('.interest-tag.active')
+        ).map(tag => tag.textContent.trim().toLowerCase());
+        
+        console.log('Interesses ativos:', activeInterests);
+        
+        // Simulação de recálculo - destacar cards aleatórios
+        const allCards = document.querySelectorAll('.recommendation-card');
+        
+        // Reset visual
+        allCards.forEach(card => {
+            card.style.order = '0';
+            card.style.transform = 'none';
+            card.style.boxShadow = 'none';
+        });
+        
+        // Selecionar alguns cards aleatórios para destacar
+        const selectedCards = Array.from(allCards)
+            .sort(() => 0.5 - Math.random())
+            .slice(0, activeInterests.length);
+        
+        // Aplicar destaque
+        selectedCards.forEach(card => {
+            card.style.order = '-1';
+            card.style.transform = 'translateY(-5px)';
+            card.style.boxShadow = '0 10px 20px rgba(30, 144, 255, 0.3)';
+        });
+        
+        // Exibir notificação de atualização
+        showNotification('Recomendações atualizadas com base nos seus interesses');
+    }
+    
+    // Exibir notificação
+    function showNotification(message) {
+        // Criar elemento de notificação
+        const notification = document.createElement('div');
+        notification.className = 'notification';
+        notification.innerHTML = `
+            <div class="notification-content">
+                <i class="fas fa-info-circle"></i>
+                <span>${message}</span>
+            </div>
+        `;
+        
+        // Estilizar notificação
+        Object.assign(notification.style, {
+            position: 'fixed',
+            bottom: '20px',
+            right: '20px',
+            background: 'rgba(30, 144, 255, 0.9)',
+            color: 'white',
+            padding: '12px 20px',
+            borderRadius: '8px',
+            boxShadow: '0 5px 15px rgba(0, 0, 0, 0.3)',
+            zIndex: '1000',
+            transform: 'translateY(100px)',
+            transition: 'transform 0.3s ease-out',
+            display: 'flex',
+            alignItems: 'center'
+        });
+        
+        // Adicionar ao DOM
+        document.body.appendChild(notification);
+        
+        // Animar entrada
+        setTimeout(() => {
+            notification.style.transform = 'translateY(0)';
+        }, 10);
+        
+        // Remover após alguns segundos
+        setTimeout(() => {
+            notification.style.transform = 'translateY(100px)';
+            
+            // Remover do DOM após animação
+            setTimeout(() => {
+                document.body.removeChild(notification);
+            }, 300);
+        }, 3000);
+    }
+    
+    // Implementar funcionalidade de pesquisa
+    function setupSearch() {
+        // Criar elemento de pesquisa na barra superior
+        const mainHeader = document.querySelector('.main-header');
+        
+        const searchContainer = document.createElement('div');
+        searchContainer.className = 'search-container';
+        
+        searchContainer.innerHTML = `
+            <div class="search-input">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Buscar experiências, eventos e produtos...">
+            </div>
+        `;
+        
+        // Estilizar container de pesquisa
+        Object.assign(searchContainer.style, {
+            position: 'absolute',
+            right: '0',
+            top: '0',
+            display: 'flex',
+            alignItems: 'center'
+        });
+        
+        // Estilizar input de pesquisa
+        const searchInput = searchContainer.querySelector('.search-input');
+        Object.assign(searchInput.style, {
+            background: 'rgba(0, 0, 0, 0.2)',
+            border: '1px solid #333',
+            borderRadius: '20px',
+            padding: '8px 15px',
+            display: 'flex',
+            alignItems: 'center',
+            width: '250px'
+        });
+        
+        const searchIcon = searchInput.querySelector('i');
+        Object.assign(searchIcon.style, {
+            color: 'var(--gray)',
+            marginRight: '10px'
+        });
+        
+        const input = searchInput.querySelector('input');
+        Object.assign(input.style, {
+            background: 'transparent',
+            border: 'none',
+            color: 'var(--light)',
+            width: '100%',
+            outline: 'none',
+            fontFamily: "'Exo 2', sans-serif",
+            fontSize: '0.9rem'
+        });
+        
+        // Adicionar à página
+        mainHeader.appendChild(searchContainer);
+        
+        // Adicionar funcionalidade de pesquisa
+        input.addEventListener('input', debounce(searchContent, 300));
+    }
+    
+    // Debounce para evitar múltiplas chamadas
+    function debounce(func, wait) {
+        let timeout;
+        return function(...args) {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => func.apply(this, args), wait);
+        };
+    }
+    
+    // Pesquisar conteúdo
+    function searchContent(event) {
+        const searchTerm = event.target.value.toLowerCase().trim();
+        
+        if (searchTerm.length < 2) {
+            // Reset da pesquisa
+            resetSearch();
+            return;
+        }
+        
+        // Obter todos os cards
+        const allCards = document.querySelectorAll('.recommendation-card');
+        
+        // Contador de correspondências
+        let matchCount = 0;
+        
+        // Verificar cada card
+        allCards.forEach(card => {
+            const title = card.querySelector('.recommendation-title').textContent.toLowerCase();
+            const description = card.querySelector('.recommendation-description').textContent.toLowerCase();
+            
+            // Verificar se o termo de pesquisa está contido no título ou descrição
+            if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                // Destacar card
+                card.style.display = 'block';
+                card.style.order = '-1';
+                card.style.transform = 'scale(1.02)';
+                card.style.boxShadow = '0 10px 20px rgba(30, 144, 255, 0.3)';
+                
+                // Destacar o texto correspondente
+                highlightText(card, searchTerm);
+                
+                matchCount++;
+            } else {
+                // Esconder cards que não correspondem
+                card.style.opacity = '0.3';
+                card.style.transform = 'scale(0.98)';
+            }
+        });
+        
+        // Exibir mensagem de resultados
+        if (matchCount > 0) {
+            showNotification(`Encontrados ${matchCount} resultados para "${searchTerm}"`);
+        } else {
+            showNotification(`Nenhum resultado encontrado para "${searchTerm}"`);
+        }
+    }
+    
+    // Resetar pesquisa
+    function resetSearch() {
+        const allCards = document.querySelectorAll('.recommendation-card');
+        
+        allCards.forEach(card => {
+            card.style.display = 'block';
+            card.style.opacity = '1';
+            card.style.order = '0';
+            card.style.transform = 'none';
+            card.style.boxShadow = 'none';
+            
+            // Remover destaques
+            removeHighlights(card);
+        });
+    }
+    
+    // Destacar texto correspondente
+    function highlightText(card, searchTerm) {
+        const titleElement = card.querySelector('.recommendation-title');
+        const descriptionElement = card.querySelector('.recommendation-description');
+        
+        // Salvar texto original se ainda não foi salvo
+        if (!titleElement.dataset.original) {
+            titleElement.dataset.original = titleElement.textContent;
+            descriptionElement.dataset.original = descriptionElement.textContent;
+        }
+        
+        // Restaurar texto original antes de destacar
+        titleElement.textContent = titleElement.dataset.original;
+        descriptionElement.textContent = descriptionElement.dataset.original;
+        
+        // Função para destacar texto
+        function addHighlight(element) {
+            const text = element.textContent;
+            const regex = new RegExp(`(${searchTerm})`, 'gi');
+            element.innerHTML = text.replace(regex, '<span class="highlight">$1</span>');
+        }
+        
+        // Aplicar destaque
+        addHighlight(titleElement);
+        addHighlight(descriptionElement);
+        
+        // Estilizar destaques
+        const highlights = card.querySelectorAll('.highlight');
+        highlights.forEach(highlight => {
+            Object.assign(highlight.style, {
+                background: 'rgba(30, 144, 255, 0.3)',
+                padding: '0 2px',
+                borderRadius: '3px',
+                color: 'white',
+                fontWeight: 'bold'
+            });
+        });
+    }
+    
+    // Remover destaques
+    function removeHighlights(card) {
+        const titleElement = card.querySelector('.recommendation-title');
+        const descriptionElement = card.querySelector('.recommendation-description');
+        
+        // Restaurar texto original se disponível
+        if (titleElement.dataset.original) {
+            titleElement.textContent = titleElement.dataset.original;
+            descriptionElement.textContent = descriptionElement.dataset.original;
+        }
+    }
+    
+    // Adicionar animações nos botões de ação
+    function setupButtonEffects() {
+        const buttons = document.querySelectorAll('.btn, .btn-icon');
+        
+        buttons.forEach(button => {
+            button.addEventListener('mouseenter', () => {
+                button.style.transform = button.classList.contains('btn-primary') 
+                    ? 'translateY(-3px)' 
+                    : 'translateY(-2px)';
+                
+                if (button.classList.contains('btn-primary')) {
+                    button.style.boxShadow = '0 5px 15px rgba(30, 144, 255, 0.4)';
+                }
+            });
+            
+            button.addEventListener('mouseleave', () => {
+                button.style.transform = 'translateY(0)';
+                
+                if (button.classList.contains('btn-primary')) {
+                    button.style.boxShadow = '0 3px 10px rgba(30, 144, 255, 0.2)';
+                }
+            });
+            
+            button.addEventListener('click', () => {
+                // Efeito de clique
+                button.style.transform = 'scale(0.95)';
+                
+                setTimeout(() => {
+                    button.style.transform = 'scale(1)';
+                    
+                    // Simulação de ação
+                    simulateButtonAction(button);
+                }, 100);
+            });
+        });
+    }
+    
+    // Simular ação de botão
+    function simulateButtonAction(button) {
+        // Obter texto do botão para identificar a ação
+        const buttonText = button.textContent.trim().toLowerCase();
+        const iconClass = button.querySelector('i')?.className || '';
+        
+        // Determinar ação com base no texto ou ícone
+        if (buttonText.includes('comprar') || buttonText.includes('ingresso') || iconClass.includes('shopping-cart') || iconClass.includes('ticket')) {
+            showModal('purchase-modal', 'Adicionar ao Carrinho', 'Item adicionado ao seu carrinho com sucesso!');
+        } else if (buttonText.includes('participar') || buttonText.includes('reservar') || iconClass.includes('star')) {
+            showModal('reservation-modal', 'Reserva Confirmada', 'Sua vaga foi reservada com sucesso! Verifique seu email para mais detalhes.');
+        } else if (iconClass.includes('heart')) {
+            toggleFavorite(button);
+        } else if (iconClass.includes('bell')) {
+            toggleNotification(button);
+        } else if (iconClass.includes('share')) {
+            showSharingOptions(button);
+        } else {
+            // Ação genérica
+            showNotification('Ação realizada com sucesso!');
+        }
+    }
+    
+    // Exibir modal
+    function showModal(modalId, title, message) {
+        // Verificar se o modal já existe
+        let modal = document.getElementById(modalId);
+        
+        if (!modal) {
+            // Criar modal
+            modal = document.createElement('div');
+            modal.id = modalId;
+            modal.className = 'modal';
+            
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>${title}</h3>
+                        <button class="modal-close">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="success-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <p>${message}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary modal-confirm">OK</button>
+                    </div>
+                </div>
+            `;
+            
+            // Estilizar modal
+            Object.assign(modal.style, {
+                position: 'fixed',
+                top: '0',
+                left: '0',
+                width: '100%',
+                height: '100%',
+                background: 'rgba(0, 0, 0, 0.7)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                zIndex: '1000',
+                opacity: '0',
+                transition: 'opacity 0.3s ease',
+                backdropFilter: 'blur(5px)'
+            });
+            
+            // Estilizar conteúdo do modal
+            const modalContent = modal.querySelector('.modal-content');
+            Object.assign(modalContent.style, {
+                background: 'linear-gradient(145deg, #111, #181818)',
+                borderRadius: '15px',
+                width: '90%',
+                maxWidth: '400px',
+                boxShadow: '0 15px 40px rgba(0, 0, 0, 0.5)',
+                border: '1px solid rgba(255, 255, 255, 0.05)',
+                overflow: 'hidden',
+                transform: 'translateY(50px)',
+                transition: 'transform 0.3s ease'
+            });
+            
+            // Estilizar cabeçalho do modal
+            const modalHeader = modal.querySelector('.modal-header');
+            Object.assign(modalHeader.style, {
+                padding: '20px',
+                borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center'
+            });
+            
+            // Estilizar título do modal
+            const modalTitle = modal.querySelector('.modal-header h3');
+            Object.assign(modalTitle.style, {
+                margin: '0',
+                color: 'var(--primary)',
+                fontFamily: "'Orbitron', sans-serif",
+                fontSize: '1.2rem'
+            });
+            
+            // Estilizar botão de fechar
+            const closeButton = modal.querySelector('.modal-close');
+            Object.assign(closeButton.style, {
+                background: 'none',
+                border: 'none',
+                color: 'var(--gray)',
+                fontSize: '1.5rem',
+                cursor: 'pointer',
+                transition: 'color 0.3s ease'
+            });
+            
+            // Estilizar corpo do modal
+            const modalBody = modal.querySelector('.modal-body');
+            Object.assign(modalBody.style, {
+                padding: '30px 20px',
+                textAlign: 'center'
+            });
+            
+            // Estilizar ícone de sucesso
+            const successIcon = modal.querySelector('.success-icon');
+            Object.assign(successIcon.style, {
+                fontSize: '3rem',
+                color: 'var(--success)',
+                marginBottom: '20px'
+            });
+            
+            // Estilizar rodapé do modal
+            const modalFooter = modal.querySelector('.modal-footer');
+            Object.assign(modalFooter.style, {
+                padding: '15px 20px',
+                borderTop: '1px solid rgba(255, 255, 255, 0.05)',
+                textAlign: 'right'
+            });
+            
+            // Adicionar ao DOM
+            document.body.appendChild(modal);
+            
+            // Configurar eventos
+            closeButton.addEventListener('click', () => closeModal(modal));
+            modal.querySelector('.modal-confirm').addEventListener('click', () => closeModal(modal));
+            
+            // Fechar ao clicar fora do conteúdo
+            modal.addEventListener('click', event => {
+                if (event.target === modal) {
+                    closeModal(modal);
+                }
+            });
+        }
+        
+        // Exibir modal
+        setTimeout(() => {
+            modal.style.opacity = '1';
+            modal.querySelector('.modal-content').style.transform = 'translateY(0)';
+        }, 10);
+    }
+    
+    // Fechar modal
+    function closeModal(modal) {
+        modal.style.opacity = '0';
+        modal.querySelector('.modal-content').style.transform = 'translateY(50px)';
+        
+        // Remover do DOM após animação
+        setTimeout(() => {
+            document.body.removeChild(modal);
+        }, 300);
+    }
+    
+    // Alternar favorito
+    function toggleFavorite(button) {
+        const isFavorite = button.dataset.favorite === 'true';
+        
+        if (isFavorite) {
+            // Remover dos favoritos
+            button.dataset.favorite = 'false';
+            button.querySelector('i').style.color = 'var(--gray)';
+            showNotification('Removido dos favoritos');
+        } else {
+            // Adicionar aos favoritos
+            button.dataset.favorite = 'true';
+            button.querySelector('i').style.color = 'var(--secondary)';
+            showNotification('Adicionado aos favoritos');
+            
+            // Animar coração
+            const icon = button.querySelector('i');
+            icon.style.transform = 'scale(1.3)';
+            
+            setTimeout(() => {
+                icon.style.transform = 'scale(1)';
+            }, 300);
+        }
+    }
+    
+    // Alternar notificação
+    function toggleNotification(button) {
+        const isNotifying = button.dataset.notify === 'true';
+        
+        if (isNotifying) {
+            // Desativar notificações
+            button.dataset.notify = 'false';
+            button.querySelector('i').style.color = 'var(--gray)';
+            showNotification('Notificações desativadas');
+        } else {
+            // Ativar notificações
+            button.dataset.notify = 'true';
+            button.querySelector('i').style.color = 'var(--primary)';
+            showNotification('Você receberá notificações sobre este item');
+        }
+    }
+    
+    // Exibir opções de compartilhamento
+    function showSharingOptions(button) {
+        // Obter dados do card
+        const card = button.closest('.recommendation-card');
+        const title = card.querySelector('.recommendation-title').textContent;
+        
+        // Criar menu de compartilhamento
+        const shareMenu = document.createElement('div');
+        shareMenu.className = 'share-menu';
+        
+        shareMenu.innerHTML = `
+            <div class="share-menu-content">
+                <div class="share-menu-header">
+                    <h4>Compartilhar</h4>
+                    <button class="share-menu-close">&times;</button>
+                </div>
+                <div class="share-menu-body">
+                    <button class="share-option" data-platform="whatsapp">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </button>
+                    <button class="share-option" data-platform="telegram">
+                        <i class="fab fa-telegram"></i> Telegram
+                    </button>
+                    <button class="share-option" data-platform="facebook">
+                        <i class="fab fa-facebook"></i> Facebook
+                    </button>
+                    <button class="share-option" data-platform="twitter">
+                        <i class="fab fa-twitter"></i> Twitter
+                    </button>
+                    <button class="share-option" data-platform="email">
+                        <i class="fas fa-envelope"></i> Email
+                    </button>
+                    <button class="share-option" data-platform="copy">
+                        <i class="fas fa-copy"></i> Copiar Link
+                    </button>
+                </div>
+            </div>
+        `;
+        
+        // Posicionar menu
+        const buttonRect = button.getBoundingClientRect();
+        
+        // Estilizar menu
+        Object.assign(shareMenu.style, {
+            position: 'fixed',
+            top: '0',
+            left: '0',
+            width: '100%',
+            height: '100%',
+            background: 'rgba(0, 0, 0, 0.7)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: '1000',
+            opacity: '0',
+            transition: 'opacity 0.3s ease',
+            backdropFilter: 'blur(5px)'
+        });
+        
+        // Estilizar conteúdo do menu
+        const menuContent = shareMenu.querySelector('.share-menu-content');
+        Object.assign(menuContent.style, {
+            background: 'linear-gradient(145deg, #111, #181818)',
+            borderRadius: '15px',
+            width: '90%',
+            maxWidth: '350px',
+            boxShadow: '0 15px 40px rgba(0, 0, 0, 0.5)',
+            border: '1px solid rgba(255, 255, 255, 0.05)',
+            overflow: 'hidden',
+            transform: 'translateY(30px)',
+            transition: 'transform 0.3s ease'
+        });
+        
+        // Estilizar cabeçalho do menu
+        const menuHeader = shareMenu.querySelector('.share-menu-header');
+        Object.assign(menuHeader.style, {
+            padding: '15px 20px',
+            borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center'
+        });
+        
+        // Estilizar título do menu
+        const menuTitle = shareMenu.querySelector('.share-menu-header h4');
+        Object.assign(menuTitle.style, {
+            margin: '0',
+            color: 'var(--light)',
+            fontFamily: "'Exo 2', sans-serif",
+            fontSize: '1rem'
+        });
+        
+        // Estilizar botão de fechar
+        const closeButton = shareMenu.querySelector('.share-menu-close');
+        Object.assign(closeButton.style, {
+            background: 'none',
+            border: 'none',
+            color: 'var(--gray)',
+            fontSize: '1.5rem',
+            cursor: 'pointer',
+            transition: 'color 0.3s ease'
+        });
+        
+        // Estilizar corpo do menu
+        const menuBody = shareMenu.querySelector('.share-menu-body');
+        Object.assign(menuBody.style, {
+            padding: '15px',
+            display: 'grid',
+            gridTemplateColumns: 'repeat(2, 1fr)',
+            gap: '10px'
+        });
+        
+        // Estilizar opções de compartilhamento
+        const shareOptions = shareMenu.querySelectorAll('.share-option');
+        shareOptions.forEach(option => {
+            Object.assign(option.style, {
+                background: 'rgba(255, 255, 255, 0.05)',
+                border: '1px solid rgba(255, 255, 255, 0.1)',
+                borderRadius: '8px',
+                padding: '12px',
+                color: 'var(--light)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+                transition: 'all 0.2s ease',
+                fontFamily: "'Exo 2', sans-serif",
+                fontSize: '0.9rem'
+            });
+            
+            // Dar cor aos ícones de redes sociais
+            const icon = option.querySelector('i');
+            const platform = option.dataset.platform;
+            
+            if (platform === 'whatsapp') icon.style.color = '#25D366';
+            if (platform === 'telegram') icon.style.color = '#0088cc';
+            if (platform === 'facebook') icon.style.color = '#1877F2';
+            if (platform === 'twitter') icon.style.color = '#1DA1F2';
+            if (platform === 'email') icon.style.color = '#D44638';
+            if (platform === 'copy') icon.style.color = '#FFC107';
+            
+            icon.style.marginRight = '8px';
+            
+            // Efeito hover
+            option.addEventListener('mouseenter', () => {
+                option.style.background = 'rgba(255, 255, 255, 0.1)';
+                option.style.transform = 'translateY(-2px)';
+            });
+            
+            option.addEventListener('mouseleave', () => {
+                option.style.background = 'rgba(255, 255, 255, 0.05)';
+                option.style.transform = 'translateY(0)';
+            });
+            
+            // Ação de compartilhamento
+            option.addEventListener('click', () => {
+                simulateShare(platform, title);
+                closeShareMenu();
+            });
+        });
+        
+        // Adicionar ao DOM
+        document.body.appendChild(shareMenu);
+        
+        // Exibir menu
+        setTimeout(() => {
+            shareMenu.style.opacity = '1';
+            menuContent.style.transform = 'translateY(0)';
+        }, 10);
+        
+        // Configurar eventos
+        closeButton.addEventListener('click', closeShareMenu);
+        
+        // Fechar ao clicar fora do conteúdo
+        shareMenu.addEventListener('click', event => {
+            if (event.target === shareMenu) {
+                closeShareMenu();
+            }
+        });
+        
+        // Função para fechar menu
+        function closeShareMenu() {
+            shareMenu.style.opacity = '0';
+            menuContent.style.transform = 'translateY(30px)';
+            
+            // Remover do DOM após animação
+            setTimeout(() => {
+                document.body.removeChild(shareMenu);
+            }, 300);
+        }
+    }
+    
+    // Simular compartilhamento
+    function simulateShare(platform, title) {
+        const message = `Confira esta experiência FURIA: ${title}`;
+        
+        // Simulação - em uma implementação real, usaria APIs de compartilhamento
+        console.log(`Compartilhando via ${platform}: ${message}`);
+        
+        if (platform === 'copy') {
+            // Simular cópia de link
+            navigator.clipboard.writeText(`https://furiax.com/experiences/${title.replace(/\s+/g, '-').toLowerCase()}`)
+                .then(() => {
+                    showNotification('Link copiado para a área de transferência');
+                })
+                .catch(err => {
+                    showNotification('Erro ao copiar link');
+                    console.error('Erro ao copiar: ', err);
+                });
+        } else {
+            // Outros métodos de compartilhamento
+            showNotification(`Compartilhado via ${platform}`);
+        }
+    }
+    
+    // Implementar sistema de recomendações personalizadas
+    function setupRecommendationSystem() {
+        // Em uma implementação real, utilizaria machine learning
+        // para analisar o comportamento do usuário e recomendar experiências
+        
+        // Simular perfil de usuário (dados de exemplo)
+        const userProfile = {
+            interests: ['csgo', 'campeonatos', 'eventos'],
+            recentViews: ['workshop', 'jersey', 'viewing party'],
+            location: 'São Paulo',
+            interactions: {
+                clicks: 12,
+                favorites: 3,
+                purchases: 1
+            }
+        };
+        
+        // Personalizar experiências com base no perfil
+        personalizeExperiences(userProfile);
+    }
+    
+    // Personalizar experiências
+    function personalizeExperiences(profile) {
+        console.log('Perfil de usuário para personalização:', profile);
+        
+        // Simulação - em uma implementação real, usaria algoritmos de recomendação
+        // Destacar cards aleatórios como recomendados personalizados
+        setTimeout(() => {
+            const allCards = document.querySelectorAll('.recommendation-card');
+            
+            // Selecionar alguns cards aleatórios
+            const selectedCards = Array.from(allCards)
+                .sort(() => 0.5 - Math.random())
+                .slice(0, 3);
+            
+            // Destacar como recomendação personalizada
+            selectedCards.forEach(card => {
+                // Adicionar badge personalizada
+                if (!card.querySelector('.personalized-badge')) {
+                    const badge = document.createElement('div');
+                    badge.className = 'personalized-badge';
+                    badge.innerHTML = '<i class="fas fa-user-check"></i> Para Você';
+                    
+                    // Estilizar badge
+                    Object.assign(badge.style, {
+                        position: 'absolute',
+                        top: '10px',
+                        left: '10px',
+                        background: 'linear-gradient(90deg, var(--primary), #36a6ff)',
+                        padding: '5px 10px',
+                        borderRadius: '15px',
+                        fontSize: '0.7rem',
+                        fontWeight: 'bold',
+                        color: 'white',
+                        zIndex: '10',
+                        boxShadow: '0 2px 8px rgba(30, 144, 255, 0.3)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '5px'
+                    });
+                    
+                    card.prepend(badge);
+                    
+                    // Destaque visual adicional
+                    card.style.borderColor = 'rgba(30, 144, 255, 0.3)';
+                    card.style.background = 'linear-gradient(145deg, rgba(0, 0, 0, 0.2), rgba(0, 10, 30, 0.3))';
+                    
+                    // Adicionar efeito de brilho especial
+                    const glowEffect = document.createElement('div');
+                    glowEffect.className = 'premium-glow-effect';
+                    
+                    Object.assign(glowEffect.style, {
+                        position: 'absolute',
+                        top: '0',
+                        left: '0',
+                        width: '100%',
+                        height: '100%',
+                        background: 'radial-gradient(circle at 50% 50%, rgba(30, 144, 255, 0.1), transparent 70%)',
+                        borderRadius: '15px',
+                        pointerEvents: 'none',
+                        zIndex: '0'
+                    });
+                    
+                    card.appendChild(glowEffect);
+                }
+            });
+        }, 2000); // Atraso para simular carregamento de dados do servidor
+    }
+    
+    // Adicionar modo escuro/claro
+    function setupThemeToggle() {
+        // Criar botão de alternância de tema
+        const themeToggle = document.createElement('button');
+        themeToggle.className = 'theme-toggle';
+        themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+        
+        // Estilizar botão
+        Object.assign(themeToggle.style, {
+            position: 'fixed',
+            bottom: '20px',
+            left: '20px',
+            width: '40px',
+            height: '40px',
+            borderRadius: '50%',
+            background: 'rgba(0, 0, 0, 0.3)',
+            border: '1px solid #333',
+            color: 'var(--gray)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'pointer',
+            zIndex: '900',
+            boxShadow: '0 3px 10px rgba(0, 0, 0, 0.2)',
+            transition: 'all 0.3s ease'
+        });
+        
+        // Adicionar ao DOM
+        document.body.appendChild(themeToggle);
+        
+        // Verificar tema atual
+        const isDarkMode = localStorage.getItem('furiax_theme') !== 'light';
+        
+        // Aplicar tema atual
+        if (!isDarkMode) {
+            applyLightTheme();
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+        
+        // Configurar evento de clique
+        themeToggle.addEventListener('click', () => {
+            // Verificar tema atual
+            const currentTheme = getComputedStyle(document.documentElement).getPropertyValue('--dark').trim();
+            
+            if (currentTheme === '#111' || currentTheme === '') {
+                // Mudar para tema claro
+                applyLightTheme();
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                localStorage.setItem('furiax_theme', 'light');
+            } else {
+                // Mudar para tema escuro
+                applyDarkTheme();
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                localStorage.setItem('furiax_theme', 'dark');
+            }
+        });
+    }
+    
+    // Aplicar tema claro
+    function applyLightTheme() {
+        // Definir variáveis CSS para tema claro
+        document.documentElement.style.setProperty('--dark', '#f4f4f4');
+        document.documentElement.style.setProperty('--darker', '#e0e0e0');
+        document.documentElement.style.setProperty('--light', '#222');
+        document.documentElement.style.setProperty('--gray', '#555');
+        
+        // Ajustar background
+        document.body.style.background = 'var(--darker)';
+        document.body.style.backgroundImage = `
+            radial-gradient(circle at 10% 10%, rgba(30, 144, 255, 0.1) 0%, transparent 30%),
+            radial-gradient(circle at 90% 30%, rgba(255, 59, 92, 0.1) 0%, transparent 30%),
+            radial-gradient(circle at 50% 80%, rgba(0, 204, 102, 0.1) 0%, transparent 40%)
+        `;
+        
+        // Ajustar sidebar
+        const sidebar = document.querySelector('.sidebar');
+        if (sidebar) {
+            sidebar.style.background = 'linear-gradient(145deg, #e0e0e0, #d0d0d0)';
+            sidebar.style.boxShadow = '5px 0 15px rgba(0, 0, 0, 0.1)';
+        }
+        
+        // Ajustar cards
+        const cards = document.querySelectorAll('.recommendation-card, .profile-summary-card');
+        cards.forEach(card => {
+            card.style.background = 'rgba(255, 255, 255, 0.8)';
+            card.style.border = '1px solid rgba(0, 0, 0, 0.1)';
+        });
+    }
+    
+    // Aplicar tema escuro
+    function applyDarkTheme() {
+        // Restaurar variáveis CSS padrão
+        document.documentElement.style.setProperty('--dark', '#111');
+        document.documentElement.style.setProperty('--darker', '#0a0a0a');
+        document.documentElement.style.setProperty('--light', '#f0f0f0');
+        document.documentElement.style.setProperty('--gray', '#aaa');
+        
+        // Restaurar background
+        document.body.style.background = 'var(--darker)';
+        document.body.style.backgroundImage = `
+            radial-gradient(circle at 10% 10%, rgba(30, 144, 255, 0.05) 0%, transparent 30%),
+            radial-gradient(circle at 90% 30%, rgba(255, 59, 92, 0.05) 0%, transparent 30%),
+            radial-gradient(circle at 50% 80%, rgba(0, 204, 102, 0.05) 0%, transparent 40%)
+        `;
+        
+        // Restaurar sidebar
+        const sidebar = document.querySelector('.sidebar');
+        if (sidebar) {
+            sidebar.style.background = 'linear-gradient(145deg, #111, #181818)';
+            sidebar.style.boxShadow = '5px 0 15px rgba(0, 0, 0, 0.3)';
+        }
+        
+        // Restaurar cards
+        const cards = document.querySelectorAll('.recommendation-card, .profile-summary-card');
+        cards.forEach(card => {
+            card.style.background = 'rgba(0, 0, 0, 0.2)';
+            card.style.border = '1px solid rgba(255, 255, 255, 0.05)';
+        });
+    }
+    
+    // Implementar funcionalidade de "pré-registro" para eventos
+    function setupEventRegistration() {
+        // Obter todos os botões de pré-registro e ingressos
+        const registrationButtons = document.querySelectorAll('.btn-primary');
+        
+        registrationButtons.forEach(button => {
+            const buttonText = button.textContent.trim().toLowerCase();
+            
+            if (buttonText.includes('pré-registro') || buttonText.includes('ingresso') || 
+                buttonText.includes('vaga') || buttonText.includes('reservar')) {
+                
+                // Configurar evento especial para registro
+                button.addEventListener('click', () => {
+                    // Obter informações do evento
+                    const card = button.closest('.recommendation-card');
+                    const title = card.querySelector('.recommendation-title').textContent;
+                    const eventInfo = card.querySelector('.event-info')?.textContent;
+                    
+                    // Exibir formulário de registro
+                    showRegistrationForm(title, eventInfo);
+                });
+            }
+        });
+    }
+    
+    // Exibir formulário de registro
+    function showRegistrationForm(eventTitle, eventInfo) {
+        // Criar modal de formulário
+        const formModal = document.createElement('div');
+        formModal.className = 'registration-modal';
+        
+        formModal.innerHTML = `
+            <div class="registration-content">
+                <div class="registration-header">
+                    <h3>Registrar para: ${eventTitle}</h3>
+                    <button class="registration-close">&times;</button>
+                </div>
+                <div class="registration-body">
+                    <p class="registration-event-info">${eventInfo || ''}</p>
+                    
+                    <div class="input-group">
+                        <label for="reg-name">Seu Nome</label>
+                        <input type="text" id="reg-name" placeholder="Nome completo" value="Carlos Silva">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="reg-email">Email</label>
+                        <input type="email" id="reg-email" placeholder="seu@email.com">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="reg-phone">Telefone</label>
+                        <input type="tel" id="reg-phone" placeholder="(XX) XXXXX-XXXX">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="reg-quantity">Quantidade</label>
+                        <select id="reg-quantity">
+                            <option value="1">1 ingresso</option>
+                            <option value="2">2 ingressos</option>
+                            <option value="3">3 ingressos</option>
+                            <option value="4">4 ingressos</option>
+                        </select>
+                    </div>
+                    
+                    <div class="input-group checkbox-group">
+                        <input type="checkbox" id="reg-terms" checked>
+                        <label for="reg-terms">Concordo com os termos e condições</label>
+                    </div>
+                    
+                    <div class="input-group checkbox-group">
+                        <input type="checkbox" id="reg-notification" checked>
+                        <label for="reg-notification">Quero receber notificações sobre este evento</label>
+                    </div>
+                </div>
+                <div class="registration-footer">
+                    <button class="btn btn-secondary" id="reg-cancel">Cancelar</button>
+                    <button class="btn btn-primary" id="reg-submit">Confirmar Registro</button>
+                </div>
+            </div>
+        `;
+        
+        // Estilizar modal
+        Object.assign(formModal.style, {
+            position: 'fixed',
+            top: '0',
+            left: '0',
+            width: '100%',
+            height: '100%',
+            background: 'rgba(0, 0, 0, 0.7)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: '1000',
+            opacity: '0',
+            transition: 'opacity 0.3s ease',
+            backdropFilter: 'blur(5px)'
+        });
+        
+        // Estilizar conteúdo
+        const content = formModal.querySelector('.registration-content');
+        Object.assign(content.style, {
+            background: 'linear-gradient(145deg, #111, #181818)',
+            borderRadius: '15px',
+            width: '90%',
+            maxWidth: '500px',
+            boxShadow: '0 15px 40px rgba(0, 0, 0, 0.5)',
+            border: '1px solid rgba(255, 255, 255, 0.05)',
+            overflow: 'hidden',
+            transform: 'translateY(50px)',
+            transition: 'transform 0.3s ease'
+        });
+        
+        // Estilizar cabeçalho
+        const header = formModal.querySelector('.registration-header');
+        Object.assign(header.style, {
+            padding: '20px',
+            borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center'
+        });
+        
+        // Estilizar título
+        const title = formModal.querySelector('.registration-header h3');
+        Object.assign(title.style, {
+            margin: '0',
+            color: 'var(--primary)',
+            fontFamily: "'Orbitron', sans-serif",
+            fontSize: '1.2rem'
+        });
+        
+        // Estilizar botão de fechar
+        const closeButton = formModal.querySelector('.registration-close');
+        Object.assign(closeButton.style, {
+            background: 'none',
+            border: 'none',
+            color: 'var(--gray)',
+            fontSize: '1.5rem',
+            cursor: 'pointer',
+            transition: 'color 0.3s ease'
+        });
+        
+        // Estilizar corpo
+        const body = formModal.querySelector('.registration-body');
+        Object.assign(body.style, {
+            padding: '20px'
+        });
+        
+        // Estilizar info do evento
+        const info = formModal.querySelector('.registration-event-info');
+        Object.assign(info.style, {
+            margin: '0 0 20px',
+            color: 'var(--gray)',
+            fontSize: '0.9rem'
+        });
+        
+        // Estilizar grupos de input
+        const inputGroups = formModal.querySelectorAll('.input-group');
+        inputGroups.forEach(group => {
+            Object.assign(group.style, {
+                marginBottom: '15px'
+            });
+        });
+        
+        // Estilizar labels
+        const labels = formModal.querySelectorAll('label:not([for="reg-terms"]):not([for="reg-notification"])');
+        labels.forEach(label => {
+            Object.assign(label.style, {
+                display: 'block',
+                marginBottom: '5px',
+                color: 'var(--light)',
+                fontSize: '0.9rem'
+            });
+        });
+        
+        // Estilizar inputs
+        const inputs = formModal.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"], select');
+        inputs.forEach(input => {
+            Object.assign(input.style, {
+                width: '100%',
+                padding: '10px 15px',
+                background: 'rgba(0, 0, 0, 0.2)',
+                border: '1px solid #333',
+                borderRadius: '8px',
+                color: 'var(--light)',
+                fontSize: '0.9rem'
+            });
+        });
+        
+        // Estilizar grupos de checkbox
+        const checkboxGroups = formModal.querySelectorAll('.checkbox-group');
+        checkboxGroups.forEach(group => {
+            Object.assign(group.style, {
+                display: 'flex',
+                alignItems: 'center'
+            });
+            
+            const checkLabel = group.querySelector('label');
+            Object.assign(checkLabel.style, {
+                marginBottom: '0',
+                marginLeft: '10px',
+                fontSize: '0.85rem',
+                color: 'var(--gray)'
+            });
+        });
+        
+        // Estilizar rodapé
+        const footer = formModal.querySelector('.registration-footer');
+        Object.assign(footer.style, {
+            padding: '15px 20px',
+            borderTop: '1px solid rgba(255, 255, 255, 0.05)',
+            display: 'flex',
+            justifyContent: 'flex-end',
+            gap: '10px'
+        });
+        
+        // Adicionar ao DOM
+        document.body.appendChild(formModal);
+        
+        // Exibir modal
+        setTimeout(() => {
+            formModal.style.opacity = '1';
+            content.style.transform = 'translateY(0)';
+        }, 10);
+        
+        // Configurar eventos
+        closeButton.addEventListener('click', closeForm);
+        formModal.querySelector('#reg-cancel').addEventListener('click', closeForm);
+        formModal.querySelector('#reg-submit').addEventListener('click', submitForm);
+        
+        // Fechar ao clicar fora
+        formModal.addEventListener('click', event => {
+            if (event.target === formModal) {
+                closeForm();
+            }
+        });
+        
+        // Função para fechar formulário
+        function closeForm() {
+            formModal.style.opacity = '0';
+            content.style.transform = 'translateY(50px)';
+            
+            // Remover do DOM após animação
+            setTimeout(() => {
+                document.body.removeChild(formModal);
+            }, 300);
+        }
+        
+        // Função para enviar formulário
+        function submitForm() {
+            // Obter valores
+            const name = formModal.querySelector('#reg-name').value;
+            const email = formModal.querySelector('#reg-email').value;
+            const phone = formModal.querySelector('#reg-phone').value;
+            const quantity = formModal.querySelector('#reg-quantity').value;
+            
+            // Validação simples
+            if (!name || !email) {
+                showNotification('Por favor, preencha os campos obrigatórios');
+                return;
+            }
+            
+            // Em uma implementação real, enviaria para o servidor
+            console.log('Registro enviado:', { 
+                evento: eventTitle, 
+                nome: name, 
+                email, 
+                telefone: phone, 
+                quantidade: quantity 
+            });
+            
+            // Fechar formulário
+            closeForm();
+            
+            // Exibir confirmação
+            showModal('registration-success', 'Registro Confirmado', `
+                <div style="text-align: center;">
+                    <p>Seu registro para <strong>${eventTitle}</strong> foi confirmado!</p>
+                    <p style="font-size: 0.9rem; color: var(--gray); margin-top: 10px;">
+                        Enviamos um email com todas as informações para <strong>${email}</strong>.
+                    </p>
+                    <div style="margin-top: 20px; background: rgba(0, 204, 102, 0.1); padding: 15px; border-radius: 10px; border: 1px solid rgba(0, 204, 102, 0.2);">
+                        <div style="font-size: 2rem; color: var(--success); margin-bottom: 10px;">
+                            <i class="fas fa-ticket-alt"></i>
+                        </div>
+                        <div style="font-family: 'Orbitron', sans-serif; color: var(--success); font-size: 1.2rem;">
+                            #FURIA${Math.floor(Math.random() * 90000) + 10000}
+                        </div>
+                        <div style="font-size: 0.8rem; color: var(--gray); margin-top: 5px;">
+                            Seu código de reserva
+                        </div>
+                    </div>
+                </div>
+            `);
+        }
+    }
+    
+    // Implementar funcionalidade de animação ao scroll
+    function setupScrollEffects() {
+        // Obter todos os cards
+        const cards = document.querySelectorAll('.recommendation-card');
+        
+        // Configurar observador de interseção
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                // Verificar se o elemento está visível
+                if (entry.isIntersecting) {
+                    // Adicionar classe para animar entrada
+                    entry.target.classList.add('animate-in');
+                    
+                    // Parar de observar depois de animar
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            root: null, // viewport
+            threshold: 0.1, // 10% visível
+            rootMargin: '0px'
+        });
+        
+        // Adicionar estilo CSS para a animação
+        const style = document.createElement('style');
+        style.textContent = `
+            .recommendation-card {
+                opacity: 0;
+                transform: translateY(30px);
+                transition: opacity 0.5s ease, transform 0.5s ease;
+            }
+            
+            .recommendation-card.animate-in {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        `;
+        
+        document.head.appendChild(style);
+        
+        // Observar cada card
+        cards.forEach((card, index) => {
+            // Atrasar o início da observação para criar efeito cascata
+            setTimeout(() => {
+                observer.observe(card);
+            }, index * 100);
+        });
+    }
+    
+    // Inicializar todas as funcionalidades quando o DOM estiver pronto
+    document.addEventListener('DOMContentLoaded', () => {
+        // Criar partículas para o fundo
+        createParticles();
+        
+        // Configurar navegação por abas
+        setupTabs();
+        
+        // Carregar dados do usuário
+        loadUserData();
+        
+        // Configurar filtros
+        setupFilters();
+        
+        // Configurar tags de interesse
+        setupInterestTags();
+        
+        // Configurar pesquisa
+        setupSearch();
+        
+        // Configurar efeitos de botões
+        setupButtonEffects();
+        
+        // Configurar sistema de recomendações
+        setupRecommendationSystem();
+        
+        // Configurar alternância de tema
+        setupThemeToggle();
+        
+        // Configurar registro para eventos
+        setupEventRegistration();
+        
+        // Configurar efeitos de rolagem
+        setupScrollEffects();
+        
+        // Exibir notificação de boas-vindas após carregar tudo
+        setTimeout(() => {
+            showNotification('Bem-vindo à FURIAX! Experimente nosso novo sistema de recomendações personalizadas.');
+        }, 1500);
+    });
+</script>
