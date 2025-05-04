@@ -232,4 +232,85 @@ Tipos de Badges:
 
 ## 6. Guia do Usuário
 
-_(continua no próximo capítulo da documentação...)_
+### 6.1 Acessando a Plataforma
+
+1. Abra seu navegador favorito.
+2. Acesse: `https://furiax.com` *(exemplo fictício)*.
+3. Clique em **"Entrar"** ou **"Registrar"**.
+4. Faça login com suas credenciais ou via redes sociais.
+5. Complete seu perfil se for o primeiro acesso.
+
+### 6.2 Personalizando seu Perfil
+
+- Vá até o menu de **Perfil**.
+- Clique em **"Editar Perfil"**.
+- Altere foto, nome, biografia, redes sociais.
+- As alterações são salvas automaticamente ou via botão "Salvar".
+
+### 6.3 Interagindo na Comunidade
+
+- Vá até a aba **Comunidade**.
+- Para criar um post: clique em **"Novo Post"**, adicione texto/imagem e publique.
+- Você pode curtir, comentar e compartilhar posts.
+- Enquetes e enquetes interativas aparecem automaticamente no feed.
+
+### 6.4 Jogando Mini-Games
+
+- Vá até **Missões**.
+- Escolha entre Quiz FURIA, Palavra do Dia, ou outras missões.
+- Ao completar, você ganhará XP e poderá subir de nível.
+- Alguns jogos oferecem recompensas exclusivas (badges, skins digitais, etc).
+
+### 6.5 Utilizando o Assistente Virtual
+
+- Acesse a aba **Assistente IA**.
+- Escolha um personagem para conversar:
+  - **Assistente Oficial**
+  - **FalleN**
+  - **KSCERATO**
+  - **Coach**
+- Digite sua pergunta no campo de texto.
+- Receba respostas, dicas e sugestões de conteúdo.
+- Os personagens reagem de forma diferente com base no contexto.
+
+### 6.6 Respondendo ao Know Your Fan
+
+- Acesse **Know Your Fan** no menu principal.
+- Responda às etapas sobre:
+  - Hábitos de consumo
+  - Preferências de jogos e estilo de vida
+  - Participação em eventos e streams
+- Quanto mais respostas, mais personalizada será sua experiência.
+
+### 6.7 Visualizando Recompensas e Progresso
+
+- Vá até o menu **Perfil > Progresso**.
+- Veja seu nível atual, XP total e histórico.
+- Badges conquistadas ficam visíveis na vitrine.
+- Recompensas futuras aparecem com porcentagem de conclusão.
+
+### 6.8 Recebendo Recomendação de Conteúdos
+
+- Acesse a aba **Recomendações**.
+- Veja sugestões de:
+  - Produtos oficiais
+  - Eventos presenciais/virtuais
+  - Clipes ou momentos históricos da FURIA
+- Relevância baseada no seu nível, perfil e atividade recente.
+
+### 6.9 Participando de Eventos
+
+- Eventos aparecem na aba **Eventos** ou como **missões temporárias**.
+- Ao se inscrever, você pode receber lembretes e instruções por email ou dentro da plataforma.
+- Participar garante XP bônus e conquistas exclusivas.
+
+### 6.10 Dicas de Engajamento
+
+- Faça login todos os dias para receber XP de streak.
+- Complete desafios diários e semanais.
+- Interaja com outros fãs (curtidas, comentários, postagens).
+- Compartilhe conquistas nas redes sociais usando o botão de **compartilhar**.
+- Participe de eventos e fique de olho em ativações surpresas.
+
+---
+

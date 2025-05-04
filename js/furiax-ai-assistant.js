@@ -10,7 +10,7 @@ const AI_CONFIG = {
     MAX_HISTORY: 50,
     PERSONALITIES: {
         DEFAULT: 'assistant',
-        ART: 'art',
+        fallen: 'fallen',
         KSCERATO: 'kscerato',
         COACH: 'coach'
     },
@@ -93,7 +93,7 @@ function setupEventListeners() {
                     
                     let personalityName;
                     switch(personality) {
-                        case 'art': personalityName = 'arT (Capitão)'; break;
+                        case 'fallen': personalityName = 'fallen (Capitão)'; break;
                         case 'kscerato': personalityName = 'KSCERATO'; break;
                         case 'coach': personalityName = 'Coach FURIA'; break;
                         default: personalityName = 'Assistente FURIA';
@@ -195,8 +195,8 @@ function setupAIChatEventListeners() {
 
 function getPersonalityGreeting(personality) {
     switch(personality) {
-        case 'art':
-            return "Fala aí! arT na área. Capitão da FURIA pronto pra trocar ideia. Pode perguntar sobre CS, táticas ou qualquer coisa do nosso time! 🔫";
+        case 'fallen':
+            return "Fala aí! fallen na área. Capitão da FURIA pronto pra trocar ideia. Pode perguntar sobre CS, táticas ou qualquer coisa do nosso time! 🔫";
         case 'kscerato':
             return "Olá! Aqui é o KSCERATO. Estou disponível para responder suas perguntas sobre a FURIA e conversar sobre CS. Como posso ajudar?";
         case 'coach':
@@ -343,7 +343,7 @@ function updateChatUI() {
                 let avatarColor;
                 
                 switch(message.personality) {
-                    case 'art':
+                    case 'fallen':
                         avatarIcon = 'fas fa-crosshairs';
                         avatarColor = '#ff3b5c';
                         break;
@@ -397,7 +397,7 @@ function generateBotResponse(userMessage, personalityType) {
     const lowerMessage = userMessage.toLowerCase();
     
     switch(personalityType) {
-        case 'art':
+        case 'fallen':
             return generateArtResponse(lowerMessage);
         case 'kscerato':
             return generateKsceratoResponse(lowerMessage);
@@ -814,7 +814,7 @@ if(lowerMessage.includes('/help') || lowerMessage.includes('ajuda') || lowerMess
            "- yuurih / Yuri Santos\n" +
            "- YEKINDAR / Marek\n" +
            "- molodoy / Danil\n" +
-           "- arT / Andrei\n\n" +
+           "- fallen / Gabriel \n\n" +
            
            "🏢 ORGANIZAÇÃO:\n" +
            "- História / fundação / origem\n" +
@@ -882,7 +882,7 @@ function generateArtResponse(message) {
     }
 
     if (message.includes('olá') || message.includes('oi') || message.includes('e aí') || message.includes('fala')) {
-        return "Fala aí! arT na área. Como que tá? Pode perguntar qualquer coisa sobre CS ou sobre o time!";
+        return "Fala aí! Dalle na área. Como que tá? Pode perguntar qualquer coisa sobre CS ou sobre o time!";
     }
 
     
@@ -892,7 +892,7 @@ function generateArtResponse(message) {
         "Fala meu mano! O que tá pegando? Pode perguntar qualquer coisa aí sobre o time ou CS.",
         "Estamos focados no próximo torneio. A preparação tá insana, confia!",
         "CS2 tem mudado várias dinâmicas do jogo, mas a gente tá se adaptando rápido. O time todo tá evoluindo bem.",
-        "Mano, essa comunidade da FURIA é diferenciada demais! Vocês são parte do time também.",
+        "Mano, essa comunidade da FURIA é diferenciada demais! Vocês são pFalleNe do time também.",
         "Bora Brasil! A gente vai representar com tudo nos próximos campeonatos. Pode confiar!"
     ];
     
