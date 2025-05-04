@@ -287,7 +287,7 @@
             width: 80px;
             height: 80px;
             border-radius: 50%;
-            background: var(--darker);
+            background: var(--primary);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -688,6 +688,76 @@
             color: var(--primary);
         }
         
+        /* Estilos específicos para produtos personalizados */
+        #personalized-products-grid .recommendation-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+        
+        #personalized-products-grid .recommendation-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+            border-color: rgba(30, 144, 255, 0.3);
+        }
+        
+        #personalized-products-grid .recommendation-card[data-priority="perfect-match"]::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at top right, rgba(30, 144, 255, 0.15), transparent 70%);
+            pointer-events: none;
+            border-radius: 15px;
+            z-index: -1;
+        }
+        
+        .btn-icon.favorited i {
+            color: var(--secondary) !important;
+        }
+        
+        /* Animação de badge exclusivo */
+        .exclusive-badge {
+            animation: pulse 2s infinite ease-in-out;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Estilo para fora de estoque */
+        .out-of-stock {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            z-index: 5;
+            border-radius: 15px;
+        }
+        
+        /* Melhoria no título do produto */
+        #personalized-products-grid .recommendation-title {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--light);
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            transition: color 0.3s ease;
+        }
+        
+        #personalized-products-grid .recommendation-card:hover .recommendation-title {
+            color: var(--primary);
+        }
+        
         /* Efeito de brilho nos cards */
         .glow-effect {
             position: absolute;
@@ -930,6 +1000,9 @@
                     <div class="tabs-nav">
                         <div class="tab-item active" data-tab="events">Eventos</div>
                         <div class="tab-item" data-tab="products">Produtos</div>
+                        <div class="tab-item" data-tab="personalized-products">
+                            <i class="fas fa-gift"></i> Para Você
+                        </div>
                         <div class="tab-item" data-tab="content">Conteúdo Exclusivo</div>
                         <div class="tab-item" data-tab="experiences">Experiências VIP</div>
                     </div>
@@ -1159,6 +1232,231 @@
                         </div>
                     </div>
                     
+                    <!-- Conteúdo da aba Produtos Personalizados -->
+                    <div class="tab-content" id="personalized-products-content">
+                        <div class="filters-bar">
+                            <button class="filter-button active" data-filter="all">
+                                <i class="fas fa-filter"></i> Todos
+                            </button>
+                            <button class="filter-button" data-filter="exclusive">
+                                <i class="fas fa-crown"></i> Exclusivos
+                            </button>
+                            <button class="filter-button" data-filter="game-specific">
+                                <i class="fas fa-gamepad"></i> Seu Jogo
+                            </button>
+                            <button class="filter-button" data-filter="limited">
+                                <i class="fas fa-fire"></i> Edição Limitada
+                            </button>
+                            <button class="filter-button" data-filter="discount">
+                                <i class="fas fa-tag"></i> Ofertas Especiais
+                            </button>
+                        </div>
+                        
+                        <div class="recommendations-grid" id="personalized-products-grid">
+                            <!-- Produto Personalizado 1 -->
+                            <div class="recommendation-card" data-priority="perfect-match">
+                                <div class="exclusive-badge" style="background: linear-gradient(90deg, var(--primary), #36a6ff); color: white;">
+                                    <i class="fas fa-user-check"></i> Para Você
+                                </div>
+                                <div class="recommendation-image">
+                                    <img src="../img/experience/prod1.webp" alt="Jersey Pro Player Limited Edition">
+                                </div>
+                                <div class="recommendation-content">
+                                    <div class="recommendation-title">Jersey Pro Player Limited Edition 2025</div>
+                                    <div class="recommendation-description">
+                                        Edição extremamente limitada com tecido premium, patches exclusivos e assinatura dos jogadores. Apenas 100 unidades disponíveis.
+                                    </div>
+                                    <div class="recommendation-meta">
+                                        <div class="recommendation-category">Exclusivo</div>
+                                        <div class="recommendation-date">
+                                            <span style="text-decoration: line-through; margin-right: 5px; font-size: 0.8rem; color: #666;">R$ 499,90</span>
+                                            <i class="fas fa-tag"></i> R$ 449,90
+                                        </div>
+                                    </div>
+                                    <div class="event-info">
+                                        <i class="fas fa-gamepad"></i> CS, VALORANT
+                                        <span class="event-info-divider">|</span>
+                                        <i class="fas fa-magic"></i> Personalizável
+                                    </div>
+                                    <div class="progress-bar-container" title="Apenas 23 unidades disponíveis!">
+                                        <div class="progress-bar-fill" style="width: 23%; background: linear-gradient(90deg, var(--secondary), #ff667f);"></div>
+                                    </div>
+                                    <div class="recommendation-actions">
+                                        <button class="btn btn-primary product-action-btn" data-action="buy" data-product="jersey-pro-limited">
+                                            <i class="fas fa-magic"></i> Personalizar
+                                        </button>
+                                        <button class="btn-icon product-action-btn" data-action="favorite" data-product="jersey-pro-limited">
+                                            <i class="fas fa-heart"></i>
+                                        </button>
+                                        <button class="btn-icon product-action-btn" data-action="share" data-product="jersey-pro-limited">
+                                            <i class="fas fa-share-alt"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Produto Personalizado 2 -->
+                            <div class="recommendation-card" data-priority="high">
+                                <div class="exclusive-badge" style="background: linear-gradient(90deg, var(--warning), #ffad33);">
+                                    <i class="fas fa-percentage"></i> -12%
+                                </div>
+                                <div class="recommendation-image">
+                                    <img src="../img/experience/prod2.webp" alt="Keyboard FURY Edition">
+                                </div>
+                                <div class="recommendation-content">
+                                    <div class="recommendation-title">Teclado Mecânico FURY Edition</div>
+                                    <div class="recommendation-description">
+                                        Desenvolvido em parceria com nossos pros, com switches personalizados, teclas de atalho especiais e iluminação RGB sincronizada.
+                                    </div>
+                                    <div class="recommendation-meta">
+                                        <div class="recommendation-category">Pro Series</div>
+                                        <div class="recommendation-date">
+                                            <span style="text-decoration: line-through; margin-right: 5px; font-size: 0.8rem; color: #666;">R$ 899,90</span>
+                                            <i class="fas fa-tag"></i> R$ 799,90
+                                        </div>
+                                    </div>
+                                    <div class="event-info">
+                                        <i class="fas fa-gamepad"></i> CS, VALORANT, APEX
+                                    </div>
+                                    <div class="recommendation-actions">
+                                        <button class="btn btn-primary product-action-btn" data-action="buy" data-product="keyboard-fury-edition">
+                                            <i class="fas fa-shopping-cart"></i> Comprar
+                                        </button>
+                                        <button class="btn-icon product-action-btn" data-action="favorite" data-product="keyboard-fury-edition">
+                                            <i class="fas fa-heart"></i>
+                                        </button>
+                                        <button class="btn-icon product-action-btn" data-action="share" data-product="keyboard-fury-edition">
+                                            <i class="fas fa-share-alt"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Produto Personalizado 3 -->
+                            <div class="recommendation-card">
+                                <div class="exclusive-badge">Edição Limitada</div>
+                                <div class="recommendation-image">
+                                    <img src="../img/experience/prod3.webp" alt="Hoodie Champion">
+                                </div>
+                                <div class="recommendation-content">
+                                    <div class="recommendation-title">Moletom Champion Edition 2025</div>
+                                    <div class="recommendation-description">
+                                        Comemorativo do título mundial, com design exclusivo e bordados especiais. Peça de colecionador com certificado de autenticidade.
+                                    </div>
+                                    <div class="recommendation-meta">
+                                        <div class="recommendation-category">Colecionador</div>
+                                        <div class="recommendation-date">
+                                            <span style="text-decoration: line-through; margin-right: 5px; font-size: 0.8rem; color: #666;">R$ 379,90</span>
+                                            <i class="fas fa-tag"></i> R$ 329,90
+                                        </div>
+                                    </div>
+                                    <div class="event-info">
+                                        <i class="fas fa-gamepad"></i> CS
+                                    </div>
+                                    <div class="progress-bar-container" title="Estoque limitado: 12 unidades">
+                                        <div class="progress-bar-fill" style="width: 12%; background: linear-gradient(90deg, var(--warning), #ffad33);"></div>
+                                    </div>
+                                    <div class="recommendation-actions">
+                                        <button class="btn btn-primary product-action-btn" data-action="buy" data-product="hoodie-champion">
+                                            <i class="fas fa-shopping-cart"></i> Comprar
+                                        </button>
+                                        <button class="btn-icon product-action-btn" data-action="favorite" data-product="hoodie-champion">
+                                            <i class="fas fa-heart"></i>
+                                        </button>
+                                        <button class="btn-icon product-action-btn" data-action="share" data-product="hoodie-champion">
+                                            <i class="fas fa-share-alt"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Produto Personalizado 4 -->
+                            <div class="recommendation-card">
+                                <div class="exclusive-badge" style="background: linear-gradient(90deg, var(--warning), #ffad33);">
+                                    <i class="fas fa-percentage"></i> -20%
+                                </div>
+                                <div class="recommendation-image">
+                                    <img src="../img/experience/prod2.webp" alt="Mousepad XL">
+                                </div>
+                                <div class="recommendation-content">
+                                    <div class="recommendation-title">Mousepad XL Pro Series Personalizável</div>
+                                    <div class="recommendation-description">
+                                        Mousepad profissional extragrande (120x50cm) com bordas costuradas, superfície de alta precisão e personalização com seu nickname.
+                                    </div>
+                                    <div class="recommendation-meta">
+                                        <div class="recommendation-category">Personalizável</div>
+                                        <div class="recommendation-date">
+                                            <span style="text-decoration: line-through; margin-right: 5px; font-size: 0.8rem; color: #666;">R$ 249,90</span>
+                                            <i class="fas fa-tag"></i> R$ 199,90
+                                        </div>
+                                    </div>
+                                    <div class="event-info">
+                                        <i class="fas fa-gamepad"></i> CS, VALORANT, APEX
+                                        <span class="event-info-divider">|</span>
+                                        <i class="fas fa-magic"></i> Personalizável
+                                    </div>
+                                    <div class="recommendation-actions">
+                                        <button class="btn btn-primary product-action-btn" data-action="buy" data-product="mousepad-xl-pro">
+                                            <i class="fas fa-magic"></i> Personalizar
+                                        </button>
+                                        <button class="btn-icon product-action-btn" data-action="favorite" data-product="mousepad-xl-pro">
+                                            <i class="fas fa-heart"></i>
+                                        </button>
+                                        <button class="btn-icon product-action-btn" data-action="share" data-product="mousepad-xl-pro">
+                                            <i class="fas fa-share-alt"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Produto Personalizado 5 -->
+                            <div class="recommendation-card" data-priority="high">
+                                <div class="exclusive-badge">Exclusivo</div>
+                                <div class="recommendation-image">
+                                    <img src="../img/experience/prod1.webp" alt="Headset Pro">
+                                </div>
+                                <div class="recommendation-content">
+                                    <div class="recommendation-title">Headset FURIA Pro Gaming</div>
+                                    <div class="recommendation-description">
+                                        Headset profissional com as mesmas especificações utilizadas pelos jogadores da FURIA. Cancelamento de ruído e microfone destacável.
+                                    </div>
+                                    <div class="recommendation-meta">
+                                        <div class="recommendation-category">Hardware</div>
+                                        <div class="recommendation-date">
+                                            <span style="text-decoration: line-through; margin-right: 5px; font-size: 0.8rem; color: #666;">R$ 699,90</span>
+                                            <i class="fas fa-tag"></i> R$ 599,90
+                                        </div>
+                                    </div>
+                                    <div class="event-info">
+                                        <i class="fas fa-gamepad"></i> CS, VALORANT, R6, APEX
+                                    </div>
+                                    <div class="recommendation-actions">
+                                        <button class="btn btn-primary product-action-btn" data-action="buy" data-product="headset-pro">
+                                            <i class="fas fa-shopping-cart"></i> Comprar
+                                        </button>
+                                        <button class="btn-icon product-action-btn" data-action="favorite" data-product="headset-pro">
+                                            <i class="fas fa-heart"></i>
+                                        </button>
+                                        <button class="btn-icon product-action-btn" data-action="share" data-product="headset-pro">
+                                            <i class="fas fa-share-alt"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="empty-state" id="no-products-found" style="display: none;">
+                            <div class="empty-state-icon">
+                                <i class="fas fa-box-open"></i>
+                            </div>
+                            <div class="empty-state-title">Nenhum produto encontrado</div>
+                            <div class="empty-state-text">
+                                Não encontramos produtos nesta categoria que correspondam ao seu perfil.
+                                Continue interagindo com a plataforma para recebermos mais dados.
+                            </div>
+                        </div>
+                    </div>
+                    
                     <!-- Conteúdo da aba Conteúdo Exclusivo -->
                     <div class="tab-content" id="content-content">
                         <div class="filters-bar">
@@ -1234,8 +1532,7 @@
                                         <button class="btn-icon">
                                             <i class="fas fa-download"></i>
                                         </button>
-                                        <button class="btn-icon">
-                                            <i class="fas fa-share-alt"></i>
+                                        alt"></i>
                                         </button>
                                     </div>
                                 </div>
@@ -1381,8 +1678,6 @@
                         </div>
                     </div>
                 </div>
-
-                
                 
                 <!-- Seção de Sugestão de Experiência Personalizada -->
                 <div class="customize-box" style="margin-top: 40px;">
@@ -1403,8 +1698,8 @@
         </div>
     </div>
     
-;    <script src="../js/furiax-profile-system.js"></script>
     <!-- JavaScript -->
+    <!-- Script principal da página -->
     <script>
         // Criar partículas para o fundo
         function createParticles() {
@@ -1489,67 +1784,6 @@
             }
         }
         
-        // Categorizar o usuário
-        function categorizeUser() {
-            // Em uma implementação real, usaria algoritmo de machine learning
-            // para classificar o usuário com base em seus interesses e comportamentos
-            
-            // Simulação para demonstração - categorias pré-definidas
-            const categories = [
-                { id: 'gamer', name: 'Gamer Hardcore', icon: 'gamepad' },
-                { id: 'collector', name: 'Colecionador', icon: 'trophy' },
-                { id: 'evento', name: 'Fã de Eventos', icon: 'calendar-alt' },
-                { id: 'social', name: 'Social Media', icon: 'share-alt' }
-            ];
-            
-            // Escolher uma categoria aleatória para demonstração
-            const randomCategory = categories[Math.floor(Math.random() * categories.length)];
-            
-            // Atualizar no DOM
-            const fanCategoryEl = document.getElementById('fanCategory');
-            if (fanCategoryEl) {
-                fanCategoryEl.innerHTML = `<i class="fas fa-${randomCategory.icon}"></i> ${randomCategory.name}`;
-            }
-            
-            // Personalizar recomendações com base na categoria
-            customizeRecommendations(randomCategory.id);
-        }
-        
-        // Personalizar recomendações
-        function customizeRecommendations(category) {
-            // Em uma implementação real, filtraria as recomendações
-            // com base na categoria do usuário, seu histórico e interesses
-            
-            console.log(`Personalizando para categoria: ${category}`);
-            
-            // Simulação - destaque algumas recomendações com base na categoria
-            const allCards = document.querySelectorAll('.recommendation-card');
-            
-            // Reset
-            allCards.forEach(card => {
-                card.style.order = '0';
-                card.style.transform = 'none';
-                card.style.boxShadow = 'none';
-            });
-            
-            // Destaque aleatório (simulação)
-            const randomCards = Array.from(allCards).sort(() => 0.5 - Math.random()).slice(0, 3);
-            
-            randomCards.forEach((card, index) => {
-                card.style.order = '-1';
-                card.style.transform = 'scale(1.02)';
-                card.style.boxShadow = '0 10px 20px rgba(30, 144, 255, 0.2)';
-                
-                // Adicionar badge se não existir
-                if (!card.querySelector('.exclusive-badge')) {
-                    const badge = document.createElement('div');
-                    badge.className = 'exclusive-badge';
-                    badge.textContent = 'Recomendado';
-                    card.prepend(badge);
-                }
-            });
-        }
-        
         // Configurar filtros
         function setupFilters() {
             const filterButtons = document.querySelectorAll('.filter-button');
@@ -1564,17 +1798,77 @@
                     // Adicionar classe ativa ao filtro clicado
                     button.classList.add('active');
                     
-                    // Simular filtragem (para demonstração)
-                    // Em uma implementação real, filtraria os resultados
-                    simulateFiltering();
+                    // Filtrar produtos se for na aba de produtos personalizados
+                    if (button.closest('#personalized-products-content')) {
+                        const filterType = button.getAttribute('data-filter') || 'all';
+                        filterPersonalizedProducts(filterType);
+                    } else {
+                        // Simular filtragem (para demonstração)
+                        simulateFiltering();
+                    }
                 });
             });
+        }
+        
+        // Filtrar produtos personalizados
+        function filterPersonalizedProducts(filterType) {
+            const productsGrid = document.getElementById('personalized-products-grid');
+            const cards = productsGrid.querySelectorAll('.recommendation-card');
+            const emptyState = document.getElementById('no-products-found');
+            
+            // Reset de visualização
+            let visibleCount = 0;
+            
+            cards.forEach(card => {
+                const productId = card.querySelector('.product-action-btn').getAttribute('data-product');
+                let shouldShow = false;
+                
+                if (filterType === 'all') {
+                    shouldShow = true;
+                } else if (filterType === 'exclusive' && card.querySelector('.exclusive-badge').textContent.toLowerCase().includes('exclusivo')) {
+                    shouldShow = true;
+                } else if (filterType === 'game-specific' && card.querySelector('.event-info').textContent.toLowerCase().includes('cs')) {
+                    shouldShow = true;
+                } else if (filterType === 'limited' && card.querySelector('.exclusive-badge').textContent.toLowerCase().includes('limitada')) {
+                    shouldShow = true;
+                } else if (filterType === 'discount' && card.querySelector('.recommendation-meta').textContent.includes('R$')) {
+                    // Verificar se tem texto riscado (desconto)
+                    const hasDiscount = card.querySelector('.recommendation-date').innerHTML.includes('line-through');
+                    if (hasDiscount) shouldShow = true;
+                }
+                
+                // Mostrar ou esconder card
+                if (shouldShow) {
+                    card.style.display = 'block';
+                    visibleCount++;
+                    
+                    // Aplicar animação de entrada
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(20px)';
+                    
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 50 * visibleCount); // Efeito cascata
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            
+            // Mostrar estado vazio se não houver produtos
+            if (visibleCount === 0) {
+                emptyState.style.display = 'block';
+                productsGrid.style.display = 'none';
+            } else {
+                emptyState.style.display = 'none';
+                productsGrid.style.display = 'grid';
+            }
         }
         
         // Simular filtragem
         function simulateFiltering() {
             // Animação simples para simulação de filtragem
-            const cards = document.querySelectorAll('.recommendation-card');
+            const cards = document.querySelectorAll('.tab-content.active .recommendation-card');
             
             cards.forEach(card => {
                 card.style.opacity = '0.5';
@@ -1582,1392 +1876,375 @@
             });
             
             setTimeout(() => {
-    cards.forEach((card, index) => {
-        setTimeout(() => {
-            card.style.opacity = '1';
-            card.style.transform = 'translateY(0)';
-        }, index * 50);
-    });
-}, 300);
-    }
-
-    
-    // Configurar tags de interesse
-    function setupInterestTags() {
-        const tags = document.querySelectorAll('.interest-tag');
-        
-        tags.forEach(tag => {
-            tag.addEventListener('click', () => {
-                tag.classList.toggle('active');
-                
-                // Em uma implementação real, salvaria a preferência
-                // e recalcularia as recomendações
-                recalculateRecommendations();
-            });
-        });
-    }
-    
-    // Recalcular recomendações com base nos interesses
-    function recalculateRecommendations() {
-        // Obter interesses ativos
-        const activeInterests = Array.from(
-            document.querySelectorAll('.interest-tag.active')
-        ).map(tag => tag.textContent.trim().toLowerCase());
-        
-        console.log('Interesses ativos:', activeInterests);
-        
-        // Simulação de recálculo - destacar cards aleatórios
-        const allCards = document.querySelectorAll('.recommendation-card');
-        
-        // Reset visual
-        allCards.forEach(card => {
-            card.style.order = '0';
-            card.style.transform = 'none';
-            card.style.boxShadow = 'none';
-        });
-        
-        // Selecionar alguns cards aleatórios para destacar
-        const selectedCards = Array.from(allCards)
-            .sort(() => 0.5 - Math.random())
-            .slice(0, activeInterests.length);
-        
-        // Aplicar destaque
-        selectedCards.forEach(card => {
-            card.style.order = '-1';
-            card.style.transform = 'translateY(-5px)';
-            card.style.boxShadow = '0 10px 20px rgba(30, 144, 255, 0.3)';
-        });
-        
-        // Exibir notificação de atualização
-        showNotification('Recomendações atualizadas com base nos seus interesses');
-    }
-    
-    // Exibir notificação
-    function showNotification(message) {
-        // Criar elemento de notificação
-        const notification = document.createElement('div');
-        notification.className = 'notification';
-        notification.innerHTML = `
-            <div class="notification-content">
-                <i class="fas fa-info-circle"></i>
-                <span>${message}</span>
-            </div>
-        `;
-        
-        // Estilizar notificação
-        Object.assign(notification.style, {
-            position: 'fixed',
-            bottom: '20px',
-            right: '20px',
-            background: 'rgba(30, 144, 255, 0.9)',
-            color: 'white',
-            padding: '12px 20px',
-            borderRadius: '8px',
-            boxShadow: '0 5px 15px rgba(0, 0, 0, 0.3)',
-            zIndex: '1000',
-            transform: 'translateY(100px)',
-            transition: 'transform 0.3s ease-out',
-            display: 'flex',
-            alignItems: 'center'
-        });
-        
-        // Adicionar ao DOM
-        document.body.appendChild(notification);
-        
-        // Animar entrada
-        setTimeout(() => {
-            notification.style.transform = 'translateY(0)';
-        }, 10);
-        
-        // Remover após alguns segundos
-        setTimeout(() => {
-            notification.style.transform = 'translateY(100px)';
-            
-            // Remover do DOM após animação
-            setTimeout(() => {
-                document.body.removeChild(notification);
+                cards.forEach((card, index) => {
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, index * 50);
+                });
             }, 300);
-        }, 3000);
-    }
-    
-    // Implementar funcionalidade de pesquisa
-    function setupSearch() {
-        // Criar elemento de pesquisa na barra superior
-        const mainHeader = document.querySelector('.main-header');
-        
-        const searchContainer = document.createElement('div');
-        searchContainer.className = 'search-container';
-        
-        searchContainer.innerHTML = `
-            <div class="search-input">
-                <i class="fas fa-search"></i>
-                <input type="text" placeholder="Buscar experiências, eventos e produtos...">
-            </div>
-        `;
-        
-        // Estilizar container de pesquisa
-        Object.assign(searchContainer.style, {
-            position: 'absolute',
-            right: '0',
-            top: '0',
-            display: 'flex',
-            alignItems: 'center'
-        });
-        
-        // Estilizar input de pesquisa
-        const searchInput = searchContainer.querySelector('.search-input');
-        Object.assign(searchInput.style, {
-            background: 'rgba(0, 0, 0, 0.2)',
-            border: '1px solid #333',
-            borderRadius: '20px',
-            padding: '8px 15px',
-            display: 'flex',
-            alignItems: 'center',
-            width: '250px'
-        });
-        
-        const searchIcon = searchInput.querySelector('i');
-        Object.assign(searchIcon.style, {
-            color: 'var(--gray)',
-            marginRight: '10px'
-        });
-        
-        const input = searchInput.querySelector('input');
-        Object.assign(input.style, {
-            background: 'transparent',
-            border: 'none',
-            color: 'var(--light)',
-            width: '100%',
-            outline: 'none',
-            fontFamily: "'Exo 2', sans-serif",
-            fontSize: '0.9rem'
-        });
-        
-        // Adicionar à página
-        mainHeader.appendChild(searchContainer);
-        
-        // Adicionar funcionalidade de pesquisa
-        input.addEventListener('input', debounce(searchContent, 300));
-    }
-    
-    // Debounce para evitar múltiplas chamadas
-    function debounce(func, wait) {
-        let timeout;
-        return function(...args) {
-            clearTimeout(timeout);
-            timeout = setTimeout(() => func.apply(this, args), wait);
-        };
-    }
-    
-    // Pesquisar conteúdo
-    function searchContent(event) {
-        const searchTerm = event.target.value.toLowerCase().trim();
-        
-        if (searchTerm.length < 2) {
-            // Reset da pesquisa
-            resetSearch();
-            return;
         }
         
-        // Obter todos os cards
-        const allCards = document.querySelectorAll('.recommendation-card');
-        
-        // Contador de correspondências
-        let matchCount = 0;
-        
-        // Verificar cada card
-        allCards.forEach(card => {
-            const title = card.querySelector('.recommendation-title').textContent.toLowerCase();
-            const description = card.querySelector('.recommendation-description').textContent.toLowerCase();
-            
-            // Verificar se o termo de pesquisa está contido no título ou descrição
-            if (title.includes(searchTerm) || description.includes(searchTerm)) {
-                // Destacar card
-                card.style.display = 'block';
-                card.style.order = '-1';
-                card.style.transform = 'scale(1.02)';
-                card.style.boxShadow = '0 10px 20px rgba(30, 144, 255, 0.3)';
-                
-                // Destacar o texto correspondente
-                highlightText(card, searchTerm);
-                
-                matchCount++;
-            } else {
-                // Esconder cards que não correspondem
-                card.style.opacity = '0.3';
-                card.style.transform = 'scale(0.98)';
-            }
-        });
-        
-        // Exibir mensagem de resultados
-        if (matchCount > 0) {
-            showNotification(`Encontrados ${matchCount} resultados para "${searchTerm}"`);
-        } else {
-            showNotification(`Nenhum resultado encontrado para "${searchTerm}"`);
-        }
-    }
-    
-    // Resetar pesquisa
-    function resetSearch() {
-        const allCards = document.querySelectorAll('.recommendation-card');
-        
-        allCards.forEach(card => {
-            card.style.display = 'block';
-            card.style.opacity = '1';
-            card.style.order = '0';
-            card.style.transform = 'none';
-            card.style.boxShadow = 'none';
-            
-            // Remover destaques
-            removeHighlights(card);
-        });
-    }
-    
-    // Destacar texto correspondente
-    function highlightText(card, searchTerm) {
-        const titleElement = card.querySelector('.recommendation-title');
-        const descriptionElement = card.querySelector('.recommendation-description');
-        
-        // Salvar texto original se ainda não foi salvo
-        if (!titleElement.dataset.original) {
-            titleElement.dataset.original = titleElement.textContent;
-            descriptionElement.dataset.original = descriptionElement.textContent;
-        }
-        
-        // Restaurar texto original antes de destacar
-        titleElement.textContent = titleElement.dataset.original;
-        descriptionElement.textContent = descriptionElement.dataset.original;
-        
-        // Função para destacar texto
-        function addHighlight(element) {
-            const text = element.textContent;
-            const regex = new RegExp(`(${searchTerm})`, 'gi');
-            element.innerHTML = text.replace(regex, '<span class="highlight">$1</span>');
-        }
-        
-        // Aplicar destaque
-        addHighlight(titleElement);
-        addHighlight(descriptionElement);
-        
-        // Estilizar destaques
-        const highlights = card.querySelectorAll('.highlight');
-        highlights.forEach(highlight => {
-            Object.assign(highlight.style, {
-                background: 'rgba(30, 144, 255, 0.3)',
-                padding: '0 2px',
-                borderRadius: '3px',
-                color: 'white',
-                fontWeight: 'bold'
-            });
-        });
-    }
-    
-    // Remover destaques
-    function removeHighlights(card) {
-        const titleElement = card.querySelector('.recommendation-title');
-        const descriptionElement = card.querySelector('.recommendation-description');
-        
-        // Restaurar texto original se disponível
-        if (titleElement.dataset.original) {
-            titleElement.textContent = titleElement.dataset.original;
-            descriptionElement.textContent = descriptionElement.dataset.original;
-        }
-    }
-    
-    // Adicionar animações nos botões de ação
-    function setupButtonEffects() {
-        const buttons = document.querySelectorAll('.btn, .btn-icon');
-        
-        buttons.forEach(button => {
-            button.addEventListener('mouseenter', () => {
-                button.style.transform = button.classList.contains('btn-primary') 
-                    ? 'translateY(-3px)' 
-                    : 'translateY(-2px)';
-                
-                if (button.classList.contains('btn-primary')) {
-                    button.style.boxShadow = '0 5px 15px rgba(30, 144, 255, 0.4)';
-                }
-            });
-            
-            button.addEventListener('mouseleave', () => {
-                button.style.transform = 'translateY(0)';
-                
-                if (button.classList.contains('btn-primary')) {
-                    button.style.boxShadow = '0 3px 10px rgba(30, 144, 255, 0.2)';
-                }
-            });
-            
-            button.addEventListener('click', () => {
-                // Efeito de clique
-                button.style.transform = 'scale(0.95)';
-                
-                setTimeout(() => {
-                    button.style.transform = 'scale(1)';
+        // Configurar eventos para botões de produto
+        function setupProductButtons() {
+            // Botões de compra
+            document.querySelectorAll('.product-action-btn[data-action="buy"]').forEach(button => {
+                button.addEventListener('click', function() {
+                    const productId = this.getAttribute('data-product');
+                    const productTitle = this.closest('.recommendation-card').querySelector('.recommendation-title').textContent;
                     
-                    // Simulação de ação
-                    simulateButtonAction(button);
-                }, 100);
+                    // Simular adição ao carrinho
+                    showNotification(`${productTitle} adicionado ao carrinho!`, 'success');
+                });
             });
-        });
-    }
-    
-    // Simular ação de botão
-    function simulateButtonAction(button) {
-        // Obter texto do botão para identificar a ação
-        const buttonText = button.textContent.trim().toLowerCase();
-        const iconClass = button.querySelector('i')?.className || '';
-        
-        // Determinar ação com base no texto ou ícone
-        if (buttonText.includes('comprar') || buttonText.includes('ingresso') || iconClass.includes('shopping-cart') || iconClass.includes('ticket')) {
-            showModal('purchase-modal', 'Adicionar ao Carrinho', 'Item adicionado ao seu carrinho com sucesso!');
-        } else if (buttonText.includes('participar') || buttonText.includes('reservar') || iconClass.includes('star')) {
-            showModal('reservation-modal', 'Reserva Confirmada', 'Sua vaga foi reservada com sucesso! Verifique seu email para mais detalhes.');
-        } else if (iconClass.includes('heart')) {
-            toggleFavorite(button);
-        } else if (iconClass.includes('bell')) {
-            toggleNotification(button);
-        } else if (iconClass.includes('share')) {
-            showSharingOptions(button);
-        } else {
-            // Ação genérica
-            showNotification('Ação realizada com sucesso!');
-        }
-    }
-    
-    // Exibir modal
-    function showModal(modalId, title, message) {
-        // Verificar se o modal já existe
-        let modal = document.getElementById(modalId);
-        
-        if (!modal) {
-            // Criar modal
-            modal = document.createElement('div');
-            modal.id = modalId;
-            modal.className = 'modal';
             
-            modal.innerHTML = `
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h3>${title}</h3>
-                        <button class="modal-close">&times;</button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="success-icon">
-                            <i class="fas fa-check-circle"></i>
-                        </div>
-                        <p>${message}</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-primary modal-confirm">OK</button>
-                    </div>
+            // Botões de favorito
+            document.querySelectorAll('.product-action-btn[data-action="favorite"]').forEach(button => {
+                button.addEventListener('click', function() {
+                    const productId = this.getAttribute('data-product');
+                    const productTitle = this.closest('.recommendation-card').querySelector('.recommendation-title').textContent;
+                    
+                    // Toggle de favorito
+                    this.classList.toggle('favorited');
+                    
+                    if (this.classList.contains('favorited')) {
+                        this.querySelector('i').style.color = 'var(--secondary)';
+                        showNotification(`${productTitle} adicionado aos favoritos`, 'success');
+                    } else {
+                        this.querySelector('i').style.color = '';
+                        showNotification(`${productTitle} removido dos favoritos`);
+                    }
+                });
+            });
+            
+            // Botões de compartilhamento
+            document.querySelectorAll('.product-action-btn[data-action="share"]').forEach(button => {
+                button.addEventListener('click', function() {
+                    const productId = this.getAttribute('data-product');
+                    const productTitle = this.closest('.recommendation-card').querySelector('.recommendation-title').textContent;
+                    
+                    // Simular compartilhamento
+                    showNotification(`Link para ${productTitle} copiado para a área de transferência!`, 'success');
+                });
+            });
+        }
+        
+        // Exibir notificação
+        function showNotification(message, type = 'info') {
+            // Criar elemento de notificação
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                background: linear-gradient(90deg, var(--primary), #36a6ff);
+                color: white;
+                padding: 15px 20px;
+                border-radius: 10px;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                z-index: 1000;
+                max-width: 350px;
+                transform: translateY(100px);
+                opacity: 0;
+                transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            `;
+            
+            // Definir ícone com base no tipo
+            let icon = 'fa-info-circle';
+            if (type === 'success') {
+                icon = 'fa-check-circle';
+                notification.style.background = 'linear-gradient(90deg, var(--success), #00e673)';
+            } else if (type === 'error') {
+                icon = 'fa-exclamation-circle';
+                notification.style.background = 'linear-gradient(90deg, var(--secondary), #ff667f)';
+            }
+            
+            // HTML da notificação
+            notification.innerHTML = `
+                <div class="notification-icon">
+                    <i class="fas ${icon}"></i>
+                </div>
+                <div class="notification-content">
+                    ${message}
+                </div>
+                <div class="notification-close">
+                    <i class="fas fa-times"></i>
                 </div>
             `;
             
-            // Estilizar modal
-            Object.assign(modal.style, {
-                position: 'fixed',
-                top: '0',
-                left: '0',
-                width: '100%',
-                height: '100%',
-                background: 'rgba(0, 0, 0, 0.7)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                zIndex: '1000',
-                opacity: '0',
-                transition: 'opacity 0.3s ease',
-                backdropFilter: 'blur(5px)'
-            });
-            
-            // Estilizar conteúdo do modal
-            const modalContent = modal.querySelector('.modal-content');
-            Object.assign(modalContent.style, {
-                background: 'linear-gradient(145deg, #111, #181818)',
-                borderRadius: '15px',
-                width: '90%',
-                maxWidth: '400px',
-                boxShadow: '0 15px 40px rgba(0, 0, 0, 0.5)',
-                border: '1px solid rgba(255, 255, 255, 0.05)',
-                overflow: 'hidden',
-                transform: 'translateY(50px)',
-                transition: 'transform 0.3s ease'
-            });
-            
-            // Estilizar cabeçalho do modal
-            const modalHeader = modal.querySelector('.modal-header');
-            Object.assign(modalHeader.style, {
-                padding: '20px',
-                borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center'
-            });
-            
-            // Estilizar título do modal
-            const modalTitle = modal.querySelector('.modal-header h3');
-            Object.assign(modalTitle.style, {
-                margin: '0',
-                color: 'var(--primary)',
-                fontFamily: "'Orbitron', sans-serif",
-                fontSize: '1.2rem'
-            });
+            // Estilizar ícone
+            notification.querySelector('.notification-icon').style.cssText = `
+                font-size: 1.5rem;
+            `;
             
             // Estilizar botão de fechar
-            const closeButton = modal.querySelector('.modal-close');
-            Object.assign(closeButton.style, {
-                background: 'none',
-                border: 'none',
-                color: 'var(--gray)',
-                fontSize: '1.5rem',
-                cursor: 'pointer',
-                transition: 'color 0.3s ease'
-            });
+            const closeButton = notification.querySelector('.notification-close');
+            closeButton.style.cssText = `
+                cursor: pointer;
+                color: rgba(255, 255, 255, 0.7);
+                transition: var(--transition);
+            `;
             
-            // Estilizar corpo do modal
-            const modalBody = modal.querySelector('.modal-body');
-            Object.assign(modalBody.style, {
-                padding: '30px 20px',
-                textAlign: 'center'
-            });
-            
-            // Estilizar ícone de sucesso
-            const successIcon = modal.querySelector('.success-icon');
-            Object.assign(successIcon.style, {
-                fontSize: '3rem',
-                color: 'var(--success)',
-                marginBottom: '20px'
-            });
-            
-            // Estilizar rodapé do modal
-            const modalFooter = modal.querySelector('.modal-footer');
-            Object.assign(modalFooter.style, {
-                padding: '15px 20px',
-                borderTop: '1px solid rgba(255, 255, 255, 0.05)',
-                textAlign: 'right'
+            // Adicionar evento de fechar
+            closeButton.addEventListener('click', () => {
+                notification.style.opacity = '0';
+                notification.style.transform = 'translateY(100px)';
+                
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        document.body.removeChild(notification);
+                    }
+                }, 500);
             });
             
             // Adicionar ao DOM
-            document.body.appendChild(modal);
+            document.body.appendChild(notification);
             
-            // Configurar eventos
-            closeButton.addEventListener('click', () => closeModal(modal));
-            modal.querySelector('.modal-confirm').addEventListener('click', () => closeModal(modal));
+            // Animar entrada
+            setTimeout(() => {
+                notification.style.transform = 'translateY(0)';
+                notification.style.opacity = '1';
+            }, 10);
             
-            // Fechar ao clicar fora do conteúdo
-            modal.addEventListener('click', event => {
-                if (event.target === modal) {
-                    closeModal(modal);
+            // Auto-remover após alguns segundos
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.style.opacity = '0';
+                    notification.style.transform = 'translateY(100px)';
+                    
+                    setTimeout(() => {
+                        if (notification.parentNode) {
+                            document.body.removeChild(notification);
+                        }
+                    }, 500);
                 }
-            });
+            }, 5000);
         }
         
-        // Exibir modal
-        setTimeout(() => {
-            modal.style.opacity = '1';
-            modal.querySelector('.modal-content').style.transform = 'translateY(0)';
-        }, 10);
-    }
-    
-    // Fechar modal
-    function closeModal(modal) {
-        modal.style.opacity = '0';
-        modal.querySelector('.modal-content').style.transform = 'translateY(50px)';
-        
-        // Remover do DOM após animação
-        setTimeout(() => {
-            document.body.removeChild(modal);
-        }, 300);
-    }
-    
-    // Alternar favorito
-    function toggleFavorite(button) {
-        const isFavorite = button.dataset.favorite === 'true';
-        
-        if (isFavorite) {
-            // Remover dos favoritos
-            button.dataset.favorite = 'false';
-            button.querySelector('i').style.color = 'var(--gray)';
-            showNotification('Removido dos favoritos');
-        } else {
-            // Adicionar aos favoritos
-            button.dataset.favorite = 'true';
-            button.querySelector('i').style.color = 'var(--secondary)';
-            showNotification('Adicionado aos favoritos');
+        // Configurar tags de interesse interativas
+        function setupInterestTags() {
+            const interestTags = document.querySelectorAll('.interest-tag');
             
-            // Animar coração
-            const icon = button.querySelector('i');
-            icon.style.transform = 'scale(1.3)';
-            
-            setTimeout(() => {
-                icon.style.transform = 'scale(1)';
-            }, 300);
-        }
-    }
-    
-    // Alternar notificação
-    function toggleNotification(button) {
-        const isNotifying = button.dataset.notify === 'true';
-        
-        if (isNotifying) {
-            // Desativar notificações
-            button.dataset.notify = 'false';
-            button.querySelector('i').style.color = 'var(--gray)';
-            showNotification('Notificações desativadas');
-        } else {
-            // Ativar notificações
-            button.dataset.notify = 'true';
-            button.querySelector('i').style.color = 'var(--primary)';
-            showNotification('Você receberá notificações sobre este item');
-        }
-    }
-    
-    // Exibir opções de compartilhamento
-    function showSharingOptions(button) {
-        // Obter dados do card
-        const card = button.closest('.recommendation-card');
-        const title = card.querySelector('.recommendation-title').textContent;
-        
-        // Criar menu de compartilhamento
-        const shareMenu = document.createElement('div');
-        shareMenu.className = 'share-menu';
-        
-        shareMenu.innerHTML = `
-            <div class="share-menu-content">
-                <div class="share-menu-header">
-                    <h4>Compartilhar</h4>
-                    <button class="share-menu-close">&times;</button>
-                </div>
-                <div class="share-menu-body">
-                    <button class="share-option" data-platform="whatsapp">
-                        <i class="fab fa-whatsapp"></i> WhatsApp
-                    </button>
-                    <button class="share-option" data-platform="telegram">
-                        <i class="fab fa-telegram"></i> Telegram
-                    </button>
-                    <button class="share-option" data-platform="facebook">
-                        <i class="fab fa-facebook"></i> Facebook
-                    </button>
-                    <button class="share-option" data-platform="twitter">
-                        <i class="fab fa-twitter"></i> Twitter
-                    </button>
-                    <button class="share-option" data-platform="email">
-                        <i class="fas fa-envelope"></i> Email
-                    </button>
-                    <button class="share-option" data-platform="copy">
-                        <i class="fas fa-copy"></i> Copiar Link
-                    </button>
-                </div>
-            </div>
-        `;
-        
-        // Posicionar menu
-        const buttonRect = button.getBoundingClientRect();
-        
-        // Estilizar menu
-        Object.assign(shareMenu.style, {
-            position: 'fixed',
-            top: '0',
-            left: '0',
-            width: '100%',
-            height: '100%',
-            background: 'rgba(0, 0, 0, 0.7)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            zIndex: '1000',
-            opacity: '0',
-            transition: 'opacity 0.3s ease',
-            backdropFilter: 'blur(5px)'
-        });
-        
-        // Estilizar conteúdo do menu
-        const menuContent = shareMenu.querySelector('.share-menu-content');
-        Object.assign(menuContent.style, {
-            background: 'linear-gradient(145deg, #111, #181818)',
-            borderRadius: '15px',
-            width: '90%',
-            maxWidth: '350px',
-            boxShadow: '0 15px 40px rgba(0, 0, 0, 0.5)',
-            border: '1px solid rgba(255, 255, 255, 0.05)',
-            overflow: 'hidden',
-            transform: 'translateY(30px)',
-            transition: 'transform 0.3s ease'
-        });
-        
-        // Estilizar cabeçalho do menu
-        const menuHeader = shareMenu.querySelector('.share-menu-header');
-        Object.assign(menuHeader.style, {
-            padding: '15px 20px',
-            borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center'
-        });
-        
-        // Estilizar título do menu
-        const menuTitle = shareMenu.querySelector('.share-menu-header h4');
-        Object.assign(menuTitle.style, {
-            margin: '0',
-            color: 'var(--light)',
-            fontFamily: "'Exo 2', sans-serif",
-            fontSize: '1rem'
-        });
-        
-        // Estilizar botão de fechar
-        const closeButton = shareMenu.querySelector('.share-menu-close');
-        Object.assign(closeButton.style, {
-            background: 'none',
-            border: 'none',
-            color: 'var(--gray)',
-            fontSize: '1.5rem',
-            cursor: 'pointer',
-            transition: 'color 0.3s ease'
-        });
-        
-        // Estilizar corpo do menu
-        const menuBody = shareMenu.querySelector('.share-menu-body');
-        Object.assign(menuBody.style, {
-            padding: '15px',
-            display: 'grid',
-            gridTemplateColumns: 'repeat(2, 1fr)',
-            gap: '10px'
-        });
-        
-        // Estilizar opções de compartilhamento
-        const shareOptions = shareMenu.querySelectorAll('.share-option');
-        shareOptions.forEach(option => {
-            Object.assign(option.style, {
-                background: 'rgba(255, 255, 255, 0.05)',
-                border: '1px solid rgba(255, 255, 255, 0.1)',
-                borderRadius: '8px',
-                padding: '12px',
-                color: 'var(--light)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                cursor: 'pointer',
-                transition: 'all 0.2s ease',
-                fontFamily: "'Exo 2', sans-serif",
-                fontSize: '0.9rem'
-            });
-            
-            // Dar cor aos ícones de redes sociais
-            const icon = option.querySelector('i');
-            const platform = option.dataset.platform;
-            
-            if (platform === 'whatsapp') icon.style.color = '#25D366';
-            if (platform === 'telegram') icon.style.color = '#0088cc';
-            if (platform === 'facebook') icon.style.color = '#1877F2';
-            if (platform === 'twitter') icon.style.color = '#1DA1F2';
-            if (platform === 'email') icon.style.color = '#D44638';
-            if (platform === 'copy') icon.style.color = '#FFC107';
-            
-            icon.style.marginRight = '8px';
-            
-            // Efeito hover
-            option.addEventListener('mouseenter', () => {
-                option.style.background = 'rgba(255, 255, 255, 0.1)';
-                option.style.transform = 'translateY(-2px)';
-            });
-            
-            option.addEventListener('mouseleave', () => {
-                option.style.background = 'rgba(255, 255, 255, 0.05)';
-                option.style.transform = 'translateY(0)';
-            });
-            
-            // Ação de compartilhamento
-            option.addEventListener('click', () => {
-                simulateShare(platform, title);
-                closeShareMenu();
-            });
-        });
-        
-        // Adicionar ao DOM
-        document.body.appendChild(shareMenu);
-        
-        // Exibir menu
-        setTimeout(() => {
-            shareMenu.style.opacity = '1';
-            menuContent.style.transform = 'translateY(0)';
-        }, 10);
-        
-        // Configurar eventos
-        closeButton.addEventListener('click', closeShareMenu);
-        
-        // Fechar ao clicar fora do conteúdo
-        shareMenu.addEventListener('click', event => {
-            if (event.target === shareMenu) {
-                closeShareMenu();
-            }
-        });
-        
-        // Função para fechar menu
-        function closeShareMenu() {
-            shareMenu.style.opacity = '0';
-            menuContent.style.transform = 'translateY(30px)';
-            
-            // Remover do DOM após animação
-            setTimeout(() => {
-                document.body.removeChild(shareMenu);
-            }, 300);
-        }
-    }
-    
-    // Simular compartilhamento
-    function simulateShare(platform, title) {
-        const message = `Confira esta experiência FURIA: ${title}`;
-        
-        // Simulação - em uma implementação real, usaria APIs de compartilhamento
-        console.log(`Compartilhando via ${platform}: ${message}`);
-        
-        if (platform === 'copy') {
-            // Simular cópia de link
-            navigator.clipboard.writeText(`https://furiax.com/experiences/${title.replace(/\s+/g, '-').toLowerCase()}`)
-                .then(() => {
-                    showNotification('Link copiado para a área de transferência');
-                })
-                .catch(err => {
-                    showNotification('Erro ao copiar link');
-                    console.error('Erro ao copiar: ', err);
+            interestTags.forEach(tag => {
+                tag.addEventListener('click', () => {
+                    // Toggle de classe ativa
+                    tag.classList.toggle('active');
+                    
+                    // Mostrar notificação de atualização
+                    showNotification('Preferências atualizadas! Recarregando recomendações...', 'success');
+                    
+                    // Simular recarga de recomendações
+                    setTimeout(() => {
+                        const currentTab = document.querySelector('.tab-item.active').getAttribute('data-tab');
+                        
+                        if (currentTab === 'personalized-products') {
+                            // Animar cards
+                            const cards = document.querySelectorAll('#personalized-products-grid .recommendation-card');
+                            cards.forEach(card => {
+                                card.style.transform = 'scale(0.9)';
+                                card.style.opacity = '0.5';
+                            });
+                            
+                            setTimeout(() => {
+                                cards.forEach((card, index) => {
+                                    setTimeout(() => {
+                                        card.style.transform = 'translateY(0) scale(1)';
+                                        card.style.opacity = '1';
+                                    }, index * 100);
+                                });
+                            }, 500);
+                        }
+                    }, 1000);
                 });
-        } else {
-            // Outros métodos de compartilhamento
-            showNotification(`Compartilhado via ${platform}`);
+            });
         }
-    }
-    
-    // Implementar sistema de recomendações personalizadas
-    function setupRecommendationSystem() {
-        // Em uma implementação real, utilizaria machine learning
-        // para analisar o comportamento do usuário e recomendar experiências
         
-        // Simular perfil de usuário (dados de exemplo)
-        const userProfile = {
-            interests: ['csgo', 'campeonatos', 'eventos'],
-            recentViews: ['workshop', 'jersey', 'viewing party'],
-            location: 'São Paulo',
-            interactions: {
-                clicks: 12,
-                favorites: 3,
-                purchases: 1
+        // Inicializar a página
+        document.addEventListener('DOMContentLoaded', function() {
+            // Criar partículas para o fundo
+            createParticles();
+            
+            // Configurar navegação por abas
+            setupTabs();
+            
+            // Carregar dados do usuário
+            loadUserData();
+            
+            // Configurar filtros
+            setupFilters();
+            
+            // Configurar botões de produto
+            setupProductButtons();
+            
+            // Configurar tags de interesse
+            setupInterestTags();
+            
+            // Mostrar notificação de boas-vindas
+            setTimeout(() => {
+                showNotification('Nova funcionalidade: produtos personalizados com base no seu perfil!', 'success');
+            }, 1500);
+        });
+    </script>
+    
+    <!-- Script específico para produtos personalizados -->
+    <script>
+        // Dados base de produtos disponíveis
+        const allProducts = [
+            {
+                id: 'jersey-pro-limited',
+                title: 'Jersey Pro Player Limited Edition 2025',
+                category: ['vestuario', 'exclusive', 'limited', 'game-specific'],
+                games: ['cs', 'valorant'],
+                price: 449.90,
+                originalPrice: 499.90,
+                description: 'Edição extremamente limitada com tecido premium, patches exclusivos e assinatura dos jogadores. Apenas 100 unidades disponíveis.',
+                imageUrl: '../img/experience/prod1.webp',
+                badges: ['Exclusivo', 'Edição Limitada'],
+                stock: 23,
+                personalizable: true
+            },
+            {
+                id: 'keyboard-fury-edition',
+                title: 'Teclado Mecânico FURY Edition',
+                category: ['hardware', 'gaming', 'exclusive'],
+                games: ['cs', 'valorant', 'apex'],
+                price: 799.90,
+                originalPrice: 899.90,
+                description: 'Desenvolvido em parceria com nossos pros, com switches personalizados, teclas de atalho especiais e iluminação RGB sincronizada.',
+                imageUrl: '../img/experience/prod2.webp',
+                badges: ['Pro Series', 'Hardware Oficial'],
+                stock: 45,
+                discount: true
+            },
+            {
+                id: 'hoodie-champion',
+                title: 'Moletom Champion Edition 2025',
+                category: ['vestuario', 'champion', 'limited', 'game-specific'],
+                games: ['cs'],
+                price: 329.90,
+                originalPrice: 379.90,
+                description: 'Comemorativo do título mundial, com design exclusivo e bordados especiais. Peça de colecionador com certificado de autenticidade.',
+                imageUrl: '../img/experience/prod3.webp',
+                badges: ['Campeão Mundial', 'Colecionador'],
+                stock: 12
+            },
+            {
+                id: 'mousepad-xl-pro',
+                title: 'Mousepad XL Pro Series Personalizável',
+                category: ['hardware', 'gaming', 'pro'],
+                games: ['cs', 'valorant', 'apex'],
+                price: 199.90,
+                originalPrice: 249.90,
+                description: 'Mousepad profissional extragrande (120x50cm) com bordas costuradas, superfície de alta precisão e personalização com seu nickname.',
+                imageUrl: '../img/experience/prod2.webp',
+                badges: ['Pro Series', 'Personalizável'],
+                stock: 78,
+                personalizable: true,
+                discount: true
+            },
+            {
+                id: 'headset-pro',
+                title: 'Headset FURIA Pro Gaming',
+                category: ['hardware', 'gaming', 'exclusive'],
+                games: ['cs', 'valorant', 'r6', 'apex'],
+                price: 599.90,
+                originalPrice: 699.90,
+                description: 'Headset profissional com as mesmas especificações utilizadas pelos jogadores da FURIA. Cancelamento de ruído e microfone destacável.',
+                imageUrl: '../img/experience/prod1.webp',
+                badges: ['Pro Series', 'Exclusivo'],
+                stock: 35,
+                discount: true
             }
-        };
-        
-        // Personalizar experiências com base no perfil
-        personalizeExperiences(userProfile);
-    }
-    
-    // Personalizar experiências
-    function personalizeExperiences(profile) {
-        console.log('Perfil de usuário para personalização:', profile);
-        
-        // Simulação - em uma implementação real, usaria algoritmos de recomendação
-        // Destacar cards aleatórios como recomendados personalizados
-        setTimeout(() => {
-            const allCards = document.querySelectorAll('.recommendation-card');
+        ];
+
+        // Evento para integração com outros scripts
+        document.addEventListener('furiaxIntegrationReady', function() {
+            console.log('Integração FURIAX pronta. Inicializando produtos personalizados...');
             
-            // Selecionar alguns cards aleatórios
-            const selectedCards = Array.from(allCards)
-                .sort(() => 0.5 - Math.random())
-                .slice(0, 3);
-            
-            // Destacar como recomendação personalizada
-            selectedCards.forEach(card => {
-                // Adicionar badge personalizada
-                if (!card.querySelector('.personalized-badge')) {
-                    const badge = document.createElement('div');
-                    badge.className = 'personalized-badge';
-                    badge.innerHTML = '<i class="fas fa-user-check"></i> Para Você';
-                    
-                    // Estilizar badge
-                    Object.assign(badge.style, {
-                        position: 'absolute',
-                        top: '10px',
-                        left: '10px',
-                        background: 'linear-gradient(90deg, var(--primary), #36a6ff)',
-                        padding: '5px 10px',
-                        borderRadius: '15px',
-                        fontSize: '0.7rem',
-                        fontWeight: 'bold',
-                        color: 'white',
-                        zIndex: '10',
-                        boxShadow: '0 2px 8px rgba(30, 144, 255, 0.3)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '5px'
-                    });
-                    
-                    card.prepend(badge);
-                    
-                    // Destaque visual adicional
-                    card.style.borderColor = 'rgba(30, 144, 255, 0.3)';
-                    card.style.background = 'linear-gradient(145deg, rgba(0, 0, 0, 0.2), rgba(0, 10, 30, 0.3))';
-                    
-                    // Adicionar efeito de brilho especial
-                    const glowEffect = document.createElement('div');
-                    glowEffect.className = 'premium-glow-effect';
-                    
-                    Object.assign(glowEffect.style, {
-                        position: 'absolute',
-                        top: '0',
-                        left: '0',
-                        width: '100%',
-                        height: '100%',
-                        background: 'radial-gradient(circle at 50% 50%, rgba(30, 144, 255, 0.1), transparent 70%)',
-                        borderRadius: '15px',
-                        pointerEvents: 'none',
-                        zIndex: '0'
-                    });
-                    
-                    card.appendChild(glowEffect);
+            // Disparar evento de produtos personalizados prontos
+            const event = new CustomEvent('personalizedProductsReady', {
+                detail: {
+                    refreshProducts: generateRecommendations
                 }
             });
-        }, 2000); // Atraso para simular carregamento de dados do servidor
-    }
-    
-    // Adicionar modo escuro/claro
-    
-    
-    // Aplicar tema claro
-    function applyLightTheme() {
-        // Definir variáveis CSS para tema claro
-        document.documentElement.style.setProperty('--dark', '#f4f4f4');
-        document.documentElement.style.setProperty('--darker', '#e0e0e0');
-        document.documentElement.style.setProperty('--light', '#222');
-        document.documentElement.style.setProperty('--gray', '#555');
-        
-        // Ajustar background
-        document.body.style.background = 'var(--darker)';
-        document.body.style.backgroundImage = `
-            radial-gradient(circle at 10% 10%, rgba(30, 144, 255, 0.1) 0%, transparent 30%),
-            radial-gradient(circle at 90% 30%, rgba(255, 59, 92, 0.1) 0%, transparent 30%),
-            radial-gradient(circle at 50% 80%, rgba(0, 204, 102, 0.1) 0%, transparent 40%)
-        `;
-        
-        // Ajustar sidebar
-        const sidebar = document.querySelector('.sidebar');
-        if (sidebar) {
-            sidebar.style.background = 'linear-gradient(145deg, #e0e0e0, #d0d0d0)';
-            sidebar.style.boxShadow = '5px 0 15px rgba(0, 0, 0, 0.1)';
-        }
-        
-        // Ajustar cards
-        const cards = document.querySelectorAll('.recommendation-card, .profile-summary-card');
-        cards.forEach(card => {
-            card.style.background = 'rgba(255, 255, 255, 0.8)';
-            card.style.border = '1px solid rgba(0, 0, 0, 0.1)';
+            document.dispatchEvent(event);
         });
-    }
-    
-    // Aplicar tema escuro
-    function applyDarkTheme() {
-        // Restaurar variáveis CSS padrão
-        document.documentElement.style.setProperty('--dark', '#111');
-        document.documentElement.style.setProperty('--darker', '#0a0a0a');
-        document.documentElement.style.setProperty('--light', '#f0f0f0');
-        document.documentElement.style.setProperty('--gray', '#aaa');
-        
-        // Restaurar background
-        document.body.style.background = 'var(--darker)';
-        document.body.style.backgroundImage = `
-            radial-gradient(circle at 10% 10%, rgba(30, 144, 255, 0.05) 0%, transparent 30%),
-            radial-gradient(circle at 90% 30%, rgba(255, 59, 92, 0.05) 0%, transparent 30%),
-            radial-gradient(circle at 50% 80%, rgba(0, 204, 102, 0.05) 0%, transparent 40%)
-        `;
-        
-        // Restaurar sidebar
-        const sidebar = document.querySelector('.sidebar');
-        if (sidebar) {
-            sidebar.style.background = 'linear-gradient(145deg, #111, #181818)';
-            sidebar.style.boxShadow = '5px 0 15px rgba(0, 0, 0, 0.3)';
-        }
-        
-        // Restaurar cards
-        const cards = document.querySelectorAll('.recommendation-card, .profile-summary-card');
-        cards.forEach(card => {
-            card.style.background = 'rgba(0, 0, 0, 0.2)';
-            card.style.border = '1px solid rgba(255, 255, 255, 0.05)';
+
+        // Responder ao evento de atualização de produtos
+        document.addEventListener('refreshPersonalizedProducts', function() {
+            console.log('Atualizando produtos personalizados...');
+            const userData = getUserData();
+            generateRecommendations(userData);
         });
-    }
-    
-    // Implementar funcionalidade de "pré-registro" para eventos
-    function setupEventRegistration() {
-        // Obter todos os botões de pré-registro e ingressos
-        const registrationButtons = document.querySelectorAll('.btn-primary');
-        
-        registrationButtons.forEach(button => {
-            const buttonText = button.textContent.trim().toLowerCase();
-            
-            if (buttonText.includes('pré-registro') || buttonText.includes('ingresso') || 
-                buttonText.includes('vaga') || buttonText.includes('reservar')) {
-                
-                // Configurar evento especial para registro
-                button.addEventListener('click', () => {
-                    // Obter informações do evento
-                    const card = button.closest('.recommendation-card');
-                    const title = card.querySelector('.recommendation-title').textContent;
-                    const eventInfo = card.querySelector('.event-info')?.textContent;
-                    
-                    // Exibir formulário de registro
-                    showRegistrationForm(title, eventInfo);
-                });
+
+        // Obter dados do usuário
+        function getUserData() {
+            try {
+                const savedData = localStorage.getItem('furiax_fan_data');
+                if (savedData) {
+                    return JSON.parse(savedData);
+                }
+            } catch (error) {
+                console.error('Erro ao obter dados do usuário:', error);
             }
-        });
-    }
-    
-    // Exibir formulário de registro
-    function showRegistrationForm(eventTitle, eventInfo) {
-        // Criar modal de formulário
-        const formModal = document.createElement('div');
-        formModal.className = 'registration-modal';
-        
-        formModal.innerHTML = `
-            <div class="registration-content">
-                <div class="registration-header">
-                    <h3>Registrar para: ${eventTitle}</h3>
-                    <button class="registration-close">&times;</button>
-                </div>
-                <div class="registration-body">
-                    <p class="registration-event-info">${eventInfo || ''}</p>
-                    
-                    <div class="input-group">
-                        <label for="reg-name">Seu Nome</label>
-                        <input type="text" id="reg-name" placeholder="Nome completo" value="Carlos Silva">
-                    </div>
-                    
-                    <div class="input-group">
-                        <label for="reg-email">Email</label>
-                        <input type="email" id="reg-email" placeholder="seu@email.com">
-                    </div>
-                    
-                    <div class="input-group">
-                        <label for="reg-phone">Telefone</label>
-                        <input type="tel" id="reg-phone" placeholder="(XX) XXXXX-XXXX">
-                    </div>
-                    
-                    <div class="input-group">
-                        <label for="reg-quantity">Quantidade</label>
-                        <select id="reg-quantity">
-                            <option value="1">1 ingresso</option>
-                            <option value="2">2 ingressos</option>
-                            <option value="3">3 ingressos</option>
-                            <option value="4">4 ingressos</option>
-                        </select>
-                    </div>
-                    
-                    <div class="input-group checkbox-group">
-                        <input type="checkbox" id="reg-terms" checked>
-                        <label for="reg-terms">Concordo com os termos e condições</label>
-                    </div>
-                    
-                    <div class="input-group checkbox-group">
-                        <input type="checkbox" id="reg-notification" checked>
-                        <label for="reg-notification">Quero receber notificações sobre este evento</label>
-                    </div>
-                </div>
-                <div class="registration-footer">
-                    <button class="btn btn-secondary" id="reg-cancel">Cancelar</button>
-                    <button class="btn btn-primary" id="reg-submit">Confirmar Registro</button>
-                </div>
-            </div>
-        `;
-        
-        // Estilizar modal
-        Object.assign(formModal.style, {
-            position: 'fixed',
-            top: '0',
-            left: '0',
-            width: '100%',
-            height: '100%',
-            background: 'rgba(0, 0, 0, 0.7)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            zIndex: '1000',
-            opacity: '0',
-            transition: 'opacity 0.3s ease',
-            backdropFilter: 'blur(5px)'
-        });
-        
-        // Estilizar conteúdo
-        const content = formModal.querySelector('.registration-content');
-        Object.assign(content.style, {
-            background: 'linear-gradient(145deg, #111, #181818)',
-            borderRadius: '15px',
-            width: '90%',
-            maxWidth: '500px',
-            boxShadow: '0 15px 40px rgba(0, 0, 0, 0.5)',
-            border: '1px solid rgba(255, 255, 255, 0.05)',
-            overflow: 'hidden',
-            transform: 'translateY(50px)',
-            transition: 'transform 0.3s ease'
-        });
-        
-        // Estilizar cabeçalho
-        const header = formModal.querySelector('.registration-header');
-        Object.assign(header.style, {
-            padding: '20px',
-            borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center'
-        });
-        
-        // Estilizar título
-        const title = formModal.querySelector('.registration-header h3');
-        Object.assign(title.style, {
-            margin: '0',
-            color: 'var(--primary)',
-            fontFamily: "'Orbitron', sans-serif",
-            fontSize: '1.2rem'
-        });
-        
-        // Estilizar botão de fechar
-        const closeButton = formModal.querySelector('.registration-close');
-        Object.assign(closeButton.style, {
-            background: 'none',
-            border: 'none',
-            color: 'var(--gray)',
-            fontSize: '1.5rem',
-            cursor: 'pointer',
-            transition: 'color 0.3s ease'
-        });
-        
-        // Estilizar corpo
-        const body = formModal.querySelector('.registration-body');
-        Object.assign(body.style, {
-            padding: '20px'
-        });
-        
-        // Estilizar info do evento
-        const info = formModal.querySelector('.registration-event-info');
-        Object.assign(info.style, {
-            margin: '0 0 20px',
-            color: 'var(--gray)',
-            fontSize: '0.9rem'
-        });
-        
-        // Estilizar grupos de input
-        const inputGroups = formModal.querySelectorAll('.input-group');
-        inputGroups.forEach(group => {
-            Object.assign(group.style, {
-                marginBottom: '15px'
-            });
-        });
-        
-        // Estilizar labels
-        const labels = formModal.querySelectorAll('label:not([for="reg-terms"]):not([for="reg-notification"])');
-        labels.forEach(label => {
-            Object.assign(label.style, {
-                display: 'block',
-                marginBottom: '5px',
-                color: 'var(--light)',
-                fontSize: '0.9rem'
-            });
-        });
-        
-        // Estilizar inputs
-        const inputs = formModal.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"], select');
-        inputs.forEach(input => {
-            Object.assign(input.style, {
-                width: '100%',
-                padding: '10px 15px',
-                background: 'rgba(0, 0, 0, 0.2)',
-                border: '1px solid #333',
-                borderRadius: '8px',
-                color: 'var(--light)',
-                fontSize: '0.9rem'
-            });
-        });
-        
-        // Estilizar grupos de checkbox
-        const checkboxGroups = formModal.querySelectorAll('.checkbox-group');
-        checkboxGroups.forEach(group => {
-            Object.assign(group.style, {
-                display: 'flex',
-                alignItems: 'center'
+            
+            // Mock data para teste
+            return {
+                personalData: {
+                    name: "João Silva",
+                    nickname: "FuriaX_Fan",
+                    location: { city: "São Paulo", state: "SP" }
+                },
+                gameInterests: {
+                    cs: 5,
+                    valorant: 4,
+                    lol: 2, 
+                    r6: 3,
+                    apex: 1
+                },
+                topicInterests: ["campeonatos", "bastidores", "jogadores", "estrategias", "hardware"],
+                purchasedProducts: ["jersey", "mousepad", "cap"],
+                purchaseAmount: "500to1000",
+                contentType: "videos",
+                watchFrequency: "most",
+                attendedEvents: ["fan-fest-sp", "meet-greet-eldorado"]
+            };
+        }
+
+        // Gerar recomendações com base nos dados
+        function generateRecommendations(userData) {
+            console.log('Gerando recomendações com base no perfil:', userData);
+            
+            // Os produtos já estão renderizados no HTML
+            // Em uma implementação real, usaríamos o algoritmo para gerar
+            // recomendações e renderizar dinamicamente
+            
+            // Atualizar animação dos cards (efeito de refresh)
+            const cards = document.querySelectorAll('#personalized-products-grid .recommendation-card');
+            cards.forEach(card => {
+                card.style.transform = 'translateY(20px)';
+                card.style.opacity = '0';
             });
             
-            const checkLabel = group.querySelector('label');
-            Object.assign(checkLabel.style, {
-                marginBottom: '0',
-                marginLeft: '10px',
-                fontSize: '0.85rem',
-                color: 'var(--gray)'
-            });
-        });
-        
-        // Estilizar rodapé
-        const footer = formModal.querySelector('.registration-footer');
-        Object.assign(footer.style, {
-            padding: '15px 20px',
-            borderTop: '1px solid rgba(255, 255, 255, 0.05)',
-            display: 'flex',
-            justifyContent: 'flex-end',
-            gap: '10px'
-        });
-        
-        // Adicionar ao DOM
-        document.body.appendChild(formModal);
-        
-        // Exibir modal
-        setTimeout(() => {
-            formModal.style.opacity = '1';
-            content.style.transform = 'translateY(0)';
-        }, 10);
-        
-        // Configurar eventos
-        closeButton.addEventListener('click', closeForm);
-        formModal.querySelector('#reg-cancel').addEventListener('click', closeForm);
-        formModal.querySelector('#reg-submit').addEventListener('click', submitForm);
-        
-        // Fechar ao clicar fora
-        formModal.addEventListener('click', event => {
-            if (event.target === formModal) {
-                closeForm();
-            }
-        });
-        
-        // Função para fechar formulário
-        function closeForm() {
-            formModal.style.opacity = '0';
-            content.style.transform = 'translateY(50px)';
-            
-            // Remover do DOM após animação
             setTimeout(() => {
-                document.body.removeChild(formModal);
+                cards.forEach((card, index) => {
+                    setTimeout(() => {
+                        card.style.transition = 'transform 0.5s ease, opacity 0.5s ease';
+                        card.style.transform = 'translateY(0)';
+                        card.style.opacity = '1';
+                    }, index * 100);
+                });
             }, 300);
         }
-        
-        // Função para enviar formulário
-        function submitForm() {
-            // Obter valores
-            const name = formModal.querySelector('#reg-name').value;
-            const email = formModal.querySelector('#reg-email').value;
-            const phone = formModal.querySelector('#reg-phone').value;
-            const quantity = formModal.querySelector('#reg-quantity').value;
-            
-            // Validação simples
-            if (!name || !email) {
-                showNotification('Por favor, preencha os campos obrigatórios');
-                return;
-            }
-            
-            // Em uma implementação real, enviaria para o servidor
-            console.log('Registro enviado:', { 
-                evento: eventTitle, 
-                nome: name, 
-                email, 
-                telefone: phone, 
-                quantidade: quantity 
-            });
-            
-            // Fechar formulário
-            closeForm();
-            
-            // Exibir confirmação
-            showModal('registration-success', 'Registro Confirmado', `
-                <div style="text-align: center;">
-                    <p>Seu registro para <strong>${eventTitle}</strong> foi confirmado!</p>
-                    <p style="font-size: 0.9rem; color: var(--gray); margin-top: 10px;">
-                        Enviamos um email com todas as informações para <strong>${email}</strong>.
-                    </p>
-                    <div style="margin-top: 20px; background: rgba(0, 204, 102, 0.1); padding: 15px; border-radius: 10px; border: 1px solid rgba(0, 204, 102, 0.2);">
-                        <div style="font-size: 2rem; color: var(--success); margin-bottom: 10px;">
-                            <i class="fas fa-ticket-alt"></i>
-                        </div>
-                        <div style="font-family: 'Orbitron', sans-serif; color: var(--success); font-size: 1.2rem;">
-                            #FURIA${Math.floor(Math.random() * 90000) + 10000}
-                        </div>
-                        <div style="font-size: 0.8rem; color: var(--gray); margin-top: 5px;">
-                            Seu código de reserva
-                        </div>
-                    </div>
-                </div>
-            `);
-        }
-    }
-   
-// Função para prevenir navegação automática
-document.addEventListener('DOMContentLoaded', function() {
-  // Este é o script que identifica e impede a navegação automática
-  // enquanto ainda permite cliques manuais do usuário
-  
-  // 1. Corrigir links na sidebar
-  const sidebarLinks = document.querySelectorAll('.sidebar .nav-item a');
-  
-  sidebarLinks.forEach(function(link) {
-    // Substituir o link original por uma cópia para remover event listeners
-    const newLink = link.cloneNode(true);
+    </script>
     
-    // Adicionar o novo handler de eventos que verifica se é um clique genuíno
-    newLink.addEventListener('click', function(event) {
-      // Se não for um evento de clique real (gerado por script)
-      // ou se o elemento for clicado programaticamente, bloqueie
-      if (!event.isTrusted) {
-        event.preventDefault();
-        event.stopPropagation();
-        console.log('Navegação automática bloqueada para:', newLink.href);
-        return false;
-      }
-      
-      // Se for um clique real do usuário, permitir a navegação
-      return true;
-    });
-    
-    // Substituir o link antigo pelo novo
-    if (link.parentNode) {
-      link.parentNode.replaceChild(newLink, link);
-    }
-  });
-  
-  // 2. Identificar e desativar qualquer script que possa estar causando redirecionamentos
-  
-  // Impedir redirecionamentos automáticos
-  const originalAssign = window.location.assign;
-  const originalReplace = window.location.replace;
-  const originalHref = Object.getOwnPropertyDescriptor(window.location, 'href');
-  
-  // Substituir os métodos de navegação para adicionar verificação
-  window.location.assign = function(url) {
-    // Verificar se a chamada veio de um evento de usuário genuíno
-    const stackTrace = new Error().stack;
-    // Se veio de um clique real, permitir
-    if (window.recentUserInteraction && (Date.now() - window.recentUserInteraction) < 1000) {
-      originalAssign.call(window.location, url);
-    } else {
-      console.warn('Redirecionamento automático bloqueado:', url);
-    }
-  };
-  
-  window.location.replace = function(url) {
-    // Verificar se a chamada veio de um evento de usuário genuíno
-    const stackTrace = new Error().stack;
-    // Se veio de um clique real, permitir
-    if (window.recentUserInteraction && (Date.now() - window.recentUserInteraction) < 1000) {
-      originalReplace.call(window.location, url);
-    } else {
-      console.warn('Redirecionamento automático bloqueado:', url);
-    }
-  };
-  
-  // Redefinir o setter de href para bloquear alterações automáticas
-  if (originalHref && originalHref.set) {
-    Object.defineProperty(window.location, 'href', {
-      set: function(value) {
-        // Se veio de um clique real, permitir
-        if (window.recentUserInteraction && (Date.now() - window.recentUserInteraction) < 1000) {
-          originalHref.set.call(window.location, value);
-        } else {
-          console.warn('Alteração automática de location.href bloqueada:', value);
-        }
-      },
-      get: originalHref.get
-    });
-  }
-  
-  // Rastrear interações genuínas do usuário
-  document.addEventListener('mousedown', function() {
-    window.recentUserInteraction = Date.now();
-  });
-  
-  document.addEventListener('keydown', function() {
-    window.recentUserInteraction = Date.now();
-  });
-  
-  document.addEventListener('touchstart', function() {
-    window.recentUserInteraction = Date.now();
-  });
-  
-  console.log('✅ Proteção contra navegação automática ativada');
-});
-    // Implementar funcionalidade de animação ao scroll
-    function setupScrollEffects() {
-        // Obter todos os cards
-        const cards = document.querySelectorAll('.recommendation-card');
-        
-        // Configurar observador de interseção
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                // Verificar se o elemento está visível
-                if (entry.isIntersecting) {
-                    // Adicionar classe para animar entrada
-                    entry.target.classList.add('animate-in');
-                    
-                    // Parar de observar depois de animar
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, {
-            root: null, // viewport
-            threshold: 0.1, // 10% visível
-            rootMargin: '0px'
-        });
-        
-        // Adicionar estilo CSS para a animação
-        const style = document.createElement('style');
-        style.textContent = `
-            .recommendation-card {
-                opacity: 0;
-                transform: translateY(30px);
-                transition: opacity 0.5s ease, transform 0.5s ease;
-            }
-            
-            .recommendation-card.animate-in {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        `;
-        
-        document.head.appendChild(style);
-        
-        // Observar cada card
-        cards.forEach((card, index) => {
-            // Atrasar o início da observação para criar efeito cascata
-            setTimeout(() => {
-                observer.observe(card);
-            }, index * 100);
-        });
-    }
-    
-    // Inicializar todas as funcionalidades quando o DOM estiver pronto
-    document.addEventListener('DOMContentLoaded', () => {
-        // Criar partículas para o fundo
-        createParticles();
-        
-        // Configurar navegação por abas
-        setupTabs();
-        
-        // Carregar dados do usuário
-        loadUserData();
-        
-        // Configurar filtros
-        setupFilters();
-        
-        // Configurar tags de interesse
-        setupInterestTags();
-        
-        // Configurar pesquisa
-        setupSearch();
-        
-        // Configurar efeitos de botões
-        setupButtonEffects();
-        
-        // Configurar sistema de recomendações
-        setupRecommendationSystem();
-        
-        // Configurar alternância de tema
-        
-        // Configurar registro para eventos
-        setupEventRegistration();
-        
-        // Configurar efeitos de rolagem
-        setupScrollEffects();
-        
-        // Exibir notificação de boas-vindas após carregar tudo
-        setTimeout(() => {
-            showNotification('Bem-vindo à FURIAX! Experimente nosso novo sistema de recomendações personalizadas.');
-        }, 1500);
-    });
-</script>
+    <!-- Script de integração -->
+    <script src="../js/furiax-integration.js"></script>
+    <script src="../js/engajament.js"></script>
+    <script src="../js/produtos.js"></script>
+</body>
+</html>

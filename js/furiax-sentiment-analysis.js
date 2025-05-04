@@ -290,107 +290,44 @@ document.addEventListener('DOMContentLoaded', function() {
         });
       }
   
-      // Alternar conexão de rede social
-      toggleSocialConnection(networkId) {
-        const network = this.socialConnections.find(n => n.id === networkId);
+  // Alternar conexão de rede social
+  toggleSocialConnection(networkId) {
+    const network = this.socialConnections.find(n => n.id === networkId);
+    
+    if (network) {
+      if (network.connected) {
+        // Desconectar
+        network.connected = false;
+        network.username = '';
+        NotificationManager.show(`Desconectado de ${network.name}`, 'info');
+      } else {
+        // Conectar (simulação)
+        const username = network.id === 'twitter' ? '@furia_fan' : 
+                        network.id === 'instagram' ? 'furia.fan' : 
+                        network.id === 'facebook' ? 'furiafan.silva' :
+                        network.id === 'youtube' ? 'FuriaFanBR' :
+                        network.id === 'twitch' ? 'furia_fan_br' : 'furiax_user';
         
-        if (!network) return;
+        network.connected = true;
+        network.username = username;
         
-
-  
-      // Simular atividade social após conexão
-      simulateSocialActivity(networkId, username) {
-        // Encontrar container de atividade social
-        const activityList = document.querySelector('.activity-list');
-        if (!activityList) return;
+        NotificationManager.show(`Conectado a ${network.name} como ${username}`, 'success');
         
-        // Criar nova atividade
-        const activityItem = document.createElement('div');
-        activityItem.className = 'activity-item';
-        
-        const network = this.socialConnections.find(n => n.id === networkId);
-        const networkName = network ? network.name : networkId;
-        
-        // Hora atual formatada
-        const now = new Date();
-        const timeString = now.toLocaleTimeString('pt-BR', {
-          hour: '2-digit',
-          minute: '2-digit'
-        });
-        
-        let activityText = '';
-        
-        // Texto de atividade baseado na rede
-        switch (networkId) {
-          case 'instagram':
-            activityText = 'Compartilhou foto da FURIA';
-            break;
-          case 'twitter':
-            activityText = 'Retweetou post oficial da FURIA';
-            break;
-          case 'facebook':
-            activityText = 'Curtiu a página oficial da FURIA';
-            break;
-          case 'youtube':
-            activityText = 'Comentou no último vídeo da FURIA';
-            break;
-          case 'twitch':
-            activityText = 'Inscreveu-se no canal da FURIA';
-            break;
-          default:
-            activityText = 'Conectou-se com a FURIA';
-        }
-        
-        activityItem.innerHTML = `
-          <div class="activity-time">agora</div>
-          <div class="activity-content">
-            <div class="activity-text">${activityText}</div>
-            <div class="activity-platform">
-              <i class="fab fa-${network ? network.icon : 'globe'}"></i>
-              ${networkName}
-            </div>
-          </div>
-          <div class="activity-meta">
-            <div class="activity-stat">
-              <i class="fas fa-heart"></i>
-              0
-            </div>
-            <div class="activity-stat">
-              <i class="fas fa-comment"></i>
-              0
-            </div>
-          </div>
-        `;
-        
-        // Adicionar com animação de entrada
-        activityItem.style.opacity = '0';
-        activityItem.style.transform = 'translateY(20px)';
-        activityList.prepend(activityItem);
-        
-        // Animar entrada
-        setTimeout(() => {
-          activityItem.style.transition = 'all 0.5s ease';
-          activityItem.style.opacity = '1';
-          activityItem.style.transform = 'translateY(0)';
-        }, 100);
-        
-        // Atualizar contador de estatísticas gradualmente
-        let count = 0;
-        const maxCount = Math.floor(Math.random() * 20) + 5;
-        
-        const updateInterval = setInterval(() => {
-          count++;
-          const likeCounter = activityItem.querySelector('.activity-stat:nth-child(1)');
-          if (likeCounter) {
-            likeCounter.innerHTML = `<i class="fas fa-heart"></i> ${count}`;
-          }
-          
-          if (count >= maxCount) {
-            clearInterval(updateInterval);
-          }
-        }, 300);
+        // Simular atividade
+        this.simulateSocialActivity(network.id, username);
       }
+      
+      // Salvar e atualizar UI
+      this.saveSocialConnections();
+      this.updateSocialConnectionsUI();
+      
+      return true;
     }
+    
+    return false;
+  }
+}
+
   
     /**
      * Analisador de Sentimentos

@@ -976,9 +976,7 @@ body {
 
 .score-circle::before {
     content: '';
-    position: absolute;
-    width: 100px;
-    height: 100px;
+
     border-radius: 50%;
     background: #181818;
 }

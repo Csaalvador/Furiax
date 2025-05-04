@@ -1763,6 +1763,375 @@
                 </div>
                 <script src="../js/integration/furiax-core.js"></script>
                 <script src="../js/integration/recommends.js"></script>
+                <!-- Adicionar ao final da tela de conclusão do formulário Know Your Fan -->
+<div class="sponsored-content-section">
+    <!-- Título da seção -->
+    <h3 class="reward-title" style="font-family: 'Orbitron', sans-serif; color: var(--primary); margin: 30px 0 15px; display: flex; align-items: center;">
+        <i class="fas fa-star" style="margin-right: 10px;"></i> Ofertas Especiais para Você
+    </h3>
+    
+    <!-- Descrição -->
+    <p style="color: var(--gray); font-size: 0.9rem; margin-bottom: 20px;">
+        Com base no seu perfil, selecionamos algumas ofertas exclusivas de nossos parceiros que podem interessar você:
+    </p>
+    
+    <!-- Container para anúncios em carrossel -->
+    <div class="sponsored-products-carousel">
+        <!-- Os anúncios serão inseridos aqui via JavaScript -->
+    </div>
+    
+    <!-- Controles do carrossel -->
+    <div class="carousel-controls" style="display: flex; justify-content: center; margin-top: 15px; gap: 10px;">
+        <button class="btn-carousel btn-prev" disabled style="width: 36px; height: 36px; border-radius: 50%; background: rgba(255, 255, 255, 0.05); border: 1px solid #333; color: var(--gray); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: var(--transition);">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <div class="carousel-indicators" style="display: flex; align-items: center; gap: 8px;"></div>
+        <button class="btn-carousel btn-next" style="width: 36px; height: 36px; border-radius: 50%; background: rgba(255, 255, 255, 0.05); border: 1px solid #333; color: var(--gray); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: var(--transition);">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+    
+    <!-- Nota de parceiros -->
+    <div style="margin-top: 20px; text-align: center; font-size: 0.8rem; color: #666;">
+        Todas as ofertas são exclusivas para membros FURIAX e expiram em 7 dias.
+        <a href="#" style="color: var(--primary); text-decoration: none; margin-left: 5px;">Ver política de parceiros</a>
+    </div>
+</div>
+
+<!-- Adicionar antes do fechamento da tag body -->
+<script src="../js/produtos.js"></script>
+<script src="../js/personalizados.js"></script>
+<script src="../js/engajament.js"></script>
+<!-- Script de inicialização para o carrossel -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Verificar se o componente de anúncios foi carregado
+        if (window.FuriaxAds) {
+            // Inicializar carrossel de produtos patrocinados
+            initSponsoredProductsCarousel();
+        } else {
+            console.error('Sistema de anúncios não carregado corretamente');
+        }
+    });
+    
+    // Função para inicializar o carrossel
+    function initSponsoredProductsCarousel() {
+        // Obter container
+        const carouselContainer = document.querySelector('.sponsored-products-carousel');
+        if (!carouselContainer) return;
+        
+        // Obter anúncios relevantes para o usuário
+        const userAds = generateUserAdSet();
+        
+        // Verificar se há anúncios disponíveis
+        if (!userAds || userAds.length === 0) {
+            carouselContainer.innerHTML = `
+                <div class="empty-state" style="text-align: center; padding: 40px 20px; color: var(--gray);">
+                    <div style="font-size: 3rem; color: #333; margin-bottom: 15px;">
+                        <i class="fas fa-store-slash"></i>
+                    </div>
+                    <div style="font-size: 1.2rem; margin-bottom: 10px;">Nenhuma oferta disponível</div>
+                    <div style="font-size: 0.9rem; max-width: 400px; margin: 0 auto;">
+                        No momento não temos ofertas que correspondam ao seu perfil.
+                        Continue interagindo com a plataforma para recebermos mais dados sobre suas preferências.
+                    </div>
+                </div>
+            `;
+            return;
+        }
+        
+        // Limitar a 5 anúncios para o carrossel
+        const carouselAds = userAds.slice(0, 5);
+        
+        // Criar estrutura do carrossel
+        carouselContainer.innerHTML = `
+            <div class="carousel-wrapper" style="overflow: hidden; position: relative;">
+                <div class="carousel-inner" style="display: flex; transition: transform 0.4s ease;">
+                    ${carouselAds.map((ad, index) => {
+                        // Determinar URL da imagem
+                        let imageUrl = ad.imageUrl;
+                        if (ad.placeholderImage) {
+                            imageUrl = `https://via.placeholder.com/300x200/0a0a0a/1e90ff?text=${encodeURIComponent(ad.brand)}`;
+                        }
+                        
+                        return `
+                            <div class="carousel-item" style="min-width: 100%; padding: 0 15px; box-sizing: border-box;">
+                                <div class="sponsored-product-card" style="background: rgba(0, 0, 0, 0.2); border-radius: 15px; overflow: hidden; border: 1px solid rgba(30, 144, 255, 0.1); transition: transform 0.3s ease, box-shadow 0.3s ease; height: 100%;">
+                                    <div class="sponsored-image" style="height: 180px; overflow: hidden; position: relative;">
+                                        <img src="${imageUrl}" alt="${ad.title}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;">
+                                        ${ad.badge ? `
+                                            <div class="sponsored-badge" style="position: absolute; top: 10px; right: 10px; background: linear-gradient(90deg, var(--warning), #ffad33); font-size: 0.7rem; font-weight: bold; padding: 5px 10px; border-radius: 15px; color: #222; z-index: 10; box-shadow: 0 2px 8px rgba(255, 193, 7, 0.3);">
+                                                ${ad.badge}
+                                            </div>
+                                        ` : ''}
+                                        <div class="sponsored-brand" style="position: absolute; top: 10px; left: 10px; background: rgba(0, 0, 0, 0.6); padding: 5px 10px; border-radius: 5px; font-size: 0.8rem; color: #fff;">
+                                            ${ad.brand}
+                                        </div>
+                                    </div>
+                                    <div class="sponsored-content" style="padding: 20px;">
+                                        <div class="sponsored-title" style="font-family: 'Orbitron', sans-serif; font-size: 1.1rem; font-weight: bold; margin-bottom: 10px;">
+                                            ${ad.title}
+                                        </div>
+                                        <div class="sponsored-description" style="color: var(--gray); font-size: 0.9rem; margin-bottom: 15px; line-height: 1.4;">
+                                            ${ad.description}
+                                        </div>
+                                        ${ad.couponCode ? `
+                                            <div class="sponsored-coupon" style="background: rgba(0, 0, 0, 0.2); padding: 10px; border-radius: 5px; margin-bottom: 15px; display: flex; align-items: center; cursor: pointer; border: 1px dashed rgba(255, 193, 7, 0.3);" data-coupon="${ad.couponCode}">
+                                                <div style="font-size: 1.2rem; color: var(--warning); margin-right: 10px;">
+                                                    <i class="fas fa-ticket-alt"></i>
+                                                </div>
+                                                <div>
+                                                    <div style="font-family: 'Orbitron', sans-serif; font-weight: bold; color: var(--warning);">${ad.couponCode}</div>
+                                                    <div style="font-size: 0.8rem; color: #666;">Clique para copiar</div>
+                                                </div>
+                                            </div>
+                                        ` : ''}
+                                        <button class="sponsored-btn" style="width: 100%; background: linear-gradient(90deg, var(--primary), #36a6ff); color: white; border: none; border-radius: 8px; padding: 10px; font-family: 'Exo 2', sans-serif; font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: transform 0.2s ease, box-shadow 0.2s ease;" data-url="${ad.targetUrl}">
+                                            <i class="fas fa-external-link-alt"></i> Ver oferta
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            </div>
+        `;
+        
+        // Adicionar indicadores
+        const indicatorsContainer = document.querySelector('.carousel-indicators');
+        if (indicatorsContainer) {
+            indicatorsContainer.innerHTML = carouselAds.map((_, index) => `
+                <div class="carousel-indicator" data-index="${index}" style="width: 8px; height: 8px; border-radius: 50%; background: ${index === 0 ? 'var(--primary)' : '#333'}; cursor: pointer; transition: background 0.3s ease;"></div>
+            `).join('');
+        }
+        
+        // Configurar controles do carrossel
+        setupCarouselControls(carouselAds.length);
+        
+        // Configurar eventos para botões e cupons
+        setupCardInteractions();
+    }
+    
+    // Configurar controles do carrossel
+    function setupCarouselControls(totalItems) {
+        const carousel = document.querySelector('.carousel-inner');
+        const prevBtn = document.querySelector('.btn-prev');
+        const nextBtn = document.querySelector('.btn-next');
+        const indicators = document.querySelectorAll('.carousel-indicator');
+        
+        // Estado atual
+        let currentIndex = 0;
+        
+        // Atualizar estado
+        function updateState() {
+            // Atualizar transformação
+            carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+            
+            // Atualizar indicadores
+            indicators.forEach((indicator, index) => {
+                indicator.style.background = index === currentIndex ? 'var(--primary)' : '#333';
+            });
+            
+            // Atualizar botões
+            prevBtn.disabled = currentIndex === 0;
+            prevBtn.style.opacity = currentIndex === 0 ? '0.5' : '1';
+            nextBtn.disabled = currentIndex === totalItems - 1;
+            nextBtn.style.opacity = currentIndex === totalItems - 1 ? '0.5' : '1';
+        }
+        
+        // Evento para botão anterior
+        prevBtn.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateState();
+            }
+        });
+        
+        // Evento para botão próximo
+        nextBtn.addEventListener('click', () => {
+            if (currentIndex < totalItems - 1) {
+                currentIndex++;
+                updateState();
+            }
+        });
+        
+        // Eventos para indicadores
+        indicators.forEach((indicator) => {
+            indicator.addEventListener('click', () => {
+                currentIndex = parseInt(indicator.getAttribute('data-index'));
+                updateState();
+            });
+        });
+    }
+    
+    // Configurar interações com os cards
+    function setupCardInteractions() {
+        // Evento para botões de ofertas
+        document.querySelectorAll('.sponsored-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const url = this.getAttribute('data-url');
+                if (url) window.open(url, '_blank');
+            });
+            
+            // Efeito hover
+            button.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-2px)';
+                this.style.boxShadow = '0 5px 15px rgba(30, 144, 255, 0.3)';
+            });
+            
+            button.addEventListener('mouseleave', function() {
+                this.style.transform = '';
+                this.style.boxShadow = '';
+            });
+        });
+        
+        // Evento para cards
+        document.querySelectorAll('.sponsored-product-card').forEach(card => {
+            // Efeito hover
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+                this.style.boxShadow = '0 10px 20px rgba(0, 0, 0, 0.2)';
+                
+                // Animar imagem
+                const image = this.querySelector('.sponsored-image img');
+                if (image) image.style.transform = 'scale(1.05)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = '';
+                this.style.boxShadow = '';
+                
+                // Resetar imagem
+                const image = this.querySelector('.sponsored-image img');
+                if (image) image.style.transform = '';
+            });
+        });
+        
+        // Evento para cupons
+        document.querySelectorAll('.sponsored-coupon').forEach(coupon => {
+            coupon.addEventListener('click', function() {
+                const code = this.getAttribute('data-coupon');
+                if (code) {
+                    navigator.clipboard.writeText(code).then(() => {
+                        // Mostrar feedback
+                        showCopyFeedback('Código copiado para a área de transferência!');
+                        
+                        // Efeito visual
+                        this.style.background = 'rgba(0, 204, 102, 0.1)';
+                        this.style.borderColor = 'rgba(0, 204, 102, 0.3)';
+                        
+                        setTimeout(() => {
+                            this.style.background = '';
+                            this.style.borderColor = '';
+                        }, 2000);
+                    });
+                }
+            });
+        });
+    }
+    
+    // Mostrar feedback de cópia
+    function showCopyFeedback(message) {
+        // Verificar se já existe um feedback
+        let feedback = document.getElementById('copy-feedback');
+        
+        if (!feedback) {
+            // Criar elemento de feedback
+            feedback = document.createElement('div');
+            feedback.id = 'copy-feedback';
+            feedback.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                background: rgba(0, 204, 102, 0.9);
+                color: white;
+                padding: 10px 15px;
+                border-radius: 5px;
+                font-size: 0.9rem;
+                z-index: 1001;
+                transition: opacity 0.3s ease, transform 0.3s ease;
+                opacity: 0;
+                transform: translateY(10px);
+                box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            `;
+            
+            // Adicionar ao DOM
+            document.body.appendChild(feedback);
+        }
+        
+        // Atualizar mensagem
+        feedback.textContent = message;
+        
+        // Mostrar feedback
+        feedback.style.opacity = '1';
+        feedback.style.transform = 'translateY(0)';
+        
+        // Esconder após 3 segundos
+        setTimeout(() => {
+            feedback.style.opacity = '0';
+            feedback.style.transform = 'translateY(10px)';
+            
+            // Remover do DOM após animação
+            setTimeout(() => {
+                if (feedback.parentNode) {
+                    document.body.removeChild(feedback);
+                }
+            }, 300);
+        }, 3000);
+    }
+    
+    // Obter anúncios para o usuário (função placeholder que será substituída)
+    function generateUserAdSet() {
+        // Esta função será substituída pela implementação real do sistema de anúncios
+        if (window.FuriaxAds && typeof window.FuriaxAds.generateUserAdSet === 'function') {
+            return window.FuriaxAds.generateUserAdSet();
+        }
+        
+        // Fallback para dados mockup em caso de erro
+        return [
+            {
+                id: 'ad-hyperx-1',
+                brand: 'HyperX',
+                title: 'HyperX Cloud Alpha - Headset Oficial FURIA',
+                description: 'O mesmo headset usado pelos pros da FURIA. Qualidade de áudio premium para suas partidas.',
+                imageUrl: '../img/ads/hyperx-headset.jpg',
+                placeholderImage: true,
+                targetUrl: 'https://www.hyperx.com/furia',
+                category: ['hardware', 'audio'],
+                games: ['all'],
+                badge: '15% OFF EXCLUSIVO',
+                couponCode: 'FURIAFAN15'
+            },
+            {
+                id: 'ad-redragon-1',
+                brand: 'Redragon',
+                title: 'Teclado Mecânico Redragon K552 RGB',
+                description: 'Precisão e velocidade para dominar suas partidas. Switches Blue para feedback tátil perfeito.',
+                imageUrl: '../img/ads/redragon-keyboard.jpg',
+                placeholderImage: true,
+                targetUrl: 'https://www.redragon.com.br/furia',
+                category: ['hardware', 'teclado'],
+                games: ['cs', 'valorant', 'apex'],
+                badge: 'CUPOM ESPECIAL',
+                couponCode: 'FURIAPRO10'
+            },
+            {
+                id: 'ad-logitech-1',
+                brand: 'Logitech G',
+                title: 'Mouse Gamer Logitech G Pro X Superlight',
+                description: 'Usado pelos campeões mundiais. Ultraleve com sensor HERO 25K para precision aim.',
+                imageUrl: '../img/ads/logitech-mouse.jpg',
+                placeholderImage: true,
+                targetUrl: 'https://www.logitechg.com/furia',
+                category: ['hardware', 'mouse'],
+                games: ['cs', 'valorant'],
+                badge: 'PARCEIRO OFICIAL',
+                couponCode: 'FURIACS20'
+            }
+        ];
+    }
+</script>
                 
     <!-- Resto do formulário continua aqui... -->
         
