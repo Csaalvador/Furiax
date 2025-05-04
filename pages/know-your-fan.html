@@ -6,6 +6,8 @@
     <title>FURIAX - Know Your Fan</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="../img/logo/favicon-32x32.png">
+
     <style>
         :root {
             --primary: #1e90ff;
@@ -1851,11 +1853,10 @@
                         // Determinar URL da imagem
                         let imageUrl = ad.imageUrl;
                         if (ad.placeholderImage) {
-                            imageUrl = `https://via.placeholder.com/300x200/0a0a0a/1e90ff?text=${encodeURIComponent(ad.brand)}`;
                         }
                         
                         return `
-                            <div class="carousel-item" style="min-width: 100%; padding: 0 15px; box-sizing: border-box;">
+                            <div class="carousel-item"; padding: 0 15px; box-sizing: border-box;">
                                 <div class="sponsored-product-card" style="background: rgba(0, 0, 0, 0.2); border-radius: 15px; overflow: hidden; border: 1px solid rgba(30, 144, 255, 0.1); transition: transform 0.3s ease, box-shadow 0.3s ease; height: 100%;">
                                     <div class="sponsored-image" style="height: 180px; overflow: hidden; position: relative;">
                                         <img src="${imageUrl}" alt="${ad.title}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;">
@@ -2090,46 +2091,46 @@
         
         // Fallback para dados mockup em caso de erro
         return [
-            {
-                id: 'ad-hyperx-1',
-                brand: 'HyperX',
-                title: 'HyperX Cloud Alpha - Headset Oficial FURIA',
-                description: 'O mesmo headset usado pelos pros da FURIA. Qualidade de áudio premium para suas partidas.',
-                imageUrl: '../img/ads/hyperx-headset.jpg',
-                placeholderImage: true,
-                targetUrl: 'https://www.hyperx.com/furia',
-                category: ['hardware', 'audio'],
-                games: ['all'],
-                badge: '15% OFF EXCLUSIVO',
-                couponCode: 'FURIAFAN15'
-            },
-            {
-                id: 'ad-redragon-1',
-                brand: 'Redragon',
-                title: 'Teclado Mecânico Redragon K552 RGB',
-                description: 'Precisão e velocidade para dominar suas partidas. Switches Blue para feedback tátil perfeito.',
-                imageUrl: '../img/ads/redragon-keyboard.jpg',
-                placeholderImage: true,
-                targetUrl: 'https://www.redragon.com.br/furia',
-                category: ['hardware', 'teclado'],
-                games: ['cs', 'valorant', 'apex'],
-                badge: 'CUPOM ESPECIAL',
-                couponCode: 'FURIAPRO10'
-            },
-            {
-                id: 'ad-logitech-1',
-                brand: 'Logitech G',
-                title: 'Mouse Gamer Logitech G Pro X Superlight',
-                description: 'Usado pelos campeões mundiais. Ultraleve com sensor HERO 25K para precision aim.',
-                imageUrl: '../img/ads/logitech-mouse.jpg',
-                placeholderImage: true,
-                targetUrl: 'https://www.logitechg.com/furia',
-                category: ['hardware', 'mouse'],
-                games: ['cs', 'valorant'],
-                badge: 'PARCEIRO OFICIAL',
-                couponCode: 'FURIACS20'
-            }
-        ];
+    {
+        id: 'Moletom',
+        brand: 'Furia',
+        title: 'Camiseta - FURIA',
+        description: 'Estilo oficial da FURIA. Conforto e qualidade premium para representar seu time dentro e fora do jogo.',
+        imageUrl: '../img/produtos/camisa2.webp',
+        placeholderImage: true,
+        targetUrl: 'https://www.hyperx.com/furia',
+        category: ['vestuário', 'camiseta'],
+        games: ['all'],
+        badge: '15% OFF EXCLUSIVO',
+        couponCode: 'FURIAFAN15'
+    },
+    {
+        id: 'Boné',
+        brand: 'Furia',
+        title: 'Boné - FURIA',
+        description: 'Visual autêntico com o escudo da FURIA. Ideal para completar seu look com estilo e atitude gamer.',
+        imageUrl: '../img/produtos/bone1.webp',
+        placeholderImage: true,
+        targetUrl: 'https://www.redragon.com.br/furia',
+        category: ['vestuário', 'acessórios'],
+        games: ['cs', 'valorant', 'apex'],
+        badge: 'CUPOM ESPECIAL',
+        couponCode: 'FURIAPRO10'
+    },
+    {
+        id: 'Moletom - FURIA',
+        brand: 'Furia',
+        title: 'Moletom FURIA',
+        description: 'O moletom oficial da FURIA. Conforto, estilo  usados pelos pros.',
+        imageUrl: '../img/produtos/moletom2.webp',
+        placeholderImage: true,
+        targetUrl: 'https://www.logitechg.com/furia',
+        category: ['vestuário', 'moletom'],
+        games: ['cs', 'valorant'],
+        badge: 'PARCEIRO OFICIAL',
+        couponCode: 'FURIACS20'
+    }
+];
     }
 </script>
                 

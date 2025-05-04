@@ -4,162 +4,110 @@
 // Base de dados de anúncios patrocinados
 const sponsoredAds = [
     {
-        id: 'ad-hyperx-1',
-        brand: 'HyperX',
-        title: 'HyperX Cloud Alpha - Headset Oficial FURIA',
-        description: 'O mesmo headset usado pelos pros da FURIA. Qualidade de áudio premium para suas partidas.',
-        imageUrl: '../img/ads/hyperx-headset.jpg',
+        id: 'camiseta-oficial',
+        brand: 'FURIA',
+        title: 'Camisa Oficial FURIA',
+        description: 'A camisa usada pelos jogadores da FURIA em campeonatos. Tecido leve, respirável e design impactante para você brilhar também.',
+        imageUrl: '../img/produtos/camisa1.webp',
         placeholderImage: true,
-        targetUrl: 'https://www.hyperx.com/furia',
-        category: ['hardware', 'audio'],
+        targetUrl: 'https://www.furia.gg/produto/camiseta-infantil-furia-adidas-preta-150264',
+        category: ['vestuário', 'camiseta'],
         games: ['all'],
-        badge: '15% OFF EXCLUSIVO',
-        couponCode: 'FURIAFAN15'
+        badge: 'LANÇAMENTO OFICIAL',
+        couponCode: 'FURIA2024'
     },
     {
-        id: 'ad-redragon-1',
-        brand: 'Redragon',
-        title: 'Teclado Mecânico Redragon K552 RGB',
-        description: 'Precisão e velocidade para dominar suas partidas. Switches Blue para feedback tátil perfeito.',
-        imageUrl: '../img/ads/redragon-keyboard.jpg',
+        id: 'furia-moletom-classic',
+        brand: 'FURIA',
+        title: 'Moletom Classic FURIA',
+        description: 'Conforto e estilo com o moletom preto clássico da FURIA. Perfeito para quem vive o universo gamer fora do jogo.',
+        imageUrl: '../img/produtos/moletom1.webp',
         placeholderImage: true,
-        targetUrl: 'https://www.redragon.com.br/furia',
-        category: ['hardware', 'teclado'],
+        targetUrl: 'https://www.furia.gg/produto/moletom-careca-furia-magic-panthera-azul-150217',
+        category: ['vestuário', 'moletom'],
+        games: ['all'],
+        badge: 'MAIS VENDIDO',
+        couponCode: 'FURIACOZY'
+    },
+    {
+        id: 'sacochila',
+        brand: 'FURIA',
+        title: 'Sacochila FURIA',
+        description: 'A sacochila oficial dos pros da FURIA. Qualidade premium para carregar seu gear com estilo.',
+        imageUrl: '../img/produtos/sacochila.webp',
+        placeholderImage: true,
+        targetUrl: 'https://www.furia.gg/produto/sacochila-furia-fc-preta-150266',
+        category: ['acessórios', 'sacochila'],
         games: ['cs', 'valorant', 'apex'],
-        badge: 'CUPOM ESPECIAL',
-        couponCode: 'FURIAPRO10'
+        badge: 'RECOMENDADO PELOS PROS',
+        couponCode: 'FURIAPRECISION'
     },
     {
-        id: 'ad-logitech-1',
-        brand: 'Logitech G',
-        title: 'Mouse Gamer Logitech G Pro X Superlight',
-        description: 'Usado pelos campeões mundiais. Ultraleve com sensor HERO 25K para precision aim.',
-        imageUrl: '../img/ads/logitech-mouse.jpg',
+        id: 'Moletom',
+        brand: 'FURIA',
+        title: 'Moletom FURIA',
+        description: 'O moletom oficial da FURIA. Conforto e estilo para os fãs do universo gamer.',
+        imageUrl: '../img/produtos/moletom2.webp',
         placeholderImage: true,
-        targetUrl: 'https://www.logitechg.com/furia',
-        category: ['hardware', 'mouse'],
-        games: ['cs', 'valorant'],
-        badge: 'PARCEIRO OFICIAL',
-        couponCode: 'FURIACS20'
-    },
-    {
-        id: 'ad-razer-1',
-        brand: 'Razer',
-        title: 'Razer BlackShark V2 Pro - Edição FURIA',
-        description: 'Headset sem fio premium com drivers de titânio de 50mm e microfone com cancelamento de ruído.',
-        imageUrl: '../img/ads/razer-headset.jpg',
-        placeholderImage: true,
-        targetUrl: 'https://www.razer.com/furia',
-        category: ['hardware', 'audio'],
-        games: ['cs', 'valorant', 'r6'],
-        badge: '20% DESCONTO',
-        couponCode: 'FURIA20'
-    },
-    {
-        id: 'ad-corsair-1',
-        brand: 'Corsair',
-        title: 'Corsair K70 RGB - Teclado Edição FURIA',
-        description: 'Switches Cherry MX Speed Silver para reações ultrarrápidas em jogos competitivos.',
-        imageUrl: '../img/ads/corsair-keyboard.jpg',
-        placeholderImage: true,
-        targetUrl: 'https://www.corsair.com/furia',
-        category: ['hardware', 'teclado'],
-        games: ['cs', 'valorant', 'apex'],
+        targetUrl: 'https://www.furia.gg/produto/moletom-my-hero-academia-x-furia-bakugo-preto-150232',
+        category: ['vestuário', 'moletom'],
+        games: ['all'],
         badge: 'EDIÇÃO LIMITADA',
-        couponCode: 'FURIAFAN25'
+        couponCode: 'FURIACOLECIONADOR'
     },
     {
-        id: 'ad-steelseries-1',
-        brand: 'SteelSeries',
-        title: 'Mouse SteelSeries Aerox 3 FURIA Edition',
-        description: 'Design ultraleve com 67g para movimentos rápidos. Sensor TrueMove Pro de 18.000 CPI.',
-        imageUrl: '../img/ads/steelseries-mouse.jpg',
+        id: 'Camisa',
+        brand: 'FURIA',
+        title: 'Camiseta Oficial FURIA',
+        description: 'Mantenha-se hidratado com estilo gamer. Garrafa térmica premium com visual agressivo e isolamento térmico.',
+        imageUrl: '../img/produtos/camisa2.webp',
         placeholderImage: true,
-        targetUrl: 'https://www.steelseries.com/furia',
-        category: ['hardware', 'mouse'],
-        games: ['cs', 'valorant'],
-        badge: '15% DESCONTO',
-        couponCode: 'FURIAVIP15'
-    },
-    {
-        id: 'ad-asus-1',
-        brand: 'ASUS ROG',
-        title: 'Monitor ASUS ROG Swift 360Hz',
-        description: 'O monitor dos profissionais. 360Hz para a vantagem competitiva que você precisa.',
-        imageUrl: '../img/ads/asus-monitor.jpg',
-        placeholderImage: true,
-        targetUrl: 'https://www.asus.com/rog/furia',
-        category: ['hardware', 'monitor'],
-        games: ['cs', 'valorant', 'apex'],
-        badge: 'FRETE GRÁTIS',
-        couponCode: 'FURIAROG'
-    },
-    {
-        id: 'ad-adidas-1',
-        brand: 'Adidas',
-        title: 'Tênis Adidas X FURIA - Edição Limitada',
-        description: 'O estilo FURIA para o seu dia a dia. Conforto e design para os verdadeiros fans.',
-        imageUrl: '../img/ads/adidas-shoes.jpg',
-        placeholderImage: true,
-        targetUrl: 'https://www.adidas.com.br/furia',
-        category: ['vestuario', 'casual'],
+        targetUrl: 'https://www.furia.gg/produto/garrafa-termica-furia',
+        category: ['acessórios', 'garrafa'],
         games: ['all'],
-        badge: 'EXCLUSIVO',
-        couponCode: 'FURIAFEET'
+        badge: 'PRODUTO SUSTENTÁVEL',
+        couponCode: 'FURIA2020'
     },
     {
-        id: 'ad-newera-1',
-        brand: 'New Era',
-        title: 'Boné New Era 9FORTY FURIA eSports',
-        description: 'Modelo oficial usado pelo time. Estilo dentro e fora dos torneios.',
-        imageUrl: '../img/ads/newera-cap.jpg',
+        id: 'furiacalca',
+        brand: 'FURIA',
+        title: 'Calça FURIA',
+        description: 'Leve a FURIA com você em todo lugar. Estilo premium e acabamento em metal escovado.',
+        imageUrl: '../img/produtos/calca1.webp',
         placeholderImage: true,
-        targetUrl: 'https://www.neweracap.com.br/furia',
-        category: ['vestuario', 'acessorios'],
+        targetUrl: 'https://www.furia.gg/produto/calca-furia-x-zor-preta-150236a',
+        category: ['acessórios', 'calça'],
         games: ['all'],
-        badge: 'LANÇAMENTO',
-        couponCode: 'FURIACAP10'
+        badge: 'BRINDE EXCLUSIVO',
+        couponCode: 'FURIACHAVE'
     },
     {
-        id: 'ad-gfuel-1',
-        brand: 'G FUEL',
-        title: 'G FUEL FURIA Blend - Energia para Campeões',
-        description: 'A bebida energética oficial da FURIA. Sabor exclusivo e zero açúcar.',
-        imageUrl: '../img/ads/gfuel-energy.jpg',
+        id: 'furia-camisa-torcedor',
+        brand: 'FURIA',
+        title: 'Camisa Torcedor FURIA',
+        description: 'A camisa que representa a torcida FURIA. Conforto e estilo para apoiar seu time.',
+        imageUrl: '../img/produtos/camisa3.webp',
         placeholderImage: true,
-        targetUrl: 'https://gfuel.com/furia',
-        category: ['consumivel', 'energia'],
+        targetUrl: 'https://www.furia.gg/produto/camiseta-furia-x-zor-preta-150240',
+        category: ['vestuário', 'camiseta'],
         games: ['all'],
-        badge: '25% NA PRIMEIRA COMPRA',
-        couponCode: 'FURIAENERGY'
+        badge: 'NOVIDADE',
+        couponCode: 'FURIATORCIDA'
     },
     {
-        id: 'ad-secretlab-1',
-        brand: 'Secretlab',
-        title: 'Cadeira Gamer Secretlab TITAN Evo 2022 FURIA Edition',
-        description: 'Design exclusivo FURIA com máximo conforto para suas maratonas de jogo.',
-        imageUrl: '../img/ads/secretlab-chair.jpg',
+        id: 'camiseta4',
+        brand: 'FURIA',
+        title: 'Camiseta FURIA Ultras',
+        description: 'Camiseta oversized FURIA para os fãs mais fervorosos. Estilo e conforto para seu dia a dia.',
+        imageUrl: '../img/produtos/camisa4.webp',
         placeholderImage: true,
-        targetUrl: 'https://secretlab.com/furia',
-        category: ['moveis', 'cadeira'],
+        targetUrl: 'https://www.furia.gg/produto/camiseta-oversized-furia-ultras-preta-150262',
+        category: ['vestuário', 'camiseta'],
         games: ['all'],
-        badge: 'R$400 OFF',
-        couponCode: 'FURIASIT'
-    },
-    {
-        id: 'ad-alienware-1',
-        brand: 'Alienware',
-        title: 'PC Gamer Alienware Aurora R13 - Config FURIA',
-        description: 'PC com as mesmas configurações usadas pelos pros da FURIA no bootcamp.',
-        imageUrl: '../img/ads/alienware-pc.jpg',
-        placeholderImage: true,
-        targetUrl: 'https://www.dell.com/alienware/furia',
-        category: ['hardware', 'pc'],
-        games: ['cs', 'valorant', 'apex'],
-        badge: 'PARCELAMENTO ESPECIAL',
-        couponCode: 'FURIAGAMER'
+        badge: 'CONFORTO TOTAL',
+        couponCode: 'FURIAC'
     }
-];
+]    
 
 // Configuração do banner de anúncios
 let adSettings = {
@@ -667,7 +615,7 @@ function updateAdContent(ad) {
         let imageUrl = ad.imageUrl;
         if (ad.placeholderImage) {
             // Usar imagem de placeholder se necessário
-            imageUrl = `https://via.placeholder.com/350x180/0a0a0a/1e90ff?text=${encodeURIComponent(ad.brand)}`;
+            imageUrl = `../img/produtos/camisa5.webp`;
         }
         
         imageContainer.innerHTML = `
@@ -866,7 +814,7 @@ function showPopupAd() {
     let imageUrl = selectedAd.imageUrl;
     if (selectedAd.placeholderImage) {
         // Usar imagem de placeholder se necessário
-        imageUrl = `https://via.placeholder.com/600x300/0a0a0a/1e90ff?text=${encodeURIComponent(selectedAd.brand)}`;
+    
     }
     
     // HTML do popup
