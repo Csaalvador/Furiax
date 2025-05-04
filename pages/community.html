@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/comunidadeaa.css">
     <link rel="stylesheet" href="../css/furiax-sentiment.css">
+    <script src="../js/"></script>
     <style>
     .gauge-fill {
     height: 100%;
@@ -78,9 +79,11 @@
         
         <a href="../index.html"><button><i class="fas fa-home"></i> <span>Início</span></button></a>
         <a href="./profile.html"><button><i class="fas fa-user-edit"></i> <span>Perfil</span></button></a>
-        <a href="./missions.html"><button><i class="fas fa-tasks"></i> <span>Missões</span></button></a>
+        <a href="./missions.html"><button><i class="fas fa-gamepad"></i> <span>Mini-Games</span></button></a>
         <a href="./community.html"><button class="active"><i class="fas fa-users"></i> <span>Comunidade</span></button></a>
-        <a href="./ia.html"><button><i class="fas fa-calendar"></i> <span>FuriosoAI</span></button></a>
+        <a href="./ia.html"><button><i class="fas fa-robot"></i> <span>FuriosoAI</span></button></a>
+        <a href="./know-your-fan.html"><button><i class="fas fa-user"></i>Know Your Fan</button></a>
+        <a href="./recommendss.html"><button><i class="fas fa-star"></i>Experiências</button></a>
         
         <div class="user-profile">
             <div class="profile-avatar">
@@ -792,7 +795,7 @@
     <script src="../js/furiax-login-auth.js"></script>
 <script src="../js/furiax-sentiment-analysis.js"></script>
 <!-- <script src="../js/furiax-feed-manager.js"></script> -->
-<!-- <script src="../js/furiax-ai-assistant.js"></script> -->
+<script src="../js/engajament.js"></script>
 <script src="../js/furiax-gamification.js"></script>
 <script src="../js/furiax-profile-system.js"></script>
 <script src="../js/furiax-main-integration.js"></script>
@@ -800,6 +803,7 @@
 <script src="../js/integration/furiax-profile.js"></script>
 <script src="../js/integration/furiax-sync.js"></script>
 <script src="../js/integration/furiax-user_session.js"></script>
+<script src="../js/furiax-main-integration.js"></script>
 <script src="../js/furiax-post-fix.js"></script>
 <script src="../js/integration/furiax-core.js"></script>
 
@@ -825,7 +829,102 @@ document.addEventListener("DOMContentLoaded", function() {
     // Ativar a aba "profile" por padrão
     tabs[0].click();
 });
-    
+// Função que adiciona evento de clique a todos os botões
+function ativarReloadNosBotoes() {
+  const botoes = document.querySelectorAll('#analyzePostBtn');
+  
+  botoes.forEach(botao => {
+    botao.addEventListener('click', () => {
+      location.reload(); // Recarrega a página
+    });
+  });
+}
+
+// Executa a função assim que o DOM estiver carregado
+document.addEventListener('DOMContentLoaded', ativarReloadNosBotoes);
+
+// Adiciona estilos e overlay no carregamento da página
+document.addEventListener('DOMContentLoaded', () => {
+  // Cria overlay
+  const refreshOverlay = document.createElement('div');
+  refreshOverlay.id = 'refreshOverlay';
+  document.body.appendChild(refreshOverlay);
+
+  // Spinner
+  const spinner = document.createElement('div');
+  spinner.className = 'refresh-spinner';
+  refreshOverlay.appendChild(spinner);
+
+  // Texto
+  const refreshText = document.createElement('div');
+  refreshText.className = 'refresh-text';
+  refreshText.textContent = 'Analisando post...';
+  refreshOverlay.appendChild(refreshText);
+
+  // Estilos
+  const style = document.createElement('style');
+  style.textContent = `
+    #refreshOverlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s, visibility 0.3s;
+    }
+
+    #refreshOverlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .refresh-spinner {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 5px solid rgba(30, 144, 255, 0.3);
+      border-top-color: #1e90ff;
+      animation: spin 1s linear infinite;
+      margin-bottom: 20px;
+    }
+
+    .refresh-text {
+      color: white;
+      font-family: sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  `;
+  document.head.appendChild(style);
+
+  // Função para mostrar animação e recarregar
+  function triggerAnimatedReload() {
+    refreshOverlay.classList.add('active');
+    setTimeout(() => {
+      location.reload();
+    }, 1500); // Tempo para mostrar animação antes do reload
+  }
+
+  // Aplica evento a todos os botões
+  document.querySelectorAll('#analyzePostBtn').forEach(btn => {
+    btn.addEventListener('click', triggerAnimatedReload);
+  });
+});
+
+
 </script>
 
 

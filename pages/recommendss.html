@@ -387,7 +387,6 @@
         .recommendation-image img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
             transition: var(--transition);
         }
         
@@ -883,7 +882,7 @@
                             <img src="../img/logo/logoFuriax.png" alt="Avatar do usuário" class="avatar-image">
                         </div>
                         <div class="profile-info">
-                            <div class="profile-name" id="profileName">Carlos Silva</div>
+                            <div class="profile-name" id="profileName">Você</div>
                             <div class="profile-title" id="profileTitle">Furioso Elite</div>
                             <div class="profile-meta">
                                 <div class="profile-meta-item">
@@ -960,7 +959,7 @@
                             <div class="recommendation-card">
                                 <div class="exclusive-badge">Exclusivo</div>
                                 <div class="recommendation-image">
-                                    <img src="/api/placeholder/400/240" alt="FURIA Fan Fest">
+                                    <img src="../img/experience/xp02.webp" alt="FURIA Fan Fest">
                                 </div>
                                 <div class="recommendation-content">
                                     <div class="recommendation-title">FURIA Fan Fest SP 2025</div>
@@ -989,7 +988,7 @@
                             <!-- Evento 2 -->
                             <div class="recommendation-card">
                                 <div class="recommendation-image">
-                                    <img src="/api/placeholder/400/240" alt="CS Major Viewing Party">
+                                    <img src="../img/experience/xp02.webp" alt="FURIA">
                                 </div>
                                 <div class="recommendation-content">
                                     <div class="recommendation-title">CS Major Viewing Party</div>
@@ -1018,7 +1017,7 @@
                             <!-- Evento 3 -->
                             <div class="recommendation-card">
                                 <div class="recommendation-image">
-                                    <img src="/api/placeholder/400/240" alt="Workshop Tático CS">
+                                    <img src="../img/experience/xp02.webp" alt="FURIA">
                                 </div>
                                 <div class="recommendation-content">
                                     <div class="recommendation-title">Workshop Tático CS</div>
@@ -1071,7 +1070,7 @@
                             <div class="recommendation-card">
                                 <div class="exclusive-badge">Exclusivo</div>
                                 <div class="recommendation-image">
-                                    <img src="/api/placeholder/400/240" alt="Jersey Pro Player Edition">
+                                    <img src="../img/experience/prod1.webp" alt="Jersey Pro Player Edition">
                                 </div>
                                 <div class="recommendation-content">
                                     <div class="recommendation-title">Jersey Pro Player Edition</div>
@@ -1101,7 +1100,7 @@
                             <!-- Produto 2 -->
                             <div class="recommendation-card">
                                 <div class="recommendation-image">
-                                    <img src="/api/placeholder/400/240" alt="Mousepad Pro">
+                                    <img src="../img/experience/prod2.webp" alt="Mousepad Pro">
                                 </div>
                                 <div class="recommendation-content">
                                     <div class="recommendation-title">Mousepad XL Pro Series</div>
@@ -1131,7 +1130,7 @@
                             <!-- Produto 3 -->
                             <div class="recommendation-card">
                                 <div class="recommendation-image">
-                                    <img src="/api/placeholder/400/240" alt="Boné FURIA">
+                                    <img src="../img/experience/prod3.webp" alt="Boné FURIA">
                                 </div>
                                 <div class="recommendation-content">
                                     <div class="recommendation-title">Boné FURIA Championship</div>
@@ -1185,7 +1184,7 @@
                             <div class="recommendation-card">
                                 <div class="exclusive-badge">Premium</div>
                                 <div class="recommendation-image">
-                                    <img src="/api/placeholder/400/240" alt="Vídeo de Treino">
+                                    <img src="../img/experience/recomd.jpg" alt="Vídeo de Treino">
                                 </div>
                                 <div class="recommendation-content">
                                     <div class="recommendation-title">Treino Tático do Major</div>
@@ -1215,7 +1214,7 @@
                             <!-- Conteúdo 2 -->
                             <div class="recommendation-card">
                                 <div class="recommendation-image">
-                                    <img src="/api/placeholder/400/240" alt="Podcast com jogadores">
+                                    <img src="../img/experience/recomd.jpg" alt="Podcast com jogadores">
                                 </div>
                                 <div class="recommendation-content">
                                     <div class="recommendation-title">Podcast: Nos Bastidores</div>
@@ -1245,7 +1244,7 @@
                             <!-- Conteúdo 3 -->
                             <div class="recommendation-card">
                                 <div class="recommendation-image">
-                                    <img src="/api/placeholder/400/240" alt="Tutorial de smokes">
+                                    <img src="../img/experience/recomd.jpg" alt="Podcast">
                                 </div>
                                 <div class="recommendation-content">
                                     <div class="recommendation-title">Masterclass: Smokes Avançadas</div>
@@ -1299,7 +1298,7 @@
                             <div class="recommendation-card">
                                 <div class="exclusive-badge">Ultra Premium</div>
                                 <div class="recommendation-image">
-                                    <img src="/api/placeholder/400/240" alt="Bootcamp Experience">
+                                    <img src="../img/experience/furia.png" alt="Bootcamp Experience">
                                 </div>
                                 <div class="recommendation-content">
                                     <div class="recommendation-title">Bootcamp Experience</div>
@@ -1328,7 +1327,7 @@
                             <!-- Experiência 2 -->
                             <div class="recommendation-card">
                                 <div class="recommendation-image">
-                                    <img src="/api/placeholder/400/240" alt="Camarote Major">
+                                    <img src="../img/experience/furia.png" alt="Camarote Major">
                                 </div>
                                 <div class="recommendation-content">
                                     <div class="recommendation-title">Camarote VIP no Major</div>
@@ -1357,7 +1356,7 @@
                             <!-- Experiência 3 -->
                             <div class="recommendation-card">
                                 <div class="recommendation-image">
-                                    <img src="/api/placeholder/400/240" alt="Play with Pro">
+                                    <img src="../img/experience/furia.png" alt="Play with Pro">
                                 </div>
                                 <div class="recommendation-content">
                                     <div class="recommendation-title">Play with Pro: Matchmaking</div>
@@ -2841,7 +2840,100 @@
             `);
         }
     }
+   
+// Função para prevenir navegação automática
+document.addEventListener('DOMContentLoaded', function() {
+  // Este é o script que identifica e impede a navegação automática
+  // enquanto ainda permite cliques manuais do usuário
+  
+  // 1. Corrigir links na sidebar
+  const sidebarLinks = document.querySelectorAll('.sidebar .nav-item a');
+  
+  sidebarLinks.forEach(function(link) {
+    // Substituir o link original por uma cópia para remover event listeners
+    const newLink = link.cloneNode(true);
     
+    // Adicionar o novo handler de eventos que verifica se é um clique genuíno
+    newLink.addEventListener('click', function(event) {
+      // Se não for um evento de clique real (gerado por script)
+      // ou se o elemento for clicado programaticamente, bloqueie
+      if (!event.isTrusted) {
+        event.preventDefault();
+        event.stopPropagation();
+        console.log('Navegação automática bloqueada para:', newLink.href);
+        return false;
+      }
+      
+      // Se for um clique real do usuário, permitir a navegação
+      return true;
+    });
+    
+    // Substituir o link antigo pelo novo
+    if (link.parentNode) {
+      link.parentNode.replaceChild(newLink, link);
+    }
+  });
+  
+  // 2. Identificar e desativar qualquer script que possa estar causando redirecionamentos
+  
+  // Impedir redirecionamentos automáticos
+  const originalAssign = window.location.assign;
+  const originalReplace = window.location.replace;
+  const originalHref = Object.getOwnPropertyDescriptor(window.location, 'href');
+  
+  // Substituir os métodos de navegação para adicionar verificação
+  window.location.assign = function(url) {
+    // Verificar se a chamada veio de um evento de usuário genuíno
+    const stackTrace = new Error().stack;
+    // Se veio de um clique real, permitir
+    if (window.recentUserInteraction && (Date.now() - window.recentUserInteraction) < 1000) {
+      originalAssign.call(window.location, url);
+    } else {
+      console.warn('Redirecionamento automático bloqueado:', url);
+    }
+  };
+  
+  window.location.replace = function(url) {
+    // Verificar se a chamada veio de um evento de usuário genuíno
+    const stackTrace = new Error().stack;
+    // Se veio de um clique real, permitir
+    if (window.recentUserInteraction && (Date.now() - window.recentUserInteraction) < 1000) {
+      originalReplace.call(window.location, url);
+    } else {
+      console.warn('Redirecionamento automático bloqueado:', url);
+    }
+  };
+  
+  // Redefinir o setter de href para bloquear alterações automáticas
+  if (originalHref && originalHref.set) {
+    Object.defineProperty(window.location, 'href', {
+      set: function(value) {
+        // Se veio de um clique real, permitir
+        if (window.recentUserInteraction && (Date.now() - window.recentUserInteraction) < 1000) {
+          originalHref.set.call(window.location, value);
+        } else {
+          console.warn('Alteração automática de location.href bloqueada:', value);
+        }
+      },
+      get: originalHref.get
+    });
+  }
+  
+  // Rastrear interações genuínas do usuário
+  document.addEventListener('mousedown', function() {
+    window.recentUserInteraction = Date.now();
+  });
+  
+  document.addEventListener('keydown', function() {
+    window.recentUserInteraction = Date.now();
+  });
+  
+  document.addEventListener('touchstart', function() {
+    window.recentUserInteraction = Date.now();
+  });
+  
+  console.log('✅ Proteção contra navegação automática ativada');
+});
     // Implementar funcionalidade de animação ao scroll
     function setupScrollEffects() {
         // Obter todos os cards

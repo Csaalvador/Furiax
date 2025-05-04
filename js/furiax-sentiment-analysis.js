@@ -296,24 +296,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (!network) return;
         
-        if (network.connected) {
-          // Confirmar desconexão
-          if (confirm(`Deseja desconectar sua conta do ${network.name}?`)) {
-            this.disconnectSocialNetwork(networkId);
-            NotificationManager.show(`${network.name} desconectado com sucesso`, 'info');
-          }
-        } else {
-          // Solicitar nome de usuário
-          const username = prompt(`Digite seu nome de usuário do ${network.name}:`);
-          if (username) {
-            this.connectSocialNetwork(networkId, username);
-            NotificationManager.show(`${network.name} conectado com sucesso`, 'success');
-            
-            // Simular atividade nova
-            this.simulateSocialActivity(networkId, username);
-          }
-        }
-      }
+
   
       // Simular atividade social após conexão
       simulateSocialActivity(networkId, username) {
