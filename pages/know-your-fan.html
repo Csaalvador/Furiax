@@ -241,54 +241,11 @@
             border-radius: 3px;
         }
         
-        .know-your-fan-container {
-            position: relative;
-            max-width: 900px;
-            margin: 0 auto;
-            overflow: hidden;
-        }
+      
         
         /* Card com o formulário */
-        .form-card {
-            background: rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 40px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .form-card::before {
-            content: '';
-            position: absolute;
-            width: 200px;
-            height: 200px;
-            background: linear-gradient(45deg, var(--primary), transparent);
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.1;
-            top: -50px;
-            left: -50px;
-            z-index: -1;
-        }
-        
-        .form-card::after {
-            content: '';
-            position: absolute;
-            width: 200px;
-            height: 200px;
-            background: linear-gradient(45deg, var(--secondary), transparent);
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.1;
-            bottom: -50px;
-            right: -50px;
-            z-index: -1;
-        }
-        
+    
+      
         /* Efeito de brilho nos cards */
         .glow-effect {
             position: absolute;
@@ -1166,719 +1123,722 @@
         </div>
 
         <!-- Conteúdo Principal -->
-<div class="main-content">
-    <div class="main-header">
-        <h1 class="main-title">Know Your Fan</h1>
-    </div>
-    
-    <!-- Introdução e objetivos -->
-    <div class="intro-section" style="max-width: 800px; margin: 0 auto 40px; background: rgba(30, 144, 255, 0.05); border-radius: 15px; padding: 25px; border: 1px solid rgba(30, 144, 255, 0.1);">
-        <h2 style="font-family: 'Orbitron', sans-serif; color: var(--primary); margin-bottom: 15px; font-size: 1.3rem;">
-            <i class="fas fa-info-circle" style="margin-right: 10px;"></i>Objetivo
-        </h2>
-        <p style="color: var(--light); line-height: 1.6; margin-bottom: 15px;">
-            O <strong>Know Your Fan</strong> é uma estratégia utilizada por grandes clubes e organizações para conhecer melhor seus fãs e assim oferecer experiências e serviços exclusivos personalizados.
-        </p>
-        <p style="color: var(--gray); line-height: 1.6; margin-bottom: 15px;">
-            Com as informações coletadas, poderemos:
-        </p>
-        <ul style="color: var(--gray); line-height: 1.6; margin-bottom: 20px; padding-left: 20px;">
-            <li style="margin-bottom: 8px;">Criar eventos alinhados com seus interesses</li>
-            <li style="margin-bottom: 8px;">Oferecer produtos que realmente fazem sentido para você</li>
-            <li style="margin-bottom: 8px;">Enviar notificações personalizadas sobre seu time e jogos favoritos</li>
-            <li style="margin-bottom: 8px;">Desenvolver conteúdo exclusivo baseado nas suas preferências</li>
-            <li>Proporcionar experiências VIP baseadas no seu histórico como fã</li>
-        </ul>
-        <p style="color: var(--light); font-style: italic; border-left: 3px solid var(--primary); padding-left: 15px;">
-            Ao preencher este formulário, você contribui para melhorarmos constantemente sua experiência como fã da FURIA.
-        </p>
-    </div>
-    
-    <!-- Apenas para mobile -->
-    <div class="step-mobile" id="stepMobileLabel" style="display: none;">
-        Etapa 1 de 4: Dados Pessoais
-    </div>
-    
-    <!-- Progress Steps -->
-     <!-- Progress Steps -->
-<div class="progress-container">
-    <div class="steps">
-        <div class="step active" id="step-1">
-            1
-            <div class="step-label">Dados Pessoais</div>
-        </div>
-        <div class="step" id="step-2">
-            2
-            <div class="step-label">Interesses</div>
-        </div>
-        <div class="step" id="step-3">
-            3
-            <div class="step-label">Eventos</div>
-        </div>
-        <div class="step" id="step-4">
-            4
-            <div class="step-label">Compras</div>
-        </div>
-    </div>
-    <div class="progress-bar">
-        <div class="progress-fill" style="width: 25%"></div>
-    </div>
-</div>
-
-<div class="know-your-fan-container">
-    <div class="form-card">
-        <!-- Efeito de brilho -->
-        <div class="glow-effect"></div>
-        
-        <!-- Etapa 1: Dados Pessoais -->
-        <div class="form-step" id="step1-content">
-            <div class="form-section">
-                <h2 class="section-title"><i class="fas fa-user"></i> Dados Pessoais</h2>
-                <p style="color: var(--gray); margin-bottom: 20px;">Suas informações ajudarão a melhorar sua experiência com a FURIA.</p>
-                
-                <div class="form-row">
-                    <div class="form-col">
-                        <div class="form-group">
-                            <label for="fullName">Nome Completo *</label>
-                            <input type="text" id="fullName" placeholder="Digite seu nome completo" required>
-                        </div>
+        <div class="main-content">
+            <div class="main-header">
+                <h1 class="main-title">Know Your Fan</h1>
+            </div>
+            
+            <!-- Introdução e objetivos -->
+            <div class="intro-section" style="max-width: 800px; margin: 0 auto 40px; background: rgba(30, 144, 255, 0.05); border-radius: 15px; padding: 25px; border: 1px solid rgba(30, 144, 255, 0.1);">
+                <h2 style="font-family: 'Orbitron', sans-serif; color: var(--primary); margin-bottom: 15px; font-size: 1.3rem;">
+                    <i class="fas fa-info-circle" style="margin-right: 10px;"></i>Objetivo
+                </h2>
+                <p style="color: var(--light); line-height: 1.6; margin-bottom: 15px;">
+                    O <strong>Know Your Fan</strong> é uma estratégia utilizada por grandes clubes e organizações para conhecer melhor seus fãs e assim oferecer experiências e serviços exclusivos personalizados.
+                </p>
+                <p style="color: var(--gray); line-height: 1.6; margin-bottom: 15px;">
+                    Com as informações coletadas, poderemos:
+                </p>
+                <ul style="color: var(--gray); line-height: 1.6; margin-bottom: 20px; padding-left: 20px;">
+                    <li style="margin-bottom: 8px;">Criar eventos alinhados com seus interesses</li>
+                    <li style="margin-bottom: 8px;">Oferecer produtos que realmente fazem sentido para você</li>
+                    <li style="margin-bottom: 8px;">Enviar notificações personalizadas sobre seu time e jogos favoritos</li>
+                    <li style="margin-bottom: 8px;">Desenvolver conteúdo exclusivo baseado nas suas preferências</li>
+                    <li>Proporcionar experiências VIP baseadas no seu histórico como fã</li>
+                </ul>
+                <p style="color: var(--light); font-style: italic; border-left: 3px solid var(--primary); padding-left: 15px;">
+                    Ao preencher este formulário, você contribui para melhorarmos constantemente sua experiência como fã da FURIA.
+                </p>
+            </div>
+            
+            <!-- Apenas para mobile -->
+            <div class="step-mobile" id="stepMobileLabel" style="display: none;">
+                Etapa 1 de 4: Dados Pessoais
+            </div>
+            
+            <!-- Progress Steps -->
+            <div class="progress-container">
+                <div class="steps">
+                    <div class="step active" id="step-1">
+                        1
+                        <div class="step-label">Dados Pessoais</div>
                     </div>
-                    <div class="form-col">
-                        <div class="form-group">
-                            <label for="nickname">Apelido/Nickname</label>
-                            <input type="text" id="nickname" placeholder="Como prefere ser chamado">
-                        </div>
+                    <div class="step" id="step-2">
+                        2
+                        <div class="step-label">Interesses</div>
+                    </div>
+                    <div class="step" id="step-3">
+                        3
+                        <div class="step-label">Eventos</div>
+                    </div>
+                    <div class="step" id="step-4">
+                        4
+                        <div class="step-label">Compras</div>
                     </div>
                 </div>
-                
-                <div class="form-row">
-                    <div class="form-col">
-                        <div class="form-group">
-                            <label for="email">E-mail *</label>
-                            <input type="email" id="email" placeholder="seu.email@exemplo.com" required>
-                        </div>
-                    </div>
-                    <div class="form-col">
-                        <div class="form-group">
-                            <label for="phone">Telefone</label>
-                            <input type="tel" id="phone" placeholder="(xx) xxxxx-xxxx">
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-col">
-                        <div class="form-group">
-                            <label for="cpf">CPF *</label>
-                            <input type="text" id="cpf" placeholder="xxx.xxx.xxx-xx" required>
-                        </div>
-                    </div>
-                    <div class="form-col">
-                        <div class="form-group">
-                            <label for="birthDate">Data de Nascimento *</label>
-                            <input type="date" id="birthDate" required>
-                        </div>
-                    </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 25%"></div>
                 </div>
             </div>
             
-            <div class="form-section">
-                <h2 class="section-title"><i class="fas fa-map-marker-alt"></i> Endereço</h2>
+            <div class="know-your-fan-container">
+                <!-- Efeito de brilho -->
+                <div class="glow-effect"></div>
                 
-                <div class="form-row">
-                    <div class="form-col">
-                        <div class="form-group">
-                            <label for="cep">CEP *</label>
-                            <input type="text" id="cep" placeholder="xxxxx-xxx" required>
+                <!-- Etapa 1: Dados Pessoais -->
+                <div class="form-step" id="step1-content">
+                    <div class="form-section">
+                        <h2 class="section-title"><i class="fas fa-user"></i> Dados Pessoais</h2>
+                        <p style="color: var(--gray); margin-bottom: 20px;">Suas informações ajudarão a melhorar sua experiência com a FURIA.</p>
+                        
+                        <div class="form-row">
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="fullName">Nome Completo *</label>
+                                    <input type="text" id="fullName" placeholder="Digite seu nome completo" required>
+                                </div>
+                            </div>
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="nickname">Apelido/Nickname</label>
+                                    <input type="text" id="nickname" placeholder="Como prefere ser chamado">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="email">E-mail *</label>
+                                    <input type="email" id="email" placeholder="seu.email@exemplo.com" required>
+                                </div>
+                            </div>
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="phone">Telefone</label>
+                                    <input type="tel" id="phone" placeholder="(xx) xxxxx-xxxx">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="cpf">CPF *</label>
+                                    <input type="text" id="cpf" placeholder="xxx.xxx.xxx-xx" required>
+                                </div>
+                            </div>
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="birthDate">Data de Nascimento *</label>
+                                    <input type="date" id="birthDate" required>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="form-col">
+                    
+                    <div class="form-section">
+                        <h2 class="section-title"><i class="fas fa-map-marker-alt"></i> Endereço</h2>
+                        
+                        <div class="form-row">
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="cep">CEP *</label>
+                                    <input type="text" id="cep" placeholder="xxxxx-xxx" required>
+                                </div>
+                            </div>
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="state">Estado *</label>
+                                    <select id="state" required>
+                                        <option value="">Selecione...</option>
+                                        <option value="AC">Acre</option>
+                                        <option value="AL">Alagoas</option>
+                                        <option value="AP">Amapá</option>
+                                        <option value="AM">Amazonas</option>
+                                        <option value="BA">Bahia</option>
+                                        <option value="CE">Ceará</option>
+                                        <option value="DF">Distrito Federal</option>
+                                        <option value="ES">Espírito Santo</option>
+                                        <option value="GO">Goiás</option>
+                                        <option value="MA">Maranhão</option>
+                                        <option value="MT">Mato Grosso</option>
+                                        <option value="MS">Mato Grosso do Sul</option>
+                                        <option value="MG">Minas Gerais</option>
+                                        <option value="PA">Pará</option>
+                                        <option value="PB">Paraíba</option>
+                                        <option value="PR">Paraná</option>
+                                        <option value="PE">Pernambuco</option>
+                                        <option value="PI">Piauí</option>
+                                        <option value="RJ">Rio de Janeiro</option>
+                                        <option value="RN">Rio Grande do Norte</option>
+                                        <option value="RS">Rio Grande do Sul</option>
+                                        <option value="RO">Rondônia</option>
+                                        <option value="RR">Roraima</option>
+                                        <option value="SC">Santa Catarina</option>
+                                        <option value="SP">São Paulo</option>
+                                        <option value="SE">Sergipe</option>
+                                        <option value="TO">Tocantins</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="city">Cidade *</label>
+                                    <input type="text" id="city" placeholder="Sua cidade" required>
+                                </div>
+                            </div>
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="neighborhood">Bairro *</label>
+                                    <input type="text" id="neighborhood" placeholder="Seu bairro" required>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="street">Rua *</label>
+                                    <input type="text" id="street" placeholder="Nome da rua" required>
+                                </div>
+                            </div>
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="number">Número *</label>
+                                    <input type="text" id="number" placeholder="Número" required>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-section">
+                            <h2 class="section-title"><i class="fas fa-id-card"></i> Validação de Documento com CPF</h2>
+                            <p style="color: var(--gray); margin-bottom: 20px;">Faça upload de um documento com seu CPF (RG, CNH ou outros) para validação.</p>
+                            
+                            <div class="form-group">
+                                <label for="documentUpload">Documento com CPF</label>
+                                <input type="file" id="documentUpload" accept="image/*" onchange="validateDocument(this)">
+                                <small style="display: block; margin-top: 5px; color: var(--gray);">
+                                    Formatos aceitos: JPG, PNG. O documento deve conter um CPF claramente visível.
+                                </small>
+                            </div>
+                            <div class="document-validation-result"></div>
+                        </div>
+                        
                         <div class="form-group">
-                            <label for="state">Estado *</label>
-                            <select id="state" required>
+                            <label for="complement">Complemento</label>
+                            <input type="text" id="complement" placeholder="Apartamento, bloco, etc.">
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button class="btn btn-secondary" id="prevButton" disabled>
+                            <i class="fas fa-chevron-left"></i> Voltar
+                        </button>
+                        <button class="btn btn-primary" id="nextButton" onclick="goToStep(2)">
+                            Próximo <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Etapa 2: Interesses -->
+                <div class="form-step" id="step2-content" style="display: none;">
+                    <div class="form-section">
+                        <h2 class="section-title"><i class="fas fa-gamepad"></i> Jogos</h2>
+                        <p style="color: var(--gray); margin-bottom: 20px;">Quais jogos você acompanha? Classifique seu interesse de 1 a 5 estrelas.</p>
+                        
+                        <div class="rating-group">
+                            <div class="game-preference">
+                                <div class="game-logo">
+                                    <i class="fas fa-crosshairs"></i>
+                                </div>
+                                <div class="game-name">Counter-Strike</div>
+                                <div class="rating" data-game="cs">
+                                    <i class="fas fa-star star" data-value="1"></i>
+                                    <i class="fas fa-star star" data-value="2"></i>
+                                    <i class="fas fa-star star" data-value="3"></i>
+                                    <i class="fas fa-star star" data-value="4"></i>
+                                    <i class="fas fa-star star" data-value="5"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="game-preference">
+                                <div class="game-logo">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <div class="game-name">VALORANT</div>
+                                <div class="rating" data-game="valorant">
+                                    <i class="fas fa-star star" data-value="1"></i>
+                                    <i class="fas fa-star star" data-value="2"></i>
+                                    <i class="fas fa-star star" data-value="3"></i>
+                                    <i class="fas fa-star star" data-value="4"></i>
+                                    <i class="fas fa-star star" data-value="5"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="game-preference">
+                                <div class="game-logo">
+                                    <i class="fas fa-chess-rook"></i>
+                                </div>
+                                <div class="game-name">League of Legends</div>
+                                <div class="rating" data-game="lol">
+                                    <i class="fas fa-star star" data-value="1"></i>
+                                    <i class="fas fa-star star" data-value="2"></i>
+                                    <i class="fas fa-star star" data-value="3"></i>
+                                    <i class="fas fa-star star" data-value="4"></i>
+                                    <i class="fas fa-star star" data-value="5"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="game-preference">
+                                <div class="game-logo">
+                                    <i class="fas fa-user-shield"></i>
+                                </div>
+                                <div class="game-name">Rainbow Six Siege</div>
+                                <div class="rating" data-game="r6">
+                                    <i class="fas fa-star star" data-value="1"></i>
+                                    <i class="fas fa-star star" data-value="2"></i>
+                                    <i class="fas fa-star star" data-value="3"></i>
+                                    <i class="fas fa-star star" data-value="4"></i>
+                                    <i class="fas fa-star star" data-value="5"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="game-preference">
+                                <div class="game-logo">
+                                    <i class="fas fa-running"></i>
+                                </div>
+                                <div class="game-name">APEX Legends</div>
+                                <div class="rating" data-game="apex">
+                                    <i class="fas fa-star star" data-value="1"></i>
+                                    <i class="fas fa-star star" data-value="2"></i>
+                                    <i class="fas fa-star star" data-value="3"></i>
+                                    <i class="fas fa-star star" data-value="4"></i>
+                                    <i class="fas fa-star star" data-value="5"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group" style="margin-top: 20px;">
+                            <label for="otherGame">Outro jogo</label>
+                            <input type="text" id="otherGame" placeholder="Especifique outro jogo que você acompanha">
+                        </div>
+                    </div>
+                    
+                    <div class="form-section">
+                        <h2 class="section-title"><i class="fas fa-hashtag"></i> Tópicos de Interesse</h2>
+                        <p style="color: var(--gray); margin-bottom: 20px;">Quais assuntos você mais gosta de acompanhar sobre a FURIA?</p>
+                        
+                        <div class="checkbox-group">
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="interests" value="campeonatos">
+                                <span class="checkbox-label">Campeonatos</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="interests" value="bastidores">
+                                <span class="checkbox-label">Bastidores</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="interests" value="jogadores">
+                                <span class="checkbox-label">Jogadores</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="interests" value="estrategias">
+                                <span class="checkbox-label">Estratégias</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="interests" value="treinos">
+                                <span class="checkbox-label">Treinos</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="interests" value="hardware">
+                                <span class="checkbox-label">Hardware</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="interests" value="conteudo-social">
+                                <span class="checkbox-label">Conteúdo Social</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="interests" value="loja">
+                                <span class="checkbox-label">Produtos/Loja</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="interests" value="analises">
+                                <span class="checkbox-label">Análises</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="interests" value="highlights">
+                                <span class="checkbox-label">Highlights</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-section">
+                        <h2 class="section-title"><i class="fas fa-comment"></i> Conteúdo Preferido</h2>
+                        <p style="color: var(--gray); margin-bottom: 20px;">Como você prefere consumir conteúdo sobre a FURIA?</p>
+                        
+                        <div class="radio-group">
+                            <label class="radio-item">
+                                <input type="radio" name="content-type" value="livestreams">
+                                <span class="radio-label">Livestreams</span>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="content-type" value="videos">
+                                <span class="radio-label">Vídeos Editados</span>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="content-type" value="articles">
+                                <span class="radio-label">Artigos/Textos</span>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="content-type" value="podcasts">
+                                <span class="radio-label">Podcasts</span>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="content-type" value="social-media">
+                                <span class="radio-label">Redes Sociais</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button class="btn btn-secondary" onclick="goToStep(1)">
+                            <i class="fas fa-chevron-left"></i> Voltar
+                        </button>
+                        <button class="btn btn-primary" onclick="goToStep(3)">
+                            Próximo <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Etapa 3: Eventos & Atividades -->
+                <div class="form-step" id="step3-content" style="display: none;">
+                    <div class="form-section">
+                        <h2 class="section-title"><i class="fas fa-calendar-alt"></i> Eventos</h2>
+                        <p style="color: var(--gray); margin-bottom: 20px;">Quais eventos presenciais da FURIA você participou no último ano?</p>
+                        
+                        <div class="event-item">
+                            <div class="event-icon">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <div class="event-details">
+                                <div class="event-title">FURIA Fan Fest São Paulo</div>
+                                <div class="event-date">12-13 de Agosto, 2024</div>
+                            </div>
+                            <div class="event-action">
+                                <label class="checkbox-item">
+                                    <input type="checkbox" name="events" value="fan-fest-sp">
+                                    <span class="checkbox-label">Participei</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="event-item">
+                            <div class="event-icon">
+                                <i class="fas fa-microphone"></i>
+                            </div>
+                            <div class="event-details">
+                                <div class="event-title">Meet & Greet - Shopping Eldorado</div>
+                                <div class="event-date">23 de Setembro, 2024</div>
+                            </div>
+                            <div class="event-action">
+                                <label class="checkbox-item">
+                                    <input type="checkbox" name="events" value="meet-greet-eldorado">
+                                    <span class="checkbox-label">Participei</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="event-item">
+                            <div class="event-icon">
+                                <i class="fas fa-gamepad"></i>
+                            </div>
+                            <div class="event-details">
+                                <div class="event-title">FURIA Experience - Rio de Janeiro</div>
+                                <div class="event-date">5-6 de Novembro, 2024</div>
+                            </div>
+                            <div class="event-action">
+                                <label class="checkbox-item">
+                                    <input type="checkbox" name="events" value="experience-rio">
+                                    <span class="checkbox-label">Participei</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="event-item">
+                            <div class="event-icon">
+                                <i class="fas fa-store"></i>
+                            </div>
+                            <div class="event-details">
+                                <div class="event-title">FURIA Pop-up Store - Shopping Morumbi</div>
+                                <div class="event-date">15-20 de Dezembro, 2024</div>
+                            </div>
+                            <div class="event-action">
+                                <label class="checkbox-item">
+                                    <input type="checkbox" name="events" value="popup-morumbi">
+                                    <span class="checkbox-label">Participei</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group" style="margin-top: 20px;">
+                            <label for="otherEvent">Outro evento</label>
+                            <input type="text" id="otherEvent" placeholder="Especifique outro evento que você participou">
+                        </div>
+                    </div>
+                    
+                    <div class="form-section">
+                        <h2 class="section-title"><i class="fas fa-tv"></i> Transmissões ao Vivo</h2>
+                        <p style="color: var(--gray); margin-bottom: 20px;">Com que frequência você assiste às partidas da FURIA ao vivo?</p>
+                        
+                        <div class="radio-group">
+                            <label class="radio-item">
+                                <input type="radio" name="watch-frequency" value="all">
+                                <span class="radio-label">Todas as partidas</span>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="watch-frequency" value="most">
+                                <span class="radio-label">A maioria das partidas</span>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="watch-frequency" value="some">
+                                <span class="radio-label">Algumas partidas</span>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="watch-frequency" value="important">
+                                <span class="radio-label">Apenas torneios importantes</span>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="watch-frequency" value="rarely">
+                                <span class="radio-label">Raramente assisto ao vivo</span>
+                            </label>
+                        </div>
+                        
+                        <div class="form-group" style="margin-top: 20px;">
+                            <label for="watchPlatform">Em qual plataforma você costuma assistir?</label>
+                            <select id="watchPlatform">
                                 <option value="">Selecione...</option>
-                                <option value="AC">Acre</option>
-                                <option value="AL">Alagoas</option>
-                                <option value="AP">Amapá</option>
-                                <option value="AM">Amazonas</option>
-                                <option value="BA">Bahia</option>
-                                <option value="CE">Ceará</option>
-                                <option value="DF">Distrito Federal</option>
-                                <option value="ES">Espírito Santo</option>
-                                <option value="GO">Goiás</option>
-                                <option value="MA">Maranhão</option>
-                                <option value="MT">Mato Grosso</option>
-                                <option value="MS">Mato Grosso do Sul</option>
-                                <option value="MG">Minas Gerais</option>
-                                <option value="PA">Pará</option>
-                                <option value="PB">Paraíba</option>
-                                <option value="PR">Paraná</option>
-                                <option value="PE">Pernambuco</option>
-                                <option value="PI">Piauí</option>
-                                <option value="RJ">Rio de Janeiro</option>
-                                <option value="RN">Rio Grande do Norte</option>
-                                <option value="RS">Rio Grande do Sul</option>
-                                <option value="RO">Rondônia</option>
-                                <option value="RR">Roraima</option>
-                                <option value="SC">Santa Catarina</option>
-                                <option value="SP">São Paulo</option>
-                                <option value="SE">Sergipe</option>
-                                <option value="TO">Tocantins</option>
+                                <option value="twitch">Twitch</option>
+                                <option value="youtube">YouTube</option>
+                                <option value="trovo">Trovo</option>
+                                <option value="nimo">Nimo TV</option>
+                                <option value="other">Outra</option>
                             </select>
                         </div>
                     </div>
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-col">
-                        <div class="form-group">
-                            <label for="city">Cidade *</label>
-                            <input type="text" id="city" placeholder="Sua cidade" required>
-                        </div>
-                    </div>
-                    <div class="form-col">
-                        <div class="form-group">
-                            <label for="neighborhood">Bairro *</label>
-                            <input type="text" id="neighborhood" placeholder="Seu bairro" required>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-col">
-                        <div class="form-group">
-                            <label for="street">Rua *</label>
-                            <input type="text" id="street" placeholder="Nome da rua" required>
-                        </div>
-                    </div>
-                    <div class="form-col">
-                        <div class="form-group">
-                            <label for="number">Número *</label>
-                            <input type="text" id="number" placeholder="Número" required>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-section">
-                    <h2 class="section-title"><i class="fas fa-id-card"></i> Validação de Documento com CPF</h2>
-                    <p style="color: var(--gray); margin-bottom: 20px;">Faça upload de um documento com seu CPF (RG, CNH ou outros) para validação.</p>
                     
-                    <div class="form-group">
-                        <label for="documentUpload">Documento com CPF</label>
-                        <input type="file" id="documentUpload" accept="image/*" onchange="validateDocument(this)">
-                        <small style="display: block; margin-top: 5px; color: var(--gray);">
-                            Formatos aceitos: JPG, PNG. O documento deve conter um CPF claramente visível.
-                        </small>
-                    </div>
-                    <div class="document-validation-result"></div>
-                </div>
-    <!-- The validation result will be displayed here -->
-</div>
-                
-                <div class="form-group">
-                    <label for="complement">Complemento</label>
-                    <input type="text" id="complement" placeholder="Apartamento, bloco, etc.">
-                </div>
-            </div>
-            
-            <div class="form-actions">
-                <button class="btn btn-secondary" id="prevButton" disabled>
-                    <i class="fas fa-chevron-left"></i> Voltar
-                </button>
-                <button class="btn btn-primary" id="nextButton" onclick="goToStep(2)">
-                    Próximo <i class="fas fa-chevron-right"></i>
-                </button>
-            </div>
-        </div>
-        
-        <!-- Etapa 2: Interesses -->
-        <div class="form-step" id="step2-content" style="display: none;">
-            <div class="form-section">
-                <h2 class="section-title"><i class="fas fa-gamepad"></i> Jogos</h2>
-                <p style="color: var(--gray); margin-bottom: 20px;">Quais jogos você acompanha? Classifique seu interesse de 1 a 5 estrelas.</p>
-                
-                <div class="rating-group">
-                    <div class="game-preference">
-                        <div class="game-logo">
-                            <i class="fas fa-crosshairs"></i>
-                        </div>
-                        <div class="game-name">Counter-Strike</div>
-                        <div class="rating" data-game="cs">
-                            <i class="fas fa-star star" data-value="1"></i>
-                            <i class="fas fa-star star" data-value="2"></i>
-                            <i class="fas fa-star star" data-value="3"></i>
-                            <i class="fas fa-star star" data-value="4"></i>
-                            <i class="fas fa-star star" data-value="5"></i>
-                        </div>
-                    </div>
-                    
-                    <div class="game-preference">
-                        <div class="game-logo">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                        <div class="game-name">VALORANT</div>
-                        <div class="rating" data-game="valorant">
-                            <i class="fas fa-star star" data-value="1"></i>
-                            <i class="fas fa-star star" data-value="2"></i>
-                            <i class="fas fa-star star" data-value="3"></i>
-                            <i class="fas fa-star star" data-value="4"></i>
-                            <i class="fas fa-star star" data-value="5"></i>
-                        </div>
-                    </div>
-                    
-                    <div class="game-preference">
-                        <div class="game-logo">
-                            <i class="fas fa-chess-rook"></i>
-                        </div>
-                        <div class="game-name">League of Legends</div>
-                        <div class="rating" data-game="lol">
-                            <i class="fas fa-star star" data-value="1"></i>
-                            <i class="fas fa-star star" data-value="2"></i>
-                            <i class="fas fa-star star" data-value="3"></i>
-                            <i class="fas fa-star star" data-value="4"></i>
-                            <i class="fas fa-star star" data-value="5"></i>
-                        </div>
-                    </div>
-                    
-                    <div class="game-preference">
-                        <div class="game-logo">
-                            <i class="fas fa-user-shield"></i>
-                        </div>
-                        <div class="game-name">Rainbow Six Siege</div>
-                        <div class="rating" data-game="r6">
-                            <i class="fas fa-star star" data-value="1"></i>
-                            <i class="fas fa-star star" data-value="2"></i>
-                            <i class="fas fa-star star" data-value="3"></i>
-                            <i class="fas fa-star star" data-value="4"></i>
-                            <i class="fas fa-star star" data-value="5"></i>
-                        </div>
-                    </div>
-                    
-                    <div class="game-preference">
-                        <div class="game-logo">
-                            <i class="fas fa-running"></i>
-                        </div>
-                        <div class="game-name">APEX Legends</div>
-                        <div class="rating" data-game="apex">
-                            <i class="fas fa-star star" data-value="1"></i>
-                            <i class="fas fa-star star" data-value="2"></i>
-                            <i class="fas fa-star star" data-value="3"></i>
-                            <i class="fas fa-star star" data-value="4"></i>
-                            <i class="fas fa-star star" data-value="5"></i>
-                        </div>
+                    <div class="form-actions">
+                        <button class="btn btn-secondary" onclick="goToStep(2)">
+                            <i class="fas fa-chevron-left"></i> Voltar
+                        </button>
+                        <button class="btn btn-primary" onclick="goToStep(4)">
+                            Próximo <i class="fas fa-chevron-right"></i>
+                        </button>
                     </div>
                 </div>
                 
-                <div class="form-group" style="margin-top: 20px;">
-                    <label for="otherGame">Outro jogo</label>
-                    <input type="text" id="otherGame" placeholder="Especifique outro jogo que você acompanha">
-                </div>
-            </div>
-            
-            <div class="form-section">
-                <h2 class="section-title"><i class="fas fa-hashtag"></i> Tópicos de Interesse</h2>
-                <p style="color: var(--gray); margin-bottom: 20px;">Quais assuntos você mais gosta de acompanhar sobre a FURIA?</p>
-                
-                <div class="checkbox-group">
-                    <label class="checkbox-item">
-                        <input type="checkbox" name="interests" value="campeonatos">
-                        <span class="checkbox-label">Campeonatos</span>
-                    </label>
-                    <label class="checkbox-item">
-                        <input type="checkbox" name="interests" value="bastidores">
-                        <span class="checkbox-label">Bastidores</span>
-                    </label>
-                    <label class="checkbox-item">
-                        <input type="checkbox" name="interests" value="jogadores">
-                        <span class="checkbox-label">Jogadores</span>
-                    </label>
-                    <label class="checkbox-item">
-                        <input type="checkbox" name="interests" value="estrategias">
-                        <span class="checkbox-label">Estratégias</span>
-                    </label>
-                    <label class="checkbox-item">
-                        <input type="checkbox" name="interests" value="treinos">
-                        <span class="checkbox-label">Treinos</span>
-                    </label>
-                    <label class="checkbox-item">
-                        <input type="checkbox" name="interests" value="hardware">
-                        <span class="checkbox-label">Hardware</span>
-                    </label>
-                    <label class="checkbox-item">
-                        <input type="checkbox" name="interests" value="conteudo-social">
-                        <span class="checkbox-label">Conteúdo Social</span>
-                    </label>
-                    <label class="checkbox-item">
-                        <input type="checkbox" name="interests" value="loja">
-                        <span class="checkbox-label">Produtos/Loja</span>
-                    </label>
-                    <label class="checkbox-item">
-                        <input type="checkbox" name="interests" value="analises">
-                        <span class="checkbox-label">Análises</span>
-                    </label>
-                    <label class="checkbox-item">
-                        <input type="checkbox" name="interests" value="highlights">
-                        <span class="checkbox-label">Highlights</span>
-                    </label>
-                </div>
-            </div>
-            
-            <div class="form-section">
-                <h2 class="section-title"><i class="fas fa-comment"></i> Conteúdo Preferido</h2>
-                <p style="color: var(--gray); margin-bottom: 20px;">Como você prefere consumir conteúdo sobre a FURIA?</p>
-                
-                <div class="radio-group">
-                    <label class="radio-item">
-                        <input type="radio" name="content-type" value="livestreams">
-                        <span class="radio-label">Livestreams</span>
-                    </label>
-                    <label class="radio-item">
-                        <input type="radio" name="content-type" value="videos">
-                        <span class="radio-label">Vídeos Editados</span>
-                    </label>
-                    <label class="radio-item">
-                        <input type="radio" name="content-type" value="articles">
-                        <span class="radio-label">Artigos/Textos</span>
-                    </label>
-                    <label class="radio-item">
-                        <input type="radio" name="content-type" value="podcasts">
-                        <span class="radio-label">Podcasts</span>
-                    </label>
-                    <label class="radio-item">
-                        <input type="radio" name="content-type" value="social-media">
-                        <span class="radio-label">Redes Sociais</span>
-                    </label>
-                </div>
-            </div>
-            
-            <div class="form-actions">
-                <button class="btn btn-secondary" onclick="goToStep(1)">
-                    <i class="fas fa-chevron-left"></i> Voltar
-                </button>
-                <button class="btn btn-primary" onclick="goToStep(3)">
-                    Próximo <i class="fas fa-chevron-right"></i>
-                </button>
-            </div>
-        </div>
-        
-        <!-- Etapa 3: Eventos & Atividades -->
-        <div class="form-step" id="step3-content" style="display: none;">
-            <div class="form-section">
-                <h2 class="section-title"><i class="fas fa-calendar-alt"></i> Eventos</h2>
-                <p style="color: var(--gray); margin-bottom: 20px;">Quais eventos presenciais da FURIA você participou no último ano?</p>
-                
-                <div class="event-item">
-                    <div class="event-icon">
-                        <i class="fas fa-trophy"></i>
-                    </div>
-                    <div class="event-details">
-                        <div class="event-title">FURIA Fan Fest São Paulo</div>
-                        <div class="event-date">12-13 de Agosto, 2024</div>
-                    </div>
-                    <div class="event-action">
-                        <label class="checkbox-item">
-                            <input type="checkbox" name="events" value="fan-fest-sp">
-                            <span class="checkbox-label">Participei</span>
-                        </label>
-                    </div>
-                </div>
-                
-                <div class="event-item">
-                    <div class="event-icon">
-                        <i class="fas fa-microphone"></i>
-                    </div>
-                    <div class="event-details">
-                        <div class="event-title">Meet & Greet - Shopping Eldorado</div>
-                        <div class="event-date">23 de Setembro, 2024</div>
-                    </div>
-                    <div class="event-action">
-                        <label class="checkbox-item">
-                            <input type="checkbox" name="events" value="meet-greet-eldorado">
-                            <span class="checkbox-label">Participei</span>
-                        </label>
-                    </div>
-                </div>
-                
-                <div class="event-item">
-                    <div class="event-icon">
-                        <i class="fas fa-gamepad"></i>
-                    </div>
-                    <div class="event-details">
-                        <div class="event-title">FURIA Experience - Rio de Janeiro</div>
-                        <div class="event-date">5-6 de Novembro, 2024</div>
-                    </div>
-                    <div class="event-action">
-                        <label class="checkbox-item">
-                            <input type="checkbox" name="events" value="experience-rio">
-                            <span class="checkbox-label">Participei</span>
-                        </label>
-                    </div>
-                </div>
-                
-                <div class="event-item">
-                    <div class="event-icon">
-                        <i class="fas fa-store"></i>
-                    </div>
-                    <div class="event-details">
-                        <div class="event-title">FURIA Pop-up Store - Shopping Morumbi</div>
-                        <div class="event-date">15-20 de Dezembro, 2024</div>
-                    </div>
-                    <div class="event-action">
-                        <label class="checkbox-item">
-                            <input type="checkbox" name="events" value="popup-morumbi">
-                            <span class="checkbox-label">Participei</span>
-                        </label>
-                    </div>
-                </div>
-                
-                <div class="form-group" style="margin-top: 20px;">
-                    <label for="otherEvent">Outro evento</label>
-                    <input type="text" id="otherEvent" placeholder="Especifique outro evento que você participou">
-                </div>
-            </div>
-            
-            <div class="form-section">
-                <h2 class="section-title"><i class="fas fa-tv"></i> Transmissões ao Vivo</h2>
-                <p style="color: var(--gray); margin-bottom: 20px;">Com que frequência você assiste às partidas da FURIA ao vivo?</p>
-                
-                <div class="radio-group">
-                    <label class="radio-item">
-                        <input type="radio" name="watch-frequency" value="all">
-                        <span class="radio-label">Todas as partidas</span>
-                    </label>
-                    <label class="radio-item">
-                        <input type="radio" name="watch-frequency" value="most">
-                        <span class="radio-label">A maioria das partidas</span>
-                    </label>
-                    <label class="radio-item">
-                        <input type="radio" name="watch-frequency" value="some">
-                        <span class="radio-label">Algumas partidas</span>
-                    </label>
-                    <label class="radio-item">
-                        <input type="radio" name="watch-frequency" value="important">
-                        <span class="radio-label">Apenas torneios importantes</span>
-                    </label>
-                    <label class="radio-item">
-                        <input type="radio" name="watch-frequency" value="rarely">
-                        <span class="radio-label">Raramente assisto ao vivo</span>
-                    </label>
-                </div>
-                
-                <div class="form-group" style="margin-top: 20px;">
-                    <label for="watchPlatform">Em qual plataforma você costuma assistir?</label>
-                    <select id="watchPlatform">
-                        <option value="">Selecione...</option>
-                        <option value="twitch">Twitch</option>
-                        <option value="youtube">YouTube</option>
-                        <option value="trovo">Trovo</option>
-                        <option value="nimo">Nimo TV</option>
-                        <option value="other">Outra</option>
-                    </select>
-                </div>
-            </div>
-            
-            <div class="form-actions">
-                <button class="btn btn-secondary" onclick="goToStep(2)">
-                    <i class="fas fa-chevron-left"></i> Voltar
-                </button>
-                <button class="btn btn-primary" onclick="goToStep(4)">
-                    Próximo <i class="fas fa-chevron-right"></i>
-                </button>
-            </div>
-        </div>
-        
-        <!-- Etapa 4: Compras & Preferências -->
-        <div class="form-step" id="step4-content" style="display: none;">
-            <div class="form-section">
-                <h2 class="section-title"><i class="fas fa-shopping-bag"></i> Produtos</h2>
-                <p style="color: var(--gray); margin-bottom: 20px;">Quais produtos da FURIA você adquiriu no último ano?</p>
-                
-                <div class="checkbox-group">
-                    <label class="checkbox-item">
-                        <input type="checkbox" name="products" value="jersey">
-                        <span class="checkbox-label">Camisa Oficial</span>
-                    </label>
-                    <label class="checkbox-item">
-                        <input type="checkbox" name="products" value="hoodie">
-                        <span class="checkbox-label">Moletom</span>
-                    </label>
-                    <label class="checkbox-item">
-                        <input type="checkbox" name="products" value="tshirt">
-                        <span class="checkbox-label">Camiseta Casual</span>
-                    </label>
-                    <label class="checkbox-item">
-                        <input type="checkbox" name="products" value="cap">
-                        <span class="checkbox-label">Boné</span>
-                    </label>
-                    <label class="checkbox-item">
-                        <input type="checkbox" name="products" value="mousepad">
-                        <span class="checkbox-label">Mousepad</span>
-                    </label>
-                    <label class="checkbox-item">
-                        <input type="checkbox" name="products" value="accessories">
-                        <span class="checkbox-label">Acessórios</span>
-                    </label>
-                    <label class="checkbox-item">
-                        <input type="checkbox" name="products" value="keychain">
-                        <span class="checkbox-label">Chaveiro</span>
-                    </label>
-                    <label class="checkbox-item">
-                        <input type="checkbox" name="products" value="mug">
-                        <span class="checkbox-label">Caneca</span>
-                    </label>
-                </div>
-                
-                <div class="form-group" style="margin-top: 20px;">
-                    <label for="purchaseAmount">Quanto você gastou aproximadamente nos últimos 12 meses com produtos da FURIA?</label>
-                    <select id="purchaseAmount">
-                        <option value="">Selecione...</option>
-                        <option value="less100">Menos de R$ 100</option>
-                        <option value="100to300">Entre R$ 100 e R$ 300</option>
-                        <option value="300to500">Entre R$ 300 e R$ 500</option>
-                        <option value="500to1000">Entre R$ 500 e R$ 1000</option>
-                        <option value="more1000">Mais de R$ 1000</option>
-                    </select>
-                </div>
-            </div>
-            
-            <div class="form-section">
-                <h2 class="section-title"><i class="fas fa-heart"></i> Preferências Futuras</h2>
-                <p style="color: var(--gray); margin-bottom: 20px;">O que você gostaria de ver mais da FURIA no futuro?</p>
-                
-                <div class="form-group">
-                    <label for="futureSuggestions">Sugestões e Feedback</label>
-                    <textarea id="futureSuggestions" placeholder="Compartilhe suas ideias para melhorar sua experiência como fã"></textarea>
-                </div>
-                
-                <div class="checkbox-group" style="margin-top: 20px;">
-                    <label class="checkbox-item">
-                        <input type="checkbox" name="future-interest" value="more-events">
-                        <span class="checkbox-label">Mais eventos presenciais</span>
-                    </label>
-                    <label class="checkbox-item">
-                        <input type="checkbox" name="future-interest" value="exclusive-content">
-                        <span class="checkbox-label">Conteúdo exclusivo para fãs</span>
-                    </label>
-                    <label class="checkbox-item">
-                        <input type="checkbox" name="future-interest" value="meet-players">
-                        <span class="checkbox-label">Mais oportunidades de conhecer jogadores</span>
-                    </label>
-                    <label class="checkbox-item">
-                        <input type="checkbox" name="future-interest" value="product-lineup">
-                        <span class="checkbox-label">Linha de produtos ampliada</span>
-                    </label>
-                    <label class="checkbox-item">
-                        <input type="checkbox" name="future-interest" value="loyalty-program">
-                        <span class="checkbox-label">Programa de fidelidade</span>
-                    </label>
-                    <label class="checkbox-item">
-                        <input type="checkbox" name="future-interest" value="fan-involvement">
-                        <span class="checkbox-label">Maior envolvimento da comunidade</span>
-                    </label>
-                </div>
-            </div>
-            
-            <div class="privacy-notice">
-                <h4 class="privacy-title"><i class="fas fa-shield-alt"></i> Política de Privacidade</h4>
-                <p class="privacy-text">
-                    Seus dados são protegidos e utilizados apenas para melhorar sua experiência como fã da FURIA. 
-                    Não compartilhamos suas informações com terceiros sem seu consentimento. 
-                    Ao enviar este formulário, você concorda com nossa política de privacidade e termos de uso.
-                </p>
-            </div>
-            
-            <div class="form-actions">
-                <button class="btn btn-secondary" onclick="goToStep(3)">
-                    <i class="fas fa-chevron-left"></i> Voltar
-                </button>
-                <button class="btn btn-primary" onclick="submitForm()">
-                    <i class="fas fa-check"></i> Finalizar
-                </button>
-            </div>
-        </div>
-        
-        <!-- Tela de conclusão -->
-        <div class="form-step" id="complete-content" style="display: none;">
-            <div class="form-complete">
-                <div class="success-icon">
-                    <i class="fas fa-check-circle"></i>
-                </div>
-                <h2 class="complete-title">Perfil Completo!</h2>
-                <p class="complete-description">
-                    Obrigado por compartilhar suas informações conosco! 
-                    Agora podemos personalizar melhor sua experiência como fã da FURIA.
-                    Você receberá conteúdo mais relevante e exclusivo.
-                </p>
-                
-                <div class="rewards-section">
-                    <h3 class="reward-title">Recompensas Desbloqueadas</h3>
-                    <p style="color: var(--gray); margin-bottom: 20px;">
-                        Por completar seu perfil, você ganhou as seguintes recompensas:
-                    </p>
-                    
-                    <div class="rewards-list">
-                        <div class="reward-item">
-                            <div class="reward-icon">
-                                <i class="fas fa-gem"></i>
-                            </div>
-                            <div class="reward-name">Badge Exclusiva</div>
-                            <div class="reward-value">Fan Expert</div>
+                <!-- Etapa 4: Compras & Preferências -->
+                <div class="form-step" id="step4-content" style="display: none;">
+                    <div class="form-section">
+                        <h2 class="section-title"><i class="fas fa-shopping-bag"></i> Produtos</h2>
+                        <p style="color: var(--gray); margin-bottom: 20px;">Quais produtos da FURIA você adquiriu no último ano?</p>
+                        
+                        <div class="checkbox-group">
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="products" value="jersey">
+                                <span class="checkbox-label">Camisa Oficial</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="products" value="hoodie">
+                                <span class="checkbox-label">Moletom</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="products" value="tshirt">
+                                <span class="checkbox-label">Camiseta Casual</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="products" value="cap">
+                                <span class="checkbox-label">Boné</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="products" value="mousepad">
+                                <span class="checkbox-label">Mousepad</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="products" value="accessories">
+                                <span class="checkbox-label">Acessórios</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="products" value="keychain">
+                                <span class="checkbox-label">Chaveiro</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="products" value="mug">
+                                <span class="checkbox-label">Caneca</span>
+                            </label>
                         </div>
                         
-                        <div class="reward-item">
-                            <div class="reward-icon">
-                                <i class="fas fa-award"></i>
-                            </div>
-                            <div class="reward-name">Pontos de Experiência</div>
-                            <div class="reward-value">+500 XP</div>
-                        </div>
-                        
-                        <div class="reward-item">
-                            <div class="reward-icon">
-                                <i class="fas fa-ticket-alt"></i>
-                            </div>
-                            <div class="reward-name">Cupom de Desconto</div>
-                            <div class="reward-value">10% OFF</div>
+                        <div class="form-group" style="margin-top: 20px;">
+                            <label for="purchaseAmount">Quanto você gastou aproximadamente nos últimos 12 meses com produtos da FURIA?</label>
+                            <select id="purchaseAmount">
+                                <option value="">Selecione...</option>
+                                <option value="less100">Menos de R$ 100</option>
+                                <option value="100to300">Entre R$ 100 e R$ 300</option>
+                                <option value="300to500">Entre R$ 300 e R$ 500</option>
+                                <option value="500to1000">Entre R$ 500 e R$ 1000</option>
+                                <option value="more1000">Mais de R$ 1000</option>
+                            </select>
                         </div>
                     </div>
+                    
+                    <div class="form-section">
+                        <h2 class="section-title"><i class="fas fa-heart"></i> Preferências Futuras</h2>
+                        <p style="color: var(--gray); margin-bottom: 20px;">O que você gostaria de ver mais da FURIA no futuro?</p>
+                        
+                        <div class="form-group">
+                            <label for="futureSuggestions">Sugestões e Feedback</label>
+                            <textarea id="futureSuggestions" placeholder="Compartilhe suas ideias para melhorar sua experiência como fã"></textarea>
+                        </div>
+                        
+                        <div class="checkbox-group" style="margin-top: 20px;">
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="future-interest" value="more-events">
+                                <span class="checkbox-label">Mais eventos presenciais</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="future-interest" value="exclusive-content">
+                                <span class="checkbox-label">Conteúdo exclusivo para fãs</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="future-interest" value="meet-players">
+                                <span class="checkbox-label">Mais oportunidades de conhecer jogadores</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="future-interest" value="product-lineup">
+                                <span class="checkbox-label">Linha de produtos ampliada</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="future-interest" value="loyalty-program">
+                                <span class="checkbox-label">Programa de fidelidade</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="future-interest" value="fan-involvement">
+                                <span class="checkbox-label">Maior envolvimento da comunidade</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="privacy-notice">
+                        <h4 class="privacy-title"><i class="fas fa-shield-alt"></i> Política de Privacidade</h4>
+                        <p class="privacy-text">
+                            Seus dados são protegidos e utilizados apenas para melhorar sua experiência como fã da FURIA. 
+                            Não compartilhamos suas informações com terceiros sem seu consentimento. 
+                            Ao enviar este formulário, você concorda com nossa política de privacidade e termos de uso.
+                        </p>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button class="btn btn-secondary" onclick="goToStep(3)">
+                            <i class="fas fa-chevron-left"></i> Voltar
+                        </button>
+                        <button class="btn btn-primary" onclick="submitForm()">
+                            <i class="fas fa-check"></i> Finalizar
+                        </button>
+                    </div>
                 </div>
-                <script src="../js/integration/furiax-core.js"></script>
-                <script src="../js/integration/recommends.js"></script>
                 
-                <!-- Adicionar ao final da tela de conclusão do formulário Know Your Fan -->
-<div class="sponsored-content-section">
-    <!-- Título da seção -->
-    <h3 class="reward-title" style="font-family: 'Orbitron', sans-serif; color: var(--primary); margin: 30px 0 15px; display: flex; align-items: center;">
-        <i class="fas fa-star" style="margin-right: 10px;"></i> Ofertas Especiais para Você
-    </h3>
-    
-    <!-- Descrição -->
-    <p style="color: var(--gray); font-size: 0.9rem; margin-bottom: 20px;">
-        Com base no seu perfil, selecionamos algumas ofertas exclusivas de nossos parceiros que podem interessar você:
-    </p>
-    
-    <!-- Container para anúncios em carrossel -->
-    <div class="sponsored-products-carousel">
-        <!-- Os anúncios serão inseridos aqui via JavaScript -->
+                <!-- Tela de conclusão -->
+                <div class="form-step" id="complete-content" style="display: none;">
+                    <div class="form-complete">
+                        <div class="success-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <h2 class="complete-title">Perfil Completo!</h2>
+                        <p class="complete-description">
+                            Obrigado por compartilhar suas informações conosco! 
+                            Agora podemos personalizar melhor sua experiência como fã da FURIA.
+                            Você receberá conteúdo mais relevante e exclusivo.
+                        </p>
+                        
+                        <div class="rewards-section">
+                            <h3 class="reward-title">Recompensas Desbloqueadas</h3>
+                            <p style="color: var(--gray); margin-bottom: 20px;">
+                                Por completar seu perfil, você ganhou as seguintes recompensas:
+                            </p>
+                            
+                            <div class="rewards-list">
+                                <div class="reward-item">
+                                    <div class="reward-icon">
+                                        <i class="fas fa-gem"></i>
+                                    </div>
+                                    <div class="reward-name">Badge Exclusiva</div>
+                                    <div class="reward-value">Fan Expert</div>
+                                </div>
+                                
+                                <div class="reward-item">
+                                    <div class="reward-icon">
+                                        <i class="fas fa-award"></i>
+                                    </div>
+                                    <div class="reward-name">Pontos de Experiência</div>
+                                    <div class="reward-value">+500 XP</div>
+                                </div>
+                                
+                                <div class="reward-item">
+                                    <div class="reward-icon">
+                                        <i class="fas fa-ticket-alt"></i>
+                                    </div>
+                                    <div class="reward-name">Cupom de Desconto</div>
+                                    <div class="reward-value">10% OFF</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Ofertas Especiais -->
+                        <div class="sponsored-content-section">
+                            <h3 class="reward-title" style="font-family: 'Orbitron', sans-serif; color: var(--primary); margin: 30px 0 15px; display: flex; align-items: center;">
+                                <i class="fas fa-star" style="margin-right: 10px;"></i> Ofertas Especiais para Você
+                            </h3>
+                            
+                            <p style="color: var(--gray); font-size: 0.9rem; margin-bottom: 20px;">
+                                Com base no seu perfil, selecionamos algumas ofertas exclusivas de nossos parceiros que podem interessar você:
+                            </p>
+                            
+                            <!-- Container para anúncios em carrossel -->
+                            <div class="sponsored-products-carousel">
+                                <!-- Os anúncios serão inseridos aqui via JavaScript -->
+                            </div>
+                            
+                            <!-- Controles do carrossel -->
+                            <div class="carousel-controls" style="display: flex; justify-content: center; margin-top: 15px; gap: 10px;">
+                                <button class="btn-carousel btn-prev" disabled style="width: 36px; height: 36px; border-radius: 50%; background: rgba(255, 255, 255, 0.05); border: 1px solid #333; color: var(--gray); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: var(--transition);">
+                                    <i class="fas fa-chevron-left"></i>
+                                </button>
+                                <div class="carousel-indicators" style="display: flex; align-items: center; gap: 8px;"></div>
+                                <button class="btn-carousel btn-next" style="width: 36px; height: 36px; border-radius: 50%; background: rgba(255, 255, 255, 0.05); border: 1px solid #333; color: var(--gray); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: var(--transition);">
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
+                            
+                            <!-- Nota de parceiros -->
+                            <div style="margin-top: 20px; text-align: center; font-size: 0.8rem; color: #666;">
+                                Todas as ofertas são exclusivas para membros FURIAX e expiram em 7 dias.
+                                <a href="#" style="color: var(--primary); text-decoration: none; margin-left: 5px;">Ver política de parceiros</a>
+                            </div>
+                        </div>
+                        
+                        <!-- Personalized Recommendations Section (Added via JavaScript) -->
+                        <div id="personalized-recommendations"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    
-    <!-- Controles do carrossel -->
-    <div class="carousel-controls" style="display: flex; justify-content: center; margin-top: 15px; gap: 10px;">
-        <button class="btn-carousel btn-prev" disabled style="width: 36px; height: 36px; border-radius: 50%; background: rgba(255, 255, 255, 0.05); border: 1px solid #333; color: var(--gray); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: var(--transition);">
-            <i class="fas fa-chevron-left"></i>
-        </button>
-        <div class="carousel-indicators" style="display: flex; align-items: center; gap: 8px;"></div>
-        <button class="btn-carousel btn-next" style="width: 36px; height: 36px; border-radius: 50%; background: rgba(255, 255, 255, 0.05); border: 1px solid #333; color: var(--gray); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: var(--transition);">
-            <i class="fas fa-chevron-right"></i>
-        </button>
-    </div>
-    
-    <!-- Nota de parceiros -->
-    <div style="margin-top: 20px; text-align: center; font-size: 0.8rem; color: #666;">
-        Todas as ofertas são exclusivas para membros FURIAX e expiram em 7 dias.
-        <a href="#" style="color: var(--primary); text-decoration: none; margin-left: 5px;">Ver política de parceiros</a>
-    </div>
-</div>
 
+    <!-- JavaScript -->
+  
 <!-- Adicionar antes do fechamento da tag body -->
 <script src="../js/produtos.js"></script>
 <script src="../js/validar-cpf.js"></script>

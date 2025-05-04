@@ -1,6 +1,257 @@
 // furiax-profile-sync.js
 // Script para sincronizar o perfil do usuário entre páginas da plataforma FURIAX
+/**
+ * FURIAX Multi-Profile Manager
+ * This fix allows multiple profiles to be stored in localStorage
+ * Each profile will be saved with a unique identifier
+ */
 
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('🔄 Initializing FURIAX Multi-Profile System...');
+    
+    // =====================================================
+    // ENHANCED MULTI-PROFILE SYSTEM
+    // =====================================================
+    
+    const MultiProfileManager = {
+        // Store of all available profiles
+        PROFILES_KEY: 'furiax_all_profiles',
+        // Current active profile ID
+        ACTIVE_PROFILE_KEY: 'furiax_active_profile',
+        
+        /**
+         * Initialize the multi-profile system
+         */
+        init: function() {
+            // Check if the profiles storage exists
+            if (!StorageManager.get(this.PROFILES_KEY)) {
+                // Initialize empty profiles object
+                StorageManager.set(this.PROFILES_KEY, {});
+                
+                // Migrate existing profile if available
+                const existingProfile = StorageManager.get(CONFIG.STORAGE_KEYS.PROFILE);
+                if (existingProfile) {
+                    // Generate a unique ID for the existing profile
+                    const profileId = 'profile_' + Date.now();
+                    
+                    // Save as first profile
+                    const profiles = {};
+                    profiles[profileId] = existingProfile;
+                    StorageManager.set(this.PROFILES_KEY, profiles);
+                    
+                    // Set as active profile
+                    StorageManager.set(this.ACTIVE_PROFILE_KEY, profileId);
+                }
+            }
+            
+            console.log('✅ Multi-Profile System initialized');
+        },
+        
+        /**
+         * Get the ID of the currently active profile
+         */
+        getActiveProfileId: function() {
+            return StorageManager.get(this.ACTIVE_PROFILE_KEY) || null;
+        },
+        
+        /**
+         * Set the active profile by ID
+         */
+        setActiveProfile: function(profileId) {
+            if (!profileId) return false;
+            
+            const profiles = this.getAllProfiles();
+            if (!profiles[profileId]) return false;
+            
+            // Set as active profile
+            StorageManager.set(this.ACTIVE_PROFILE_KEY, profileId);
+            
+            // For compatibility, also update the original profile storage
+            StorageManager.set(CONFIG.STORAGE_KEYS.PROFILE, profiles[profileId]);
+            
+            return true;
+        },
+        
+        /**
+         * Get all available profiles
+         */
+        getAllProfiles: function() {
+            return StorageManager.get(this.PROFILES_KEY, {});
+        },
+        
+        /**
+         * Get profile data for the currently active profile
+         */
+        getActiveProfileData: function() {
+            const activeId = this.getActiveProfileId();
+            const profiles = this.getAllProfiles();
+            
+            if (activeId && profiles[activeId]) {
+                return profiles[activeId];
+            }
+            
+            // Return default profile if no active profile
+            return {
+                username: CONFIG.DEFAULTS.USERNAME,
+                avatar: CONFIG.DEFAULTS.AVATAR,
+                title: CONFIG.DEFAULTS.TITLE,
+                level: 1,
+                levelProgress: 0,
+                bio: 'Olá, sou um fã da FURIA!'
+            };
+        },
+        
+        /**
+         * Create a new profile
+         */
+        createProfile: function(profileData) {
+            if (!profileData || typeof profileData !== 'object') return null;
+            
+            // Generate unique ID
+            const profileId = 'profile_' + Date.now();
+            
+            // Get all profiles
+            const profiles = this.getAllProfiles();
+            
+            // Add new profile
+            profiles[profileId] = {
+                ...profileData,
+                createdAt: Date.now()
+            };
+            
+            // Save profiles
+            StorageManager.set(this.PROFILES_KEY, profiles);
+            
+            // Set as active
+            this.setActiveProfile(profileId);
+            
+            return profileId;
+        },
+        
+        /**
+         * Update an existing profile
+         */
+        updateProfile: function(profileId, profileData) {
+            if (!profileId || !profileData) return false;
+            
+            const profiles = this.getAllProfiles();
+            if (!profiles[profileId]) return false;
+            
+            // Update profile
+            profiles[profileId] = {
+                ...profiles[profileId],
+                ...profileData,
+                updatedAt: Date.now()
+            };
+            
+            // Save profiles
+            StorageManager.set(this.PROFILES_KEY, profiles);
+            
+            // If this is the active profile, update the original profile storage
+            const activeId = this.getActiveProfileId();
+            if (activeId === profileId) {
+                StorageManager.set(CONFIG.STORAGE_KEYS.PROFILE, profiles[profileId]);
+            }
+            
+            return true;
+        },
+        
+        /**
+         * Delete a profile
+         */
+        deleteProfile: function(profileId) {
+            if (!profileId) return false;
+            
+            const profiles = this.getAllProfiles();
+            if (!profiles[profileId]) return false;
+            
+            // Delete profile
+            delete profiles[profileId];
+            
+            // Save profiles
+            StorageManager.set(this.PROFILES_KEY, profiles);
+            
+            // If this was the active profile, set another one as active
+            const activeId = this.getActiveProfileId();
+            if (activeId === profileId) {
+                const profileIds = Object.keys(profiles);
+                if (profileIds.length > 0) {
+                    this.setActiveProfile(profileIds[0]);
+                } else {
+                    // No profiles left, clear active profile
+                    StorageManager.set(this.ACTIVE_PROFILE_KEY, null);
+                    // Also clear original profile storage
+                    StorageManager.set(CONFIG.STORAGE_KEYS.PROFILE, null);
+                }
+            }
+            
+            return true;
+        }
+    };
+    
+    // =====================================================
+    // OVERRIDE EXISTING PROFILE MANAGER
+    // =====================================================
+    
+    // Initialize the multi-profile system
+    MultiProfileManager.init();
+    
+    // Override existing ProfileManager methods
+    const originalProfileManager = window.FURIAXCommunity.ProfileManager;
+    
+    window.FURIAXCommunity.ProfileManager = {
+        ...originalProfileManager,
+        
+        // Override getProfileData to use the multi-profile system
+        getProfileData: function() {
+            return MultiProfileManager.getActiveProfileData();
+        },
+        
+        // Method to create a new profile
+        createNewProfile: function(profileData) {
+            return MultiProfileManager.createProfile(profileData);
+        },
+        
+        // Method to update current profile
+        updateCurrentProfile: function(profileData) {
+            const activeId = MultiProfileManager.getActiveProfileId();
+            if (activeId) {
+                return MultiProfileManager.updateProfile(activeId, profileData);
+            }
+            return false;
+        },
+        
+        // Method to switch to a different profile
+        switchProfile: function(profileId) {
+            const result = MultiProfileManager.setActiveProfile(profileId);
+            if (result) {
+                // Update UI with new profile
+                this.updateProfileUI();
+                
+                // Show notification
+                if (window.FURIAXCommunity.NotificationManager) {
+                    window.FURIAXCommunity.NotificationManager.show('Perfil alterado com sucesso!', 'success');
+                }
+            }
+            return result;
+        },
+        
+        // Get list of all profiles
+        getAllProfiles: function() {
+            return MultiProfileManager.getAllProfiles();
+        },
+        
+        // Get current profile ID
+        getCurrentProfileId: function() {
+            return MultiProfileManager.getActiveProfileId();
+        }
+    };
+    
+    // Make MultiProfileManager available globally
+    window.FURIAXCommunity.MultiProfileManager = MultiProfileManager;
+    
+    console.log('✅ Profile system enhanced with multi-profile support');
+});
 // Função principal para sincronizar os dados do perfil do usuário
 function syncUserProfile() {
     // Verificar se existe um usuário logado
