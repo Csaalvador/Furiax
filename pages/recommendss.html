@@ -1408,6 +1408,88 @@
 ;    <script src="../js/furiax-profile-system.js"></script>
     <!-- JavaScript -->
     <script>
+
+function uploadAndValidateCPF(file) {
+    let resultContainer = document.querySelector('.document-validation-result');
+    if (!resultContainer) {
+        resultContainer = document.createElement('div');
+        resultContainer.className = 'document-validation-result';
+        document.getElementById('documentUpload').parentNode.appendChild(resultContainer);
+    }
+    
+    // Mostrar carregando
+    resultContainer.innerHTML = `
+        <div style="padding:15px; background:rgba(255,255,255,0.05); border-radius:5px; display:flex; align-items:center; margin-top:15px;">
+            <i class="fas fa-spinner fa-spin" style="margin-right:10px;"></i> Processando documento...
+        </div>
+    `;
+    
+    // Criar FormData para enviar o arquivo
+    const formData = new FormData();
+    formData.append('document', file);
+    
+    // Enviar para o servidor
+    fetch('/api/validate-cpf', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Documento validado com sucesso
+            resultContainer.innerHTML = `
+                <div style="padding:15px; background:rgba(0,204,102,0.1); border-radius:5px; display:flex; align-items:center; margin-top:15px;">
+                    <i class="fas fa-check-circle" style="margin-right:10px; color:#00cc66;"></i> ${data.message || 'Documento validado com sucesso!'}
+                </div>
+                <div style="margin-top:15px; padding:15px; background:rgba(0,0,0,0.2); border-radius:10px;">
+                    <img src="${URL.createObjectURL(file)}" alt="CPF Document" style="max-width:100%; max-height:300px; border-radius:5px;">
+                    <div style="margin-top:15px; padding:10px; background:rgba(0,0,0,0.1); border-radius:5px;">
+                        <div><strong>CPF:</strong> ${data.cpf}</div>
+                        <div><strong>Nome:</strong> ${data.name || 'Não detectado'}</div>
+                        ${data.birthDate ? `<div><strong>Nascimento:</strong> ${data.birthDate}</div>` : ''}
+                    </div>
+                    <button onclick="confirmCPFDocument('${data.cpf}')" style="margin-top:15px; background:#4CAF50; color:white; border:none; padding:10px 15px; border-radius:5px; cursor:pointer; width:100%;">
+                        Confirmar Documento
+                    </button>
+                </div>
+            `;
+            
+            // Auto-preencher o campo de CPF
+            const cpfField = document.getElementById('cpf');
+            if (cpfField) {
+                cpfField.value = data.cpf;
+            }
+        } else {
+            // Documento inválido
+            resultContainer.innerHTML = `
+                <div style="padding:15px; background:rgba(255,59,92,0.1); border-radius:5px; display:flex; align-items:center; margin-top:15px;">
+                    <i class="fas fa-exclamation-circle" style="margin-right:10px; color:#ff3b5c;"></i> ${data.message || 'Documento inválido'}
+                </div>
+                <div style="margin-top:15px; padding:15px; background:rgba(0,0,0,0.2); border-radius:10px;">
+                    <img src="${URL.createObjectURL(file)}" alt="Document" style="max-width:100%; max-height:300px; border-radius:5px;">
+                    <div style="margin-top:15px; padding:10px; background:rgba(255,255,255,0.05); border-radius:5px; font-size:0.8rem; color:#aaa; max-height:150px; overflow:auto;">
+                        <p>A imagem não foi reconhecida como um cartão de CPF válido.</p>
+                        <p>Por favor, envie uma imagem do cartão azul de CPF emitido pela Receita Federal.</p>
+                    </div>
+                    <button onclick="resetDocumentUpload()" style="margin-top:15px; background:#1e90ff; color:white; border:none; padding:10px 15px; border-radius:5px; cursor:pointer; width:100%;">
+                        Tentar novamente
+                    </button>
+                </div>
+            `;
+        }
+    })
+    .catch(error => {
+        console.error('Erro:', error);
+        resultContainer.innerHTML = `
+            <div style="padding:15px; background:rgba(255,59,92,0.1); border-radius:5px; display:flex; align-items:center; margin-top:15px;">
+                <i class="fas fa-exclamation-circle" style="margin-right:10px; color:#ff3b5c;"></i> Erro ao processar o documento
+            </div>
+            <button onclick="resetDocumentUpload()" style="margin-top:15px; background:#1e90ff; color:white; border:none; padding:10px 15px; border-radius:5px; cursor:pointer; width:100%;">
+                Tentar novamente
+            </button>
+        `;
+    });
+}
         // Criar partículas para o fundo
         function createParticles() {
             const container = document.getElementById('particles');
@@ -1477,7 +1559,7 @@
                     
                     // Preencher dados no perfil
                     if (parsedData.personalData) {
-                        document.getElementById('profileName').textContent = parsedData.personalData.name || "FuriaX Pro";
+                        document.getElementById('profileName').textContent = parsedData.personalData.name || "";
                     }
                     
                     // Categorizar o usuário com base em seus interesses
