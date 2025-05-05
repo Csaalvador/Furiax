@@ -236,3 +236,115 @@
   body.menu-open {
     overflow: hidden;
   }
+
+  /* CSS para navegação responsiva entre abas */
+@media screen and (max-width: 991px) {
+    /* Navegação móvel para as abas */
+    .mobile-tab-navigator {
+      display: flex;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, #0a0a0a, #111);
+      border-top: 1px solid #333;
+      z-index: 1000;
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
+    }
+    
+    .mobile-tab-button {
+      flex: 1;
+      padding: 12px 5px;
+      background: transparent;
+      border: none;
+      color: #aaa;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.7rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .mobile-tab-button i {
+      font-size: 1.2rem;
+      color: #777;
+      transition: all 0.3s ease;
+    }
+    
+    .mobile-tab-button.active {
+      color: #1e90ff;
+    }
+    
+    .mobile-tab-button.active i {
+      color: #1e90ff;
+    }
+    
+    /* Ajustes para o conteúdo principal */
+    .main-content {
+      padding-bottom: 70px !important; /* Espaço para a navegação fixa */
+    }
+    
+    /* Ajustes para o conteúdo das abas */
+    .config-section {
+      padding-bottom: 80px;
+    }
+    
+    /* Ajustes para o preview */
+    .preview-section {
+      margin-bottom: 30px !important;
+      height: auto !important;
+      max-height: none !important;
+    }
+    
+    /* Indicador de scroll para facilitar a navegação */
+    .scroll-indicator {
+      position: fixed;
+      bottom: 60px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+      background-color: rgba(30, 144, 255, 0.7);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      z-index: 999;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      cursor: pointer;
+    }
+    
+    .scroll-indicator.show {
+      opacity: 1;
+    }
+    
+    /* Estilo para tornar as abas mais acessíveis em mobile */
+    .config-tab-buttons {
+      padding: 10px 0;
+      border-bottom: 1px solid #333;
+      margin-bottom: 20px;
+    }
+    
+    .config-tab-button {
+      padding: 10px 15px;
+      margin-right: 5px;
+    }
+  }
+  
+  /* Ajustes específicos para telas muito pequenas */
+  @media screen and (max-width: 480px) {
+    .mobile-tab-button {
+      font-size: 0.6rem;
+      padding: 10px 2px;
+    }
+    
+    .mobile-tab-button i {
+      font-size: 1rem;
+    }
+  }

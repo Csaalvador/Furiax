@@ -489,24 +489,7 @@ body {
 };
 
 
-  document.querySelectorAll('.sidebar button').forEach(btn => {
-    btn.addEventListener('mouseenter', (e) => {
-      const text = btn.innerText.trim();
-      if (tooltips[text]) {
-        tooltipPopup.innerText = tooltips[text];
-        tooltipPopup.style.display = 'block';
-      }
-    });
-
-    btn.addEventListener('mousemove', (e) => {
-      tooltipPopup.style.left = e.pageX + 15 + 'px';
-      tooltipPopup.style.top = e.pageY + 'px';
-    });
-
-    btn.addEventListener('mouseleave', () => {
-      tooltipPopup.style.display = 'none';
-    });
-  });
+ 
 
   
   </script>

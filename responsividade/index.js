@@ -93,8 +93,8 @@ document.addEventListener('DOMContentLoaded', function() {
   // Criar botão de menu
   function createMobileMenuButton() {
     const menuBtn = document.createElement('button');
-    menuBtn.className = 'mobile-menu-btn';
-    menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+    menuBtn.className = '';
+    menuBtn.innerHTML = '';
     document.body.appendChild(menuBtn);
   }
   
