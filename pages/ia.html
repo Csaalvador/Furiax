@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="../img/logo/favicon-32x32.png">
+    <link rel="stylesheet" href="../responsividade/ia.css">
 
     <style>
         * { 
@@ -858,7 +859,56 @@
                 <div class="intro-line v-line"></div>
             </div>
         </div>
-
+        <div class="mobile-menu-btn" id="mobileTrigger">
+            <div class="hamburger-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <!-- Mobile Navigation Menu -->
+        <div class="mobile-nav-menu" id="mobileNavMenu">
+            <div class="mobile-nav-header">
+                <img src="../img/logo/logoFuriax.png" alt="FURIAX Logo" class="mobile-logo">
+                <div class="mobile-menu-close" id="mobileMenuClose">
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+            <div class="mobile-nav-items">
+                <a href="./profile.html" class="mobile-nav-item">
+                    <i class="fas fa-user-edit"></i>
+                    <span>Perfil</span>
+                </a>
+                <a href="./community.html" class="mobile-nav-item">
+                    <i class="fas fa-users"></i>
+                    <span>Comunidade</span>
+                </a>
+                <a href="./mini-games.html" class="mobile-nav-item">
+                    <i class="fas fa-gamepad"></i>
+                    <span>Mini-Games</span>
+                </a>
+                <a href="./ia.html" class="mobile-nav-item active">
+                    <i class="fas fa-robot"></i>
+                    <span>FuriosoAI</span>
+                </a>
+            </div>
+            <div class="mobile-nav-footer">
+                <div class="user-info">
+                    <div class="user-avatar-small">
+                        <img src="/api/placeholder/40/40" alt="Avatar">
+                    </div>
+                    <div class="user-details">
+                        <div class="user-name-small">FuriaX_Pro</div>
+                        <div class="user-role-small">Furioso Elite</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile menu overlay -->
+        <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+        
         <!-- Badges FURIA -->
         <div class="badge-container">
             <div class="furia-badge" data-personality="assistant">
@@ -969,6 +1019,7 @@
     </div>  
 
     <script src="../js/furiax-ai-assistant.js"></script>
+    <script src="../responsividade/ia.js"></script>
     <!-- Script para o ChatBot -->
     <script>
         // Definição das chaves para localStorage

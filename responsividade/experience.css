@@ -1,0 +1,372 @@
+/* Mobile Menu CSS */
+@media (max-width: 768px) {
+    /* Hide desktop navigation */
+    .nav-menu {
+        display: none !important;
+    }
+    
+    /* Mobile Navigation Container */
+    .mobile-nav-container {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+    }
+    
+    /* Mobile Menu Button */
+    .mobile-menu-btn {
+        display: flex !important;
+        position: fixed;
+        top: 15px;
+        left: 15px;
+        width: 44px;
+        height: 44px;
+        background: rgba(10, 10, 10, 0.8);
+        border-radius: 10px;
+        align-items: center;
+        justify-content: center;
+        z-index: 1010;
+        border: 1px solid #333;
+        cursor: pointer;
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        transition: all 0.3s ease;
+    }
+    
+    .mobile-menu-btn:hover {
+        background: rgba(30, 144, 255, 0.15);
+        border-color: #1e90ff;
+    }
+    
+    /* Hamburger Icon */
+    .hamburger-icon {
+        width: 24px;
+        height: 16px;
+        position: relative;
+        transform: rotate(0deg);
+        transition: 0.5s ease-in-out;
+    }
+    
+    .hamburger-icon span {
+        display: block;
+        position: absolute;
+        height: 2px;
+        width: 100%;
+        background: #1e90ff;
+        border-radius: 2px;
+        opacity: 1;
+        left: 0;
+        transform: rotate(0deg);
+        transition: .25s ease-in-out;
+    }
+    
+    .hamburger-icon span:nth-child(1) {
+        top: 0;
+    }
+    
+    .hamburger-icon span:nth-child(2) {
+        top: 7px;
+    }
+    
+    .hamburger-icon span:nth-child(3) {
+        top: 14px;
+    }
+    
+    .hamburger-icon.active span:nth-child(1) {
+        top: 7px;
+        transform: rotate(135deg);
+    }
+    
+    .hamburger-icon.active span:nth-child(2) {
+        opacity: 0;
+        left: -60px;
+    }
+    
+    .hamburger-icon.active span:nth-child(3) {
+        top: 7px;
+        transform: rotate(-135deg);
+    }
+    
+    /* Sidebar Navigation Menu */
+    .mobile-nav-menu {
+        position: fixed;
+        top: 0;
+        left: -280px;
+        width: 280px;
+        height: 100%;
+        background: linear-gradient(to bottom, #111, #181818);
+        z-index: 1005;
+        display: flex;
+        flex-direction: column;
+        box-shadow: none;
+        transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+        border-right: 1px solid #333;
+    }
+    
+    .mobile-nav-menu.active {
+        left: 0;
+        box-shadow: 5px 0 25px rgba(0, 0, 0, 0.7);
+    }
+    
+    /* Menu Header */
+    .mobile-nav-header {
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #333;
+    }
+    
+    .mobile-logo {
+        height: 30px;
+        filter: drop-shadow(0 0 5px rgba(30, 144, 255, 0.3));
+    }
+    
+    .mobile-menu-close {
+        width: 32px;
+        height: 32px;
+        color: #777;
+        font-size: 1.2rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        transition: all 0.3s;
+    }
+    
+    .mobile-menu-close:hover {
+        color: #fff;
+        transform: rotate(90deg);
+    }
+    
+    /* Menu Items */
+    .mobile-nav-items {
+        flex-grow: 1;
+        overflow-y: auto;
+        padding: 20px 15px;
+    }
+    
+    .mobile-nav-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 14px;
+        margin-bottom: 10px;
+        border-radius: 10px;
+        color: #ccc;
+        text-decoration: none;
+        font-family: 'Orbitron', sans-serif;
+        transition: all 0.3s;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid #333;
+    }
+    
+    .mobile-nav-item i {
+        color: #1e90ff;
+        font-size: 1.1rem;
+    }
+    
+    .mobile-nav-item:hover {
+        background: rgba(30, 144, 255, 0.1);
+        border-color: #1e90ff;
+        transform: translateX(5px);
+        color: #fff;
+    }
+    
+    .mobile-nav-item.active {
+        background: rgba(30, 144, 255, 0.15);
+        border-color: #1e90ff;
+        color: #1e90ff;
+        box-shadow: 0 0 10px rgba(30, 144, 255, 0.2);
+    }
+    
+    /* User Info Section */
+    .mobile-nav-footer {
+        padding: 20px;
+        border-top: 1px solid #333;
+    }
+    
+    .user-info {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: rgba(30, 144, 255, 0.05);
+        border-radius: 10px;
+        padding: 12px;
+        border: 1px solid #333;
+    }
+    
+    .user-avatar-small {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: linear-gradient(45deg, #1e90ff, #00bfff);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        box-shadow: 0 0 10px rgba(30, 144, 255, 0.3);
+    }
+    
+    .user-details {
+        flex-grow: 1;
+    }
+    
+    .user-name-small {
+        font-size: 0.9rem;
+        color: #ddd;
+        margin-bottom: 3px;
+        font-family: 'Orbitron', sans-serif;
+    }
+    
+    .user-role-small {
+        font-size: 0.7rem;
+        color: #1e90ff;
+        background: rgba(30, 144, 255, 0.1);
+        padding: 2px 6px;
+        border-radius: 20px;
+        display: inline-block;
+        text-transform: uppercase;
+        font-family: 'Orbitron', sans-serif;
+    }
+    
+    /* Overlay */
+    .mobile-menu-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(3px);
+        -webkit-backdrop-filter: blur(3px);
+        z-index: 1000;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+    }
+    
+    .mobile-menu-overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    /* Swipe indicator */
+    .swipe-indicator {
+        position: fixed;
+        top: 50%;
+        left: 0;
+        width: 4px;
+        height: 60px;
+        background: rgba(30, 144, 255, 0.15);
+        border-radius: 0 3px 3px 0;
+        transform: translateY(-50%);
+        z-index: 5;
+        opacity: 0.7;
+        animation: swipe-pulse 2s infinite;
+        pointer-events: none;
+    }
+    
+    @keyframes swipe-pulse {
+        0%, 100% { opacity: 0.3; width: 4px; }
+        50% { opacity: 0.7; width: 7px; }
+    }
+    
+    /* Logo repositioning for mobile */
+    .furiax-logo {
+        left: 50%;
+        transform: translateX(-50%);
+        top: 15px;
+        z-index: 990;
+    }
+    
+    /* Sidebar adjustments */
+    .sidebar {
+        left: -280px;
+        transition: left 0.3s ease;
+    }
+    
+    /* Main content adjustments */
+    .main-content {
+        margin-left: 0 !important;
+        width: 100% !important;
+        padding-top: 70px !important;
+    }
+    
+    /* AI page adjustments */
+    .main-interface {
+        padding-top: 60px !important;
+    }
+    
+    /* For pages with container class */
+    .container {
+        display: block;
+    }
+}
+
+/* Smaller mobile screens */
+@media (max-width: 480px) {
+    .mobile-menu-btn {
+        top: 10px;
+        left: 10px;
+        width: 40px;
+        height: 40px;
+    }
+    
+    .mobile-nav-menu {
+        width: 260px;
+        left: -260px;
+    }
+    
+    .mobile-nav-item {
+        padding: 12px 10px;
+        font-size: 0.9rem;
+    }
+    
+    .mobile-nav-header {
+        padding: 15px;
+    }
+    
+    .mobile-nav-footer {
+        padding: 15px;
+    }
+    
+    .mobile-logo {
+        height: 25px;
+    }
+    
+    /* Make sure all fullscreen modals are truly fullscreen */
+    .ai-chat-modal, 
+    .modal-overlay, 
+    .registration-modal {
+        width: 100% !important;
+        height: 100% !important;
+        border-radius: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+    }
+}
+
+/* Fix for iOS Safari */
+@supports (-webkit-touch-callout: none) {
+    .mobile-nav-menu, 
+    .mobile-menu-overlay, 
+    .sidebar {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+    }
+    
+    body, html {
+        height: -webkit-fill-available;
+    }
+    
+    body {
+        min-height: 100vh;
+        min-height: -webkit-fill-available;
+    }
+}

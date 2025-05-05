@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="../img/logo/favicon-32x32.png">
+    <link rel="stylesheet" href="../responsividade/experience.css">
 
     <style>
         :root {
@@ -1268,7 +1269,76 @@
                             </div>
                         </div>
                     </div>
-                    
+                    <!-- Add this HTML code right before the closing </body> tag -->
+
+<!-- Mobile Navigation Menu -->
+<div class="mobile-nav-container">
+    <!-- Mobile Menu Button -->
+    <div class="mobile-menu-btn" id="mobileTrigger">
+        <div class="hamburger-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+    
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+    
+    <!-- Mobile Navigation Menu -->
+    <div class="mobile-nav-menu" id="mobileNavMenu">
+        <div class="mobile-nav-header">
+            <img src="../img/logo/logoFuriax.png" alt="FURIAX Logo" class="mobile-logo">
+            <div class="mobile-menu-close" id="mobileMenuClose">
+                <i class="fas fa-times"></i>
+            </div>
+        </div>
+        <div class="mobile-nav-items">
+            <a href="./profile.html" class="mobile-nav-item">
+                <i class="fas fa-user-edit"></i>
+                <span>Perfil</span>
+            </a>
+            <a href="./community.html" class="mobile-nav-item">
+                <i class="fas fa-users"></i>
+                <span>Comunidade</span>
+            </a>
+            <a href="./mini-games.html" class="mobile-nav-item">
+                <i class="fas fa-gamepad"></i>
+                <span>Mini-Games</span>
+            </a>
+            <a href="./ia.html" class="mobile-nav-item">
+                <i class="fas fa-robot"></i>
+                <span>FuriosoAI</span>
+            </a>
+            <a href="./missions.html" class="mobile-nav-item">
+                <i class="fas fa-tasks"></i>
+                <span>Missões</span>
+            </a>
+            <a href="./know-your-fan.html" class="mobile-nav-item">
+                <i class="fas fa-id-card"></i>
+                <span>Know Your Fan</span>
+            </a>
+            <a href="./experiences.html" class="mobile-nav-item">
+                <i class="fas fa-star"></i>
+                <span>Experiências</span>
+            </a>
+        </div>
+        <div class="mobile-nav-footer">
+            <div class="user-info">
+                <div class="user-avatar-small">
+                    <img src="../img/logo/logoFuriax.png" alt="Avatar" class="avatar-image">
+                </div>
+                <div class="user-details">
+                    <div class="user-name-small" id="mobileUsername">FuriaX_Pro</div>
+                    <div class="user-role-small" id="mobileUserRole">Furioso Elite</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Swipe indicator for edge -->
+    <div class="swipe-indicator" id="swipeIndicator"></div>
+</div>
                     <!-- Conteúdo da aba Experiências VIP -->
                     <div class="tab-content" id="experiences-content">
                         <div class="filters-bar">
@@ -1398,6 +1468,7 @@
             </div>
         </div>
     </div>
+    <script src="../responsividade/experience.js"></script>
     <script src="../js/furiax-profile-system.js"></script>
 
 <script src="../js/furiax-main-integration.js"></script>

@@ -1416,63 +1416,218 @@ body {
 }
 
 /* Responsive */
-@media (max-width: 992px) {
+/* Responsive CSS for FURIAX Community Page */
+
+/* Base Media Query Variables */
+:root {
+    --sidebar-width: 240px;
+    --mobile-breakpoint: 768px;
+    --tablet-breakpoint: 1024px;
+}
+
+/* Default Styles Enhancement */
+body {
+    overflow-x: hidden;
+    margin: 0;
+    font-family: 'Exo 2', sans-serif;
+}
+
+/* Mobile Menu Toggle Button */
+.mobile-menu-toggle {
+    display: none;
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 1000;
+    background: rgba(30, 144, 255, 0.9);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Layout Responsive Adjustments */
+@media screen and (max-width: 1024px) {
     .community-feed {
         flex-direction: column;
     }
     
+    .feed-column, .analysis-column {
+        width: 100%;
+        max-width: 100%;
+    }
+    
     .analysis-column {
-        order: -1;
-        margin-bottom: 20px;
-    }
-    
-    .sidebar {
-        width: 80px;
-        padding: 15px 10px;
-    }
-    
-    .sidebar img {
-        width: 60px;
-    }
-    
-    .sidebar-header, .user-name, .user-role {
-        display: none;
-    }
-    
-    .sidebar button {
-        width: 60px;
-        justify-content: center;
-        padding: 0.6rem;
-    }
-    
-    .sidebar button span {
-        display: none;
-    }
-    
-    .avatar {
-        width: 50px;
-        height: 50px;
+        margin-top: 20px;
+        margin-left: 0;
     }
 }
 
-@media (max-width: 576px) {
+@media screen and (max-width: 768px) {
+    /* Sidebar Mobile Styling */
+    .sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        position: fixed;
+        z-index: 1001;
+        height: 100%;
+        width: 80%;
+        max-width: 300px;
+    }
+    
+    .sidebar.active {
+        transform: translateX(0);
+    }
+    
+    .mobile-menu-toggle {
+        display: block;
+    }
+    
+    /* Main Content Adjustments */
     .main-content {
-        padding: 1rem;
+        margin-left: 0;
+        padding: 15px;
+        padding-top: 60px;
     }
     
-    .post-header {
-        flex-wrap: wrap;
+    /* Post Cards Mobile Styling */
+    .post-card {
+        padding: 12px;
+        margin-bottom: 15px;
     }
     
-    .post-actions {
+    .post-footer {
         flex-direction: column;
-        gap: 10px;
-        align-items: flex-start;
+    }
+    
+    .post-stats {
+        margin-bottom: 10px;
+        justify-content: space-around;
     }
     
     .post-actions-btns {
+        justify-content: space-around;
+    }
+    
+    .post-action-btn {
+        padding: 6px 10px;
+        font-size: 0.85rem;
+    }
+    
+    /* Comment Section Mobile */
+    .comment-form {
+        flex-direction: column;
+    }
+    
+    .comment-input {
         width: 100%;
-        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+    
+    .comment-submit {
+        width: 100%;
+    }
+    
+    /* Analytics Tabs Mobile */
+    .analysis-tabs {
+        flex-wrap: wrap;
+    }
+    
+    .analysis-tab {
+        flex: 1 0 33%;
+        padding: 8px 0;
+        font-size: 0.9rem;
+    }
+    
+    /* Fan Stats Mobile */
+    .fan-stats {
+        flex-direction: column;
+    }
+    
+    .fan-stat-item {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+    
+    /* Engagement Score Mobile */
+    .engagement-score {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .score-circle {
+        margin-bottom: 15px;
+    }
+    
+    .engagement-breakdown {
+        grid-template-columns: 1fr;
     }
 }
+
+/* Small Mobile Devices */
+@media screen and (max-width: 480px) {
+    /* Further Adjustments for Very Small Screens */
+    .post-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+    
+    .post-user-info {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+    
+    .post-avatar {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .post-actions-btns {
+        flex-wrap: wrap;
+    }
+    
+    .post-action-btn {
+        margin-bottom: 8px;
+    }
+    
+    /* Poll Options */
+    .poll-option-text {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .poll-percentage {
+        margin-left: 0;
+    }
+}
+
+/* Additional Touch-friendly Adjustments */
+@media (hover: none) {
+    .post-action-btn:active, .comment-submit:active, .attachment-button:active {
+        transform: scale(0.95);
+    }
+}
+
+/* Dark Mode Support for OLED Devices */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #121212;
+        color: #f5f5f5;
+    }
+    
+    .post-card, .create-post, .comment-form, .analysis-content {
+        background-color: #1e1e1e;
+        border-color: #333;
+    }
+    
+    .post-input, .comment-input {
+        background-color: #2d2d2d;
+        color: #f5f5f5;
+        border-color: #444;
+    }
+}
+
 
