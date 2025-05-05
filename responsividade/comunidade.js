@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Close sidebar when clicking outside
-    document.addEventListener('click', function(event) {
+    document.addEvenatListener('click', function(event) {
         const sidebar = document.querySelector('.sidebar');
         const mobileToggle = document.querySelector('.mobile-menu-toggle');
         
@@ -122,3 +122,101 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add listener for changes
     mediaQuery.addEventListener('change', handleMediaQueryChange);
 });
+
+// Adicione este script ao final do seu arquivo community.html
+document.addEventListener('DOMContentLoaded', function() {
+    // Função para garantir que a página carregue no topo
+    function scrollToTop() {
+      window.scrollTo(0, 0);
+      document.body.scrollTop = 0; // Para Safari
+      document.documentElement.scrollTop = 0; // Para Chrome, Firefox, IE e Opera
+    }
+    
+    // Executar imediatamente quando a página carrega
+    scrollToTop();
+    
+    // Adicionar um pequeno atraso para garantir que funcione após qualquer outro código de inicialização
+    setTimeout(scrollToTop, 100);
+    
+    // Garantir que a aba "profile" seja ativada por padrão, mas sem rolar a página
+    const profileTab = document.querySelector('.analysis-tab[data-tab="profile"]');
+    if (profileTab) {
+      // Prevenir o comportamento padrão de rolagem ao clicar nas abas
+      const allTabs = document.querySelectorAll('.analysis-tab');
+      allTabs.forEach(tab => {
+        tab.addEventListener('click', function(e) {
+          // Armazenar a posição de rolagem atual
+          const currentScrollPos = window.pageYOffset || document.documentElement.scrollTop;
+          
+          // Ativar a aba
+          const target = this.getAttribute('data-tab');
+          
+          // Remover classes ativas de todas as abas e conteúdos
+          allTabs.forEach(t => t.classList.remove('active'));
+          document.querySelectorAll('.analysis-content').forEach(c => c.classList.remove('active'));
+          
+          // Adicionar classes ativas à aba clicada e seu conteúdo
+          this.classList.add('active');
+          const targetContent = document.getElementById(target + '-content');
+          if (targetContent) {
+            targetContent.classList.add('active');
+          }
+          
+          // Restaurar a posição de rolagem (previne rolagem automática)
+          setTimeout(() => {
+            window.scrollTo(0, currentScrollPos);
+          }, 10);
+          
+          e.preventDefault();
+        });
+      });
+      
+      // Ativar a aba "profile" sem rolar a página
+      const currentScrollPos = window.pageYOffset || document.documentElement.scrollTop;
+      profileTab.click();
+      setTimeout(() => {
+        window.scrollTo(0, currentScrollPos);
+      }, 10);
+    }
+    
+    // Corrigir os links do menu para que, ao clicar na comunidade, role para o topo
+    const communityLinks = document.querySelectorAll('a[href*="community.html"], a[href*="comunidade.html"]');
+    communityLinks.forEach(link => {
+      // Se estamos na própria página da comunidade, modificar o comportamento
+      if (window.location.pathname.includes('community') || window.location.pathname.includes('comunidade')) {
+        link.addEventListener('click', function(e) {
+          // Se clicarmos no link da comunidade enquanto já estamos na página da comunidade
+          e.preventDefault();
+          scrollToTop();
+          // Fechar o menu mobile se estiver aberto
+          const sidebar = document.querySelector('.sidebar');
+          if (sidebar && sidebar.classList.contains('active')) {
+            sidebar.classList.remove('active');
+          }
+        });
+      }
+    });
+    
+    // Sobrescrever o comportamento padrão do comunidade.js para não rolar a página
+    if (window.innerWidth <= 768) {
+      // Sobrescrever o comportamento das tabs em mobile
+      const originalTabFunction = document.querySelectorAll('.analysis-tab')[0]?.onclick;
+      document.querySelectorAll('.analysis-tab').forEach(tab => {
+        tab.onclick = function(e) {
+          const target = this.getAttribute('data-tab');
+          
+          // Remover classes ativas
+          document.querySelectorAll('.analysis-tab').forEach(t => t.classList.remove('active'));
+          document.querySelectorAll('.analysis-content').forEach(c => c.classList.remove('active'));
+          
+          // Adicionar classes ativas
+          this.classList.add('active');
+          const targetContent = document.getElementById(target + '-content');
+          if (targetContent) {
+            targetContent.classList.add('active');
+            // NÃO fazer o scroll automático
+          }
+        };
+      });
+    }
+  });
