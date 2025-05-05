@@ -15,7 +15,6 @@ document.addEventListener('DOMContentLoaded', function() {
       createSidebarOverlay();
       
       // Adicionar botão de menu
-      createMobileMenuButton();
       
       // Adicionar botão de iniciar fixo
       createStartButton();
