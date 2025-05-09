@@ -1,5 +1,4 @@
-
-                <!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -1110,7 +1109,332 @@
 
 <script>
     /* Add JavaScript to Toggle Mobile Menu */
-//**
+//**/**
+
+
+(function() {
+  // Auto-iniciar após o DOM estar carregado
+  document.addEventListener('DOMContentLoaded', initPostButtonsFix);
+  
+  // Ou iniciar imediatamente se o DOM já estiver pronto
+  if (document.readyState === 'interactive' || document.readyState === 'complete') {
+    initPostButtonsFix();
+  }
+  
+  // Função principal de inicialização
+  function initPostButtonsFix() {
+    console.log('🔧 FURIAX Post Buttons Fix: Inicializando...');
+    
+    // Observar o sistema FURIAX para interceptar a criação de posts
+    interceptPostCreation();
+    
+    // Configurar observador para correções contínuas
+    setupDOMObserver();
+    
+    // Corrigir posts existentes que possam estar sem botões
+    fixExistingPosts();
+    
+    // Verificar novamente após um tempo para garantir
+   
+  }
+  
+  // Intercepta a criação de posts do sistema principal
+  function interceptPostCreation() {
+    // Aguardar até que o sistema FURIAX esteja disponível
+    const checkSystem = setInterval(() => {
+      if (window.FURIAXCommunity && window.FURIAXCommunity.PostManager) {
+        clearInterval(checkSystem);
+        
+        // Interceptar a função de criação de post
+        const originalCreatePost = window.FURIAXCommunity.PostManager.createPost;
+        window.FURIAXCommunity.PostManager.createPost = function(content) {
+          // Chamar a função original
+          const post = originalCreatePost.call(this, content);
+          
+          // Garantir que os botões foram adicionados corretamente
+          setTimeout(() => {
+            // Encontrar o post recém-criado no DOM
+            const postElements = document.querySelectorAll('.post-card');
+            if (postElements.length > 0) {
+              // O post mais recente geralmente é o primeiro
+              const newPostElement = postElements[0];
+              
+              // Verificar se o post possui os botões de ação
+              if (!hasActionButtons(newPostElement)) {
+                console.log('🛠️ Adicionando botões ausentes ao novo post...');
+                addActionButtonsToPost(newPostElement, post);
+              }
+            }
+          }, 100);
+          
+          return post;
+        };
+        
+        console.log('✅ Interceptação de criação de posts configurada');
+      }
+    }, 200);
+    
+    // Se passar muito tempo, cancelar a verificação
+    setTimeout(() => clearInterval(checkSystem), 10000);
+  }
+  
+  // Verificar se o post possui os botões de ação
+  function hasActionButtons(postElement) {
+    const actionsContainer = postElement.querySelector('.post-actions-btns');
+    if (!actionsContainer) return false;
+    
+    const buttons = actionsContainer.querySelectorAll('.post-action-btn');
+    return buttons.length >= 3; // Deve ter pelo menos os 3 botões principais
+  }
+  
+  // Adicionar botões de ação a um post
+  function addActionButtonsToPost(postElement, postData = null) {
+    // Se não tivermos os dados do post, tentar extrair ID
+    const postId = postData?.id || postElement.dataset.id || `post-${Date.now()}`;
+    
+    // Se o elemento não tem ID, adicionar
+    if (!postElement.dataset.id) {
+      postElement.dataset.id = postId;
+    }
+    
+    // Verificar se já existe um container de ações
+    let actionsContainer = postElement.querySelector('.post-actions-btns');
+    
+    // Se não existir, verificar se existe o footer para adicionar
+    if (!actionsContainer) {
+      const postFooter = postElement.querySelector('.post-footer');
+      
+      if (postFooter) {
+        // Verificar se o footer já tem um elemento para estatísticas
+        let statsContainer = postFooter.querySelector('.post-stats');
+        
+        // Se não tiver stats, criar
+        if (!statsContainer) {
+          statsContainer = document.createElement('div');
+          statsContainer.className = 'post-stats';
+          statsContainer.innerHTML = `
+            <div class="post-stat"><i class="fas fa-heart"></i> 0</div>
+            <div class="post-stat"><i class="fas fa-comment"></i> 0</div>
+            <div class="post-stat"><i class="fas fa-share"></i> 0</div>
+          `;
+          postFooter.appendChild(statsContainer);
+        }
+        
+        // Criar container de ações
+        actionsContainer = document.createElement('div');
+        actionsContainer.className = 'post-actions-btns';
+        postFooter.appendChild(actionsContainer);
+      } else {
+        // Se não tiver footer, criar tudo
+        const postFooter = document.createElement('div');
+        postFooter.className = 'post-footer';
+        
+        // Adicionar estatísticas
+        const statsContainer = document.createElement('div');
+        statsContainer.className = 'post-stats';
+        statsContainer.innerHTML = `
+          <div class="post-stat"><i class="fas fa-heart"></i> 0</div>
+          <div class="post-stat"><i class="fas fa-comment"></i> 0</div>
+          <div class="post-stat"><i class="fas fa-share"></i> 0</div>
+        `;
+        postFooter.appendChild(statsContainer);
+        
+        // Adicionar container de ações
+        actionsContainer = document.createElement('div');
+        actionsContainer.className = 'post-actions-btns';
+        postFooter.appendChild(actionsContainer);
+        
+        // Adicionar footer ao post
+        postElement.appendChild(postFooter);
+      }
+    }
+    
+    // Se chegamos aqui e ainda não temos o container, algo está muito errado
+    if (!actionsContainer) {
+      console.error('❌ Não foi possível encontrar ou criar container de ações');
+      return false;
+    }
+    
+    // Limpar container existente
+    actionsContainer.innerHTML = '';
+    
+    // Adicionar os três botões
+    actionsContainer.innerHTML = `
+      <button class="post-action-btn" data-action="curtir" data-id="${postId}">
+        <i class="far fa-heart"></i> Curtir
+      </button>
+      <button class="post-action-btn comment-btn" data-action="comentar" data-id="${postId}">
+        <i class="far fa-comment"></i> Comentar
+      </button>
+      <button class="post-action-btn" data-action="compartilhar" data-id="${postId}">
+        <i class="fas fa-share"></i> Compartilhar
+      </button>
+    `;
+    
+    // Verificar se temos seção de comentários
+    if (!postElement.querySelector('.comments-section')) {
+      const commentsSection = document.createElement('div');
+      commentsSection.className = 'comments-section';
+      commentsSection.id = `comments-${postId}`;
+      commentsSection.innerHTML = `
+        <div class="comment-form">
+          <input type="text" class="comment-input" placeholder="Escreva um comentário...">
+          <button class="comment-submit" data-id="${postId}">Enviar</button>
+        </div>
+        <div class="comment-list"></div>
+      `;
+      postElement.appendChild(commentsSection);
+    }
+    
+    // Restaurar processador de botões se disponível
+    if (window.FURIAXCommunity?.ButtonStabilizer?.manuallyStabilize) {
+      setTimeout(() => {
+        window.FURIAXCommunity.ButtonStabilizer.manuallyStabilize();
+      }, 200);
+    }
+    
+    return true;
+  }
+  
+  // Corrigir posts existentes que possam estar sem botões
+  function fixExistingPosts() {
+    const posts = document.querySelectorAll('.post-card');
+    let fixedCount = 0;
+    
+    posts.forEach(post => {
+      if (!hasActionButtons(post)) {
+        console.log(`🔧 Corrigindo post ID: ${post.dataset.id || 'sem ID'}`);
+        addActionButtonsToPost(post);
+        fixedCount++;
+      }
+    });
+    
+    if (fixedCount > 0) {
+      console.log(`✅ ${fixedCount} posts corrigidos com sucesso`);
+    }
+  }
+  
+  // Configurar observador para correções contínuas
+  function setupDOMObserver() {
+    const observer = new MutationObserver(mutations => {
+      let shouldCheckPosts = false;
+      
+      for (const mutation of mutations) {
+        if (mutation.addedNodes.length) {
+          for (const node of mutation.addedNodes) {
+            // Se for um elemento DOM
+            if (node.nodeType === 1) {
+              // Se for um post, ou contiver posts
+              if (node.classList?.contains('post-card') || 
+                  node.querySelector?.('.post-card')) {
+                shouldCheckPosts = true;
+                break;
+              }
+            }
+          }
+        }
+        
+        if (shouldCheckPosts) break;
+      }
+      
+      if (shouldCheckPosts) {
+        // Pequeno delay para garantir que o DOM foi completamente atualizado
+        setTimeout(fixExistingPosts, 100);
+      }
+    });
+    
+    // Observar o feed de posts
+    const feedContainer = document.querySelector('.feed-column');
+    if (feedContainer) {
+      observer.observe(feedContainer, {
+        childList: true,
+        subtree: true
+      });
+      console.log('👀 Observador configurado para corrigir novos posts');
+    }
+  }
+  
+  // Adicionar CSS necessário
+  function addRequiredCSS() {
+    const style = document.createElement('style');
+    style.textContent = `
+      /* Garante que os botões sejam visíveis */
+      .post-actions-btns {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+      }
+      
+      .post-action-btn {
+        background: transparent;
+        color: #ccc;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      
+      .post-action-btn:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+      
+      .post-action-btn i {
+        font-size: 14px;
+      }
+      
+      .post-action-btn.liked {
+        color: #ff3b5c;
+      }
+      
+      /* Estilos para seção de comentários */
+      .comments-section {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+      }
+      
+      .comments-section.show, .comments-section.visible {
+        max-height: 500px !important;
+        overflow-y: auto;
+        padding-top: 10px;
+        margin-top: 10px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      
+      .comment-form {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 10px;
+      }
+      
+      .comment-input {
+        flex: 1;
+        padding: 8px;
+        border-radius: 5px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(0, 0, 0, 0.1);
+        color: white;
+      }
+      
+      .comment-submit {
+        cursor: pointer;
+        background: linear-gradient(90deg, #1e90ff, #0066cc);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 5px 15px;
+      }
+    `;
+    document.head.appendChild(style);
+  }
+  
+  // Iniciar com os estilos necessários
+  addRequiredCSS();
+})();
 
     // 2. Função para obter perfil do usuário
     function getProfile() {
