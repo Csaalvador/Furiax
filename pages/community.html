@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+
+                <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -8,66 +9,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/comunidadeaa.css">
     <link rel="stylesheet" href="../css/furiax-sentiment.css">
+    <link rel="stylesheet" href="../css/furiax-friend.css">
+    <link rel="stylesheet" href="../css/sidebardireito.css">
+    <link rel="stylesheet" href="../css/friends.css">
+    <link rel="stylesheet" href="../responsividade/comunidade.css">
     <link rel="icon" type="image/png" href="../img/logo/favicon-32x32.png">
-    <style>
-    .gauge-fill {
-    height: 100%;
-    background: linear-gradient(90deg, #ff3b5c, #1e90ff, #00cc66);
-    border-radius: 10px;
-    min-width: 100%;
+   <style>
+    body {
+        scrollbar-width: 1px;
     }
-
-    .user-profile {
-            margin-top: auto;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 10px;
-            padding: 15px;
-            display: flex;
-            align-items: center;
-            transition: var(--transition);
-        }
-        
-        .user-profile:hover {
-            background: rgba(0, 0, 0, 0.3);
-            transform: translateY(-3px);
-        }
-        
-        .profile-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: var(--primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            margin-right: 10px;
-            overflow: hidden;
-            border: 2px solid rgba(30, 144, 255, 0.3);
-        }
-        
-        .avatar-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .user-info {
-            flex: 1;
-        }
-        
-        .user-name {
-            font-weight: bold;
-            font-size: 0.9rem;
-        }
-        
-        .user-role {
-            font-size: 0.8rem;
-            color: var(--primary);
-        }
-
-
-    </style>
+   </style>
 </head>
 <body>
     <div class="sidebar">
@@ -126,28 +77,31 @@
                 <!-- Posts Feed -->
                 <div class="post-card">
                     <div class="post-header">
-                        <div class="post-avatar">
-                            <img src="../img/avatars/avatar01.jpg" alt="Avatar">
-                        </div>
+                        <div class="post-avatar">MA</div>
                         <div class="post-user-info">
-                            <div class="post-user-name">Luiza_FURIA</div>
-                            <div class="post-time">Há 2 horas</div>
+                            <div class="post-user-name">Marcos_Avante</div>
+                            <div class="post-time">Há 5 horas</div>
                         </div>
                     </div>
                     <div class="post-content">
-                        Que vitória INCRÍVEL da FURIA ontem! 🔥🔥 O time está jogando um CS como nunca antes. FalleN está absurdo com o AWP! Estou com muita expectativa pro próximo major. #FURIAnoMajor #SomosFURIA
-                    </div>
+                        Que vitória INCRÍVEL da FURIA ontem! 🔥🔥 O time está jogando um CS como nunca antes. FalleN está absurdo com o AWP! Estou com muita expectativa pro próximo major. #FURIAnoMajor #SomosFURIA                    </div>
                     <div class="post-footer">
                         <div class="post-stats">
-                            <div class="post-stat"><i class="fas fa-heart"></i> 128</div>
-                            <div class="post-stat"><i class="fas fa-comment"></i> 32</div>
-                            <div class="post-stat"><i class="fas fa-share"></i> 8</div>
+                            <div class="post-stat"><i class="fas fa-heart"></i> 64</div>
+                            <div class="post-stat"><i class="fas fa-comment"></i> 48</div>
+                            <div class="post-stat"><i class="fas fa-share"></i> 12</div>
                         </div>
                         <div class="post-actions-btns">
                             <button class="post-action-btn"><i class="far fa-heart"></i> Curtir</button>
                             <button class="post-action-btn comment-btn"><i class="far fa-comment"></i> Comentar</button>
                             <button class="post-action-btn"><i class="fas fa-share"></i> Compartilhar</button>
                         </div>
+                    </div>
+                
+                    <div class="post-footer">
+                        <div class="post-stats">
+                        </div>
+                    
                     </div>
                     <!-- Comentários -->
                     <div class="comments-section" id="comments-1">
@@ -193,11 +147,7 @@
                             <div class="post-stat"><i class="fas fa-comment"></i> 48</div>
                             <div class="post-stat"><i class="fas fa-share"></i> 12</div>
                         </div>
-                        <div class="post-actions-btns">
-                            <button class="post-action-btn"><i class="far fa-heart"></i> Curtir</button>
-                            <button class="post-action-btn comment-btn"><i class="far fa-comment"></i> Comentar</button>
-                            <button class="post-action-btn"><i class="fas fa-share"></i> Compartilhar</button>
-                        </div>
+                        
                     </div>
                     <!-- Comentários -->
                     <div class="comments-section" id="comments-2">
@@ -408,65 +358,155 @@
                 <!-- Fan Profile -->
                 <div class="analysis-content" id="profile-content">
                     <div class="fan-profile">
-                        <div class="fan-profile-header">
-                            <i class="fas fa-user-chart"></i> Perfil de Fã
-                        </div>
-                        
-                        <div class="fan-stats">
-                            <div class="fan-stat-item">
-                                <div class="fan-stat-title">
-                                    <i class="fas fa-calendar-alt"></i> Tempo de Fã
+                        <!-- Feed de Notícias FURIA Premium -->
+<div class="furia-news-hub">
+    <div class="news-hub-header">
+        <div class="hub-title">
+            <i class="fas fa-fire-alt pulse-icon"></i>
+            <span>FURIA INSIDER</span>
+        </div>
+        <div class="hub-controls">
+            <button class="hub-refresh-btn" id="refreshNewsBtn">
+                <i class="fas fa-sync-alt"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="breaking-news-banner">
+        <div class="breaking-news-label">SEMANA</div>
+        <div class="breaking-news-content">
+            <div class="breaking-news-text">
+                FURIA FC garante vaga direta na semifinal da Kings League Brasil após vitória sobre o Fluxo por 5 a 2
+            </div>
+        </div>
+        
+    </div>
+
+    
+
+    <div class="news-feed-container">
+        <!-- Notícia principal em destaque -->
+     
+
+        <!-- Feed de notícias normal -->
+        <div class="news-grid">
+            <!-- Notícia 1 -->
+            <div class="news-card" data-category="events">
+                <div class="news-card-img">
+                    <img src="../img/news/kingsleague.jpg" alt="Time de Neymar na Kings League">
+                    <div class="news-badge events">Esportes</div>
+                </div>
+                <div class="news-card-content">
+                    <div class="news-card-meta">
+                        <span class="news-date"><i class="far fa-clock"></i> 5 de maio de 2025</span>
+                    </div>
+                    <h4 class="news-card-title">FURIA FC garante vaga no Mundial da Kings League</h4>
+                    <p class="news-card-excerpt">O FURIA FC, equipe presidida por Neymar Jr., foi o primeiro time classificado para o Mundial de Clubes da Kings League.</p>
+                </div>
+                <div class="news-card-footer">
+                    <span class="news-engagement">
+                        <i class="far fa-heart"></i> 412
+                        <i class="far fa-comment"></i> 102
+                    </span>
+                    <a href="https://www.msn.com/pt-br/esportes/futebol/time-de-neymar-%C3%A9-o-primeiro-a-garantir-vaga-no-mundial-de-clubes-da-kings-league/ar-AA1EdU7Q?ocid=BingNewsSerp" class="news-card-link" target="_blank">
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+                     
+
+
+                        <div class="friends-sidebar">
+                            <div class="friends-header">
+                                <div class="friends-title">
+                                    <i class="fas fa-user-friends"></i> Amigos
                                 </div>
-                                <div class="fan-stat-value">2 anos e 4 meses</div>
+                                <div class="friends-actions">
+                                    <button class="friend-action-button" title="Mensagens Diretas">
+                                        <i class="fas fa-comment-alt"></i>
+                                    </button>
+                                    <button class="friend-action-button" title="Adicionar Amigo">
+                                        <i class="fas fa-user-plus"></i>
+                                    </button>
+                                </div>
                             </div>
-                            
-                            <div class="fan-stat-item">
-                                <div class="fan-stat-title">
-                                    <i class="fas fa-chart-pie"></i> Interesses
+                    
+                            <div class="friends-search">
+                                <i class="fas fa-search"></i>
+                                <input type="text" placeholder="Pesquisar amigos..." id="friendSearchInput">
+                            </div>
+                    
+                            <div class="friends-tabs">
+                                <div class="friends-tab active" data-tab="online">Online</div>
+                                <div class="friends-tab" data-tab="all">Todos</div>
+                                <div class="friends-tab" data-tab="pending">Pendentes</div>
+                            </div>
+                    
+                            <div class="friends-list">
+                                <!-- Online Friends Section -->
+                                <div class="friends-section active" id="online-section">
+                                    <div class="friends-section-header">
+                                        <span>Online</span>
+                                        <span class="count" id="online-count">0</span>
+                                    </div>
+                                    <div id="online-friends">
+                                        <!-- Friends will be loaded here -->
+                                    </div>
                                 </div>
-                                <div class="fan-stat-value">
-                                    <div class="interest-chart">
-                                        <div class="chart-bar">
-                                            <div class="chart-label">CS:GO</div>
-                                        </div>
-                                        <div class="chart-bar">
-                                            <div class="chart-label">Valorant</div>
-                                        </div>
-                                        <div class="chart-bar">
-                                            <div class="chart-label">LoL</div>
-                                        </div>
-                                        <div class="chart-bar">
-                                            <div class="chart-label">R6</div>
-                                        </div>
-                                        <div class="chart-bar">
-                                            <div class="chart-label">Conteúdo</div>
-                                        </div>
+                    
+                                <!-- All Friends Section -->
+                                <div class="friends-section hidden" id="all-section">
+                                    <div class="friends-section-header">
+                                        <span>Todos os Amigos</span>
+                                        <span class="count" id="all-count">0</span>
+                                    </div>
+                                    <div id="all-friends">
+                                        <!-- Friends will be loaded here -->
+                                    </div>
+                                </div>
+                    
+                                <!-- Pending Friends Section -->
+                                <div class="friends-section hidden" id="pending-section">
+                                    <div class="friends-section-header">
+                                        <span>Solicitações Pendentes</span>
+                                        <span class="count" id="pending-count">0</span>
+                                    </div>
+                                    <div id="pending-friends">
+                                        <!-- Pending friends will be loaded here -->
                                     </div>
                                 </div>
                             </div>
-                            
-                            <div class="fan-stat-item">
-                                <div class="fan-stat-title">
-                                    <i class="fas fa-trophy"></i> Conquistas
+                    
+                            <!-- Current User Profile -->
+                            <div class="user-profile">
+                                <div class="profile-avatar">
+                                    <div class="avatar-image" id="currentUserAvatar">FX</div>
+                                    <div class="friend-status status-online"></div>
                                 </div>
-                                <div class="fan-stat-value">
-                                    12 missões completas<br>
-                                    3 eventos presenciais<br>
-                                    5 produtos adquiridos
+                                <div class="user-info">
+                                    <div class="user-name" id="currentUserName">FuriaX_User</div>
+                                    <div class="user-role" id="currentUserRole">Novato</div>
                                 </div>
+                                <button class="friend-action-button" id="userSettingsBtn">
+                                    <i class="fas fa-cog"></i>
+                                </button>
                             </div>
                         </div>
-                        
+                    
                         <div class="social-integration">
                             <div class="social-title">
                                 <i class="fas fa-link"></i> Contas Conectadas
                             </div>
                             <div class="social-accounts">
                                 <div class="social-account">
+                                    
                                     <div class="social-icon twitter-icon">
                                         <i class="fab fa-twitter"></i>
                                     </div>
-                                    <div class="social-name">Twitter</div>
+                                    <div class="social-name">X</div>
                                     <div class="social-status">Conectado</div>
                                 </div>
                                 
@@ -498,36 +538,336 @@
                     </div>
                     
                     <!-- Fan Engagement Score -->
-                    <div class="fan-engagement">
-                        <div class="fan-profile-header">
-                            <i class="fas fa-chart-bar"></i> Pontuação de Engajamento
-                        </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab switching functionality
+            const tabs = document.querySelectorAll('.friends-tab');
+            const sections = document.querySelectorAll('.friends-section');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Remove active class from all tabs
+                    tabs.forEach(t => t.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+                    
+                    // Hide all sections
+                    sections.forEach(section => section.classList.add('hidden'));
+                    
+                    // Show the corresponding section
+                    const tabName = this.getAttribute('data-tab');
+                    document.getElementById(tabName + '-section').classList.remove('hidden');
+                });
+            });
+
+            // Search functionality
+            const searchInput = document.getElementById('friendSearchInput');
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                const friendItems = document.querySelectorAll('.friend-item');
+                
+                friendItems.forEach(item => {
+                    const friendName = item.querySelector('.friend-name').textContent.toLowerCase();
+                    if (friendName.includes(searchTerm)) {
+                        item.style.display = 'flex';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+
+            // Load friends from localStorage
+            loadFriends();
+
+            // Load current user profile
+            loadCurrentUserProfile();
+
+            // Settings button click event
+            document.getElementById('userSettingsBtn').addEventListener('click', function() {
+                // Open settings modal or navigate to settings page
+                alert('Configurações do usuário');
+            });
+        });
+
+        // Function to load friends from localStorage
+        function loadFriends() {
+            try {
+                // First try to get profiles from MultiProfileManager if available
+                let profiles = {};
+                if (window.FURIAXCommunity && window.FURIAXCommunity.MultiProfileManager) {
+                    profiles = window.FURIAXCommunity.MultiProfileManager.getAllProfiles();
+                } else {
+                    // Fallback to getting profiles from localStorage
+                    const storedProfiles = localStorage.getItem('furiax_all_profiles');
+                    if (storedProfiles) {
+                        profiles = JSON.parse(storedProfiles);
+                    }
+                }
+
+                // Get current user ID
+                let currentUserId = null;
+                if (window.FURIAXCommunity && window.FURIAXCommunity.MultiProfileManager) {
+                    currentUserId = window.FURIAXCommunity.MultiProfileManager.getActiveProfileId();
+                } else {
+                    currentUserId = localStorage.getItem('furiax_active_profile');
+                }
+
+                // Process profiles
+                const onlineFriends = document.getElementById('online-friends');
+                const allFriends = document.getElementById('all-friends');
+                
+                // Clear previous content
+                onlineFriends.innerHTML = '';
+                allFriends.innerHTML = '';
+                
+                let onlineCount = 0;
+                let totalCount = 0;
+
+                // Create friend items
+                Object.entries(profiles).forEach(([id, profile]) => {
+                    // Skip current user
+                    if (id === currentUserId) return;
+                    
+                    totalCount++;
+                    
+                    // Determine online status randomly for demo
+                    const onlineStatus = Math.random() > 0.5;
+                    if (onlineStatus) onlineCount++;
+                    
+                    const statusClass = onlineStatus ? 'status-online' : 'status-offline';
+                    const activityText = onlineStatus ? getRandomActivity() : 'Offline';
+                    
+                    const friendItem = createFriendItem(profile, id, statusClass, activityText);
+                    
+                    // Add to all friends section
+                    allFriends.appendChild(friendItem.cloneNode(true));
+                    
+                    // Add to online friends if online
+                    if (onlineStatus) {
+                        onlineFriends.appendChild(friendItem);
+                    }
+                });
+                
+                // Update counters
+                document.getElementById('online-count').textContent = onlineCount;
+                document.getElementById('all-count').textContent = totalCount;
+                
+                // Show no friends message if needed
+                if (totalCount === 0) {
+                    const noFriendsMsg = document.createElement('div');
+                    noFriendsMsg.className = 'no-friends-msg';
+                    noFriendsMsg.innerHTML = '<i class="fas fa-user-friends"></i><br>Nenhum amigo encontrado.<br>Adicione novos amigos para começar!';
+                    
+                    allFriends.appendChild(noFriendsMsg);
+                    onlineFriends.appendChild(noFriendsMsg.cloneNode(true));
+                }
+                
+                // Add some pending requests for demo
+                const pendingFriends = document.getElementById('pending-friends');
+                pendingFriends.innerHTML = '';
+                
+                // Create sample pending requests
+                const pendingCount = Math.floor(Math.random() * 3);
+                document.getElementById('pending-count').textContent = pendingCount;
+                
+                if (pendingCount > 0) {
+                    for (let i = 0; i < pendingCount; i++) {
+                        const pendingProfile = {
+                            username: 'FURIA_Fan_' + (Math.floor(Math.random() * 100) + 1),
+                            avatar: null
+                        };
                         
-                        <div class="engagement-score">
-                            <div class="score-circle">
-                                <div class="score-value">85</div>
-                            </div>
-                            <div class="score-label">Nível de Engajamento: ELITE</div>
-                        </div>
-                        
-                        <div class="engagement-breakdown">
-                            <div class="engagement-item">
-                                <div class="engagement-label">Atividade na Comunidade</div>
-                                <div class="engagement-value">92/100</div>
-                            </div>
-                            <div class="engagement-item">
-                                <div class="engagement-label">Presença em Eventos</div>
-                                <div class="engagement-value">76/100</div>
-                            </div>
-                            <div class="engagement-item">
-                                <div class="engagement-label">Suporte ao Time</div>
-                                <div class="engagement-value">88/100</div>
-                            </div>
-                            <div class="engagement-item">
-                                <div class="engagement-label">Reputação entre Fãs</div>
-                                <div class="engagement-value">81/100</div>
-                            </div>
-                        </div>
+                        const pendingItem = createPendingItem(pendingProfile, 'pending_' + i);
+                        pendingFriends.appendChild(pendingItem);
+                    }
+                } else {
+                    const noPendingMsg = document.createElement('div');
+                    noPendingMsg.className = 'no-friends-msg';
+                    noPendingMsg.innerHTML = 'Nenhuma solicitação pendente.';
+                    pendingFriends.appendChild(noPendingMsg);
+                }
+                
+            } catch (error) {
+                console.error('Error loading friends:', error);
+                
+                // Show error message
+                const errorMsg = document.createElement('div');
+                errorMsg.className = 'no-friends-msg';
+                errorMsg.innerHTML = '<i class="fas fa-exclamation-circle"></i><br>Erro ao carregar amigos.';
+                
+                document.getElementById('online-friends').innerHTML = '';
+                document.getElementById('all-friends').innerHTML = '';
+                document.getElementById('online-friends').appendChild(errorMsg);
+                document.getElementById('all-friends').appendChild(errorMsg.cloneNode(true));
+            }
+        }
+
+        // Create a friend item element
+        function createFriendItem(profile, id, statusClass, activityText) {
+            const item = document.createElement('div');
+            item.className = 'friend-item';
+            item.setAttribute('data-id', id);
+            
+            const initials = profile.username ? profile.username.substring(0, 2).toUpperCase() : 'FX';
+            
+            let avatarContent = '';
+            if (profile.avatar) {
+                avatarContent = `<img src="${profile.avatar}" alt="${profile.username}" onerror="this.style.display='none';this.parentNode.textContent='${initials}'">`;
+            } else {
+                avatarContent = initials;
+            }
+            
+            item.innerHTML = `
+                <div class="friend-avatar">
+                    ${avatarContent}
+                    <div class="friend-status ${statusClass}"></div>
+                </div>
+                <div class="friend-info">
+                    <div class="friend-name">${profile.username || 'Usuário FURIAX'}</div>
+                    <div class="friend-activity">${activityText}</div>
+                </div>
+                <div class="friend-actions">
+                    <button class="friend-action msg" title="Mensagem">
+                        <i class="fas fa-comment"></i>
+                    </button>
+                    <button class="friend-action call" title="Chamar">
+                        <i class="fas fa-phone"></i>
+                    </button>
+                </div>
+            `;
+            
+            return item;
+        }
+
+        // Create a pending friend request item
+        function createPendingItem(profile, id) {
+            const item = document.createElement('div');
+            item.className = 'friend-item';
+            item.setAttribute('data-id', id);
+            
+            const initials = profile.username ? profile.username.substring(0, 2).toUpperCase() : 'FX';
+            
+            let avatarContent = '';
+            if (profile.avatar) {
+                avatarContent = `<img src="${profile.avatar}" alt="${profile.username}" onerror="this.style.display='none';this.parentNode.textContent='${initials}'">`;
+            } else {
+                avatarContent = initials;
+            }
+            
+            item.innerHTML = `
+                <div class="friend-avatar">
+                    ${avatarContent}
+                </div>
+                <div class="friend-info">
+                    <div class="friend-name">${profile.username || 'Usuário FURIAX'}</div>
+                    <div class="friend-activity">Enviou solicitação de amizade</div>
+                </div>
+                <div class="friend-actions">
+                    <button class="friend-action call" title="Aceitar" style="color: #3ba55c;">
+                        <i class="fas fa-check"></i>
+                    </button>
+                    <button class="friend-action" title="Rejeitar" style="color: #ed4245;">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            `;
+            
+            return item;
+        }
+
+        // Load current user profile
+        function loadCurrentUserProfile() {
+            try {
+                // Get profile data
+                let profileData = null;
+                
+                if (window.FURIAXCommunity && window.FURIAXCommunity.ProfileManager) {
+                    profileData = window.FURIAXCommunity.ProfileManager.getProfileData();
+                } else {
+                    // Fallback to localStorage
+                    const storedProfile = localStorage.getItem('furiaxProfile');
+                    if (storedProfile) {
+                        profileData = JSON.parse(storedProfile);
+                    }
+                }
+                
+                if (!profileData) {
+                    console.warn('Profile data not found');
+                    return;
+                }
+                
+                // Update UI elements
+                const usernameElement = document.getElementById('currentUserName');
+                const roleElement = document.getElementById('currentUserRole');
+                const avatarElement = document.getElementById('currentUserAvatar');
+                
+                if (usernameElement) {
+                    usernameElement.textContent = profileData.username || 'FuriaX_User';
+                }
+                
+                if (roleElement) {
+                    // Map title value to more friendly text
+                    const titles = {
+                        "novato": "Novato",
+                        "iniciante": "Iniciante",
+                        "casual": "Jogador Casual",
+                        "competitivo": "Competidor", 
+                        "furioso": "Furioso",
+                        "furioso_elite": "Furioso Elite",
+                        "lendario": "Furioso Lendário"
+                    };
+                    
+                    roleElement.textContent = titles[profileData.title] || profileData.title || 'Novato';
+                }
+                
+                if (avatarElement) {
+                    if (profileData.avatar) {
+                        if (avatarElement.tagName === 'IMG') {
+                            avatarElement.src = profileData.avatar;
+                        } else {
+                            const img = document.createElement('img');
+                            img.src = profileData.avatar;
+                            img.alt = profileData.username;
+                            img.className = 'avatar-image';
+                            img.onerror = function() {
+                                this.style.display = 'none';
+                                avatarElement.textContent = profileData.username.substring(0, 2).toUpperCase();
+                            };
+                            
+                            avatarElement.textContent = '';
+                            avatarElement.appendChild(img);
+                        }
+                    } else {
+                        // Use initials if no avatar
+                        avatarElement.textContent = profileData.username.substring(0, 2).toUpperCase();
+                    }
+                }
+                
+            } catch (error) {
+                console.error('Error loading current user profile:', error);
+            }
+        }
+
+        // Get random activity text for demo purposes
+        function getRandomActivity() {
+            const activities = [
+                'Jogando VALORANT',
+                'Assistindo FURIA Esports',
+                'Jogando CS:GO',
+                'Online há 2 horas',
+                'Na comunidade FURIAX',
+                'Disponível',
+                'Participando de eventos',
+                'Jogando League of Legends'
+            ];
+            
+            return activities[Math.floor(Math.random() * activities.length)];
+        }
+    </script>
+</body>
+</html>
                     </div>
                 </div>
                 
@@ -734,61 +1074,15 @@
                             <i class="fas fa-award"></i> Programa de Lealdade
                         </div>
                         
-                        <div class="loyalty-rewards">
-                            <div class="reward-item">
-                                <div class="reward-icon">
-                                    <i class="fas fa-ticket-alt"></i>
-                                </div>
-                                <div class="reward-info">
-                                    <div class="reward-title">Acesso Prioritário - Meetup SP</div>
-                                    <div class="reward-desc">Entrada 1h antes para encontro com jogadores</div>
-                                </div>
-                                <div class="reward-progress">
-                                    <div class="progress-bar">
-                                        <div class="progress-fill" style="width: 85%"></div>
-                                    </div>
-                                    <div class="progress-text">85%</div>
-                                </div>
-                            </div>
-                            
-                            <div class="reward-item">
-                                <div class="reward-icon">
-                                    <i class="fas fa-tshirt"></i>
-                                </div>
-                                <div class="reward-info">
-                                    <div class="reward-title">Camisa Exclusiva FURIA Elite</div>
-                                    <div class="reward-desc">Edição limitada para fãs de alta pontuação</div>
-                                </div>
-                                <div class="reward-progress">
-                                    <div class="progress-bar">
-                                        <div class="progress-fill" style="width: 60%"></div>
-                                    </div>
-                                    <div class="progress-text">60%</div>
-                                </div>
-                            </div>
-                            
-                            <div class="reward-item">
-                                <div class="reward-icon">
-                                    <i class="fas fa-headset"></i>
-                                </div>
-                                <div class="reward-info">
-                                    <div class="reward-title">Sessão de Gameplay com Jogador</div>
-                                    <div class="reward-desc">30 minutos jogando com um pro player</div>
-                                </div>
-                                <div class="reward-progress">
-                                    <div class="progress-bar">
-                                        <div class="progress-fill" style="width: 35%"></div>
-                                    </div>
-                                    <div class="progress-text">35%</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                       
                 </div>
             </div>
         </div>
     </div>
 
+    
+
+    <script src="../js/furiax-fixfeed.js"></script>
     <!-- <script src="../js/integration/recommends.js"></script> -->
     <script src="../js/furiax-login-auth.js"></script>
 <script src="../js/furiax-sentiment-analysis.js"></script>
@@ -806,11 +1100,1559 @@
 <script src="../js/integration/furiax-core.js"></script>
 <script src="../responsividade/comunidade.js"></script>
 <script src="../js/like.js"></script>
+<script src="../js/furiax-friends.js"></script>
+<script src="../js/furiax-fixphotos.js"></script>
+<script src="../js/discord.js"></script>
+<script src="../js/reload.js"></script>
+<script src="../js/furiax-compartilhar.js"></script>
+<script src="../js/friends.js"></script>
+<!-- <script src="../js/furiax-feed-manager.js"></script> -->
 
 <script>
     /* Add JavaScript to Toggle Mobile Menu */
-// Mobile Responsiveness JavaScript for FURIAX Community
+//**
 
+    // 2. Função para obter perfil do usuário
+    function getProfile() {
+        try {
+            const profileData = localStorage.getItem(CONFIG.STORAGE_KEY_PROFILE);
+            if (profileData) {
+                return JSON.parse(profileData);
+            }
+        } catch (e) {
+            console.error('Erro ao obter perfil:', e);
+        }
+        return null;
+    }
+    
+    /**
+ * FURIAX - Correção do sistema de curtidas
+ * Este script corrige o problema de curtir/descurtir posts no feed de comunidade
+ */
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('🧡 Iniciando correção do sistema de curtidas...');
+    
+    // Função para corrigir o comportamento de curtir/descurtir
+    function fixLikeSystem() {
+        // Selecionar todos os botões de curtir
+        const likeButtons = document.querySelectorAll('.post-action-btn:first-child');
+        
+        // Remover listeners antigos (para evitar duplicação)
+        likeButtons.forEach(button => {
+            const newButton = button.cloneNode(true);
+            if (button.parentNode) {
+                button.parentNode.replaceChild(newButton, button);
+            }
+            
+            // Adicionar novo event listener com comportamento correto
+            newButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Encontrar o post associado a este botão
+                const postCard = this.closest('.post-card');
+                if (!postCard) return;
+                
+                // Verificar estado atual (curtido ou não)
+                const isLiked = this.classList.contains('liked');
+                
+                // Encontrar contador de curtidas
+                const likeCounter = postCard.querySelector('.post-stat:first-child');
+                let likeCount = 0;
+                
+                if (likeCounter) {
+                    // Extrair número atual de curtidas
+                    const currentText = likeCounter.textContent;
+                    const match = currentText.match(/\d+/);
+                    if (match) {
+                        likeCount = parseInt(match[0]);
+                    }
+                }
+                
+                if (isLiked) {
+                    // Descurtir
+                    this.classList.remove('liked');
+                    this.innerHTML = '<i class="far fa-heart"></i> Curtir';
+                    
+                    // Decrementar contador se maior que zero
+                    if (likeCount > 0) {
+                        likeCount--;
+                        if (likeCounter) {
+                            likeCounter.innerHTML = `<i class="fas fa-heart"></i> ${likeCount}`;
+                        }
+                    }
+                    
+                    console.log('Post descurtido com sucesso');
+                } else {
+                    // Curtir
+                    this.classList.add('liked');
+                    this.innerHTML = '<i class="fas fa-heart"></i> Curtido';
+                    
+                    // Incrementar contador
+                    likeCount++;
+                    if (likeCounter) {
+                        likeCounter.innerHTML = `<i class="fas fa-heart"></i> ${likeCount}`;
+                    }
+                    
+                    console.log('Post curtido com sucesso');
+                }
+                
+                // Armazenar estado no localStorage (opcional)
+                try {
+                    const postId = postCard.dataset.id;
+                    if (postId) {
+                        const likedPosts = JSON.parse(localStorage.getItem('furiax_liked_posts') || '{}');
+                        
+                        if (!isLiked) {
+                            // Adicionar às curtidas
+                            likedPosts[postId] = true;
+                        } else {
+                            // Remover das curtidas
+                            delete likedPosts[postId];
+                        }
+                        
+                        localStorage.setItem('furiax_liked_posts', JSON.stringify(likedPosts));
+                    }
+                } catch (error) {
+                    console.error('Erro ao salvar estado de curtida:', error);
+                }
+            });
+        });
+        
+        console.log(`✅ Sistema de curtidas corrigido para ${likeButtons.length} botões`);
+    }
+    
+    // Aplicar correção inicial
+    fixLikeSystem();
+    
+    // Observar mudanças no DOM para aplicar correção a novos posts
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.addedNodes.length) {
+                // Verificar se algum novo post foi adicionado
+                for (let node of mutation.addedNodes) {
+                    if (node.nodeType === 1 && 
+                        (node.classList.contains('post-card') || 
+                         node.querySelector('.post-card'))) {
+                        // Novo post detectado, aplicar correção
+                        setTimeout(fixLikeSystem, 100);
+                        break;
+                    }
+                }
+            }
+        });
+    });
+    
+    // Configurar observador para mudanças no feed
+    const feedColumn = document.querySelector('.feed-column');
+    if (feedColumn) {
+        observer.observe(feedColumn, { childList: true, subtree: true });
+        console.log('👀 Observador configurado para novos posts');
+    }
+    
+    // Restaurar estado das curtidas do localStorage
+    try {
+        const likedPosts = JSON.parse(localStorage.getItem('furiax_liked_posts') || '{}');
+        
+        // Para cada post que já foi curtido, definir estado visual
+        Object.keys(likedPosts).forEach(postId => {
+            const post = document.querySelector(`.post-card[data-id="${postId}"]`);
+            if (post) {
+                const likeButton = post.querySelector('.post-action-btn:first-child');
+                if (likeButton) {
+                    likeButton.classList.add('liked');
+                    likeButton.innerHTML = '<i class="fas fa-heart"></i> Curtido';
+                }
+            }
+        });
+    } catch (error) {
+        console.error('Erro ao restaurar estado das curtidas:', error);
+    }
+});
+    // 3. Função para garantir que as imagens sejam exibidas corretamente
+    function fixAvatarImages() {
+        debug("Aplicando correção para backgrounds azuis...");
+        
+        const profile = getProfile();
+        if (!profile || !profile.avatar) {
+            debug("Perfil não encontrado ou sem avatar definido");
+            return;
+        }
+        
+        // Determinar URL do avatar
+        let avatarUrl;
+        const avatarId = parseInt(profile.avatar);
+        
+        if (!isNaN(avatarId) && avatarMappings[avatarId]) {
+            avatarUrl = avatarMappings[avatarId];
+            debug(`Avatar ID ${avatarId} mapeado para: ${avatarUrl}`);
+        } else if (typeof profile.avatar === 'string' && 
+                  (profile.avatar.startsWith('http') || 
+                   profile.avatar.startsWith('../') || 
+                   profile.avatar.startsWith('/'))) {
+            // É uma URL completa
+            avatarUrl = profile.avatar;
+            debug(`Avatar é uma URL: ${avatarUrl}`);
+        } else {
+            // Fallback para logo padrão
+            avatarUrl = CONFIG.DEFAULT_AVATAR;
+            debug(`Usando avatar padrão: ${avatarUrl}`);
+        }
+        
+        // Função para corrigir container de avatar
+        function fixContainer(container, username) {
+            // Verificar se é um container do usuário atual
+            const parent = container.closest('.post-card, .comment-item');
+            if (!parent) return;
+            
+            const userElement = parent.querySelector('.post-user-name, .comment-user');
+            if (!userElement || userElement.textContent !== profile.username) return;
+            
+            debug(`Corrigindo avatar para ${profile.username} em ${container.className}`);
+            
+            // Remover background azul
+            container.style.background = 'none';
+            
+            // Garantir que exista uma imagem
+            let avatarImg = container.querySelector('img');
+            
+            if (!avatarImg) {
+                // Criar imagem se não existir
+                avatarImg = document.createElement('img');
+                avatarImg.alt = 'Avatar';
+                avatarImg.className = 'avatar-image';
+                container.appendChild(avatarImg);
+                debug("Imagem de avatar criada");
+            }
+            
+            // Garantir estilos corretos na imagem
+            avatarImg.style.width = '100%';
+            avatarImg.style.height = '100%';
+            avatarImg.style.objectFit = 'cover';
+            avatarImg.style.borderRadius = '50%';
+            
+            // Definir src da imagem
+            avatarImg.src = avatarUrl;
+            
+            // Adicionar fallback
+            avatarImg.onerror = function() {
+                debug(`Erro ao carregar imagem: ${avatarUrl}, usando fallback`);
+                this.src = CONFIG.DEFAULT_AVATAR;
+                // Adicionar borda para visualização
+                this.style.border = '2px solid red';
+            };
+            
+            debug(`Avatar atualizado para: ${avatarUrl}`);
+        }
+        
+        // Aplicar correção a todos os containers de avatar
+        document.querySelectorAll('.post-avatar, .comment-avatar').forEach(container => {
+            fixContainer(container);
+        });
+    }
+    
+    // 4. Corrigir estilos CSS problemáticos
+    function fixCSSStyles() {
+        debug("Corrigindo estilos CSS problemáticos...");
+        
+        // Adicionar estilos que garantem que a imagem seja exibida corretamente
+        const styleEl = document.createElement('style');
+        styleEl.id = 'avatar-background-fix-styles';
+        styleEl.textContent = `
+            /* Garantir que o container não tenha background que sobreponha a imagem */
+            .post-avatar, .comment-avatar {
+                background: transparent !important;
+                overflow: hidden !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                width: 40px !important;
+                height: 40px !important;
+                border-radius: 50% !important;
+            }
+            
+            /* Garantir que a imagem ocupe todo o espaço disponível */
+            .post-avatar img, .comment-avatar img {
+                width: 100% !important;
+                height: 100% !important;
+                object-fit: cover !important;
+                border-radius: 50% !important;
+                display: block !important;
+            }
+            
+            /* Adicionar efeito de hover para melhor feedback visual */
+            .post-avatar:hover img, .comment-avatar:hover img {
+                transform: scale(1.05);
+                transition: transform 0.2s ease;
+            }
+        `;
+        
+        // Adicionar ao head apenas se ainda não existir
+        if (!document.getElementById('avatar-background-fix-styles')) {
+            document.head.appendChild(styleEl);
+            debug("Estilos CSS corretivos adicionados");
+        }
+    }
+    
+    // 5. Observar mudanças no DOM para aplicar a correção a novos elementos
+    function observeDOMChanges() {
+        debug("Configurando observador para novas alterações...");
+        
+        const observer = new MutationObserver(function(mutations) {
+            let shouldFix = false;
+            
+            mutations.forEach(function(mutation) {
+                if (mutation.addedNodes.length > 0) {
+                    // Verificar se algum novo elemento relevante foi adicionado
+                    const hasRelevantNodes = Array.from(mutation.addedNodes).some(node => 
+                        node.nodeType === 1 && (
+                            node.classList?.contains('post-card') || 
+                            node.classList?.contains('comment-item') ||
+                            node.querySelector?.('.post-avatar, .comment-avatar')
+                        )
+                    );
+                    
+                    if (hasRelevantNodes) {
+                        shouldFix = true;
+                    }
+                }
+            });
+            
+            if (shouldFix) {
+                debug("Novos elementos detectados, reaplicando correção...");
+                setTimeout(fixAvatarImages, 50);
+            }
+        });
+        
+        // Observar a coluna de feed
+        const feedColumn = document.querySelector('.feed-column');
+        if (feedColumn) {
+            observer.observe(feedColumn, { 
+                childList: true, 
+                subtree: true 
+            });
+            debug("Observando mudanças no feed");
+        }
+    }
+    
+    // Iniciar o processo de correção
+    function init() {
+        // Verificar caminhos de avatar
+        checkAvatarPaths();
+        
+        // Corrigir estilos CSS
+        fixCSSStyles();
+        
+        // Aplicar correção aos avatares existentes
+        fixAvatarImages();
+        
+        // Observar mudanças no DOM
+        observeDOMChanges();
+        
+        // Aplicar novamente após um tempo para garantir
+        setTimeout(fixAvatarImages, 1000);
+        setTimeout(fixAvatarImages, 3000);
+        
+        debug("Correção para background azul inicializada com sucesso");
+    }
+    
+    // Executar inicialização
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+    
+    // Reexecutar quando a página estiver totalmente carregada
+    window.addEventListener('load', fixAvatarImages);
+    
+    // Monitorar alterações no localStorage
+    window.addEventListener('storage', function(e) {
+        if (e.key === CONFIG.STORAGE_KEY_PROFILE) {
+            debug("Perfil alterado, reaplicando correção...");
+            fixAvatarImages();
+        }
+    });
+// Removed invalid expression
+
+ document.addEventListener('DOMContentLoaded', function() {
+    console.log('🖼️ Iniciando correção de avatares FURIAX (Anti-sobreposição)...');
+    
+    // Constantes do sistema
+    const CONFIG = {
+        STORAGE_KEY_PROFILE: 'furiaxProfile',
+        DEFAULT_AVATAR: '../img/logo/logoFuriax.png',
+        DEBUG: true  // Ativar logs para depuração
+    };
+    
+    // Função para depuração
+    function debug(message, data = null) {
+        if (CONFIG.DEBUG) {
+            if (data) {
+                console.log(`🔍 [Avatar Fix] ${message}`, data);
+            } else {
+                console.log(`🔍 [Avatar Fix] ${message}`);
+            }
+        }
+    }
+    
+    // Função para obter perfil do localStorage
+    function getProfileFromStorage() {
+        try {
+            const profileData = localStorage.getItem(CONFIG.STORAGE_KEY_PROFILE);
+            if (profileData) {
+                const profile = JSON.parse(profileData);
+                debug("Perfil obtido do localStorage:", profile);
+                return profile;
+            }
+        } catch (error) {
+            console.error('❌ Erro ao carregar perfil:', error);
+        }
+        
+        return { 
+            username: 'FuriaX_User',
+            avatar: CONFIG.DEFAULT_AVATAR,
+            title: 'Furioso Novato'
+        };
+    }
+    
+    // Função para limpar elementos antes de atualizar
+    function clearContainerBeforeUpdate(container) {
+        // Remover qualquer imagem existente
+        const existingImages = container.querySelectorAll('img');
+        existingImages.forEach(img => img.remove());
+        
+        // Remover qualquer texto (iniciais) que possa existir
+        container.textContent = '';
+    }
+    
+    // Função para atualizar avatar em um container
+    function updateAvatarInContainer(container, avatarUrl) {
+        if (!container) return false;
+        
+        // Limpar container primeiro
+        clearContainerBeforeUpdate(container);
+        
+        // Checar se a URL é válida
+        if (!avatarUrl || avatarUrl === 'undefined' || avatarUrl === 'null') {
+            avatarUrl = CONFIG.DEFAULT_AVATAR;
+        }
+        
+        // Criar elemento de imagem
+        const img = document.createElement('img');
+        img.src = avatarUrl;
+        img.alt = 'Avatar';
+        img.className = 'avatar-image';
+        img.dataset.fixed = 'true';
+        
+        // Adicionar fallback para erro
+        img.onerror = function() {
+            this.src = CONFIG.DEFAULT_AVATAR;
+        };
+        
+        // Adicionar ao container
+        container.appendChild(img);
+        
+        return true;
+    }
+    
+    // Corrigir a função de criação de posts para usar o avatar correto
+    function patchPostManager() {
+        // Verificar se o PostManager está disponível
+        if (!window.FURIAXCommunity || !window.FURIAXCommunity.PostManager) {
+            debug("PostManager não encontrado, tentando novamente em 500ms...");
+            setTimeout(patchPostManager, 500);
+            return;
+        }
+        
+        debug("Aplicando patch ao PostManager...");
+        
+        // Guardar referência à função original
+        const originalCreatePost = window.FURIAXCommunity.PostManager.createPost;
+        
+        // Sobrescrever a função
+        window.FURIAXCommunity.PostManager.createPost = function(content) {
+            if (!content || content.trim() === '') return null;
+            
+            // Obter perfil ATUALIZADO do localStorage
+            const profileData = getProfileFromStorage();
+            debug("Criando post com avatar:", profileData.avatar);
+            
+            // Criar objeto do post com avatar correto
+            const post = {
+                id: Date.now(),
+                usuario: profileData.username || 'FuriaX_User',
+                avatar: profileData.avatar,  // Usar avatar do perfil
+                timestamp: Date.now(),
+                tempo: 'agora',
+                conteudo: content.trim(),
+                curtidas: 0,
+                comentarios: [],
+                compartilhamentos: 0,
+                curtido: false,
+                sentiment: window.FURIAXCommunity.SentimentAnalyzer.analyze(content.trim())
+            };
+            
+            // Adicionar ao armazenamento
+            const posts = this.getPosts();
+            posts.unshift(post);
+            this.savePosts(posts);
+            
+            // Sistema de gamificação (simplificado)
+            this.addPoints('post_created', 10);
+            
+            // Adicionar post ao DOM sem recarregar a página
+            addPostToDom(post);
+            
+            return post;
+        };
+        
+        // Sobrescrever também a função de adicionar comentário
+        const originalAddComment = window.FURIAXCommunity.PostManager.addComment;
+        
+        window.FURIAXCommunity.PostManager.addComment = function(postId, commentText) {
+            if (!commentText || commentText.trim() === '') return null;
+            
+            // Obter perfil ATUALIZADO do localStorage
+            const profileData = getProfileFromStorage();
+            debug("Adicionando comentário com avatar:", profileData.avatar);
+            
+            // Usar a função original para garantir compatibilidade
+            const posts = this.getPosts();
+            let updatedPost = null;
+            
+            const numericPostId = parseInt(postId);
+            
+            const updatedPosts = posts.map(post => {
+                if (post.id === numericPostId) {
+                    const comment = {
+                        id: Date.now(),
+                        usuario: profileData.username || 'FuriaX_User',
+                        avatar: profileData.avatar,  // Usar avatar do perfil
+                        texto: commentText.trim(),
+                        timestamp: Date.now(),
+                        tempo: 'agora',
+                        sentiment: window.FURIAXCommunity.SentimentAnalyzer.analyze(commentText.trim())
+                    };
+                    
+                    // Garantir que comentarios seja um array
+                    if (!Array.isArray(post.comentarios)) {
+                        post.comentarios = [];
+                    }
+                    
+                    post.comentarios.push(comment);
+                    updatedPost = post;
+                    
+                    // Sistema de gamificação
+                    this.addPoints('comment_added', 5);
+                }
+                return post;
+            });
+            
+            if (updatedPost) {
+                this.savePosts(updatedPosts);
+                
+                // Adicionar comentário ao DOM
+                addCommentToDom(postId, updatedPost.comentarios[updatedPost.comentarios.length - 1]);
+            }
+            
+            return updatedPost;
+        };
+        
+        debug("✅ PostManager corrigido com sucesso!");
+    }
+    
+    // Função para adicionar post diretamente ao DOM
+    function addPostToDom(post) {
+        if (!post) return;
+        
+        debug("Adicionando post ao DOM:", post);
+        
+        // Obter container do feed
+        const feedContainer = document.querySelector('.feed-column');
+        if (!feedContainer) {
+            debug("Container do feed não encontrado!");
+            return;
+        }
+        
+        // Criar elemento do post
+        const postCard = document.createElement('div');
+        postCard.className = 'post-card generated';
+        postCard.dataset.id = post.id;
+        
+        // Criar container de avatar vazio primeiro
+        const avatarContainer = document.createElement('div');
+        avatarContainer.className = 'post-avatar';
+        
+        // Atualizar avatar no container
+        updateAvatarInContainer(avatarContainer, post.avatar);
+        
+        // Gerar HTML do post
+        postCard.innerHTML = `
+            <div class="post-header">
+                <!-- Avatar será inserido aqui -->
+                <div class="post-user-info">
+                    <div class="post-user-name">${post.usuario}</div>
+                    <div class="post-time">agora</div>
+                </div>
+            </div>
+            <div class="post-content">${post.conteudo}</div>
+            <div class="post-footer">
+                <div class="post-stats">
+                    <div class="post-stat"><i class="fas fa-heart"></i> ${post.curtidas || 0}</div>
+                    <div class="post-stat"><i class="fas fa-comment"></i> ${post.comentarios.length}</div>
+                    <div class="post-stat"><i class="fas fa-share"></i> ${post.compartilhamentos || 0}</div>
+                </div>
+           
+            </div>
+            <div class="comments-section" id="comments-${post.id}">
+                <div class="comment-form">
+                    <input type="text" class="comment-input" placeholder="Escreva um comentário...">
+                    <button class="comment-submit" data-id="${post.id}">Enviar</button>
+                </div>
+                <div class="comment-list"></div>
+            </div>
+        `;
+        
+        // Adicionar avatar ao post header
+        const postHeader = postCard.querySelector('.post-header');
+        postHeader.insertBefore(avatarContainer, postHeader.firstChild);
+        
+        // Adicionar ao topo do feed
+        const firstPost = feedContainer.querySelector('.post-card');
+        if (firstPost) {
+            feedContainer.insertBefore(postCard, firstPost);
+        } else {
+            feedContainer.appendChild(postCard);
+        }
+        
+        // Limpar campo de texto
+        const postInput = document.querySelector('.post-input');
+        if (postInput) {
+            postInput.value = '';
+        }
+        
+        // Feedback visual
+        postCard.style.animation = 'fadeIn 0.5s ease-out';
+        postCard.style.borderLeft = '3px solid #1e90ff';
+        
+        debug("✅ Post adicionado ao DOM");
+    }
+    
+    // Função para adicionar comentário diretamente ao DOM
+    function addCommentToDom(postId, comment) {
+        if (!postId || !comment) return;
+        
+        debug("Adicionando comentário ao DOM:", comment);
+        
+        // Encontrar a seção de comentários
+        const commentsSection = document.querySelector(`#comments-${postId}`);
+        if (!commentsSection) {
+            debug("Seção de comentários não encontrada");
+            return;
+        }
+        
+        // Lista de comentários
+        const commentList = commentsSection.querySelector('.comment-list');
+        if (!commentList) {
+            debug("Lista de comentários não encontrada");
+            return;
+        }
+        
+        // Criar elemento de comentário
+        const commentItem = document.createElement('div');
+        commentItem.className = 'comment-item';
+        
+        // Criar container de avatar
+        const avatarContainer = document.createElement('div');
+        avatarContainer.className = 'comment-avatar';
+        
+        // Atualizar avatar no container
+        updateAvatarInContainer(avatarContainer, comment.avatar);
+        
+        // Criar conteúdo do comentário
+        const commentContent = document.createElement('div');
+        commentContent.className = 'comment-content';
+        commentContent.innerHTML = `
+            <div class="comment-user">${comment.usuario}</div>
+            <div class="comment-text">${comment.texto}</div>
+            <div class="comment-time">agora</div>
+        `;
+        
+        // Montar o comentário
+        commentItem.appendChild(avatarContainer);
+        commentItem.appendChild(commentContent);
+        
+        // Adicionar à lista
+        commentList.appendChild(commentItem);
+        
+        // Mostrar a seção de comentários
+        commentsSection.classList.add('show');
+        
+        // Limpar campo
+        const commentInput = commentsSection.querySelector('.comment-input');
+        if (commentInput) {
+            commentInput.value = '';
+        }
+        
+        debug("✅ Comentário adicionado ao DOM");
+    }
+    
+    // Corrigir o botão de publicação para não recarregar a página
+    function fixPublishButton() {
+        // Obter o botão de publicar
+        const publishBtn = document.querySelector('#analyzePostBtn');
+        if (!publishBtn) {
+            debug("Botão de publicação não encontrado, tentando novamente em 500ms...");
+            setTimeout(fixPublishButton, 500);
+            return;
+        }
+        
+        debug("Corrigindo botão de publicação...");
+        
+        // Clonar o botão para remover todos os event listeners
+        const newPublishBtn = publishBtn.cloneNode(true);
+        publishBtn.parentNode.replaceChild(newPublishBtn, publishBtn);
+        
+        // Adicionar novo event listener personalizado
+        newPublishBtn.addEventListener('click', function(e) {
+            e.preventDefault(); // Impedir comportamento padrão
+            
+            // Obter o conteúdo do post
+            const postInput = document.querySelector('.post-input');
+            if (!postInput || !postInput.value.trim()) {
+                debug("Campo de texto vazio");
+                return;
+            }
+            
+            debug("Botão de publicação clicado");
+            
+            // Mostrar animação de feedback sem recarregar
+            const overlay = document.getElementById('refreshOverlay');
+            if (overlay) {
+                overlay.classList.add('active');
+                setTimeout(() => {
+                    overlay.classList.remove('active');
+                }, 1000);
+            }
+            
+            // Usar o PostManager para criar o post
+            if (window.FURIAXCommunity && window.FURIAXCommunity.PostManager) {
+                const post = window.FURIAXCommunity.PostManager.createPost(postInput.value.trim());
+                debug("Post criado:", post);
+                
+                // Mostrar feedback de sucesso
+                if (window.FURIAXCommunity.NotificationManager) {
+                    window.FURIAXCommunity.NotificationManager.show('Post publicado com sucesso!', 'success');
+                }
+            } else {
+                debug("PostManager não disponível");
+            }
+        });
+        
+        debug("✅ Botão de publicação corrigido");
+    }
+    
+    // Função para forçar a atualização de todos os avatares existentes
+    function updateAllAvatars() {
+        debug("Atualizando todos os avatares existentes...");
+        
+        // Obter perfil atual
+        const profile = getProfileFromStorage();
+        if (!profile || !profile.avatar) {
+            debug("Perfil ou avatar não encontrado");
+            return;
+        }
+        
+        // Atualizar posts
+        document.querySelectorAll('.post-card').forEach(post => {
+            const usernameElement = post.querySelector('.post-user-name');
+            if (usernameElement && usernameElement.textContent === profile.username) {
+                const avatarContainer = post.querySelector('.post-avatar');
+                if (avatarContainer) {
+                    updateAvatarInContainer(avatarContainer, profile.avatar);
+                    debug("Avatar atualizado em post");
+                }
+            }
+        });
+        
+        // Atualizar comentários
+        document.querySelectorAll('.comment-item').forEach(comment => {
+            const usernameElement = comment.querySelector('.comment-user');
+            if (usernameElement && usernameElement.textContent === profile.username) {
+                const avatarContainer = comment.querySelector('.comment-avatar');
+                if (avatarContainer) {
+                    updateAvatarInContainer(avatarContainer, profile.avatar);
+                    debug("Avatar atualizado em comentário");
+                }
+            }
+        });
+        
+        debug("✅ Todos os avatares atualizados");
+    }
+    
+    // Observar mudanças de perfil
+    function observeProfileChanges() {
+        // Monitorar alterações no localStorage
+        window.addEventListener('storage', function(e) {
+            if (e.key === CONFIG.STORAGE_KEY_PROFILE) {
+                debug("Alteração detectada no perfil");
+                updateAllAvatars();
+            }
+        });
+        
+        // Verificar periodicamente se o avatar mudou
+        let lastKnownAvatar = null;
+        
+        setInterval(function() {
+            const profile = getProfileFromStorage();
+            
+            if (profile && profile.avatar !== lastKnownAvatar) {
+                debug("Avatar mudou de:", lastKnownAvatar, "para:", profile.avatar);
+                lastKnownAvatar = profile.avatar;
+                updateAllAvatars();
+            }
+        }, 2000); // Verificar a cada 2 segundos
+    }
+    
+    // Aplicar estilos específicos para avatares
+    function addAvatarStyles() {
+        const styleElement = document.createElement('style');
+        styleElement.id = 'avatar-fix-styles';
+        styleElement.textContent = `
+            .post-avatar, .comment-avatar {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                overflow: hidden;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: rgba(0, 0, 0, 0.1);
+            }
+            
+            .post-avatar img, .comment-avatar img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+            }
+            
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(-10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            
+            .post-card.generated {
+                animation: fadeIn 0.5s ease-out;
+            }
+        `;
+        document.head.appendChild(styleElement);
+        
+        debug("✅ Estilos específicos para avatares adicionados");
+    }
+    
+    // Iniciar todas as funções
+    function init() {
+        debug("🚀 Iniciando correção de avatares...");
+        
+        // Adicionar estilos
+        addAvatarStyles();
+        
+        // Aplicar patches
+        patchPostManager();
+        fixPublishButton();
+        
+        // Atualizar avatares existentes
+        setTimeout(updateAllAvatars, 1000);
+        
+        // Monitorar mudanças
+        observeProfileChanges();
+        
+        debug("✅ Sistema de correção de avatares inicializado");
+    }
+    
+    // Inicializar o sistema
+    init();
+});
+    /**
+ * FURIAX - Correção Simplificada para Avatares em Posts
+ * Esta versão usa uma abordagem minimalista para resolver o problema
+ */
+
+// Modificação do sistema de avatares
+(function() {
+    // Aguardar que o sistema original seja carregado
+    document.addEventListener('DOMContentLoaded', function() {
+        // Verificar se o sistema FURIAX está disponível
+        if (!window.FURIAX || !window.FURIAX.avatars) {
+            console.error("Sistema FURIAX não encontrado. A correção não pode ser aplicada.");
+            return;
+        }
+        
+        // Armazenar referência para a função original updateAvatars
+        const originalUpdateAvatars = window.FURIAX.avatars.update;
+        
+        // Substituir a função update com uma versão melhorada
+        window.FURIAX.avatars.update = function(avatarId) {
+            // Chamar a função original
+            originalUpdateAvatars(avatarId);
+            
+            // Registrar o hook para chamadas futuras
+            registerPostHook();
+            
+            console.log("Correção de avatar: Sistema melhorado aplicado com sucesso");
+        };
+        
+        // Função para registrar hooks em eventos de post
+        function registerPostHook() {
+            // Buscar todos os botões de envio de post ou comentário
+            const postButtons = document.querySelectorAll('button[type="submit"], #post-button, .send-comment, #analyzePostBtn, .post-btn');
+            
+            // Para cada botão, adicionar um listener de clique
+            postButtons.forEach(button => {
+                // Verificar se o botão já tem nosso listener especial
+                if (!button.hasAttribute('data-avatar-hook')) {
+                    button.setAttribute('data-avatar-hook', 'true');
+                    
+                    // Adicionar evento de clique
+                    button.addEventListener('click', function() {
+                        // Esperar um pouco para o DOM ser atualizado após o post
+                        setTimeout(function() {
+                            // Obter o avatar atual do localStorage
+                            try {
+                                const profileData = localStorage.getItem('furiaxProfile');
+                                if (profileData) {
+                                    const profile = JSON.parse(profileData);
+                                    if (profile && profile.avatar) {
+                                        // Atualizar todos os avatares na página
+                                        originalUpdateAvatars(profile.avatar);
+                                    }
+                                }
+                            } catch (error) {
+                                console.error("Erro ao processar perfil:", error);
+                            }
+                        }, 300); // 300ms geralmente é suficiente para o DOM atualizar
+                    });
+                }
+            });
+        }
+        
+        // Adicionar uma função de atualização global que pode ser chamada após AJAX
+        window.FURIAX.updateAvatarsAfterPost = function() {
+            // Apenas recuperar o avatar atual e aplicá-lo
+            try {
+                const profileData = localStorage.getItem('furiaxProfile');
+                if (profileData) {
+                    const profile = JSON.parse(profileData);
+                    if (profile && profile.avatar) {
+                        // Atualizar todos os avatares na página
+                        originalUpdateAvatars(profile.avatar);
+                    }
+                }
+            } catch (error) {
+                console.error("Erro ao processar perfil:", error);
+            }
+        };
+        
+        // Registrar hooks para botões na inicialização
+        registerPostHook();
+        
+        // Fazer uma atualização inicial para garantir
+        setTimeout(function() {
+            // Tentar uma atualização inicial para garantir que tudo esteja correto
+            window.FURIAX.updateAvatarsAfterPost();
+        }, 500);
+    });
+})();
+
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('🖼️ Inicializando correção de avatares FURIAX v1.1.0...');
+    
+    // Definir a prioridade deste script como alta
+    // Isso ajuda a garantir que nossas correções não sejam sobrepostas por outros scripts
+    document.currentScript.setAttribute('data-priority', 'high');
+    
+    // Função para obter dados de perfil do localStorage de forma confiável
+    function getUserProfile() {
+        // Tentar obter do sistema multi-perfil primeiro (se disponível)
+        if (window.FURIAXCommunity && window.FURIAXCommunity.MultiProfileManager) {
+            const profileData = window.FURIAXCommunity.MultiProfileManager.getActiveProfileData();
+            if (profileData) return profileData;
+        }
+        
+        // Tentar obter do ProfileManager
+        if (window.FURIAXCommunity && window.FURIAXCommunity.ProfileManager) {
+            const profileData = window.FURIAXCommunity.ProfileManager.getProfileData();
+            if (profileData) return profileData;
+        }
+        
+        // Tentar obter diretamente do localStorage
+        try {
+            const profileString = localStorage.getItem('furiaxProfile');
+            if (profileString) {
+                return JSON.parse(profileString);
+            }
+        } catch (e) {
+            console.error('Erro ao carregar perfil do localStorage:', e);
+        }
+        
+        // Dados padrão se nada for encontrado
+        return {
+            username: 'FuriaX_User',
+            avatar: '../img/logo/logoFuriax.png',
+            title: 'Furioso Novato'
+        };
+    }
+    
+    // Função para sincronizar usuário atual com o elemento sidebar
+    function syncSidebarProfile() {
+        const profile = getUserProfile();
+        
+        // Atualizar nome de usuário na sidebar
+        const usernameElement = document.getElementById('sidebarUsername');
+        if (usernameElement) {
+            usernameElement.textContent = profile.username;
+        }
+        
+        // Atualizar título/role na sidebar
+        const titleElement = document.getElementById('sidebarTitle');
+        if (titleElement) {
+            titleElement.textContent = profile.title;
+        }
+        
+        // Atualizar avatar na sidebar
+     
+        
+        console.log('✅ Perfil na sidebar atualizado');
+    }
+    
+    // Função para gerar HTML de avatar com fallback mais confiável
+    function getAvatarHTML(avatarUrl) {
+        // Verificar se a URL é válida e não está vazia
+        if (!avatarUrl || avatarUrl === 'undefined' || avatarUrl === 'null') {
+            avatarUrl = '../img/logo/logoFuriax.png';
+        }
+        
+        // Verificar se é uma URL completa ou relativa
+        if (avatarUrl.indexOf('http') !== 0 && avatarUrl.indexOf('../') !== 0 && avatarUrl.indexOf('/') !== 0) {
+            // Se não for uma URL bem formada, usar a imagem padrão
+            avatarUrl = '../img/logo/logoFuriax.png';
+        }
+        
+        // Usar atributo data-original-src para preservar a URL original
+        // e poder verificar se foi alterada por algum outro script
+       
+    }
+    
+    // Função para verificar e restaurar avatares se foram substituídos
+    function checkAndRestoreAvatars() {
+        const profile = getUserProfile();
+        
+        // Verificar todas as imagens de avatar que foram marcadas pelo nosso script
+        document.querySelectorAll('img.avatar-image[data-fixed="true"]').forEach(img => {
+            const originalSrc = img.getAttribute('data-original-src');
+            
+            // Se a src atual não é a original e não é a fallback, restaurar
+            if (img.src !== originalSrc && !img.hasAttribute('data-fallback-applied')) {
+                img.src = originalSrc;
+                console.log('🔄 Avatar restaurado ao valor original');
+            }
+        });
+    }
+    
+    // Função principal para aplicar avatares nos posts
+    function applyAvatarsToAllPosts() {
+        const profile = getUserProfile();
+        console.log('🔍 Aplicando avatar a todos os posts do usuário:', profile.username);
+        
+        // Verificar todos os posts
+        const allPosts = document.querySelectorAll('.post-card');
+        
+        allPosts.forEach(post => {
+            const usernameElement = post.querySelector('.post-user-name');
+            
+            // Verificar se é um post do usuário atual
+            if (usernameElement && profile.username === usernameElement.textContent.trim()) {
+                const avatarContainer = post.querySelector('.post-avatar');
+                
+                if (avatarContainer) {
+                    // Verificar se já existe uma imagem que foi configurada por nós
+                    const existingImg = avatarContainer.querySelector('img[data-fixed="true"]');
+                    
+                    if (existingImg) {
+                        // Se a imagem já existe e foi configurada por nós, verificar se a fonte está correta
+                        const originalSrc = existingImg.getAttribute('data-original-src');
+                        if (originalSrc !== profile.avatar) {
+                            // Se o avatar mudou, atualizar
+                            avatarContainer.innerHTML = getAvatarHTML(profile.avatar);
+                        }
+                    } else {
+                        // Se não existe ou não foi configurada por nós, substituir
+                        avatarContainer.innerHTML = getAvatarHTML(profile.avatar);
+                    }
+                    
+                    console.log('✓ Avatar aplicado ao post de:', profile.username);
+                }
+            }
+        });
+        
+        // Aplicar também aos comentários
+        const allComments = document.querySelectorAll('.comment-item');
+        
+        allComments.forEach(comment => {
+            const commentUsername = comment.querySelector('.comment-user');
+            
+            if (commentUsername && profile.username === commentUsername.textContent.trim()) {
+                const commentAvatar = comment.querySelector('.comment-avatar');
+                
+                if (commentAvatar) {
+                    // Mesma lógica de verificação aplicada aos comentários
+                    const existingImg = commentAvatar.querySelector('img[data-fixed="true"]');
+                    
+                    if (existingImg) {
+                        const originalSrc = existingImg.getAttribute('data-original-src');
+                        if (originalSrc !== profile.avatar) {
+                            commentAvatar.innerHTML = getAvatarHTML(profile.avatar);
+                        }
+                    } else {
+                        commentAvatar.innerHTML = getAvatarHTML(profile.avatar);
+                    }
+                    
+                    console.log('✓ Avatar aplicado ao comentário de:', profile.username);
+                }
+            }
+        });
+        
+        // Agendar verificações para prevenir substituições por outros scripts
+        setTimeout(checkAndRestoreAvatars, 1000);  // 1 segundo depois
+        setTimeout(checkAndRestoreAvatars, 2000);  // 2 segundos depois
+    }
+    
+    // Modificar PostManager para garantir que novos posts usem o avatar correto
+    function fixPostManagerAvatar() {
+        // Verificar se o PostManager está disponível
+        if (!window.FURIAXCommunity || !window.FURIAXCommunity.PostManager) {
+            console.warn('⚠️ PostManager não encontrado, verificando novamente em breve...');
+            setTimeout(fixPostManagerAvatar, 1000);
+            return;
+        }
+        
+        // Verificar se já foi corrigido
+        if (window.FURIAXCommunity.PostManager._avatarFixed) {
+            return;
+        }
+        
+        // Armazenar a função original
+        const originalCreatePost = window.FURIAXCommunity.PostManager.createPost;
+        
+        // Sobrescrever com versão corrigida
+        window.FURIAXCommunity.PostManager.createPost = function(content) {
+            // Obter perfil atualizado
+            const profile = getUserProfile();
+            
+            // Verificar se o avatar é válido
+            let avatarUrl = profile.avatar;
+            if (!avatarUrl || avatarUrl === 'undefined' || avatarUrl === 'null') {
+                avatarUrl = '../img/logo/logoFuriax.png';
+            }
+            
+            // Modificar StorageManager temporariamente para garantir que o avatar persista
+            if (window.StorageManager && window.StorageManager.set) {
+                const originalStorageSet = window.StorageManager.set;
+                window.StorageManager.set = function(key, value) {
+                    // Se estiver salvando posts, garantir que tenham o avatar correto
+                    if (key.includes('posts') && Array.isArray(value)) {
+                        value = value.map(post => {
+                            if (post.usuario === profile.username) {
+                                post.avatar = avatarUrl;
+                            }
+                            return post;
+                        });
+                    }
+                    return originalStorageSet.call(this, key, value);
+                };
+                
+                // Restaurar a função original após um breve período
+                setTimeout(() => {
+                    window.StorageManager.set = originalStorageSet;
+                }, 500);
+            }
+            
+            // Criar post usando a função original
+            const post = originalCreatePost.call(this, content);
+            
+            if (post) {
+                // Garantir que o avatar e username estejam corretos
+                post.avatar = avatarUrl;
+                post.usuario = profile.username;
+                
+                // Verificação dupla para garantir que o post use o avatar correto
+                try {
+                    // Atualizar o post no storage
+                    const posts = this.getPosts();
+                    const updatedPosts = posts.map(p => {
+                        if (p.id === post.id) {
+                            p.avatar = avatarUrl;
+                            p.usuario = profile.username;
+                        }
+                        return p;
+                    });
+                    
+                    // Salvar posts atualizados
+                    this.savePosts(updatedPosts);
+                    
+                    console.log('✅ Novo post criado com avatar correto:', avatarUrl);
+                } catch (e) {
+                    console.error('❌ Erro ao atualizar post no storage:', e);
+                }
+                
+                // Agendar uma verificação adicional para garantir que o avatar seja aplicado na interface
+                setTimeout(() => {
+                    applyAvatarsToAllPosts();
+                }, 100);
+            }
+            
+            return post;
+        };
+        
+        // Marcar como corrigido
+        window.FURIAXCommunity.PostManager._avatarFixed = true;
+        console.log('✅ PostManager corrigido para usar avatar atual');
+    }
+    
+    // Corrigir também a função addComment
+    function fixCommentManagerAvatar() {
+        // Verificar se o PostManager está disponível
+        if (!window.FURIAXCommunity || !window.FURIAXCommunity.PostManager) {
+            console.warn('⚠️ PostManager não encontrado para correção de comentários');
+            setTimeout(fixCommentManagerAvatar, 1000);
+            return;
+        }
+        
+        // Verificar se já foi corrigido
+        if (window.FURIAXCommunity.PostManager._commentAvatarFixed) {
+            return;
+        }
+        
+        // Armazenar a função original
+        const originalAddComment = window.FURIAXCommunity.PostManager.addComment;
+        
+        // Sobrescrever com versão corrigida
+        window.FURIAXCommunity.PostManager.addComment = function(postId, commentText) {
+            // Obter perfil atualizado
+            const profile = getUserProfile();
+            
+            // Criar comentário usando a função original
+            const updatedPost = originalAddComment.call(this, postId, commentText);
+            
+            if (updatedPost && updatedPost.comentarios && updatedPost.comentarios.length > 0) {
+                // Garantir que o último comentário tenha o avatar correto
+                const lastComment = updatedPost.comentarios[updatedPost.comentarios.length - 1];
+                lastComment.avatar = profile.avatar;
+                lastComment.usuario = profile.username;
+                
+                // Atualizar o post no storage
+                const posts = this.getPosts();
+                const updatedPosts = posts.map(p => p.id === updatedPost.id ? updatedPost : p);
+                this.savePosts(updatedPosts);
+                
+                console.log('✅ Novo comentário criado com avatar correto');
+            }
+            
+            return updatedPost;
+        };
+        
+        // Marcar como corrigido
+        window.FURIAXCommunity.PostManager._commentAvatarFixed = true;
+        console.log('✅ Função de comentários corrigida para usar avatar atual');
+    }
+    
+    // Configurar observador do DOM para atualizar novos posts/comentários
+    function setupDOMObserver() {
+        const observer = new MutationObserver(function(mutations) {
+            let shouldUpdate = false;
+            
+            for (const mutation of mutations) {
+                if (mutation.addedNodes.length) {
+                    // Verificar se algum dos nós adicionados é um post ou comentário
+                    for (let i = 0; i < mutation.addedNodes.length; i++) {
+                        const node = mutation.addedNodes[i];
+                        if (node.classList && 
+                            (node.classList.contains('post-card') || 
+                             node.classList.contains('comment-item'))) {
+                            shouldUpdate = true;
+                            break;
+                        }
+                    }
+                    
+                    if (shouldUpdate) break;
+                }
+            }
+            
+            if (shouldUpdate) {
+                console.log('🔄 Novos elementos detectados, atualizando avatares...');
+                setTimeout(applyAvatarsToAllPosts, 50);
+            }
+        });
+        
+        // Observar toda a coluna de feed
+        const feedColumn = document.querySelector('.feed-column');
+        if (feedColumn) {
+            observer.observe(feedColumn, { childList: true, subtree: true });
+            console.log('👀 Observador do DOM configurado para a coluna de feed');
+        }
+    }
+    
+    // Desativar qualquer script conflitante
+    function disableConflictingScripts() {
+        // Procurar por scripts que podem estar substituindo nossas alterações
+        const potentialConflicts = [
+            'furiax-fixphotos.js',  // Mencionado no community.html
+            'reload.js',            // Pode estar recarregando a página ou elementos
+            'furiax-profile-sync.js' // Pode estar tentando sincronizar perfis também
+        ];
+        
+        // Verificar se algum deles está presente e tentar desativar suas funções
+        // Essa é uma abordagem não-invasiva, apenas previne que eles substituam nossos avatares
+        
+        // 1. Verificar se há intervalos ou timeouts
+        if (window._avatarIntervals) {
+            window._avatarIntervals.forEach(id => clearInterval(id));
+        }
+        
+        // 2. Monitorar as alterações em avatares para detectar conflitos
+        const observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                // Verificar se houve alteração em um avatar que configuramos
+                if (mutation.type === 'attributes' && 
+                    mutation.attributeName === 'src' && 
+                    mutation.target.hasAttribute('data-fixed') &&
+                    !mutation.target.hasAttribute('data-mutation-handled')) {
+                    
+                    // Marcar para evitar loops infinitos
+                    mutation.target.setAttribute('data-mutation-handled', 'true');
+                    
+                    // Restaurar para o valor original
+                    const originalSrc = mutation.target.getAttribute('data-original-src');
+                    if (mutation.target.src !== originalSrc && originalSrc) {
+                        console.log('🛡️ Interceptada alteração do avatar por outro script, restaurando...');
+                        mutation.target.src = originalSrc;
+                    }
+                    
+                    // Remover a marcação após um momento
+                    setTimeout(() => {
+                        mutation.target.removeAttribute('data-mutation-handled');
+                    }, 50);
+                }
+            });
+        });
+        
+        // Observar alterações de atributos em todos os avatares
+        setTimeout(() => {
+            document.querySelectorAll('img.avatar-image').forEach(img => {
+                observer.observe(img, { attributes: true });
+            });
+        }, 1000);
+    }
+    
+    // Inicialização completa
+    function initialize() {
+        // Sincronizar perfil da sidebar
+        syncSidebarProfile();
+        
+        // Aplicar avatares aos posts existentes
+        applyAvatarsToAllPosts();
+        
+        // Corrigir o PostManager para posts futuros
+        fixPostManagerAvatar();
+        
+        // Corrigir gerenciador de comentários
+        fixCommentManagerAvatar();
+        
+        // Configurar observador para mudanças no DOM
+        setupDOMObserver();
+        
+        // Desativar scripts conflitantes
+        disableConflictingScripts();
+        
+        // Fazer novas verificações para garantir que os avatares permaneçam corretos
+        setTimeout(applyAvatarsToAllPosts, 1500);
+        setTimeout(applyAvatarsToAllPosts, 3000);
+        setTimeout(applyAvatarsToAllPosts, 5000);
+        
+        // Configurar verificação periódica para garantir que avatares continuem corretos
+        setInterval(checkAndRestoreAvatars, 2000);
+        
+        console.log('✅ Correção de avatares inicializada com sucesso!');
+    }
+    
+    // Iniciar depois de um pequeno atraso para garantir que o DOM esteja pronto
+    setTimeout(initialize, 500);
+    
+    // Adicionar ouvinte para mudanças no localStorage (alterações de perfil)
+    window.addEventListener('storage', function(e) {
+        if (e.key === 'furiaxProfile' || e.key === CONFIG.STORAGE_KEYS.PROFILE || 
+            e.key.includes('furiax_')) {
+            console.log('🔄 Mudança detectada no perfil, atualizando avatares...');
+            syncSidebarProfile();
+            applyAvatarsToAllPosts();
+        }
+    });
+});
+ 
+ document.addEventListener('DOMContentLoaded', function() {
+    console.log('🔧 Aplicando sincronização de perfil para o chat...');
+    
+    // Função para obter dados do perfil do localStorage
+    function getProfileFromLocalStorage() {
+        try {
+            // Primeiro tenta obter do sistema multi-perfil se disponível
+            if (window.FURIAXCommunity && window.FURIAXCommunity.MultiProfileManager) {
+                return window.FURIAXCommunity.MultiProfileManager.getActiveProfileData();
+            }
+            
+            // Se não, tenta obter diretamente do localStorage
+            const profileKey = 'furiaxProfile';
+            const profileData = localStorage.getItem(profileKey);
+            if (profileData) {
+                return JSON.parse(profileData);
+            }
+        } catch (error) {
+            console.error('Erro ao obter perfil do localStorage:', error);
+        }
+        
+        // Valor padrão se nada for encontrado
+        return {
+            username: 'FuriaX_User',
+            avatar: '../img/logo/logoFuriax.png',
+            title: 'Furioso Novato'
+        };
+    }
+    
+    // Função para aplicar o perfil nos chats
+    function applyProfileToChats() {
+        // Obter dados do perfil
+        const profile = getProfileFromLocalStorage();
+        console.log('📋 Perfil carregado:', profile);
+        
+        // Verificar se temos os dados necessários
+        if (!profile || !profile.username) {
+            console.warn('⚠️ Dados de perfil incompletos');
+            return;
+        }
+        
+        // Aplicar nome de usuário e avatar aos elementos relevantes
+        const username = profile.username;
+        const avatarUrl = profile.avatar || '../img/logo/logoFuriax.png';
+        
+        // Encontrar posts do usuário atual e atualizar avatar
+        document.querySelectorAll('.post-card').forEach(post => {
+            const usernameEl = post.querySelector('.post-user-name');
+            if (usernameEl && usernameEl.textContent.trim() === username) {
+                const avatarContainer = post.querySelector('.post-avatar');
+                if (avatarContainer) {
+                    // Verificar se já tem uma imagem, caso contrário, adicionar
+                    
+                }
+                
+                // Aplicar nome correto se necessário
+                if (usernameEl.textContent !== username) {
+                    usernameEl.textContent = username;
+                }
+            }
+        });
+        
+        // Fazer o mesmo para comentários
+        document.querySelectorAll('.comment-item').forEach(comment => {
+            const commentUsername = comment.querySelector('.comment-user');
+            if (commentUsername && commentUsername.textContent.trim() === username) {
+                const commentAvatar = comment.querySelector('.comment-avatar');
+                if (commentAvatar) {
+                   
+                }
+                
+                // Aplicar nome correto se necessário
+                if (commentUsername.textContent !== username) {
+                    commentUsername.textContent = username;
+                }
+            }
+        });
+        
+        // Verificar e corrigir o formulário de criação de post para garantir que os novos posts usem o perfil correto
+        if (window.FURIAXCommunity && window.FURIAXCommunity.PostManager) {
+            // Hook para criar posts com o perfil correto
+            const originalCreatePost = window.FURIAXCommunity.PostManager.createPost;
+            
+            // Sobrescrever apenas se ainda não foi sobrescrito
+            if (!window.FURIAXCommunity.PostManager._profileHooked) {
+                window.FURIAXCommunity.PostManager.createPost = function(content) {
+                    // Obter perfil atualizado antes de criar o post
+                    const currentProfile = getProfileFromLocalStorage();
+                    
+                    // Criar post com dados atualizados
+                    const post = originalCreatePost.call(this, content);
+                    
+                    if (post) {
+                        // Garantir que o post use o perfil correto
+                        post.usuario = currentProfile.username || 'FuriaX_User';
+                        post.avatar = currentProfile.avatar || '../img/logo/logoFuriax.png';
+                        
+                        // Atualizar o post no armazenamento
+                        const posts = this.getPosts();
+                        const updatedPosts = posts.map(p => {
+                            if (p.id === post.id) {
+                                return post;
+                            }
+                            return p;
+                        });
+                        
+                        // Salvar posts atualizados
+                        this.savePosts(updatedPosts);
+                    }
+                    
+                    return post;
+                };
+                
+                // Marcar como hooked para evitar múltiplas sobrescritas
+                window.FURIAXCommunity.PostManager._profileHooked = true;
+            }
+        }
+        
+        console.log('✅ Perfil aplicado aos chats com sucesso');
+    }
+    
+    // Hook para o evento de storage para atualizar os chats quando o perfil for alterado
+    window.addEventListener('storage', function(e) {
+        if (e.key === 'furiaxProfile' || e.key.includes('furiax_')) {
+            console.log('🔄 Detectada alteração no perfil, atualizando chats...');
+            applyProfileToChats();
+        }
+    });
+    
+    // Observar mudanças no DOM para aplicar perfil em novos posts/comentários
+    const observer = new MutationObserver(function(mutations) {
+        for (const mutation of mutations) {
+            if (mutation.addedNodes.length) {
+                setTimeout(applyProfileToChats, 50);
+                break;
+            }
+        }
+    });
+    
+    // Observar a coluna de feed
+    const feedColumn = document.querySelector('.feed-column');
+    if (feedColumn) {
+        observer.observe(feedColumn, { childList: true, subtree: true });
+    }
+    
+    // Aplicar inicialmente após pequeno atraso para garantir que o DOM esteja pronto
+    setTimeout(applyProfileToChats, 500);
+    
+    // Verificar novamente após um tempo para pegar elementos carregados dinamicamente
+    setTimeout(applyProfileToChats, 1500);
+    
+    console.log('✅ Sistema de sincronização de perfil inicializado');
+});
 
 document.addEventListener("DOMContentLoaded", function() {
     const tabs = document.querySelectorAll('.analysis-tab');
@@ -831,16 +2673,15 @@ document.addEventListener("DOMContentLoaded", function() {
     // Ativar a aba "profile" por padrão
     tabs[0].click();
 });
-// Função que adiciona evento de clique a todos os botões
-function ativarReloadNosBotoes() {
-  const botoes = document.querySelectorAll('#analyzePostBtn');
+// function ativarReloadNosBotoes() {
+//   const botoes = document.querySelectorAll('#analyzePostBtn');
   
-  botoes.forEach(botao => {
-    botao.addEventListener('click', () => {
-      location.reload(); // Recarrega a página
-    });
-  });
-}
+//   botoes.forEach(botao => {
+//     botao.addEventListener('click', () => {
+//       location.reload(); // Recarrega a página
+//     });
+//   });
+// }
 
 // Executa a função assim que o DOM estiver carregado
 document.addEventListener('DOMContentLoaded', ativarReloadNosBotoes);

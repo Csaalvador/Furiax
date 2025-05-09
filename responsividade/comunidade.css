@@ -1,0 +1,895 @@
+/* CSS Responsivo para o Sistema de Amigos FURIAX */
+
+.furiax-friends-container {
+    font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    background-color: var(--bg-color, #2f3136);
+    color: var(--text-color, #dcddde);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--divider-color, #40444b);
+    transition: all 0.3s ease;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  
+  /* Cabeçalho */
+  .friends-header {
+    padding: 12px;
+    background-color: var(--header-bg, #202225);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--divider-color, #40444b);
+  }
+  
+  .friends-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: bold;
+    font-size: 16px;
+  }
+  
+  .friends-actions {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .friends-actions button {
+    background: none;
+    border: none;
+    color: var(--text-secondary, #b9bbbe);
+    font-size: 16px;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+  
+  .friends-actions button:hover {
+    color: var(--text-color, #dcddde);
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  /* Pesquisa */
+  .friends-search {
+    padding: 12px;
+    border-bottom: 1px solid var(--divider-color, #40444b);
+    position: relative;
+  }
+  
+  .friends-search input {
+    width: 100%;
+    padding: 8px 12px 8px 32px;
+    border-radius: 4px;
+    border: none;
+    background-color: var(--input-bg, #202225);
+    color: var(--text-color, #dcddde);
+    font-size: 14px;
+  }
+  
+  .friends-search input::placeholder {
+    color: var(--text-secondary, #b9bbbe);
+  }
+  
+  .friends-search i {
+    position: absolute;
+    left: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-secondary, #b9bbbe);
+  }
+  
+  /* Abas */
+  .friends-tabs {
+    display: flex;
+    border-bottom: 1px solid var(--divider-color, #40444b);
+  }
+  
+  .friends-tab {
+    padding: 10px 12px;
+    flex: 1;
+    text-align: center;
+    color: var(--text-secondary, #b9bbbe);
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 14px;
+  }
+  
+  .friends-tab:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+  
+  .friends-tab.active {
+    border-bottom: 2px solid var(--accent-color, #5865f2);
+    color: var(--text-color, #dcddde);
+  }
+  
+  .friends-tab span {
+    background-color: var(--badge-bg, #4f545c);
+    color: #fff;
+    border-radius: 10px;
+    padding: 0 6px;
+    font-size: 12px;
+    margin-left: 5px;
+  }
+  
+  /* Seções de amigos */
+  .friends-section {
+    display: block;
+    overflow-y: auto;
+  }
+  
+  .friends-section.hidden {
+    display: none;
+  }
+  
+  .friends-section-header {
+    padding: 10px 16px;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: var(--text-secondary, #b9bbbe);
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .count {
+    font-size: 12px;
+    opacity: 0.7;
+  }
+  
+  /* Item de amigo */
+  .friend-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin: 2px 8px;
+    transition: background-color 0.2s;
+    position: relative;
+  }
+  
+  .friend-item:hover {
+    background-color: var(--hover-bg, #36393f);
+  }
+  
+  .friend-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: var(--avatar-bg, #7289da);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 12px;
+    margin-right: 12px;
+    position: relative;
+    flex-shrink: 0;
+  }
+  
+  .pro-player .friend-avatar {
+    background: linear-gradient(135deg, #ff4500, #ffb000);
+  }
+  
+  .friend-status {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    border: 2px solid var(--bg-color, #2f3136);
+  }
+  
+  .status-online {
+    background-color: var(--online-color, #3ba55c);
+  }
+  
+  .status-offline {
+    background-color: #747f8d;
+  }
+  
+  .status-idle {
+    background-color: var(--idle-color, #faa61a);
+  }
+  
+  .status-dnd {
+    background-color: var(--dnd-color, #ed4245);
+  }
+  
+  .friend-info {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+  }
+  
+  .friend-name {
+    font-weight: 500;
+    font-size: 14px;
+    margin-bottom: 3px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: flex;
+    align-items: center;
+  }
+  
+  .pro-badge {
+    background-color: #f47fff;
+    color: white;
+    font-size: 10px;
+    padding: 2px 4px;
+    border-radius: 3px;
+    margin-left: 5px;
+    font-weight: bold;
+  }
+  
+  .friend-activity, .friend-status {
+    font-size: 12px;
+    color: var(--text-secondary, #b9bbbe);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .friend-playing {
+    color: var(--online-color, #3ba55c);
+  }
+  
+  .friend-custom-status {
+    font-style: italic;
+    font-size: 11px;
+    opacity: 0.8;
+    margin-top: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  /* Botões de ação */
+  .friend-actions {
+    display: flex;
+    gap: 4px;
+    margin-left: auto;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  
+  .friend-item:hover .friend-actions {
+    opacity: 1;
+  }
+  
+  .friend-action-btn, .friend-action {
+    background: none;
+    border: none;
+    color: var(--text-secondary, #b9bbbe);
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  
+  .friend-action-btn:hover, .friend-action:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-color, #dcddde);
+  }
+  
+  .invite-btn {
+    background-color: var(--online-color, #3ba55c);
+    color: white;
+    border: none;
+    border-radius: 3px;
+    padding: 2px 8px;
+    font-size: 11px;
+    cursor: pointer;
+    margin-left: auto;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  
+  .friend-item:hover .invite-btn {
+    opacity: 1;
+  }
+  
+  /* Tooltip de amigo */
+  .friend-tooltip {
+    position: absolute;
+    background-color: var(--tooltip-bg, rgba(32, 34, 37, 0.9));
+    padding: 12px;
+    border-radius: 5px;
+    width: 200px;
+    top: 0;
+    left: 100%;
+    margin-left: 10px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+  }
+  
+  .friend-item:hover .friend-tooltip {
+    opacity: 1;
+  }
+  
+  .tooltip-title {
+    font-weight: bold;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: var(--text-color, #dcddde);
+    border-bottom: 1px solid var(--divider-color, #40444b);
+    padding-bottom: 4px;
+  }
+  
+  .tooltip-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4px;
+    font-size: 12px;
+  }
+  
+  .tooltip-key {
+    color: var(--text-secondary, #b9bbbe);
+  }
+  
+  .pro-info {
+    color: #f47fff;
+    margin-top: 4px;
+    font-weight: bold;
+  }
+  
+  /* Estados de jogos */
+  .game-status-csgo {
+    background: linear-gradient(45deg, #fa5858, #ff8c00);
+  }
+  
+  .game-status-valorant {
+    background: linear-gradient(45deg, #ff4655, #000000);
+  }
+  
+  .game-status-r6 {
+    background: linear-gradient(45deg, #6441a5, #2a0845);
+  }
+  
+  /* Mensagens */
+  .no-friends-msg {
+    text-align: center;
+    padding: 20px;
+    color: var(--text-secondary, #b9bbbe);
+    font-size: 14px;
+  }
+  
+  .no-friends-msg i {
+    font-size: 24px;
+    margin-bottom: 8px;
+    color: var(--accent-color, #5865f2);
+  }
+  
+  .loading-friends {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    color: var(--text-secondary, #b9bbbe);
+  }
+  
+  .loading-spinner {
+    width: 24px;
+    height: 24px;
+    border: 3px solid var(--divider-color, #40444b);
+    border-top-color: var(--accent-color, #5865f2);
+    border-radius: 50%;
+    animation: spin 1s infinite linear;
+    margin-bottom: 12px;
+  }
+  
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  
+  /* Efeito de partida ao vivo */
+  .live-match {
+    position: relative;
+  }
+  
+  .live-match:after {
+    content: "AO VIVO";
+    position: absolute;
+    top: -8px;
+    right: 0;
+    background-color: var(--dnd-color, #ed4245);
+    color: white;
+    font-size: 9px;
+    padding: 2px 4px;
+    border-radius: 2px;
+    font-weight: bold;
+  }
+  
+  /* Perfil do usuário atual */
+  .user-profile {
+    padding: 12px;
+    background-color: var(--header-bg, #202225);
+    display: flex;
+    align-items: center;
+    border-top: 1px solid var(--divider-color, #40444b);
+    margin-top: auto;
+  }
+  
+  .profile-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: var(--avatar-bg, #7289da);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 14px;
+    color: white;
+    margin-right: 10px;
+    position: relative;
+  }
+  
+  .user-info {
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .user-name {
+    font-weight: 500;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .user-role {
+    font-size: 12px;
+    color: var(--text-secondary, #b9bbbe);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  /* Modal styles */
+  .furiax-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+  }
+  
+  .furiax-modal-overlay.show {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .furiax-modal {
+    background: var(--modal-bg, linear-gradient(145deg, #2f3136, #202225));
+    border-radius: 8px;
+    width: 400px;
+    max-width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    transform: translateY(-20px);
+    transition: transform 0.3s;
+    border: 1px solid var(--divider-color, #40444b);
+  }
+  
+  .furiax-modal-overlay.show .furiax-modal {
+    transform: translateY(0);
+  }
+  
+  .furiax-modal-header {
+    padding: 16px;
+    border-bottom: 1px solid var(--divider-color, #40444b);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .furiax-modal-title {
+    font-weight: bold;
+    font-size: 18px;
+  }
+  
+  .furiax-modal-close {
+    background: none;
+    border: none;
+    color: var(--text-secondary, #b9bbbe);
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .furiax-modal-body {
+    padding: 16px;
+  }
+  
+  .furiax-modal-footer {
+    padding: 16px;
+    border-top: 1px solid var(--divider-color, #40444b);
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+  }
+  
+  .furiax-modal-footer button {
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+  }
+  
+  .furiax-btn-cancel {
+    background-color: transparent;
+    color: var(--text-color, #dcddde);
+    border: 1px solid var(--divider-color, #40444b);
+  }
+  
+  .furiax-btn-primary {
+    background-color: var(--accent-color, #5865f2);
+    color: white;
+  }
+  
+  /* Notificações de evento do jogo */
+  .game-notification {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 16px 24px;
+    border-radius: 8px;
+    text-align: center;
+    z-index: 2000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+    width: auto;
+    max-width: 300px;
+  }
+  
+  .game-notification.show {
+    opacity: 1;
+  }
+  
+  .game-notification-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+  
+  .game-notification-message {
+    font-size: 14px;
+  }
+  
+  /* Convite para partida */
+  .match-invite {
+    background: var(--modal-bg, linear-gradient(145deg, #2f3136, #202225));
+    border-radius: 8px;
+    width: 360px;
+    max-width: 90%;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    transition: all 0.3s;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 999;
+    transform: translateX(400px);
+    border: 1px solid var(--divider-color, #40444b);
+  }
+  
+  .match-invite.show {
+    transform: translateX(0);
+  }
+  
+  /* Toast de notificação */
+  .furiax-toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 12px 16px;
+    border-radius: 4px;
+    background-color: var(--foreground, #36393f);
+    color: var(--text-color, #dcddde);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 1100;
+    max-width: 300px;
+    transform: translateY(100px);
+    opacity: 0;
+    transition: transform 0.3s, opacity 0.3s;
+  }
+  
+  .furiax-toast.show {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  
+  /* Eventos ao vivo */
+  .live-events {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    max-width: 300px;
+    z-index: 99;
+  }
+  
+  .live-event {
+    background-color: var(--foreground, #36393f);
+    border-radius: 6px;
+    padding: 12px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    animation: slideInLeft 0.3s forwards;
+  }
+  
+  @keyframes slideInLeft {
+    from {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  /* Media queries para responsividade */
+  @media (max-width: 1200px) {
+    .furiax-friends-container {
+      width: 280px;
+    }
+    
+    .friend-tooltip {
+      display: none;
+    }
+  }
+  
+  @media (max-width: 992px) {
+    .furiax-friends-container {
+      width: 260px;
+    }
+    
+    .friend-custom-status {
+      display: none;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .furiax-friends-container {
+      position: fixed;
+      width: 300px;
+      height: 100%;
+      top: 0;
+      right: 0;
+      border-radius: 0;
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+      z-index: 900;
+    }
+    
+    .furiax-friends-container.open {
+      transform: translateX(0);
+    }
+    
+    .friends-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: var(--accent-color, #5865f2);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      z-index: 901;
+      cursor: pointer;
+      border: none;
+      font-size: 20px;
+    }
+    
+    .friend-item {
+      padding: 10px 12px;
+    }
+    
+    .match-invite {
+      width: 300px;
+      max-width: 90%;
+    }
+    
+    .furiax-modal {
+      width: 90%;
+      max-height: 80vh;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .furiax-friends-container {
+      width: 100%;
+    }
+    
+    .friends-header {
+      padding: 10px;
+    }
+    
+    .friend-actions {
+      opacity: 1;
+    }
+    
+    .invite-btn {
+      opacity: 1;
+    }
+    
+    .match-invite {
+      width: 90%;
+      left: 50%;
+      right: auto;
+      transform: translateX(-50%) translateY(-100%);
+    }
+    
+    .match-invite.show {
+      transform: translateX(-50%) translateY(0);
+    }
+    
+    .furiax-toast {
+      left: 20px;
+      right: 20px;
+      max-width: calc(100% - 40px);
+    }
+    
+    .live-events {
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90%;
+      max-width: 350px;
+    }
+    
+    .game-notification {
+      width: 90%;
+      max-width: 300px;
+    }
+    
+    .friends-tabs {
+      flex-wrap: wrap;
+    }
+    
+    .friends-tab {
+      padding: 8px;
+      font-size: 13px;
+    }
+  }
+  
+  /* Animações e efeitos */
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+  }
+  
+  .pulse {
+    animation: pulse 1s infinite;
+  }
+  
+  /* Tema claro */
+  .light-mode {
+    --bg-color: #f2f3f5;
+    --foreground: #ffffff;
+    --text-color: #2e3338;
+    --text-secondary: #747f8d;
+    --accent-color: #5865f2;
+    --online-color: #3ba55c;
+    --idle-color: #faa61a;
+    --dnd-color: #ed4245;
+    --header-bg: #e3e5e8;
+    --modal-bg: linear-gradient(145deg, #ffffff, #f2f3f5);
+    --divider-color: #d4d7dc;
+    --tooltip-bg: rgba(242, 243, 245, 0.9);
+    --input-bg: #ebedef;
+    --avatar-bg: #99aab5;
+    --badge-bg: #747f8d;
+    --hover-bg: #e3e5e8;
+  }
+  
+  /* Toggle para dispositivos móveis */
+  .friends-toggle {
+    display: none;
+  }
+  
+  @media (max-width: 768px) {
+    .friends-toggle {
+      display: flex;
+    }
+    
+    .friends-close-mobile {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: none;
+      border: none;
+      color: var(--text-color, #dcddde);
+      font-size: 16px;
+      cursor: pointer;
+      z-index: 10;
+      display: block;
+    }
+  }
+  
+  /* Adicionar pequenas animações para interatividade */
+  .friend-item, .friend-action-btn, .friend-action, .invite-btn, 
+  .friends-tab, .furiax-btn-primary, .furiax-btn-cancel {
+    transition: all 0.2s ease;
+  }
+  
+  .friend-item:active {
+    transform: scale(0.98);
+  }
+  
+  .friend-action-btn:active, .friend-action:active, .invite-btn:active {
+    transform: scale(0.9);
+  }
+  
+  .furiax-btn-primary:hover, .invite-btn:hover {
+    filter: brightness(1.1);
+  }
+  
+  .friend-item:focus-within {
+    background-color: var(--hover-bg, #36393f);
+  }
+  
+  /* Acessibilidade */
+  .friend-action-btn:focus, .friend-action:focus, .invite-btn:focus,
+  .furiax-btn-primary:focus, .furiax-btn-cancel:focus {
+    outline: 2px solid var(--accent-color, #5865f2);
+    outline-offset: 2px;
+  }
+  
+  .friends-search input:focus {
+    box-shadow: 0 0 0 2px var(--accent-color, #5865f2);
+    outline: none;
+  }
+  
+  /* Tooltip posicionamento adaptativo */
+  @media (max-width: 1200px) {
+    .friend-tooltip {
+      left: 50%;
+      top: auto;
+      bottom: 100%;
+      margin-left: 0;
+      margin-bottom: 10px;
+      transform: translateX(-50%);
+    }
+  }

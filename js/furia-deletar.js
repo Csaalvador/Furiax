@@ -196,7 +196,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                 );
                             }
                         }
-                    }, 1200); // Tempo suficiente para a animação completar
+                    }, 1000); // Tempo suficiente para a animação completar
                     
                     return true;
                 } else {

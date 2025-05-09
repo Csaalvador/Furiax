@@ -25,7 +25,6 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         DEFAULTS: {
             USERNAME: 'FuriaX_User',
-            AVATAR: '../img/logo/logoFuriax.png',
             TITLE: 'Furioso Novato'
         },
         SELECTORS: {
@@ -103,9 +102,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         getAvatarHTML: function(avatarPath = null) {
             // Se tiver um caminho de avatar, retorna uma tag img
-            if (avatarPath) {
-                return `<img src="${avatarPath}" alt="Avatar" class="avatar-image" onerror="this.src='${CONFIG.DEFAULTS.AVATAR}'">`;
-            }
+            
             
             // Se não, usa as iniciais
             const profile = this.getProfileData();

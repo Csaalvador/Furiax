@@ -1,4 +1,4 @@
-// auth.js - Client-side authentication handler
+w// auth.js - Client-side authentication handler
 
 // OAuth Configuration for different platforms
 const oauthConfig = {
