@@ -14,7 +14,7 @@ body {
 /* Friends Sidebar Styles */
 .friends-sidebar {
     width: 110%;
-    height: 60vh;
+    height: 66vh;
     background: linear-gradient(to bottom, #111, #181818);
     border-left: 2px solid #333;
     box-shadow: -4px 0 10px rgba(0, 0, 0, 0.5);
