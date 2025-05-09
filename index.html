@@ -457,38 +457,9 @@
     </div>    
     
     <!-- Contêiner de vídeo (será escondido em mobile) -->
- <!-- Substitua o atual elemento de vídeo por este: -->
-<div class="video-container">
-  <video width="100%" height="100%" controls>
-    <source src="./img/apresentacao/1746767069.mp4" type="video/mp4">
-    Seu navegador não suporta o elemento de vídeo.
-  </video>
-</div>
-
-<script>
-  // Adicione este código ao bloco <script> existente
-  document.addEventListener('DOMContentLoaded', function() {
-    const video = document.querySelector('.video-container video');
-    const progressBar = document.getElementById('videoProgress');
-    let awarded = false;
-    
-    if (video && progressBar) {
-      // Atualizar a barra de progresso enquanto o vídeo estiver sendo reproduzido
-      video.addEventListener('timeupdate', function() {
-        const percent = (video.currentTime / video.duration) * 100;
-        progressBar.style.width = percent + '%';
-      });
-      
-      // Mostrar popup de recompensa quando o vídeo terminar
-      video.addEventListener('ended', function() {
-        if (!awarded) {
-          showXPReward();
-          awarded = true;
-        }
-      });
-    }
-  });
-</script>
+    <div class="video-container">
+      <iframe id="yt-video" width="560" height="315" src="https://www.youtube.com/embed/nGaempPZkIE?si=mHHQ2_ehE1SdwXdI&enablejsapi=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
     
     <!-- Conteúdo exclusivo para mobile -->
     <div class="mobile-only-content">
@@ -560,149 +531,222 @@
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <script>
     // Inicialização do Particles.js
-    // Inicialização do Particles.js com tema FURIAX
-particlesJS("particles-js", {
-  "particles": {
-    "number": { 
-      "value": 80, 
-      "density": { 
-        "enable": true, 
-        "value_area": 800 
-      } 
-    },
-    "color": { 
-      "value": ["#1e90ff", "#ff3838", "#ff1e63"] // Azul FURIAX e tons de vermelho para o tema "furioso"
-    },
-    "shape": { 
-      "type": ["circle", "triangle"], 
-      "stroke": { 
-        "width": 0, 
-        "color": "#000000" 
-      },
-      "polygon": { 
-        "nb_sides": 5 
-      }
-    },
-    "opacity": { 
-      "value": 0.7,
-      "random": true,
-      "anim": { 
-        "enable": true, 
-        "speed": 1, 
-        "opacity_min": 0.1, 
-        "sync": false 
-      }
-    },
-    "size": { 
-      "value": 4,
-      "random": true,
-      "anim": { 
-        "enable": true, 
-        "speed": 2, 
-        "size_min": 0.5, 
-        "sync": false 
-      }
-    },
-    "line_linked": {
-      "enable": true,
-      "distance": 150,
-      "color": "#1e90ff",
-      "opacity": 0.4,
-      "width": 1.2
-    },
-    "move": { 
-      "enable": true,
-      "speed": 3,
-      "direction": "none",
-      "random": true,
-      "straight": false,
-      "out_mode": "out",
-      "bounce": false,
-      "attract": { 
-        "enable": true, 
-        "rotateX": 600, 
-        "rotateY": 1200 
-      }
-    }
-  },
-  "interactivity": {
-    "detect_on": "canvas",
-    "events": {
-      "onhover": { 
-        "enable": true, 
-        "mode": "repulse" 
-      },
-      "onclick": {
-        "enable": true,
-        "mode": "push"
-      },
-      "resize": true
-    },
-    "modes": {
-      "grab": {
-        "distance": 140,
+    particlesJS("particles-js", {
+      "particles": {
+        "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
+        "color": { "value": "#1e90ff" },
+        "shape": { "type": "circle" },
+        "opacity": { 
+          "value": 0.5,
+          "random": false,
+          "anim": { "enable": false }
+        },
+        "size": { 
+          "value": 3,
+          "random": true,
+          "anim": { "enable": false }
+        },
         "line_linked": {
-          "opacity": 1
+          "enable": true,
+          "distance": 150,
+          "color": "#1e90ff",
+          "opacity": 0.2,
+          "width": 1
+        },
+        "move": { 
+          "enable": true,
+          "speed": 2,
+          "direction": "none",
+          "random": false,
+          "straight": false,
+          "out_mode": "out",
+          "bounce": false
         }
       },
-      "bubble": {
-        "distance": 400,
-        "size": 8,
-        "duration": 2,
-        "opacity": 8,
-        "speed": 3
+      "interactivity": {
+        "detect_on": "canvas",
+        "events": {
+          "onhover": { 
+            "enable": true, 
+            "mode": "repulse" 
+          },
+          "onclick": {
+            "enable": true,
+            "mode": "push"
+          },
+          "resize": true
+        },
+        "modes": {
+          "repulse": {
+            "distance": 100,
+            "duration": 0.4
+          },
+          "push": {
+            "particles_nb": 4
+          }
+        }
       },
-      "repulse": {
-        "distance": 150,
-        "duration": 0.4
-      },
-      "push": {
-        "particles_nb": 4
-      },
-      "remove": {
-        "particles_nb": 2
+      "retina_detect": true
+    });
+
+    // Funcionalidade do menu mobile
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const sidebar = document.getElementById('sidebar');
+    
+    mobileMenuBtn.addEventListener('click', function() {
+      sidebar.classList.toggle('open');
+      
+      // Alternar ícone do botão
+      const icon = mobileMenuBtn.querySelector('i');
+      if (sidebar.classList.contains('open')) {
+        icon.classList.remove('fa-bars');
+        icon.classList.add('fa-times');
+      } else {
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
+      }
+    });
+    
+    // Fechar o menu ao clicar em um item
+    const sidebarButtons = sidebar.querySelectorAll('button, a');
+    sidebarButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        if (window.innerWidth <= 768) {
+          sidebar.classList.remove('open');
+          const icon = mobileMenuBtn.querySelector('i');
+          icon.classList.remove('fa-times');
+          icon.classList.add('fa-bars');
+        }
+      });
+    });
+
+    // API do YouTube
+    let tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    document.body.appendChild(tag);
+
+    let player;
+    function onYouTubeIframeAPIReady() {
+      // Verificar se o elemento existe (não estará presente em dispositivos móveis)
+      const videoElement = document.getElementById('yt-video');
+      if (videoElement) {
+        player = new YT.Player('yt-video', {
+          events: {
+            'onStateChange': onPlayerStateChange
+          }
+        });
       }
     }
-  },
-  "retina_detect": true,
-  // Para dispositivos móveis
-  "responsive": [
-    {
-      "breakpoint": 768,
-      "options": {
+
+    let awarded = false;
+    function onPlayerStateChange(event) {
+      if (event.data == YT.PlayerState.PLAYING) {
+        // Atualizar barra de progresso
+        const progressInterval = setInterval(() => {
+          if (player && typeof player.getCurrentTime === 'function') {
+            const duration = player.getDuration();
+            const currentTime = player.getCurrentTime();
+            const percent = (currentTime / duration) * 100;
+            const progressBar = document.getElementById("videoProgress");
+            if (progressBar) {
+              progressBar.style.width = percent + "%";
+            }
+          }
+        }, 1000);
+        
+        // Limpar intervalo quando o vídeo parar
+        player.addEventListener('onStateChange', (e) => {
+          if (e.data != YT.PlayerState.PLAYING) {
+            clearInterval(progressInterval);
+          }
+        });
+      }
+      
+      // Recompensa ao terminar o vídeo
+      if (event.data == YT.PlayerState.ENDED && !awarded) {
+        showXPReward();
+        awarded = true;
+      }
+    }
+
+    function showXPReward() {
+      const popup = document.getElementById('popup');
+      popup.style.display = 'block';
+      popup.animate([
+        { transform: 'translate(-50%, -50%) scale(0.8)', opacity: 0 },
+        { transform: 'translate(-50%, -50%) scale(1.05)', opacity: 1 },
+        { transform: 'translate(-50%, -50%) scale(1)', opacity: 1 }
+      ], {
+        duration: 500,
+        easing: 'ease-out'
+      });
+    }
+
+    // Tooltips
+    const tooltipPopup = document.getElementById('tooltipPopup');
+    const tooltips = {
+      "O que é o FURIAX?": "FURIAX é a plataforma definitiva que conecta fãs e transforma emoções em conquistas épicas.",
+      "Principais Recursos": "Chatbot com IA, feed personalizado, ranking de fãs e experiências gamificadas.",
+      "Como Funciona": "Interaja com o bot, participe dos desafios, acumule XP e desbloqueie conquistas lendárias.",
+      "Destaques": "Veja os fãs mais engajados, os momentos mais emocionantes e as recompensas da semana.",
+      "Começar Agora": "Crie seu perfil, mergulhe no universo da FURIAX e torne-se uma lenda furiosa!"
+    };
+    
+    // Adicionar tooltips a todos os botões
+    const buttons = document.querySelectorAll('.sidebar button');
+    buttons.forEach(button => {
+      button.addEventListener('mouseenter', function(e) {
+        const buttonText = button.textContent.trim();
+        if (tooltips[buttonText]) {
+          tooltipPopup.textContent = tooltips[buttonText];
+          tooltipPopup.style.display = 'block';
+          
+          // Posicionar tooltip
+          const rect = button.getBoundingClientRect();
+          tooltipPopup.style.left = (rect.right + 10) + 'px';
+          tooltipPopup.style.top = (rect.top + rect.height/2 - tooltipPopup.offsetHeight/2) + 'px';
+          
+          // Em dispositivos móveis, posicionar abaixo do botão
+          if (window.innerWidth <= 768) {
+            tooltipPopup.style.left = (rect.left + rect.width/2 - tooltipPopup.offsetWidth/2) + 'px';
+            tooltipPopup.style.top = (rect.bottom + 10) + 'px';
+          }
+        }
+      });
+      
+      button.addEventListener('mouseleave', function() {
+        tooltipPopup.style.display = 'none';
+      });
+    });
+    
+    // Fechar tooltips em dispositivos móveis ao tocar em qualquer lugar
+    document.addEventListener('touchstart', function(e) {
+      if (tooltipPopup.style.display === 'block') {
+        tooltipPopup.style.display = 'none';
+      }
+    });
+    
+    // Detectar se é um dispositivo móvel
+    function isMobileDevice() {
+      return (window.innerWidth <= 768) || 
+             (navigator.userAgent.match(/Android/i) || 
+              navigator.userAgent.match(/webOS/i) || 
+              navigator.userAgent.match(/iPhone/i) || 
+              navigator.userAgent.match(/iPad/i) || 
+              navigator.userAgent.match(/iPod/i) || 
+              navigator.userAgent.match(/BlackBerry/i) || 
+              navigator.userAgent.match(/Windows Phone/i));
+    }
+    
+    // Ajustar partículas para dispositivos móveis
+    if (isMobileDevice()) {
+      particlesJS("particles-js", {
         "particles": {
-          "number": { "value": 30 },
-          "size": { "value": 3 },
-          "move": { "speed": 2 }
+          "number": { "value": 20 },
+          "size": { "value": 2 }
         }
-      }
+      });
     }
-  ]
-});
-
-// Ajustar partículas para dispositivos móveis
-function isMobileDevice() {
-  return (window.innerWidth <= 768) || 
-         (navigator.userAgent.match(/Android/i) || 
-          navigator.userAgent.match(/webOS/i) || 
-          navigator.userAgent.match(/iPhone/i) || 
-          navigator.userAgent.match(/iPad/i) || 
-          navigator.userAgent.match(/iPod/i) || 
-          navigator.userAgent.match(/BlackBerry/i) || 
-          navigator.userAgent.match(/Windows Phone/i));
-}
-
-// Aplicar configuração reduzida para dispositivos móveis
-if (isMobileDevice()) {
-  particlesJS("particles-js", {
-    "particles": {
-      "number": { "value": 20 },
-      "size": { "value": 3 },
-      "move": { "speed": 2 },
-      "opacity": { "value": 0.6 }
-    }
-  });
-}
   </script>
 </body>
 </html>
