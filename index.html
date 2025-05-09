@@ -459,12 +459,14 @@
     <!-- Contêiner de vídeo (será escondido em mobile) -->
  <!-- Substitua o atual elemento de vídeo por este: -->
 <div class="video-container">
-  <video width="100%" height="100%" controls>
-    <source src="./img/apresentacao/1746767069.mp4" type="video/mp4">
-    Seu navegador não suporta o elemento de vídeo.
+  <video width="100%" height="100%" controls preload="metadata" poster="./img/logo/logoFuriax.png">
+    <!-- Múltiplos formatos para melhor compatibilidade -->
+    <source src="/img/apresentacao/1746767069.mp4" type="video/mp4">
+    <source src="/img/apresentacao/1746767069.webm" type="video/webm">
+    <!-- Fallback para navegadores antigos -->
+    Seu navegador não suporta o elemento de vídeo. <a href="/img/apresentacao/1746767069.mp4" download>Baixe o vídeo</a>.
   </video>
 </div>
-
 <script>
   // Adicione este código ao bloco <script> existente
   document.addEventListener('DOMContentLoaded', function() {
