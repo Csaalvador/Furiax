@@ -1044,7 +1044,6 @@
             const originalAddPostToDom = window.addPostToDom;
             window.addPostToDom = function(post) {
                 const result = originalAddPostToDom.call(this, post);
-                setTimeout(fixShareButtons, 50);
                 return result;
             };
         }

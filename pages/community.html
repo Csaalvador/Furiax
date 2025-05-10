@@ -672,10 +672,10 @@
                 document.getElementById('pending-count').textContent = pendingCount;
                 
                 if (pendingCount > 0) {
-                    for (let i = 0; i < pendingCount; i++) {
+                    for (let i = 0; i < 3; i++) {
                         const pendingProfile = {
-                            username: 'FURIA_Fan_' + (Math.floor(Math.random() * 100) + 1),
-                            avatar: null
+                            username: 'User' + (Math.floor(Math.random() * 100) + 1),
+                            avatar: '../img/avatars/avatar06.jpg',
                         };
                         
                         const pendingItem = createPendingItem(pendingProfile, 'pending_' + i);
@@ -720,7 +720,7 @@
             
             item.innerHTML = `
                 <div class="friend-avatar">
-                    ${avatarContent}
+                    <img src="../img/avatars/avatar05.png" alt="Perfil">
                     <div class="friend-status ${statusClass}"></div>
                 </div>
                 <div class="friend-info">
@@ -785,7 +785,7 @@
                 if (window.FURIAXCommunity && window.FURIAXCommunity.ProfileManager) {
                     profileData = window.FURIAXCommunity.ProfileManager.getProfileData();
                 } else {
-                    // Fallback to localStorage
+                    // Fallback to localStorfage
                     const storedProfile = localStorage.getItem('furiaxProfile');
                     if (storedProfile) {
                         profileData = JSON.parse(storedProfile);
@@ -865,8 +865,7 @@
             return activities[Math.floor(Math.random() * activities.length)];
         }
     </script>
-</body>
-</html>
+
                     </div>
                 </div>
                 

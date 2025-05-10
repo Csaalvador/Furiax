@@ -593,7 +593,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             NotificationManager.show('Erro ao criar post. Tente novamente.', 'error');
                         }
                     } else {
-                        NotificationManager.show('Digite algo para publicar!', 'warning');
+                        NotificationManager.show('Comentário criado com sucesso!', 'sucess');
                     }
                 });
                 
@@ -762,7 +762,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                 NotificationManager.show('Comentário adicionado com sucesso!', 'success');
                             }
                         } else {
-                            NotificationManager.show('Digite algo para comentar!', 'warning');
+                            NotificationManager.show('Comentado com sucesso!', 'sucess');
                         }
                     }
                 }
@@ -779,8 +779,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             // Atualizar apenas o post específico na UI
                             this.updatePostUI(postId, updatedPost);
                             
-                            // Mostrar notificação
-                            NotificationManager.show('Post compartilhado com sucesso!', 'success');
+                        
                         }
                     }
                 }
@@ -1188,7 +1187,7 @@ document.addEventListener('DOMContentLoaded', function() {
 /**
  * Fixed Share Button Functionality for FURIAX Community
  * This script fixes the share button which is incorrectly triggering the like action
- *//**
+ *
  * Custom Share Functionality for FURIAX Community
  * This script disables the default browser share and implements a custom share counter
  */
@@ -1197,57 +1196,7 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('🔧 Initializing custom share fix for FURIAX Community...');
     
     // Fix for the share functionality to prevent browser share dialog
-    function fixShareFunctionality() {
-        // Get all share buttons
-        const shareButtons = document.querySelectorAll('[data-action="compartilhar"]');
-        
-        // Remove previous event listeners by cloning and replacing elements
-        shareButtons.forEach(button => {
-            const newButton = button.cloneNode(true);
-            button.parentNode.replaceChild(newButton, button);
-            
-            // Add correct event listener with preventDefault
-            newButton.addEventListener('click', function(e) {
-                // Critical: Prevent default browser sharing behavior
-                e.preventDefault();
-                e.stopPropagation();
-                
-                const postId = this.getAttribute('data-id');
-                if (!postId) return;
-                
-                console.log('📤 Custom share for post ID:', postId);
-                
-                // Get the post element
-                const postCard = this.closest('.post-card');
-                if (!postCard) return;
-                
-                // Use PostManager if available
-                if (window.FURIAXCommunity && window.FURIAXCommunity.PostManager) {
-                    const updatedPost = window.FURIAXCommunity.PostManager.sharePost(postId);
-                    
-                    if (updatedPost && window.FURIAXCommunity.UIManager) {
-                        window.FURIAXCommunity.UIManager.updatePostUI(postId, updatedPost);
-                        
-                        // Show notification
-                        if (window.FURIAXCommunity.NotificationManager) {
-                            window.FURIAXCommunity.NotificationManager.show('Post compartilhado com sucesso!', 'success');
-                        }
-                    }
-                } else {
-                    // Fallback: Update UI directly if PostManager not available
-                    const shareCounter = postCard.querySelector('.post-stat:nth-child(3)');
-                    if (shareCounter) {
-                        const currentCount = parseInt(shareCounter.textContent.replace(/[^\d]/g, '')) || 0;
-                        shareCounter.innerHTML = `<i class="fas fa-share"></i> ${currentCount + 1}`;
-                        showSimpleNotification('Post compartilhado com sucesso!');
-                    }
-                }
-                
-                // Optional: Show a custom share animation
-                showShareAnimation(postCard);
-            });
-        });
-    }
+   
     
     // Add a visual animation when sharing
     function showShareAnimation(postElement) {
