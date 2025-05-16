@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FURIA Challenge</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/furia.css">
+    <link rel="stylesheet" href="../css/comunidade.css">
+</head>
+<body>
+    <div class="challenge-container">
+        <h1 class="challenge-title">Ousa desafiar a Furia?</h1>
+        <a href="#" class="watch-btn" id="watchTacticalBtn">
+            BrasCS
+            <span class="fire-effect"><i class="fas fa-fire"></i></span>
+        </a>
+    </div>
+
+     <div class="nav-menu">
+        <a href="./community.html"><div class="nav-item">VOLTAR A COMUNIDADE</div></a>
+    </div>
+    <!-- Popups explicativos do jogo - Tema azul e preto -->
+    <div class="game-popup" id="popup1">
+        <div class="popup-header">
+            <div class="popup-title">
+                <i class="fas fa-gamepad"></i>
+                Bem-vindo ao BrasCS
+            </div>
+            <button class="popup-close" id="closePopup1">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="popup-content">
+            Você acaba de descobrir <strong>BrasCS</strong>, um jogo de gerenciamento de equipes de Counter-Strike inspirado no clássico Brasfoot!
+        </div>
+        <div class="popup-actions">
+            <button class="popup-next" id="nextPopup1">
+                Próximo <i class="fas fa-arrow-right"></i>
+            </button>
+            <div class="popup-progress">
+                <div class="progress-dot active"></div>
+                <div class="progress-dot"></div>
+                <div class="progress-dot"></div>
+                <div class="progress-dot"></div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="game-popup" id="popup2">
+        <div class="popup-header">
+            <div class="popup-title">
+                <i class="fas fa-users"></i>
+                Monte Seu Time
+            </div>
+            <button class="popup-close" id="closePopup2">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="popup-content">
+            No BrasCS você pode recrutar jogadores, montar seu próprio time de CS, treinar habilidades específicas como aim, game sense e táticas em equipe.
+        </div>
+        <div class="popup-actions">
+            <button class="popup-next" id="nextPopup2">
+                Próximo <i class="fas fa-arrow-right"></i>
+            </button>
+            <div class="popup-progress">
+                <div class="progress-dot active"></div>
+                <div class="progress-dot active"></div>
+                <div class="progress-dot"></div>
+                <div class="progress-dot"></div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="game-popup" id="popup3">
+        <div class="popup-header">
+            <div class="popup-title">
+                <i class="fas fa-trophy"></i>
+                Desafie os Melhores
+            </div>
+            <button class="popup-close" id="closePopup3">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="popup-content">
+            Quando seu time estiver pronto, desafie a FURIA e outras equipes profissionais! Conquiste torneios, ganhe dinheiro virtual e torne-se uma lenda do CS.
+        </div>
+        <div class="popup-actions">
+            <button class="popup-next" id="nextPopup3">
+                Próximo <i class="fas fa-arrow-right"></i>
+            </button>
+            <div class="popup-progress">
+                <div class="progress-dot active"></div>
+                <div class="progress-dot active"></div>
+                <div class="progress-dot active"></div>
+                <div class="progress-dot"></div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="game-popup" id="popup4">
+        <div class="popup-header">
+            <div class="popup-title">
+                <i class="fas fa-fire"></i>
+                Comece Agora!
+            </div>
+            <button class="popup-close" id="closePopup4">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="popup-content">
+            Clique no botão BrasCS para iniciar sua jornada como manager! Transforme jogadores comuns em campeões e mostre seu talento estratégico.
+        </div>
+        <div class="popup-actions">
+            <button class="popup-next" id="startGame">
+                Começar <i class="fas fa-play"></i>
+            </button>
+            <div class="popup-progress">
+                <div class="progress-dot active"></div>
+                <div class="progress-dot active"></div>
+                <div class="progress-dot active"></div>
+                <div class="progress-dot active"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal do Tactical Trainer -->
+    <script src="../js/furia.js"></script>
+
+    <script>
+        // Sistema de popups
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mostrar o primeiro popup após 1.5 segundos
+            setTimeout(() => {
+                document.getElementById('popup1').classList.add('active');
+            }, 1500);
+            
+            // Handlers para navegação entre popups
+            document.getElementById('nextPopup1').addEventListener('click', function() {
+                document.getElementById('popup1').classList.remove('active');
+                setTimeout(() => {
+                    document.getElementById('popup2').classList.add('active');
+                }, 500);
+            });
+            
+            document.getElementById('nextPopup2').addEventListener('click', function() {
+                document.getElementById('popup2').classList.remove('active');
+                setTimeout(() => {
+                    document.getElementById('popup3').classList.add('active');
+                }, 500);
+            });
+            
+            document.getElementById('nextPopup3').addEventListener('click', function() {
+                document.getElementById('popup3').classList.remove('active');
+                setTimeout(() => {
+                    document.getElementById('popup4').classList.add('active');
+                }, 500);
+            });
+            
+            // Fechar popups individuais
+            document.getElementById('closePopup1').addEventListener('click', function() {
+                document.getElementById('popup1').classList.remove('active');
+            });
+            
+            document.getElementById('closePopup2').addEventListener('click', function() {
+                document.getElementById('popup2').classList.remove('active');
+            });
+            
+            document.getElementById('closePopup3').addEventListener('click', function() {
+                document.getElementById('popup3').classList.remove('active');
+            });
+            
+            document.getElementById('closePopup4').addEventListener('click', function() {
+                document.getElementById('popup4').classList.remove('active');
+            });
+            
+            // Iniciar o jogo (abrir o modal)
+            document.getElementById('startGame').addEventListener('click', function() {
+                document.getElementById('popup4').classList.remove('active');
+                document.getElementById('tacticalTrainerModal').classList.add('active');
+            });
+            
+            // Conectar o botão ao treino tático
+            document.getElementById('watchTacticalBtn').addEventListener('click', function(e) {
+                e.preventDefault();
+                // Fechar todos os popups primeiro
+                document.querySelectorAll('.game-popup').forEach(popup => {
+                    popup.classList.remove('active');
+                });
+                document.getElementById('tacticalTrainerModal').classList.add('active');
+            });
+            
+            // Fechar o modal clicando fora
+            document.addEventListener('click', function(e) {
+                const modal = document.getElementById('tacticalTrainerModal');
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                }
+            });
+            
+            // Tecla ESC fecha o modal e popups
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    document.getElementById('tacticalTrainerModal').classList.remove('active');
+                    document.querySelectorAll('.game-popup').forEach(popup => {
+                        popup.classList.remove('active');
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

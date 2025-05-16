@@ -1,0 +1,386 @@
+* { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box;
+        }
+        
+        /* Estilos para os popups explicativos - Tema azul e preto */
+        .game-popup {
+            position: fixed;
+            bottom: -300px;
+            right: 30px;
+            width: 350px;
+            background: rgba(10, 10, 10, 0.95);
+            border: 1px solid #1e90ff;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 15px rgba(30, 144, 255, 0.5);
+            z-index: 100;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            opacity: 0;
+        }
+        
+        .game-popup.active {
+            bottom: 30px;
+            opacity: 1;
+        }
+        
+        .popup-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+        
+        .popup-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1e90ff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .popup-title i {
+            font-size: 1.3rem;
+        }
+        
+        .popup-close {
+            background: rgba(30, 144, 255, 0.2);
+            border: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: rgba(255, 255, 255, 0.7);
+            transition: all 0.3s ease;
+        }
+        
+        .popup-close:hover {
+            background: rgba(30, 144, 255, 0.4);
+            color: white;
+            transform: rotate(90deg);
+        }
+        
+        .popup-content {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 15px;
+        }
+        
+        .popup-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .popup-next {
+            background: linear-gradient(45deg, #1e90ff, #0066cc);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: 'Exo 2', sans-serif;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .popup-next:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(30, 144, 255, 0.3);
+        }
+        
+        .popup-progress {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .progress-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .progress-dot.active {
+            background: #1e90ff;
+        }
+        
+        body {
+            font-family: 'Exo 2', sans-serif;
+            background-color: #0a0a0a;
+            color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            background-image: 
+                radial-gradient(circle at 10% 10%, rgba(30, 144, 255, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 90%, rgba(30, 144, 255, 0.05) 0%, transparent 40%),
+                linear-gradient(to bottom, #0a0a0a, #111);
+        }
+        
+        .challenge-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+            padding: 50px 20px;
+            width: 100%;
+            max-width: 600px;
+        }
+        
+        .challenge-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2rem, 6vw, 4rem);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: white;
+            text-shadow: 0 0 15px rgba(30, 144, 255, 0.5);
+            position: relative;
+        }
+        
+        .challenge-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, #1e90ff, #0066cc);
+        }
+        
+        /* Estilização do botão Assistir - Agora azul */
+        .watch-btn {
+            background: #1e90ff;
+            color: white;
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 5px 20px rgba(30, 144, 255, 0.4);
+            text-decoration: none;
+            margin-top: 20px;
+        }
+
+        .watch-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.8s ease;
+        }
+
+        .watch-btn:hover {
+            background: #0066cc;
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(30, 144, 255, 0.6);
+        }
+
+        .watch-btn:hover::before {
+            left: 100%;
+        }
+
+        .watch-btn:active {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(30, 144, 255, 0.4);
+        }
+
+        /* Ícone de fogo agora azul */
+        .watch-btn::after {
+            content: '\f06d';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            margin-left: 5px;
+        }
+
+        /* Animação de pulsação para chamar atenção */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .watch-btn {
+            animation: pulse 2s infinite;
+        }
+
+        .watch-btn:hover {
+            animation: none;
+        }
+        
+        /* Modal Tactical Trainer - Tema azul e preto */
+        .tactical-trainer-pro-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+
+        .tactical-trainer-pro-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .tactical-trainer-pro-content {
+            width: 90%;
+            max-width: 1200px;
+            height: 90vh;
+            background: linear-gradient(135deg, #0a0a0a, #111);
+            border: 1px solid rgba(30, 144, 255, 0.3);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(30, 144, 255, 0.2);
+            position: relative;
+            transform: translateY(50px) scale(0.95);
+            opacity: 0;
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.6s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tactical-trainer-pro-modal.active .tactical-trainer-pro-content {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+        }
+        
+        /* Conteúdo do fogo que aparece no botão */
+        @keyframes fire {
+            0% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.8; }
+        }
+        
+        .fire-effect {
+            position: absolute;
+            top: -20px;
+            right: -10px;
+            color: #1e90ff;
+            font-size: 1.5rem;
+            animation: fire 1.5s infinite;
+        }
+        
+        /* Responsividade aprimorada */
+        @media (max-width: 768px) {
+            .challenge-title {
+                font-size: clamp(1.5rem, 5vw, 3rem);
+            }
+            
+            .watch-btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+            
+            .game-popup {
+                width: calc(100% - 40px);
+                right: 20px;
+                left: 20px;
+                padding: 15px;
+            }
+            
+            .popup-title {
+                font-size: 1rem;
+            }
+            
+            .popup-content {
+                font-size: 0.9rem;
+            }
+            
+            .popup-next {
+                padding: 6px 12px;
+                font-size: 0.85rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .challenge-container {
+                padding: 30px 15px;
+            }
+            
+            .challenge-title {
+                font-size: clamp(1.2rem, 4.5vw, 2.5rem);
+            }
+            
+            .watch-btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .game-popup {
+                bottom: -350px;
+            }
+            
+            .game-popup.active {
+                bottom: 15px;
+            }
+            
+            .popup-header {
+                margin-bottom: 10px;
+            }
+            
+            .popup-actions {
+                flex-direction: column;
+                gap: 10px;
+                align-items: stretch;
+            }
+            
+            .popup-progress {
+                justify-content: center;
+            }
+        }
+
+        .nav-item {
+             width: 35px;
+                height: 35px;
+                background: rgba(0, 0, 0);
+                border: none;
+                border-radius: 50%;
+                color: #fff;
+                font-size: 1rem;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+        }
+
+        .nav-item:hover {
+            scale: 1.2;
+        }

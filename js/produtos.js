@@ -106,8 +106,22 @@ const sponsoredAds = [
         games: ['all'],
         badge: 'CONFORTO TOTAL',
         couponCode: 'FURIAC'
-    }
-]    
+    },
+  {
+    id: 'Moletom FURIA x Champion',
+    brand: 'FURIA',
+    title: 'Moletom FURIA x Champion College Preto',
+    description: 'Moletom da colaboração FURIA x Champion. Conforto e estilo usados pelos profissionais.',
+    imageUrl: 'https://furiagg.fbitsstatic.net/img/p/moletom-furia-x-champion-college-preto-150174/336876-1.jpg?w=1280&h=1280&v=no-value',
+    placeholderImage: true,
+    targetUrl: 'https://www.furia.gg/produtos/moletom-furia-champion-college-preto',
+    category: ['vestuário', 'moletom'],
+    games: ['cs', 'valorant'],
+    badge: 'PARCEIRO OFICIAL',
+    couponCode: 'FURIACHAMP20'
+  }
+]
+
 
 // Configuração do banner de anúncios
 let adSettings = {
